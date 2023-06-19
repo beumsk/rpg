@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: monospace;
+  overflow: hidden;
+  min-width: 352px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  width: 352px;
+  height: 192px;
+  background: #ddd;
+  /* background: conic-gradient(
+    #bbb 0deg 90deg,
+    #ddd 90deg 180deg,
+    #bbb 180deg 270deg,
+    #ddd 270deg 360deg
+  );
+  background-size: 32px 32px; */
+}
+
+@media (min-width: 528px) and (min-height: 288px) {
+  .container {
+    transform: scale(1.5);
+  }
+}
+
+@media (min-width: 704px) and (min-height: 384px) {
+  .container {
+    transform: scale(2);
+  }
+}
+
+@media (min-width: 1056px) and (min-height: 576px) {
+  .container {
+    transform: scale(3);
+  }
+}
+
+.container canvas {
+  image-rendering: pixelated;
+}
