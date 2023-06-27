@@ -10,18 +10,19 @@ function screenWorld() {
     fill: cDoor,
   };
 
+  // TODO: add multiple enemies?
   currentEnemy = {
     ...enemies[rand(enemies.length)],
-    x: rand(canW, 16, 21 * 16),
-    y: rand(canH, 16, 0),
+    ...randPos(canW, canH, 16, currentMap.deadSpots),
   };
 
-  const objects = [door, currentEnemy, player];
+  const objects = [door, currentEnemy, player, ...currentMap.deadSpots];
 
   let animationId;
 
   function keyWorldHandler(event) {
     const key = event.key;
+    const pos = { x: player.x, y: player.y };
     if (key === 'ArrowUp' && player.y >= 16) {
       player.y -= 16;
     } else if (key === 'ArrowDown' && player.y <= canH - 32) {
@@ -33,20 +34,28 @@ function screenWorld() {
     } else if (key === 'Escape') {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
-      screenLogic('start');
+      screenLogic('menu');
     }
-    checkCollision();
+    // TODO: ctrl+r => screenLogic('start')
+    checkCollision(pos);
 
     ctx.fillStyle = player.fill;
     ctx.fillRect(player.x, player.y, player.w, player.h);
   }
 
-  function checkCollision() {
+  function checkCollision(oldPos) {
     if (player.x === currentEnemy.x && player.y === currentEnemy.y) {
       stop();
       screenTransition('right', 'fight');
-    } else if (false) {
+    } else if (
+      currentMap.deadSpots.some(
+        (spot) => spot.x === player.x && spot.y === player.y
+      )
+    ) {
       // TODO: add dead cells check and put door as one until lvl is reached
+      console.log('dead spot on this map');
+      player.x = oldPos.x;
+      player.y = oldPos.y;
     } else if (player.x === door.x && player.y === door.y) {
       if (player.lvl > currentMap.lvl) {
         currentMap = maps[currentMap.lvl + 1];
@@ -56,8 +65,8 @@ function screenWorld() {
         player.x = 2 * 16;
         player.Y = 2 * 16;
       } else {
-        player.x -= 16;
-        player.y += 16;
+        player.x = oldPos.x;
+        player.y = oldPos.y;
         console.log(
           `Up lvl ${player.lvl + 1} to reach Map ${
             maps[currentMap.lvl + 1].lvl
@@ -76,6 +85,7 @@ function screenWorld() {
         ctx.fillStyle = obj.fill;
         ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
       });
+
       animationId = requestAnimationFrame(step);
     };
     step();

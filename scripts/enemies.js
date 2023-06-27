@@ -20,7 +20,7 @@ const enemies = [
   {
     ...enemyBase,
     name: 'Dragon',
-    hp: 20,
+    hp: 10,
     hpmax: 100,
     state: '',
     str: 20,
@@ -42,7 +42,7 @@ const enemies = [
   {
     ...enemyBase,
     name: 'Gobelin',
-    hp: 30,
+    hp: 10,
     hpmax: 30,
     state: '',
     str: 4,
@@ -59,7 +59,7 @@ const enemies = [
   {
     ...enemyBase,
     name: 'Vampire',
-    hp: 40,
+    hp: 10,
     hpmax: 40,
     state: '',
     str: 6,

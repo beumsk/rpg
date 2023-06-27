@@ -15,6 +15,9 @@ function screenLogic(screen) {
     case 'fight':
       screenFight();
       break;
+    case 'menu':
+      screenMenu();
+      break;
     default:
       screenStart();
   }

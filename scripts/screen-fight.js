@@ -10,11 +10,10 @@ function screenFight() {
   const enemyY = 16;
   let playerX = canW - rectWidth - 16;
   const playerY = canH - rectHeight - 48;
-  const textOffset = 8;
   const menuHeight = 32;
 
-  const topMenu = [{ name: 'attacks' }, { name: 'items' }];
-  let currentMenu = topMenu;
+  const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
+  let currentMenu = mainMenu;
   let currentMenuName = 'main';
   let currentMenuItem = 'attacks';
 
@@ -39,9 +38,9 @@ function screenFight() {
           subText = `${player.name} uses ${currentMenuItem}`;
         }
       } else if (key === 'Backspace' || key === 'Escape') {
-        currentMenu = topMenu;
+        currentMenu = mainMenu;
         currentMenuName = 'main';
-        currentMenuItem = topMenu[0].name;
+        currentMenuItem = mainMenu[0].name;
       } else if (key === 'ArrowRight') {
         let i = currentMenu.findIndex((x) => x.name === currentMenuItem);
         currentMenuItem =
@@ -77,7 +76,7 @@ function screenFight() {
           nextPlay = 'enemy attack';
         } else if (nextPlay === 'enemy attack') {
           currentEnemy.useAttack();
-          currentMenu = topMenu;
+          currentMenu = mainMenu;
           currentMenuName = 'main';
           currentMenuItem = 'attacks';
           if (player.hp === 0) {
@@ -171,12 +170,4 @@ function screenFight() {
   }
 
   start();
-
-  function drawRect(x, y, width, height, fill, stroke, ratio) {
-    ctx.strokeStyle = stroke;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(x, y, width, height);
-    ctx.fillStyle = fill;
-    ctx.fillRect(x, y, width * ratio, height);
-  }
 }
