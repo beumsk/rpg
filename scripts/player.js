@@ -1,4 +1,6 @@
-const player = {
+let player = {};
+
+const playerBase = {
   name: 'Player',
   x: 2 * 16,
   y: 2 * 16,
@@ -12,63 +14,9 @@ const player = {
   lvl: 1,
   xp: 0,
   gold: 0,
-  attacks: [
-    {
-      name: 'punch',
-      dmg: 10,
-      desc: 'punch: attack description',
-    },
-    {
-      name: 'kick',
-      dmg: 20,
-      desc: 'kick: attack description',
-    },
-  ],
-  items: [
-    {
-      name: 'potion',
-      type: 'heal',
-      effect: 20,
-      qtt: 1,
-      desc: 'potion: item description',
-    },
-    {
-      name: 'remedy',
-      type: 'state',
-      effect: '',
-      qtt: 1,
-      desc: 'potion: item description',
-    },
-    {
-      name: 'waker',
-      type: 'state',
-      effect: 'asleep',
-      qtt: 1,
-      desc: 'potion: item description',
-    },
-    // add boosts and more items
-  ],
-  stuff: [
-    {
-      name: 'dummy hat',
-      type: 'hat',
-      effect: { hp: 5 },
-      desc: 'dummy hat: stuff description',
-    },
-    {
-      name: 'dummy cloak',
-      type: 'cloak',
-      effect: { hp: 5 },
-      desc: 'dummy cloak: stuff description',
-    },
-    {
-      name: 'dummy ring',
-      type: 'ring',
-      effect: { hp: 5 },
-      desc: 'dummy ring: stuff description',
-    },
-    // hat, cloak, ring, amulet, belt, boots, rune?, pet?
-  ],
+  attacks: attacks.filter((x) => x.base),
+  items: items.filter((x) => x.base).map((x) => ({ ...x, qtt: 1 })),
+  stuff: stuff.filter((x) => x.base),
   useAttack: (attack) => {
     const c = player.attacks.find((x) => x.name === attack);
     subText = 'oui';

@@ -37,13 +37,12 @@ function screenMenu(prevSceen = 'world') {
           currentMenuName = currentMenuItem;
           currentMenuItem = player[currentMenuItem][0].name;
         } else {
-          // TODO: show stats
           currentMenu = [
             { name: `${player.name}` },
             { name: `lvl: ${player.lvl}` },
             { name: `xp: ${player.xp}` },
+            { name: `map: ${currentMap.lvl}` },
             { name: `gold: ${player.gold}` },
-            // { name: `win: ${player.win}` },
             { name: `str: ${player.str}` },
             { name: `hp: ${player.hp}` },
           ];
@@ -65,7 +64,6 @@ function screenMenu(prevSceen = 'world') {
       document.removeEventListener('keydown', keyWorldHandler);
       screenLogic(prevSceen);
     }
-    console.log(currentMenuItem);
   }
 
   function start() {
@@ -74,6 +72,7 @@ function screenMenu(prevSceen = 'world') {
     const step = () => {
       ctx.clearRect(0, 0, canW, canH);
       // drawRect(1, 1, 160, canH - 2, cWhite, cBlack, 1);
+      ctx.font = '12px monospace';
       currentMenu
         .filter((x) => x.qtt !== 0)
         .map((x, i) => {

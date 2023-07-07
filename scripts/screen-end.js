@@ -1,9 +1,9 @@
-function screenStart() {
+function screenEnd() {
   container.style.backgroundImage = '';
 
-  player = { ...playerBase };
+  player.hp = player.hpmax;
 
-  let fontSize = 120;
+  let fontSize = 10;
   let textColor = cText2;
 
   let animationId;
@@ -15,10 +15,14 @@ function screenStart() {
     ctx.fillStyle = textColor;
     ctx.textAlign = 'center';
 
-    ctx.fillText('RPG', canW / 2, canH / 2);
+    ctx.fillText(
+      `You died and scored ${(currentMap.lvl - 1) * 100}`,
+      canW / 2,
+      canH / 2
+    );
 
-    if (fontSize > 60) {
-      fontSize -= 1;
+    if (fontSize < 20) {
+      fontSize += 0.5;
     } else {
       ctx.font = '20px monospace';
       ctx.fillStyle = cText;
@@ -37,8 +41,8 @@ function screenStart() {
   start();
   document.addEventListener('keydown', keyStartHandler);
   function keyStartHandler() {
-    stop();
-    document.removeEventListener('keydown', keyStartHandler);
-    screenTransition('bottom', 'world');
+    // stop();
+    // document.removeEventListener('keydown', keyStartHandler);
+    location.reload();
   }
 }

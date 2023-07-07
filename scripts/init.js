@@ -1,6 +1,6 @@
 // for dev purposes
 window.addEventListener('focus', function () {
-  location.reload();
+  // location.reload();
 });
 
 // screen logic
@@ -17,6 +17,9 @@ function screenLogic(screen) {
       break;
     case 'menu':
       screenMenu();
+      break;
+    case 'end':
+      screenEnd();
       break;
     default:
       screenStart();

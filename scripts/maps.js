@@ -21,6 +21,14 @@ const maps = [
       { ...defaultSpot, x: 21 * 16, y: 11 * 16 },
     ],
   },
+  {
+    lvl: 3,
+    name: 'eerhten',
+    deadSpots: [
+      { ...defaultSpot, x: 9 * 16, y: 6 * 16 },
+      { ...defaultSpot, x: 6 * 16, y: 17 * 16 },
+    ],
+  },
 ];
 
 let currentMap = { ...maps[1] };

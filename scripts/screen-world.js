@@ -11,9 +11,12 @@ function screenWorld() {
   };
 
   // TODO: add multiple enemies?
+  // TOFIX: prevent enemies to respawn on show menu
   currentEnemy = {
     ...enemies[rand(enemies.length)],
     ...randPos(canW, canH, 16, currentMap.deadSpots),
+    // x: 0,
+    // y: 16,
   };
 
   const objects = [door, currentEnemy, player, ...currentMap.deadSpots];
@@ -35,8 +38,10 @@ function screenWorld() {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
       screenLogic('menu');
+      // } else if (event.ctrlKey && event.key === 'r') {
+      //   event.preventDefault();
+      //   location.reload();
     }
-    // TODO: ctrl+r => screenLogic('start')
     checkCollision(pos);
 
     ctx.fillStyle = player.fill;
@@ -52,8 +57,6 @@ function screenWorld() {
         (spot) => spot.x === player.x && spot.y === player.y
       )
     ) {
-      // TODO: add dead cells check and put door as one until lvl is reached
-      console.log('dead spot on this map');
       player.x = oldPos.x;
       player.y = oldPos.y;
     } else if (player.x === door.x && player.y === door.y) {

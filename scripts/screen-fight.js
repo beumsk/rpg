@@ -88,7 +88,7 @@ function screenFight() {
           }
         } else if (nextPlay === 'player dead') {
           stop();
-          screenTransition('bottom', 'start');
+          screenTransition('bottom', 'end');
           nextPlay = 'player';
         }
       }

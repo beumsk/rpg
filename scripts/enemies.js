@@ -26,7 +26,7 @@ const enemies = [
     str: 20,
     lvl: 1,
     xp: 10,
-    gold: 1,
+    gold: 5,
     attacks: [
       {
         name: 'fireball',
@@ -48,7 +48,7 @@ const enemies = [
     str: 4,
     lvl: 1,
     xp: 4,
-    gold: 0.2,
+    gold: 1,
     attacks: [
       {
         name: 'poke',
@@ -65,7 +65,7 @@ const enemies = [
     str: 6,
     lvl: 1,
     xp: 6,
-    gold: 0.4,
+    gold: 2,
     attacks: [
       {
         name: 'suck',
