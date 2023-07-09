@@ -1,9 +1,10 @@
-function screenMenu(prevSceen = 'world') {
+function screenMenu() {
   container.style.backgroundImage = '';
 
   let animationId;
 
   // TODO: add logic when too many items in menu
+  // TODO: add text when menu is empty or remove it?
 
   const mainMenu = [
     { name: 'stats' },
@@ -44,25 +45,22 @@ function screenMenu(prevSceen = 'world') {
             { name: `map: ${currentMap.lvl}` },
             { name: `gold: ${player.gold}` },
             { name: `str: ${player.str}` },
-            { name: `hp: ${player.hp}` },
+            { name: `hp: ${player.hp}/${player.hpmax}` },
           ];
         }
       } else if (currentMenuName === 'items') {
-        // TODO: add option to use items?
-        // show details
+        itemUse(currentMenuItem);
       } else if (currentMenuName === 'attacks') {
         // TODO: re order attacks option?
-        // show details
       } else if (currentMenuName === 'stuff') {
         // TODO: add option to equip stuff
-        // show details
       } else if (currentMenuName === 'options') {
         // TODO: add options: sound, save, load
       }
     } else if (key === 'Escape') {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
-      screenLogic(prevSceen);
+      screenWorld(true);
     }
   }
 

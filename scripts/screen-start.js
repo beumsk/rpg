@@ -1,7 +1,12 @@
 function screenStart() {
   container.style.backgroundImage = '';
 
+  // reset
   player = { ...playerBase };
+  currentMap = { ...maps[1] };
+  stuffEquip(stuffBase);
+
+  // TODO: load logic?
 
   let fontSize = 120;
   let textColor = cText2;
@@ -39,6 +44,6 @@ function screenStart() {
   function keyStartHandler() {
     stop();
     document.removeEventListener('keydown', keyStartHandler);
-    screenTransition('bottom', 'world');
+    screenTransition('bottom', () => screenWorld());
   }
 }

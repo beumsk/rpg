@@ -20,6 +20,7 @@ const cBack4 = '#bbb';
 const cPlayer = '#22d';
 const cEnemy = '#d22';
 const cDoor = '#2d2';
+const cChest = '#c72';
 
 // useful general functions
 function rand(val, step = 1, not) {

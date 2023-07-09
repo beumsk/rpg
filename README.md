@@ -17,10 +17,10 @@ _desc_
 
 > 0.0.3
 
-- add chests
+- more info on screen: locked door, current map, chest content
 - how to heal? => tarvern? pay?
 - lvlup rewards (more stats, stuff, attacks, items, )
-- stuff logic to add
+- stuff logic to improve
 - improve attacks to evolve with level
 
 > 0.0.X

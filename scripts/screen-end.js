@@ -1,8 +1,6 @@
 function screenEnd() {
   container.style.backgroundImage = '';
 
-  player.hp = player.hpmax;
-
   let fontSize = 10;
   let textColor = cText2;
 
@@ -41,8 +39,9 @@ function screenEnd() {
   start();
   document.addEventListener('keydown', keyStartHandler);
   function keyStartHandler() {
-    // stop();
-    // document.removeEventListener('keydown', keyStartHandler);
-    location.reload();
+    stop();
+    document.removeEventListener('keydown', keyStartHandler);
+    screenStart();
+    // location.reload();
   }
 }

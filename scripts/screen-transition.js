@@ -1,9 +1,11 @@
-function screenTransition(dir, screen = 'world') {
+function screenTransition(dir, screenFunc = screenWorld) {
+  const step = 8;
   let rectX = 0;
   let rectY = 0;
 
+  if (dir === 'right') rectX = -step;
   if (dir === 'left') rectX = canW;
-
+  if (dir === 'bottom') rectY = -step;
   if (dir === 'top') rectY = canH;
 
   let animationId;
@@ -13,16 +15,16 @@ function screenTransition(dir, screen = 'world') {
     if (dir !== 'top' && dir !== 'bottom') {
       ctx.fillRect(rectX, rectY, 16, canH);
       if (dir === 'left') {
-        transitionLogic(rectX !== 0, (rectX -= 8));
+        transitionLogic(rectX !== 0, (rectX -= step));
       } else {
-        transitionLogic(rectX !== canW, (rectX += 8));
+        transitionLogic(rectX !== canW, (rectX += step));
       }
     } else {
       ctx.fillRect(rectX, rectY, canW, 16);
       if (dir === 'top') {
-        transitionLogic(rectY !== 0, (rectY -= 8));
+        transitionLogic(rectY !== 0, (rectY -= step));
       } else {
-        transitionLogic(rectY !== canW, (rectY += 8));
+        transitionLogic(rectY !== canW, (rectY += step));
       }
     }
   }
@@ -33,7 +35,7 @@ function screenTransition(dir, screen = 'world') {
       animationId = requestAnimationFrame(start);
     } else {
       stop();
-      screenLogic(screen);
+      screenFunc();
     }
   }
 

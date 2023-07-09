@@ -4,7 +4,7 @@ const enemyBase = {
   w: 16,
   h: 16,
   fill: cEnemy,
-  useAttack: (attack) => {
+  attackUse: (attack) => {
     const c = attack
       ? currentEnemy.attacks.find((x) => x.name === attack)
       : currentEnemy.attacks[0];

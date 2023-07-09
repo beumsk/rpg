@@ -3,6 +3,7 @@ function screenFight() {
   container.style.backgroundSize = 'unset';
 
   // TODO: simplify the logic
+  // TODO: handle empty item list
 
   const rectWidth = 80;
   const rectHeight = 48;
@@ -53,7 +54,7 @@ function screenFight() {
     } else {
       if (key === 'Enter' || key === ' ') {
         if (nextPlay === 'player attack') {
-          player.useAttack(currentMenuItem);
+          attackUse(currentMenuItem);
           if (currentEnemy.hp === 0) {
             subText = `${currentEnemy.name} is dead`;
             nextPlay = 'enemy dead';
@@ -62,20 +63,21 @@ function screenFight() {
             nextPlay = 'enemy';
           }
         } else if (nextPlay === 'player item') {
-          player.useItem(currentMenuItem);
+          itemUse(currentMenuItem);
           subText = `${currentEnemy.name} is attacking...`;
           nextPlay = 'enemy';
         } else if (nextPlay === 'enemy dead') {
-          player.endFight();
-          console.log(player);
+          player.xp += currentEnemy.xp;
+          player.gold += currentEnemy.gold;
+          checkLvlUp(player.lvl, player.xp);
           stop();
-          screenTransition('left', 'world');
+          screenTransition('left', () => screenWorld());
           nextPlay = 'player';
         } else if (nextPlay === 'enemy') {
           subText = `${currentEnemy.name} uses ${currentEnemy.attacks[0].name}`;
           nextPlay = 'enemy attack';
         } else if (nextPlay === 'enemy attack') {
-          currentEnemy.useAttack();
+          currentEnemy.attackUse();
           currentMenu = mainMenu;
           currentMenuName = 'main';
           currentMenuItem = 'attacks';
@@ -88,7 +90,7 @@ function screenFight() {
           }
         } else if (nextPlay === 'player dead') {
           stop();
-          screenTransition('bottom', 'end');
+          screenTransition('bottom', () => screenEnd());
           nextPlay = 'player';
         }
       }
