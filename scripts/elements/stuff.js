@@ -29,7 +29,6 @@ const stuff = [
 const stuffBase = stuff.filter((x) => x.base);
 
 function stuffEquip(stuffList) {
-  console.log(stuffList);
   stuffList.map((s) => {
     player.stuff.push(s);
     for (const key in s.effect) {

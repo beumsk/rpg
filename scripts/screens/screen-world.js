@@ -73,10 +73,9 @@ function screenWorld(keepEnemy) {
         const chest = deadSpotCollision.chest;
         for (const key in chest) {
           const value = chest[key];
-          console.log(`Key: ${key}, Value: ${value}`);
+          // console.log(`Key: ${key}, Value: ${value}`);
           if (key === 'gold') {
             player.gold += value;
-            console.log(player);
           } else if (key === 'items') {
           } else if (key === 'stuff') {
           }
