@@ -17,18 +17,17 @@ _desc_
 
 > 0.0.3
 
-- more info on screen: locked door, current map, chest content
-- how to heal? => tarvern? pay?
+- more info on screen: locked door, current map, chest content, item used, stuff equiped
 - lvlup rewards (more stats, stuff, attacks, items, )
-- stuff logic to improve
+- stuff logic to improve: equip from menu && show if item equiped in menu
 - improve attacks to evolve with level
+- how to heal? => tarvern? pay? newMap?
 
 > 0.0.X
 
 - handle how is the game saved, laoded and reset
 - menu improve
   - options: (sound, save, load)
-  - menu items to use?
   - menu stuff to equip?
 - fight system: state icons
 - add AI logic (not only first attack)

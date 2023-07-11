@@ -17,7 +17,7 @@ const maps = [
         y: 10 * 16,
         type: 'chest',
         fill: cChest,
-        chest: { gold: 10 },
+        chest: { gold: 10, stuff: 'test ring', items: 'potion' },
       },
       { ...defaultSpot, x: 21 * 16, y: 0, type: 'door', fill: cDoor },
     ],

@@ -77,8 +77,17 @@ function screenMenu() {
           if (currentMenuName !== 'stats') {
             ctx.fillStyle = x.name === currentMenuItem ? cText2 : cText;
           }
-          if (['attacks', 'items', 'stuff'].includes(currentMenuName)) {
+          if (currentMenuName === 'attacks') {
             ctx.fillText(x.desc, textOffset, textOffset * 2 + 24 * i);
+          } else if (currentMenuName === 'stuff') {
+            // TODO show if item is equiped
+            ctx.fillText(x.desc, textOffset, textOffset * 2 + 24 * i);
+          } else if (currentMenuName === 'items') {
+            ctx.fillText(
+              `${x.desc}: x${x.qtt}`,
+              textOffset,
+              textOffset * 2 + 24 * i
+            );
           } else {
             ctx.fillText(x.name, textOffset, textOffset * 2 + 24 * i);
           }

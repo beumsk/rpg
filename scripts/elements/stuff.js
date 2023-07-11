@@ -21,6 +21,12 @@ const stuff = [
     base: true,
   },
   // hat, cloak, ring, amulet, belt, boots, rune?, pet?
+  {
+    name: 'test ring',
+    type: 'ring',
+    effect: { hpmax: 5 },
+    desc: 'test ring: stuff description',
+  },
 ];
 
 // TODO: limit stuff to one per item type

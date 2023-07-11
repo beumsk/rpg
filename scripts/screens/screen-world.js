@@ -73,11 +73,16 @@ function screenWorld(keepEnemy) {
         const chest = deadSpotCollision.chest;
         for (const key in chest) {
           const value = chest[key];
-          // console.log(`Key: ${key}, Value: ${value}`);
           if (key === 'gold') {
             player.gold += value;
           } else if (key === 'items') {
+            if (player.items.find((i) => i.name === value)) {
+              player.items.find((i) => i.name === value).qtt += 1;
+            } else {
+              player.items.push(items.find((i) => i.name === value));
+            }
           } else if (key === 'stuff') {
+            player.stuff.push(stuff.find((s) => s.name === value));
           }
         }
         // make the chest disappear after use
