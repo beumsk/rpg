@@ -40,6 +40,7 @@ function stuffEquip(stuffList) {
     for (const key in s.effect) {
       const value = s.effect[key];
       player[key] += value;
+      if (key === 'hpmax') player.hp += value;
     }
   });
 }

@@ -7,7 +7,10 @@ ctx.textBaseline = 'middle';
 const canW = canvas.width;
 const canH = canvas.height;
 
+const menuHeight = 32;
 const textOffset = 8;
+
+let subText = ``;
 
 const cWhite = '#fff';
 const cBlack = '#000';

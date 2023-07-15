@@ -8,10 +8,11 @@ const enemyBase = {
     const c = attack
       ? currentEnemy.attacks.find((x) => x.name === attack)
       : currentEnemy.attacks[0];
-    if (c.dmg >= player.hp) {
+    const calcDmg = Math.floor(c.dmg + (c.dmg * currentEnemy.str) / 100);
+    if (calcDmg >= player.hp) {
       player.hp = 0;
     } else {
-      player.hp -= c.dmg;
+      player.hp -= calcDmg;
     }
   },
 };
@@ -20,11 +21,11 @@ const enemies = [
   {
     ...enemyBase,
     name: 'Dragon',
-    hp: 10,
+    hp: 100,
     hpmax: 100,
     state: '',
     str: 20,
-    lvl: 1,
+    lvl: 2,
     xp: 10,
     gold: 5,
     attacks: [
@@ -41,8 +42,25 @@ const enemies = [
   },
   {
     ...enemyBase,
+    name: 'Troll',
+    hp: 80,
+    hpmax: 80,
+    state: '',
+    str: 12,
+    lvl: 2,
+    xp: 8,
+    gold: 4,
+    attacks: [
+      {
+        name: 'Snore',
+        dmg: 12,
+      },
+    ],
+  },
+  {
+    ...enemyBase,
     name: 'Gobelin',
-    hp: 10,
+    hp: 30,
     hpmax: 30,
     state: '',
     str: 4,
@@ -59,7 +77,7 @@ const enemies = [
   {
     ...enemyBase,
     name: 'Vampire',
-    hp: 10,
+    hp: 40,
     hpmax: 40,
     state: '',
     str: 6,

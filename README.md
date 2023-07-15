@@ -15,12 +15,12 @@ _desc_
 
 ## Todo:
 
-> 0.0.3
+- add maps, enemies, attacks, items
 
-- more info on screen: locked door, current map, chest content, item used, stuff equiped
-- lvlup rewards (more stats, stuff, attacks, items, )
+> 0.0.4
+
 - stuff logic to improve: equip from menu && show if item equiped in menu
-- improve attacks to evolve with level
+- add shop
 - how to heal? => tarvern? pay? newMap?
 
 > 0.0.X

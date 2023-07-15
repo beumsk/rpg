@@ -11,7 +11,6 @@ function screenFight() {
   const enemyY = 16;
   let playerX = canW - rectWidth - 16;
   const playerY = canH - rectHeight - 48;
-  const menuHeight = 32;
 
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
   let currentMenu = mainMenu;
@@ -19,7 +18,6 @@ function screenFight() {
   let currentMenuItem = 'attacks';
 
   let nextPlay = 'player';
-  let subText = '';
 
   let animationId;
 

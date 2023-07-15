@@ -7,7 +7,7 @@ const playerBase = {
   w: 16,
   h: 16,
   fill: cPlayer,
-  hp: 30,
+  hp: 100,
   hpmax: 100,
   state: 'asleep',
   str: 20,

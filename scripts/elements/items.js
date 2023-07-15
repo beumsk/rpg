@@ -28,6 +28,7 @@ const itemsBase = items.filter((x) => x.base).map((x) => ({ ...x, qtt: 1 }));
 function itemUse(item) {
   const c = player.items.find((x) => x.name === item);
   if (c.qtt > 0) {
+    subText = `${player.name} uses ${item}`;
     c.qtt -= 1;
     if (c.type === 'heal') {
       player.hp + c.effect <= player.hpmax

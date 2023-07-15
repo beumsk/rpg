@@ -3,6 +3,8 @@ function screenMenu() {
 
   let animationId;
 
+  subText = '';
+
   // TODO: add logic when too many items in menu
   // TODO: add text when menu is empty or remove it?
 
@@ -39,7 +41,6 @@ function screenMenu() {
           currentMenuItem = player[currentMenuItem][0].name;
         } else {
           currentMenu = [
-            { name: `${player.name}` },
             { name: `lvl: ${player.lvl}` },
             { name: `xp: ${player.xp}` },
             { name: `map: ${currentMap.lvl}` },
@@ -92,6 +93,19 @@ function screenMenu() {
             ctx.fillText(x.name, textOffset, textOffset * 2 + 24 * i);
           }
         });
+
+      drawRect(
+        1,
+        canH - menuHeight - 1,
+        canW - 2,
+        menuHeight,
+        cWhite,
+        cBlack,
+        1
+      );
+      ctx.font = '12px monospace';
+      ctx.fillStyle = cText;
+      ctx.fillText(subText, textOffset, canH - 16);
 
       animationId = requestAnimationFrame(step);
     };

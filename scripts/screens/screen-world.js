@@ -2,16 +2,17 @@ function screenWorld(keepEnemy) {
   container.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
   container.style.backgroundSize = '32px 32px';
 
+  subText = `Map ${currentMap.lvl}`;
+
   // TODO: add multiple enemies?
   if (!keepEnemy) {
+    mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
     currentEnemy = {
-      ...enemies[rand(enemies.length)],
-      ...randPos(canW, canH, 16, [
+      ...mapEnemies[rand(mapEnemies.length)],
+      ...randPos(canW, canH - 32, 16, [
         { x: player.x, y: player.y },
         ...currentMap.deadSpots,
       ]),
-      // x: 0,
-      // y: 16,
     };
   }
 
@@ -24,12 +25,16 @@ function screenWorld(keepEnemy) {
     const pos = { x: player.x, y: player.y };
     if (key === 'ArrowUp' && player.y >= 16) {
       player.y -= 16;
-    } else if (key === 'ArrowDown' && player.y <= canH - 32) {
+      subText = `Map ${currentMap.lvl}`;
+    } else if (key === 'ArrowDown' && player.y <= canH - 64) {
       player.y += 16;
+      subText = `Map ${currentMap.lvl}`;
     } else if (key === 'ArrowLeft' && player.x >= 16) {
       player.x -= 16;
+      subText = `Map ${currentMap.lvl}`;
     } else if (key === 'ArrowRight' && player.x <= canW - 32) {
       player.x += 16;
+      subText = `Map ${currentMap.lvl}`;
     } else if (key === 'Escape') {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
@@ -57,34 +62,18 @@ function screenWorld(keepEnemy) {
           currentMap = maps[currentMap.lvl + 1];
           stop();
           screenTransition('top', () => screenWorld());
-          changeMap();
+          changeMap(currentMap.rewards);
           player.x = 2 * 16;
           player.Y = 2 * 16;
         } else {
           player.x = oldPos.x;
           player.y = oldPos.y;
-          console.log(
-            `Up lvl ${player.lvl + 1} to reach Map ${
-              maps[currentMap.lvl + 1].lvl
-            }`
-          );
+          subText = `Up lvl ${player.lvl + 1} to reach Map ${
+            currentMap.lvl + 1
+          }`;
         }
       } else if (deadSpotCollision.type === 'chest') {
-        const chest = deadSpotCollision.chest;
-        for (const key in chest) {
-          const value = chest[key];
-          if (key === 'gold') {
-            player.gold += value;
-          } else if (key === 'items') {
-            if (player.items.find((i) => i.name === value)) {
-              player.items.find((i) => i.name === value).qtt += 1;
-            } else {
-              player.items.push(items.find((i) => i.name === value));
-            }
-          } else if (key === 'stuff') {
-            player.stuff.push(stuff.find((s) => s.name === value));
-          }
-        }
+        openChest(deadSpotCollision.chest);
         // make the chest disappear after use
         deadSpotCollision.x = -16;
         deadSpotCollision.y = -16;
@@ -104,6 +93,20 @@ function screenWorld(keepEnemy) {
         ctx.fillStyle = obj.fill;
         ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
       });
+
+      // info text
+      drawRect(
+        1,
+        canH - menuHeight - 1,
+        canW - 2,
+        menuHeight,
+        cWhite,
+        cBlack,
+        1
+      );
+      ctx.font = '12px monospace';
+      ctx.fillStyle = cText;
+      ctx.fillText(subText, textOffset, canH - 16);
 
       animationId = requestAnimationFrame(step);
     };

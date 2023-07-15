@@ -1,6 +1,6 @@
 const lvls = [
-  0, 0, 4, 900, 1600, 2500, 3600, 4900, 6400, 8100, 10000, 12100, 14400, 16900,
-  19600, 22500, 25600, 28900, 32400, 36100, 40000,
+  0, 0, 40, 90, 160, 250, 360, 490, 640, 810, 1000, 1210, 1440, 1690, 1960,
+  2250, 2560, 2890, 3240, 3610, 4000,
 ];
 
 function checkLvlUp(currentLvl, currentXp) {
@@ -12,6 +12,8 @@ function checkLvlUp(currentLvl, currentXp) {
 }
 
 function lvlUp() {
+  player.str += 20 * player.lvl;
+  player.hpmax += 20 * player.lvl;
+  player.hp = player.hpmax;
   player.lvl += 1;
-  // decide what to give
 }
