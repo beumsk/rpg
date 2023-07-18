@@ -3,7 +3,6 @@ function screenFight() {
   container.style.backgroundSize = 'unset';
 
   // TODO: simplify the logic
-  // TODO: handle empty item list
 
   const rectWidth = 80;
   const rectHeight = 48;
@@ -13,9 +12,16 @@ function screenFight() {
   const playerY = canH - rectHeight - 48;
 
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
-  let currentMenu = mainMenu;
-  let currentMenuName = 'main';
-  let currentMenuItem = 'attacks';
+  let currentMenu;
+  let currentMenuName;
+  let currentMenuItem;
+  defaultMenu();
+
+  function defaultMenu() {
+    currentMenu = mainMenu;
+    currentMenuName = 'main';
+    currentMenuItem = mainMenu[0].name;
+  }
 
   let nextPlay = 'player';
 
@@ -29,6 +35,7 @@ function screenFight() {
           currentMenu = player[currentMenuItem].filter((x) => x.qtt !== 0);
           currentMenuName = currentMenuItem;
           currentMenuItem = player[currentMenuItem][0].name;
+          if (!currentMenu.length) defaultMenu();
         } else if (currentMenuName === 'items') {
           nextPlay = 'player item';
           subText = `${player.name} uses ${currentMenuItem}`;
@@ -37,9 +44,7 @@ function screenFight() {
           subText = `${player.name} uses ${currentMenuItem}`;
         }
       } else if (key === 'Backspace' || key === 'Escape') {
-        currentMenu = mainMenu;
-        currentMenuName = 'main';
-        currentMenuItem = mainMenu[0].name;
+        defaultMenu();
       } else if (key === 'ArrowRight') {
         let i = currentMenu.findIndex((x) => x.name === currentMenuItem);
         currentMenuItem =
@@ -76,9 +81,7 @@ function screenFight() {
           nextPlay = 'enemy attack';
         } else if (nextPlay === 'enemy attack') {
           currentEnemy.attackUse();
-          currentMenu = mainMenu;
-          currentMenuName = 'main';
-          currentMenuItem = 'attacks';
+          defaultMenu();
           if (player.hp === 0) {
             subText = `${player.name} is dead`;
             nextPlay = 'player dead';

@@ -6,7 +6,6 @@ function screenMenu() {
   subText = '';
 
   // TODO: add logic when too many items in menu
-  // TODO: add text when menu is empty or remove it?
 
   const mainMenu = [
     { name: 'stats' },
@@ -15,9 +14,16 @@ function screenMenu() {
     { name: 'stuff' },
     { name: 'options' },
   ];
-  let currentMenu = mainMenu;
-  let currentMenuName = 'main';
-  let currentMenuItem = 'stats';
+  let currentMenu;
+  let currentMenuName;
+  let currentMenuItem;
+  defaultMenu();
+
+  function defaultMenu() {
+    currentMenu = mainMenu;
+    currentMenuName = 'main';
+    currentMenuItem = mainMenu[0].name;
+  }
 
   function keyWorldHandler(event) {
     const key = event.key;
@@ -30,15 +36,14 @@ function screenMenu() {
       currentMenuItem =
         currentMenu[i < currentMenu.length - 1 ? i + 1 : 0].name;
     } else if (key === 'ArrowLeft' || key === 'Backspace') {
-      currentMenu = mainMenu;
-      currentMenuName = 'main';
-      currentMenuItem = mainMenu[0].name;
+      defaultMenu();
     } else if (key === 'ArrowRight' || key === 'Enter' || key === ' ') {
       if (currentMenuName === 'main') {
         if (currentMenuItem !== 'stats') {
           currentMenu = player[currentMenuItem].filter((x) => x.qtt !== 0);
           currentMenuName = currentMenuItem;
           currentMenuItem = player[currentMenuItem][0].name;
+          if (!currentMenu.length) defaultMenu();
         } else {
           currentMenu = [
             { name: `lvl: ${player.lvl}` },
@@ -50,7 +55,7 @@ function screenMenu() {
           ];
         }
       } else if (currentMenuName === 'items') {
-        itemUse(currentMenuItem);
+        itemUse(currentMenuItem, defaultMenu);
       } else if (currentMenuName === 'attacks') {
         // TODO: re order attacks option?
       } else if (currentMenuName === 'stuff') {

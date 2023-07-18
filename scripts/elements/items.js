@@ -25,7 +25,7 @@ const items = [
 
 const itemsBase = items.filter((x) => x.base).map((x) => ({ ...x, qtt: 1 }));
 
-function itemUse(item) {
+function itemUse(item, failCallback) {
   const c = player.items.find((x) => x.name === item);
   if (c.qtt > 0) {
     subText = `${player.name} uses ${item}`;
@@ -41,5 +41,6 @@ function itemUse(item) {
     }
   } else {
     console.log(`No ${c.name} anymore`);
+    if (failCallback) failCallback();
   }
 }
