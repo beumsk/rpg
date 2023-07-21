@@ -16,7 +16,7 @@ function screenWorld(keepEnemy) {
     };
   }
 
-  const objects = [currentEnemy, player, ...currentMap.deadSpots];
+  let objects = [currentEnemy, player, ...currentMap.deadSpots];
 
   let animationId;
 
@@ -64,7 +64,7 @@ function screenWorld(keepEnemy) {
           screenTransition('top', () => screenWorld());
           changeMap(currentMap.rewards);
           player.x = 2 * 16;
-          player.Y = 2 * 16;
+          player.y = 2 * 16;
         } else {
           player.x = oldPos.x;
           player.y = oldPos.y;
@@ -73,10 +73,19 @@ function screenWorld(keepEnemy) {
           }`;
         }
       } else if (deadSpotCollision.type === 'chest') {
-        openChest(deadSpotCollision.chest);
-        // make the chest disappear after use
-        deadSpotCollision.x = -16;
-        deadSpotCollision.y = -16;
+        if (player.keys.includes(deadSpotCollision.name)) {
+          openChest(deadSpotCollision.chest);
+          player.keys = player.keys.filter((x) => x !== deadSpotCollision.name);
+          // make the chest disappear after use
+          currentMap.deadSpots = currentMap.deadSpots.filter(
+            (x) => x.type !== 'chest' && x.name !== deadSpotCollision.name
+          );
+          objects = [currentEnemy, player, ...currentMap.deadSpots];
+        } else {
+          subText = 'You need the key of this chest.';
+          player.x = oldPos.x;
+          player.y = oldPos.y;
+        }
       } else {
         player.x = oldPos.x;
         player.y = oldPos.y;
@@ -86,31 +95,54 @@ function screenWorld(keepEnemy) {
 
   function start() {
     document.addEventListener('keydown', keyWorldHandler);
+    const objImg = objects.filter((x) => x.img);
+    const objSq = objects.filter((x) => !x.img);
 
-    const step = () => {
-      ctx.clearRect(0, 0, canW, canH);
-      objects.forEach((obj) => {
-        ctx.fillStyle = obj.fill;
-        ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
+    function loadImage(obj) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = obj.img;
       });
+    }
 
-      // info text
-      drawRect(
-        1,
-        canH - menuHeight - 1,
-        canW - 2,
-        menuHeight,
-        cWhite,
-        cBlack,
-        1
-      );
-      ctx.font = '12px monospace';
-      ctx.fillStyle = cText;
-      ctx.fillText(subText, textOffset, canH - 16);
+    function loadImages(obj) {
+      return Promise.all(obj.map(loadImage));
+    }
 
-      animationId = requestAnimationFrame(step);
-    };
-    step();
+    loadImages(objImg).then((images) => {
+      const step = () => {
+        ctx.clearRect(0, 0, canW, canH);
+
+        images.forEach((img, i) =>
+          ctx.drawImage(img, 0, 0, 16, 16, objImg[i].x, objImg[i].y, 16, 16)
+        );
+
+        objSq.forEach((obj) => {
+          ctx.fillStyle = obj.fill;
+          ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
+        });
+
+        // TODO: change info text so it only has top border
+        // info text
+        drawRect(
+          1,
+          canH - menuHeight - 1,
+          canW - 2,
+          menuHeight,
+          cWhite,
+          cBlack,
+          1
+        );
+        ctx.font = '12px monospace';
+        ctx.fillStyle = cText;
+        ctx.fillText(subText, textOffset, canH - 16);
+
+        animationId = requestAnimationFrame(step);
+      };
+      step();
+    });
   }
 
   function stop() {

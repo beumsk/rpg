@@ -30,6 +30,7 @@ function screenFight() {
   function keyFightHandler(event) {
     const key = event.key;
     if (nextPlay === 'player') {
+      // menu navigation
       if (key === 'Enter' || key === ' ') {
         if (currentMenuName === 'main') {
           currentMenu = player[currentMenuItem].filter((x) => x.qtt !== 0);
@@ -55,6 +56,7 @@ function screenFight() {
           currentMenu[i > 0 ? i - 1 : currentMenu.length - 1].name;
       }
     } else {
+      // menu action
       if (key === 'Enter' || key === ' ') {
         if (nextPlay === 'player attack') {
           attackUse(currentMenuItem);
@@ -72,6 +74,7 @@ function screenFight() {
         } else if (nextPlay === 'enemy dead') {
           player.xp += currentEnemy.xp;
           player.gold += currentEnemy.gold;
+          randomKeyDrop();
           checkLvlUp(player.lvl, player.xp);
           stop();
           screenTransition('left', () => screenWorld());

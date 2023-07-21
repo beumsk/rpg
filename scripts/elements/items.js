@@ -20,7 +20,6 @@ const items = [
     desc: 'waker: item description',
   },
   // add boosts and more items
-  // items out of fight?
 ];
 
 const itemsBase = items.filter((x) => x.base).map((x) => ({ ...x, qtt: 1 }));

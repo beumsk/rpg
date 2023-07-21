@@ -1,9 +1,23 @@
 const defaultSpot = { x: 0, y: 0, w: 16, h: 16, type: 'wall', fill: cBlack };
 
+const defaultChest = {
+  ...defaultSpot,
+  type: 'chest',
+  fill: cChest,
+  img: './img/chest.png',
+};
+
+const defaultDoor = {
+  ...defaultSpot,
+  type: 'door',
+  fill: cDoor,
+  img: './img/door.png',
+};
+
 const maps = [
   // GD: map list the player is going through; each map is accessible at a lvl === index
   // => maps[0] is null, map[1] is starting map and map[2] is accessible at lvl 2
-  // GD: chest can give gold, items or stuff
+  // GD: chest can give gold, items x1 or stuff x1
   { name: null },
   {
     lvl: 1,
@@ -12,14 +26,13 @@ const maps = [
       { ...defaultSpot, x: 0, y: 0 },
       { ...defaultSpot, x: 9 * 16, y: 0 },
       {
-        ...defaultSpot,
+        ...defaultChest,
         x: 1 * 16,
         y: 8 * 16,
-        type: 'chest',
-        fill: cChest,
+        name: '1-A',
         chest: { gold: 10, items: 'potion' },
       },
-      { ...defaultSpot, x: 21 * 16, y: 0, type: 'door', fill: cDoor },
+      { ...defaultDoor, x: 21 * 16, y: 0 },
     ],
   },
   {
@@ -28,17 +41,17 @@ const maps = [
     deadSpots: [
       { ...defaultSpot, x: 0, y: 9 * 16 },
       { ...defaultSpot, x: 21 * 16, y: 0 },
-      { ...defaultSpot, x: 21 * 16, y: 9 * 16, type: 'door', fill: cDoor },
+      { ...defaultDoor, x: 21 * 16, y: 9 * 16 },
     ],
     rewards: { items: 'potion' },
   },
   {
     lvl: 3,
-    name: 'eerhten',
+    name: 'Eerhten',
     deadSpots: [
       { ...defaultSpot, x: 9 * 16, y: 6 * 16 },
       { ...defaultSpot, x: 6 * 16, y: 9 * 16 },
-      { ...defaultSpot, x: 0, y: 9 * 16, type: 'door', fill: cDoor },
+      { ...defaultDoor, x: 0, y: 9 * 16 },
     ],
     rewards: { items: 'potion' },
   },
@@ -46,12 +59,25 @@ const maps = [
 
 let currentMap;
 
+function randomKeyDrop() {
+  if (rand(10) === 1) {
+    mapChests = currentMap.deadSpots.filter((x) => x.type === 'chest');
+    chestNames = mapChests.map((x) => x.name);
+    droppedKey = chestNames[rand(chestNames.length)];
+    player.keys.push(droppedKey);
+    subText = `You dropped the key ${droppedKey}`;
+  }
+}
+
 function changeMap(rewards) {
   objLoop(rewards);
 }
 
 function openChest(chest) {
   objLoop(chest);
+  subText = `You opened a chest and got ${
+    chest.gold ? chest.gold + 'g,' : ''
+  } ${chest.items + ',' || ''} ${chest.stuff || ''}`;
 }
 
 function objLoop(obj) {

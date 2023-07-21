@@ -15,7 +15,10 @@ _desc_
 
 ## Todo:
 
-- add maps, enemies, attacks, items
+> first release
+
+- add maps, enemies, attacks, items, stuff
+- map transition => show clearly map lvl switch && add randomnes in rewards? (attacks, items, stuff, gold)
 
 > 0.0.4
 
@@ -46,3 +49,7 @@ _desc_
 - Starting a new map gives a random bonus for the rest of the run?
 - think of system to make each game different: stuff to buy, stats to use, new attacks on map change etc.
 - map enigmas?
+
+## Useful
+
+- 16px icons creation at: https://www.pixilart.com/draw

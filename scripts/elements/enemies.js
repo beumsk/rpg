@@ -4,6 +4,7 @@ const enemyBase = {
   w: 16,
   h: 16,
   fill: cEnemy,
+  img: './img/enemy.png',
   state: '',
   attackUse: (attack) => {
     const c = attack
