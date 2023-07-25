@@ -5,6 +5,7 @@ function screenStart() {
   player = { ...playerBase };
   currentMap = { ...maps[1] };
   stuffEquip(stuffBase);
+  stuffFind(stuff.filter((x) => x.name === 'test ring'));
 
   // TODO: load logic?
 

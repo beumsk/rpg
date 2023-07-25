@@ -2,7 +2,13 @@
 
 _desc_
 
-## Game Design (GD):
+## Game Theme
+
+- find game theme from inspiration of dev game of hackers battling
+  - from sport? tennis, boxe,
+  -
+
+## Game Design (GD)
 
 - pokemon-rpg like, walking around and fighting enemies
 - one map after the other
@@ -13,7 +19,7 @@ _desc_
   - enough xp > lvlup > access to next map + rewards (more stats, stuff, attacks, items? )
 - add a score screen at the game over
 
-## Todo:
+## Todo
 
 > first release
 
@@ -22,7 +28,6 @@ _desc_
 
 > 0.0.4
 
-- stuff logic to improve: equip from menu && show if item equiped in menu
 - add shop
 - how to heal? => tarvern? pay? newMap?
 

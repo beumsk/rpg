@@ -124,19 +124,7 @@ function screenWorld(keepEnemy) {
           ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
         });
 
-        // TODO: change info text so it only has top border
-        // info text
-        drawRect(
-          1,
-          canH - menuHeight - 1,
-          canW - 2,
-          menuHeight,
-          cWhite,
-          cBlack,
-          1
-        );
-        ctx.font = '12px monospace';
-        ctx.fillStyle = cText;
+        drawInfoBox();
         ctx.fillText(subText, textOffset, canH - 16);
 
         animationId = requestAnimationFrame(step);

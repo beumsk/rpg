@@ -142,17 +142,7 @@ function screenFight() {
       ctx.fillText('Player', playerX + textOffset, playerY + textOffset * 2);
 
       // create menu of actions
-      drawRect(
-        1,
-        canH - menuHeight - 1,
-        canW - 2,
-        menuHeight,
-        cWhite,
-        cBlack,
-        1
-      );
-      ctx.font = '12px monospace';
-      ctx.fillStyle = cText;
+      drawInfoBox();
       if (nextPlay === 'player') {
         currentMenu
           .filter((x) => x.qtt !== 0)

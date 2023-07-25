@@ -20,10 +20,10 @@ const cBack = '#eee';
 const cBack2 = '#ddd';
 const cBack3 = '#ccc';
 const cBack4 = '#bbb';
-const cPlayer = '#22d';
-const cEnemy = '#d22';
-const cDoor = '#2d2';
-const cChest = '#c72';
+const cPlayer = '#00a2ff';
+const cEnemy = '#ff595e';
+const cDoor = '#bf723f';
+const cChest = '#bf723f';
 
 // useful general functions
 function rand(val, step = 1, not) {
@@ -55,4 +55,10 @@ function drawRect(x, y, width, height, fill, stroke, ratio) {
   ctx.strokeRect(x, y, width, height);
   ctx.fillStyle = fill;
   ctx.fillRect(x, y, width * ratio, height);
+}
+
+function drawInfoBox() {
+  drawRect(0, canH - menuHeight + 1, canW, menuHeight - 1, cWhite, cBlack, 1);
+  ctx.font = '12px monospace';
+  ctx.fillStyle = cText;
 }

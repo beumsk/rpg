@@ -36,15 +36,14 @@ function screenMenu() {
       currentMenuItem =
         currentMenu[i < currentMenu.length - 1 ? i + 1 : 0].name;
     } else if (key === 'ArrowLeft' || key === 'Backspace') {
-      defaultMenu();
+      if (currentMenu === mainMenu) {
+        stop();
+      } else {
+        defaultMenu();
+      }
     } else if (key === 'ArrowRight' || key === 'Enter' || key === ' ') {
       if (currentMenuName === 'main') {
-        if (currentMenuItem !== 'stats') {
-          currentMenu = player[currentMenuItem].filter((x) => x.qtt !== 0);
-          currentMenuName = currentMenuItem;
-          currentMenuItem = player[currentMenuItem][0].name;
-          if (!currentMenu.length) defaultMenu();
-        } else {
+        if (currentMenuItem === 'stats') {
           currentMenu = [
             { name: `lvl: ${player.lvl}` },
             { name: `xp: ${player.xp}` },
@@ -53,20 +52,29 @@ function screenMenu() {
             { name: `str: ${player.str}` },
             { name: `hp: ${player.hp}/${player.hpmax}` },
           ];
+        } else if (currentMenuItem === 'stuff') {
+          currentMenu = player[currentMenuItem];
+          currentMenuName = currentMenuItem;
+          currentMenuItem = currentMenu[0].name;
+        } else if (currentMenuItem === 'options') {
+          currentMenu = [{ name: `sound` }, { name: `save` }, { name: `load` }];
+        } else {
+          currentMenu = player[currentMenuItem].filter((x) => x.qtt !== 0);
+          currentMenuName = currentMenuItem;
+          currentMenuItem = currentMenu[0].name;
+          if (!currentMenu.length) defaultMenu();
         }
       } else if (currentMenuName === 'items') {
         itemUse(currentMenuItem, defaultMenu);
       } else if (currentMenuName === 'attacks') {
         // TODO: re order attacks option?
       } else if (currentMenuName === 'stuff') {
-        // TODO: add option to equip stuff
+        stuffEquip(stuff.filter((x) => x.name === currentMenuItem));
       } else if (currentMenuName === 'options') {
         // TODO: add options: sound, save, load
       }
     } else if (key === 'Escape') {
       stop();
-      document.removeEventListener('keydown', keyWorldHandler);
-      screenWorld(true);
     }
   }
 
@@ -75,7 +83,6 @@ function screenMenu() {
 
     const step = () => {
       ctx.clearRect(0, 0, canW, canH);
-      // drawRect(1, 1, 160, canH - 2, cWhite, cBlack, 1);
       ctx.font = '12px monospace';
       currentMenu
         .filter((x) => x.qtt !== 0)
@@ -86,8 +93,13 @@ function screenMenu() {
           if (currentMenuName === 'attacks') {
             ctx.fillText(x.desc, textOffset, textOffset * 2 + 24 * i);
           } else if (currentMenuName === 'stuff') {
-            // TODO show if item is equiped
-            ctx.fillText(x.desc, textOffset, textOffset * 2 + 24 * i);
+            ctx.fillText(
+              x.equiped
+                ? `${x.name} (${x.effect}) |E|`
+                : `${x.name} (${x.effect})`,
+              textOffset,
+              textOffset * 2 + 24 * i
+            );
           } else if (currentMenuName === 'items') {
             ctx.fillText(
               `${x.desc}: x${x.qtt}`,
@@ -99,17 +111,7 @@ function screenMenu() {
           }
         });
 
-      drawRect(
-        1,
-        canH - menuHeight - 1,
-        canW - 2,
-        menuHeight,
-        cWhite,
-        cBlack,
-        1
-      );
-      ctx.font = '12px monospace';
-      ctx.fillStyle = cText;
+      drawInfoBox();
       ctx.fillText(subText, textOffset, canH - 16);
 
       animationId = requestAnimationFrame(step);
@@ -121,6 +123,7 @@ function screenMenu() {
     cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyWorldHandler);
     ctx.clearRect(0, 0, canW, canH);
+    screenWorld(true);
   }
 
   start();
