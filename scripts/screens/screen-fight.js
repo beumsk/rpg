@@ -4,7 +4,7 @@ function screenFight() {
 
   // TODO: simplify the logic
 
-  const rectWidth = 80;
+  const rectWidth = 120;
   const rectHeight = 48;
   let enemyX = 1;
   const enemyY = 16;
@@ -108,7 +108,7 @@ function screenFight() {
       ctx.clearRect(0, 0, canW, canH);
 
       // animates the boxes
-      if (enemyX < canW - 80 - 16) enemyX += 4;
+      if (enemyX < canW - rectWidth - 16) enemyX += 4;
       if (playerX > 16) playerX -= 4;
 
       // create enemy and player boxes
@@ -139,7 +139,7 @@ function screenFight() {
         enemyX + textOffset,
         enemyY + textOffset * 2
       );
-      ctx.fillText('Player', playerX + textOffset, playerY + textOffset * 2);
+      ctx.fillText(player.name, playerX + textOffset, playerY + textOffset * 2);
 
       // create menu of actions
       drawInfoBox();

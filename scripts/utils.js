@@ -51,7 +51,7 @@ function randPos(valX, valY, step = 1, not) {
 
 function drawRect(x, y, width, height, fill, stroke, ratio) {
   ctx.strokeStyle = stroke;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1;
   ctx.strokeRect(x, y, width, height);
   ctx.fillStyle = fill;
   ctx.fillRect(x, y, width * ratio, height);

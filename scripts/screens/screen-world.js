@@ -2,7 +2,7 @@ function screenWorld(keepEnemy) {
   container.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
   container.style.backgroundSize = '32px 32px';
 
-  subText = `Map ${currentMap.lvl}`;
+  // subText = `Map ${currentMap.lvl}`;
 
   // TODO: add multiple enemies?
   if (!keepEnemy) {
@@ -39,9 +39,6 @@ function screenWorld(keepEnemy) {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
       screenMenu();
-      // } else if (event.ctrlKey && event.key === 'r') {
-      //   event.preventDefault();
-      //   location.reload();
     }
     checkCollision(pos);
 
@@ -77,10 +74,13 @@ function screenWorld(keepEnemy) {
           openChest(deadSpotCollision.chest);
           player.keys = player.keys.filter((x) => x !== deadSpotCollision.name);
           // make the chest disappear after use
-          currentMap.deadSpots = currentMap.deadSpots.filter(
-            (x) => x.type !== 'chest' && x.name !== deadSpotCollision.name
-          );
-          objects = [currentEnemy, player, ...currentMap.deadSpots];
+          // currentMap.deadSpots = currentMap.deadSpots.filter(
+          //   (x) => x.type !== 'chest' && x.name !== deadSpotCollision.name
+          // );
+          // objects = [currentEnemy, player, ...currentMap.deadSpots];
+          // move chest because of remove bug
+          deadSpotCollision.x = -16;
+          deadSpotCollision.y = -16;
         } else {
           subText = 'You need the key of this chest.';
           player.x = oldPos.x;

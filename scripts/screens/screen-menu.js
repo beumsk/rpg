@@ -93,10 +93,13 @@ function screenMenu() {
           if (currentMenuName === 'attacks') {
             ctx.fillText(x.desc, textOffset, textOffset * 2 + 24 * i);
           } else if (currentMenuName === 'stuff') {
+            // TODO: add icons for stuff
             ctx.fillText(
               x.equiped
-                ? `${x.name} (${x.effect}) |E|`
-                : `${x.name} (${x.effect})`,
+                ? `|${x.equiped.charAt(0).toUpperCase()}| ${
+                    x.name
+                  } ${JSON.stringify(x.effect)}`
+                : `    ${x.name} ${JSON.stringify(x.effect)}`,
               textOffset,
               textOffset * 2 + 24 * i
             );

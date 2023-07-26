@@ -6,7 +6,6 @@ _desc_
 
 - find game theme from inspiration of dev game of hackers battling
   - from sport? tennis, boxe,
-  -
 
 ## Game Design (GD)
 
@@ -23,12 +22,11 @@ _desc_
 
 > first release
 
+- add shop
+- review subtext
 - add maps, enemies, attacks, items, stuff
 - map transition => show clearly map lvl switch && add randomnes in rewards? (attacks, items, stuff, gold)
 
-> 0.0.4
-
-- add shop
 - how to heal? => tarvern? pay? newMap?
 
 > 0.0.X
@@ -36,7 +34,6 @@ _desc_
 - handle how is the game saved, laoded and reset
 - menu improve
   - options: (sound, save, load)
-  - menu stuff to equip?
 - fight system: state icons
 - add AI logic (not only first attack)
 

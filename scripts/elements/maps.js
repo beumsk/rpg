@@ -30,7 +30,7 @@ const maps = [
         x: 1 * 16,
         y: 8 * 16,
         name: '1-A',
-        chest: { gold: 10, items: 'potion' },
+        chest: { gold: 10, items: 'potion', stuff: 'test ring' },
       },
       { ...defaultDoor, x: 21 * 16, y: 0 },
     ],
@@ -41,6 +41,13 @@ const maps = [
     deadSpots: [
       { ...defaultSpot, x: 0, y: 9 * 16 },
       { ...defaultSpot, x: 21 * 16, y: 0 },
+      {
+        ...defaultChest,
+        x: 8 * 16,
+        y: 8 * 16,
+        name: '2-A',
+        chest: { gold: 10, stuff: 'potion' },
+      },
       { ...defaultDoor, x: 21 * 16, y: 9 * 16 },
     ],
     rewards: { items: 'potion' },
@@ -60,12 +67,13 @@ const maps = [
 let currentMap;
 
 function randomKeyDrop() {
+  // if (true) {
   if (rand(10) === 1) {
     mapChests = currentMap.deadSpots.filter((x) => x.type === 'chest');
     chestNames = mapChests.map((x) => x.name);
     droppedKey = chestNames[rand(chestNames.length)];
     player.keys.push(droppedKey);
-    subText = `You dropped the key ${droppedKey}`;
+    subText = `You found the key ${droppedKey}`;
   }
 }
 
@@ -92,7 +100,7 @@ function objLoop(obj) {
         player.items.push(items.find((i) => i.name === value));
       }
     } else if (key === 'stuff') {
-      player.stuff.push(stuff.find((s) => s.name === value));
+      stuffFind(stuff.filter((s) => s.name === value));
     }
   }
 }

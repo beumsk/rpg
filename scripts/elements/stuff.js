@@ -20,28 +20,58 @@ const stuff = [
     desc: 'dummy ring: stuff description',
     base: true,
   },
-  // hat, cloak, ring, amulet, belt, boots, rune?, pet?
   {
     name: 'test ring',
     type: 'ring',
     effect: { str: 5 },
     desc: 'test ring: stuff description',
   },
+  // {
+  //   name: 'test ringg',
+  //   type: 'ring',
+  //   effect: { str: 5 },
+  //   desc: 'test ring: stuff description',
+  // },
+  // {
+  //   name: 'test ringgg',
+  //   type: 'ring',
+  //   effect: { str: 5 },
+  //   desc: 'test ring: stuff description',
+  // },
+  // {
+  //   name: 'test ringggg',
+  //   type: 'ring',
+  //   effect: { str: 5 },
+  //   desc: 'test ring: stuff description',
+  // },
+  // {
+  //   name: 'test ringgggg',
+  //   type: 'ring',
+  //   effect: { str: 5 },
+  //   desc: 'test ring: stuff description',
+  // },
+  // {
+  //   name: 'test ringggggg',
+  //   type: 'ring',
+  //   effect: { str: 5 },
+  //   desc: 'test ring: stuff description',
+  // },
+  // add amulet, belt, boots, rune, pet?
 ];
 
 const stuffBase = stuff.filter((x) => x.base);
 
 function stuffEquip(stuffList) {
   stuffList.map((s) => {
+    const newStuff = player.stuff.find((x) => x.name === s.name);
+    const oldStuff = player.stuff.find((x) => x.equiped && x.type === s.type);
     // stuff type is empty (game start)
     if (!player.stuff.find((x) => x.type === s.type)) {
       player.stuff = [...player.stuff, { ...s, equiped: s.type }];
       stuffModifyEffects(s.effect);
     }
     // replace stuff type because already something equiped
-    const newStuff = player.stuff.find((x) => x.name === s.name);
-    const oldStuff = player.stuff.find((x) => x.equiped && x.type === s.type);
-    if (newStuff?.equiped) return;
+    else if (newStuff?.equiped) return;
     else {
       oldStuff.equiped = '';
       stuffModifyEffects(oldStuff.effect, false);
@@ -49,8 +79,7 @@ function stuffEquip(stuffList) {
       stuffModifyEffects(newStuff.effect);
     }
   });
-  // TODO: sort by equiped !!
-  // player.stuff = player.stuff.sort((a, b) => a.equiped - b.equiped);
+  player.stuff.sort((a, b) => b.equiped.localeCompare(a.equiped));
 }
 
 function stuffModifyEffects(obj, add = true) {
@@ -67,5 +96,7 @@ function stuffModifyEffects(obj, add = true) {
 }
 
 function stuffFind(stuffList) {
-  player.stuff = [...player.stuff, ...stuffList];
+  stuffList.map((s) => {
+    player.stuff = [...player.stuff, { ...s, equiped: '' }];
+  });
 }
