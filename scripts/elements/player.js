@@ -2,10 +2,10 @@ let player = {};
 
 const playerBase = {
   name: 'Player',
-  x: 2 * 16,
-  y: 2 * 16,
-  w: 16,
-  h: 16,
+  x: 2 * step,
+  y: 2 * step,
+  w: step,
+  h: step,
   // fill: cPlayer,
   img: './img/player.png',
   hp: 100,

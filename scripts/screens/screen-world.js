@@ -1,6 +1,6 @@
 function screenWorld(keepEnemy) {
-  container.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
-  container.style.backgroundSize = '32px 32px';
+  canvas.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
+  canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
 
   // subText = `Map ${currentMap.lvl}`;
 
@@ -9,7 +9,7 @@ function screenWorld(keepEnemy) {
     mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
     currentEnemy = {
       ...mapEnemies[rand(mapEnemies.length)],
-      ...randPos(canW, canH - 32, 16, [
+      ...randPos(baseW, baseH - 32, step, [
         { x: player.x, y: player.y },
         ...currentMap.deadSpots,
       ]),
@@ -23,17 +23,17 @@ function screenWorld(keepEnemy) {
   function keyWorldHandler(event) {
     const key = event.key;
     const pos = { x: player.x, y: player.y };
-    if (key === 'ArrowUp' && player.y >= 16) {
-      player.y -= 16;
+    if (key === 'ArrowUp' && player.y >= step) {
+      player.y -= step;
       subText = `Map ${currentMap.lvl}`;
-    } else if (key === 'ArrowDown' && player.y <= canH - 64) {
-      player.y += 16;
+    } else if (key === 'ArrowDown' && player.y <= baseH - 64) {
+      player.y += step;
       subText = `Map ${currentMap.lvl}`;
-    } else if (key === 'ArrowLeft' && player.x >= 16) {
-      player.x -= 16;
+    } else if (key === 'ArrowLeft' && player.x >= step) {
+      player.x -= step;
       subText = `Map ${currentMap.lvl}`;
-    } else if (key === 'ArrowRight' && player.x <= canW - 32) {
-      player.x += 16;
+    } else if (key === 'ArrowRight' && player.x <= baseW - 2 * step) {
+      player.x += step;
       subText = `Map ${currentMap.lvl}`;
     } else if (key === 'Escape') {
       stop();
@@ -60,8 +60,8 @@ function screenWorld(keepEnemy) {
           stop();
           screenTransition('top', () => screenWorld());
           changeMap(currentMap.rewards);
-          player.x = 2 * 16;
-          player.y = 2 * 16;
+          player.x = 2 * step;
+          player.y = 2 * step;
         } else {
           player.x = oldPos.x;
           player.y = oldPos.y;
@@ -73,14 +73,9 @@ function screenWorld(keepEnemy) {
         if (player.keys.includes(deadSpotCollision.name)) {
           openChest(deadSpotCollision.chest);
           player.keys = player.keys.filter((x) => x !== deadSpotCollision.name);
-          // make the chest disappear after use
-          // currentMap.deadSpots = currentMap.deadSpots.filter(
-          //   (x) => x.type !== 'chest' && x.name !== deadSpotCollision.name
-          // );
-          // objects = [currentEnemy, player, ...currentMap.deadSpots];
           // move chest because of remove bug
-          deadSpotCollision.x = -16;
-          deadSpotCollision.y = -16;
+          deadSpotCollision.x = -step;
+          deadSpotCollision.y = -step;
         } else {
           subText = 'You need the key of this chest.';
           player.x = oldPos.x;
@@ -112,11 +107,21 @@ function screenWorld(keepEnemy) {
     }
 
     loadImages(objImg).then((images) => {
-      const step = () => {
-        ctx.clearRect(0, 0, canW, canH);
+      const frame = () => {
+        clearCanvas();
 
         images.forEach((img, i) =>
-          ctx.drawImage(img, 0, 0, 16, 16, objImg[i].x, objImg[i].y, 16, 16)
+          ctx.drawImage(
+            img,
+            0,
+            0,
+            step,
+            step,
+            objImg[i].x,
+            objImg[i].y,
+            step,
+            step
+          )
         );
 
         objSq.forEach((obj) => {
@@ -125,18 +130,18 @@ function screenWorld(keepEnemy) {
         });
 
         drawInfoBox();
-        ctx.fillText(subText, textOffset, canH - 16);
+        ctx.fillText(subText, textOffset, baseH - textOffset * 2);
 
-        animationId = requestAnimationFrame(step);
+        animationId = requestAnimationFrame(frame);
       };
-      step();
+      frame();
     });
   }
 
   function stop() {
     cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyWorldHandler);
-    ctx.clearRect(0, 0, canW, canH);
+    clearCanvas();
   }
 
   start();

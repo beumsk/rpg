@@ -1,15 +1,15 @@
 function screenFight() {
-  container.style.backgroundImage = `linear-gradient(45deg, ${cBack2} 60%, ${cBack4} 60%)`;
-  container.style.backgroundSize = 'unset';
+  canvas.style.backgroundImage = `linear-gradient(45deg, ${cBack2} 60%, ${cBack4} 60%)`;
+  canvas.style.backgroundSize = 'unset';
 
   // TODO: simplify the logic
 
   const rectWidth = 120;
   const rectHeight = 48;
-  let enemyX = 1;
-  const enemyY = 16;
-  let playerX = canW - rectWidth - 16;
-  const playerY = canH - rectHeight - 48;
+  let enemyX = 0;
+  const enemyY = textOffset * 2;
+  let playerX = baseW - rectWidth - textOffset * 2;
+  const playerY = baseH - rectHeight - 48;
 
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
   let currentMenu;
@@ -104,30 +104,30 @@ function screenFight() {
   function start() {
     document.addEventListener('keydown', keyFightHandler);
 
-    const step = () => {
-      ctx.clearRect(0, 0, canW, canH);
+    const frame = () => {
+      clearCanvas();
 
       // animates the boxes
-      if (enemyX < canW - rectWidth - 16) enemyX += 4;
-      if (playerX > 16) playerX -= 4;
+      if (enemyX < baseW - rectWidth - textOffset * 2) enemyX += 4;
+      if (playerX > textOffset * 2) playerX -= 4;
 
       // create enemy and player boxes
       drawRect(enemyX, enemyY, rectWidth, rectHeight, cWhite, cEnemy, 1);
       drawRect(
-        enemyX + 8,
-        enemyY + 32,
-        rectWidth - 16,
-        8,
+        enemyX + textOffset,
+        enemyY + textOffset * 4,
+        rectWidth - textOffset * 2,
+        textOffset,
         cEnemy,
         cEnemy,
         currentEnemy.hp / currentEnemy.hpmax
       );
       drawRect(playerX, playerY, rectWidth, rectHeight, cWhite, cPlayer, 1);
       drawRect(
-        playerX + 8,
-        playerY + 32,
-        rectWidth - 16,
-        8,
+        playerX + textOffset,
+        playerY + textOffset * 4,
+        rectWidth - textOffset * 2,
+        textOffset,
         cPlayer,
         cPlayer,
         player.hp / player.hpmax
@@ -148,21 +148,21 @@ function screenFight() {
           .filter((x) => x.qtt !== 0)
           .map((x, i) => {
             ctx.fillStyle = x.name === currentMenuItem ? cText2 : cText;
-            ctx.fillText(x.name, textOffset + 72 * i, canH - 16);
+            ctx.fillText(x.name, textOffset + 72 * i, baseH - 16);
           });
       } else {
-        ctx.fillText(subText, textOffset, canH - 16);
+        ctx.fillText(subText, textOffset, baseH - textOffset * 2);
       }
 
-      animationId = requestAnimationFrame(step);
+      animationId = requestAnimationFrame(frame);
     };
-    step();
+    frame();
   }
 
   function stop() {
     cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyFightHandler);
-    ctx.clearRect(0, 0, canW, canH);
+    clearCanvas();
   }
 
   start();

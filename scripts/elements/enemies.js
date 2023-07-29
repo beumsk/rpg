@@ -1,8 +1,8 @@
 const enemyBase = {
-  x: 2 * 16,
-  y: 4 * 16,
-  w: 16,
-  h: 16,
+  x: 2 * step,
+  y: 4 * step,
+  w: step,
+  h: step,
   fill: cEnemy,
   img: './img/enemy.png',
   state: '',

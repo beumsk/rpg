@@ -1,11 +1,14 @@
-# RPG
+# Tarava
 
 _desc_
 
 ## Game Theme
 
-- find game theme from inspiration of dev game of hackers battling
-  - from sport? tennis, boxe,
+- inspired from avatar -> fight your way to peace in a world of 4 elements
+  - (air < fire < water < earth )
+  - pick 1 element and fight until the end?
+    - offer to change element at lvlup/mapup?
+  - OR master 4 elements through game
 
 ## Game Design (GD)
 
@@ -20,9 +23,13 @@ _desc_
 
 ## Todo
 
+- try html text for menu, info...
+
 > first release
 
 - add shop
+- adapt enemies to theme avatar
+- create element logic (water > fire etc.)
 - review subtext
 - add maps, enemies, attacks, items, stuff
 - map transition => show clearly map lvl switch && add randomnes in rewards? (attacks, items, stuff, gold)

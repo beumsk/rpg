@@ -1,30 +1,30 @@
 function screenTransition(dir, screenFunc = screenWorld) {
-  const step = 8;
+  const speed = step / 2;
   let rectX = 0;
   let rectY = 0;
 
-  if (dir === 'right') rectX = -step;
-  if (dir === 'left') rectX = canW;
-  if (dir === 'bottom') rectY = -step;
-  if (dir === 'top') rectY = canH;
+  if (dir === 'right') rectX = -speed;
+  if (dir === 'left') rectX = baseW;
+  if (dir === 'bottom') rectY = -speed;
+  if (dir === 'top') rectY = baseH;
 
   let animationId;
 
   function start() {
     ctx.fillStyle = cBack3;
     if (dir !== 'top' && dir !== 'bottom') {
-      ctx.fillRect(rectX, rectY, 16, canH);
+      ctx.fillRect(rectX, rectY, step, baseH);
       if (dir === 'left') {
-        transitionLogic(rectX !== 0, (rectX -= step));
+        transitionLogic(rectX !== 0, (rectX -= speed));
       } else {
-        transitionLogic(rectX !== canW, (rectX += step));
+        transitionLogic(rectX !== baseW, (rectX += speed));
       }
     } else {
-      ctx.fillRect(rectX, rectY, canW, 16);
+      ctx.fillRect(rectX, rectY, baseW, step);
       if (dir === 'top') {
-        transitionLogic(rectY !== 0, (rectY -= step));
+        transitionLogic(rectY !== 0, (rectY -= speed));
       } else {
-        transitionLogic(rectY !== canW, (rectY += step));
+        transitionLogic(rectY !== baseW, (rectY += speed));
       }
     }
   }
@@ -41,7 +41,7 @@ function screenTransition(dir, screenFunc = screenWorld) {
 
   function stop() {
     cancelAnimationFrame(animationId);
-    ctx.clearRect(0, 0, canW, canH);
+    clearCanvas();
   }
 
   start();

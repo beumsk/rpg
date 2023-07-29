@@ -1,13 +1,13 @@
 function screenEnd() {
-  container.style.backgroundImage = '';
+  canvas.style.backgroundImage = '';
 
-  let fontSize = 10;
+  let fontSize = baseW / 32;
   let textColor = cText2;
 
   let animationId;
 
   function start() {
-    ctx.clearRect(0, 0, canW, canH);
+    clearCanvas();
 
     ctx.font = `${fontSize}px monospace`;
     ctx.fillStyle = textColor;
@@ -15,16 +15,16 @@ function screenEnd() {
 
     ctx.fillText(
       `You died and scored ${(currentMap.lvl - 1) * 100}`,
-      canW / 2,
-      canH / 2
+      baseW / 2,
+      baseH / 2
     );
 
-    if (fontSize < 20) {
+    if (fontSize < baseW / 16) {
       fontSize += 0.5;
     } else {
       ctx.font = '20px monospace';
       ctx.fillStyle = cText;
-      ctx.fillText('Press any key', canW / 2, canH / 2 + 70);
+      ctx.fillText('Press any key', baseW / 2, baseH - baseW / 8);
     }
 
     animationId = requestAnimationFrame(start);
@@ -33,7 +33,7 @@ function screenEnd() {
   function stop() {
     cancelAnimationFrame(animationId);
     ctx.textAlign = 'start';
-    ctx.clearRect(0, 0, canW, canH);
+    clearCanvas();
   }
 
   start();
@@ -42,6 +42,5 @@ function screenEnd() {
     stop();
     document.removeEventListener('keydown', keyStartHandler);
     screenStart();
-    // location.reload();
   }
 }

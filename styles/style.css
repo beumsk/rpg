@@ -5,6 +5,24 @@
   box-sizing: border-box;
 }
 
+:root {
+  --yellow: #f7f06d;
+  --green: #09bc8a;
+  --blue: #00a2ff;
+  --red: #ff595e;
+  --brown: #bf723f;
+  --white: #fff;
+  --white-1: #eee;
+  --white-2: #ddd;
+  --white-3: #ccc;
+  --white-4: #bbb;
+  --black-4: #444;
+  --black-3: #333;
+  --black-2: #222;
+  --black-1: #111;
+  --black: #000;
+}
+
 html,
 body {
   height: 100%;
@@ -35,41 +53,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(
+      rgba(256, 256, 256, 0.6),
+      rgba(256, 256, 256, 0.6)
+    ),
+    /* linear-gradient(to top right, #39ff6e, #4aa9ff, #f78fb3, #ff5d2b); */
+      conic-gradient(from 45deg, #09bc8a, #00a2ff, #ff595e, #f7f06d, #09bc8a);
 }
 
-.container {
-  position: relative;
-  width: 352px;
-  height: 192px;
-  background: #ddd;
-  /* background: conic-gradient(
-    #bbb 0deg 90deg,
-    #ddd 90deg 180deg,
-    #bbb 180deg 270deg,
-    #ddd 270deg 360deg
-  );
-  background-size: 32px 32px; */
-}
-
-@media (min-width: 528px) and (min-height: 288px) {
-  .container {
-    transform: scale(1.5);
-  }
-}
-
-@media (min-width: 704px) and (min-height: 384px) {
-  .container {
-    transform: scale(2);
-  }
-}
-
-@media (min-width: 1056px) and (min-height: 576px) {
-  .container {
-    transform: scale(3);
-  }
-}
-
-.container canvas {
+.canvas {
   image-rendering: pixelated;
   outline: solid 1px;
+}
+
+.pix {
+  image-rendering: pixelated;
+  font-size: 30px;
+  position: absolute;
+  top: 44px;
+  color: wheat;
+  transform: scale(3);
 }

@@ -1,5 +1,5 @@
 function screenMenu() {
-  container.style.backgroundImage = '';
+  canvas.style.backgroundImage = '';
 
   let animationId;
 
@@ -81,8 +81,8 @@ function screenMenu() {
   function start() {
     document.addEventListener('keydown', keyWorldHandler);
 
-    const step = () => {
-      ctx.clearRect(0, 0, canW, canH);
+    const frame = () => {
+      clearCanvas();
       ctx.font = '12px monospace';
       currentMenu
         .filter((x) => x.qtt !== 0)
@@ -115,17 +115,17 @@ function screenMenu() {
         });
 
       drawInfoBox();
-      ctx.fillText(subText, textOffset, canH - 16);
+      ctx.fillText(subText, textOffset, baseH - textOffset * 2);
 
-      animationId = requestAnimationFrame(step);
+      animationId = requestAnimationFrame(frame);
     };
-    step();
+    frame();
   }
 
   function stop() {
     cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyWorldHandler);
-    ctx.clearRect(0, 0, canW, canH);
+    clearCanvas();
     screenWorld(true);
   }
 
