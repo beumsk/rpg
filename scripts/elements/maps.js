@@ -73,7 +73,7 @@ function randomKeyDrop() {
     chestNames = mapChests.map((x) => x.name);
     droppedKey = chestNames[rand(chestNames.length)];
     player.keys.push(droppedKey);
-    subText = `You found the key ${droppedKey}`;
+    infoEl.innerText = `You found the key ${droppedKey}`;
   }
 }
 
@@ -83,7 +83,7 @@ function changeMap(rewards) {
 
 function openChest(chest) {
   objLoop(chest);
-  subText = `You opened a chest and got ${
+  infoEl.innerText = `You opened a chest and got ${
     chest.gold ? chest.gold + 'g,' : ''
   } ${chest.items + ',' || ''} ${chest.stuff || ''}`;
 }

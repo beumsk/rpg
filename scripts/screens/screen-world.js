@@ -2,8 +2,6 @@ function screenWorld(keepEnemy) {
   canvas.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
 
-  // subText = `Map ${currentMap.lvl}`;
-
   // TODO: add multiple enemies?
   if (!keepEnemy) {
     mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
@@ -25,16 +23,16 @@ function screenWorld(keepEnemy) {
     const pos = { x: player.x, y: player.y };
     if (key === 'ArrowUp' && player.y >= step) {
       player.y -= step;
-      subText = `Map ${currentMap.lvl}`;
+      infoEl.innerText = `Map ${currentMap.lvl}`;
     } else if (key === 'ArrowDown' && player.y <= baseH - 64) {
       player.y += step;
-      subText = `Map ${currentMap.lvl}`;
+      infoEl.innerText = `Map ${currentMap.lvl}`;
     } else if (key === 'ArrowLeft' && player.x >= step) {
       player.x -= step;
-      subText = `Map ${currentMap.lvl}`;
+      infoEl.innerText = `Map ${currentMap.lvl}`;
     } else if (key === 'ArrowRight' && player.x <= baseW - 2 * step) {
       player.x += step;
-      subText = `Map ${currentMap.lvl}`;
+      infoEl.innerText = `Map ${currentMap.lvl}`;
     } else if (key === 'Escape') {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
@@ -65,7 +63,8 @@ function screenWorld(keepEnemy) {
         } else {
           player.x = oldPos.x;
           player.y = oldPos.y;
-          subText = `Up lvl ${player.lvl + 1} to reach Map ${
+
+          infoEl.innerText = `Up lvl ${player.lvl + 1} to reach Map ${
             currentMap.lvl + 1
           }`;
         }
@@ -77,7 +76,7 @@ function screenWorld(keepEnemy) {
           deadSpotCollision.x = -step;
           deadSpotCollision.y = -step;
         } else {
-          subText = 'You need the key of this chest.';
+          infoEl.innerText = 'You need the key of this chest.';
           player.x = oldPos.x;
           player.y = oldPos.y;
         }
@@ -128,9 +127,6 @@ function screenWorld(keepEnemy) {
           ctx.fillStyle = obj.fill;
           ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
         });
-
-        drawInfoBox();
-        ctx.fillText(subText, textOffset, baseH - textOffset * 2);
 
         animationId = requestAnimationFrame(frame);
       };

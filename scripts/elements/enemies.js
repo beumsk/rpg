@@ -6,17 +6,6 @@ const enemyBase = {
   fill: cEnemy,
   img: './img/enemy.png',
   state: '',
-  attackUse: (attack) => {
-    const c = attack
-      ? currentEnemy.attacks.find((x) => x.name === attack)
-      : currentEnemy.attacks[0];
-    const calcDmg = Math.floor(c.dmg + (c.dmg * currentEnemy.str) / 100);
-    if (calcDmg >= player.hp) {
-      player.hp = 0;
-    } else {
-      player.hp -= calcDmg;
-    }
-  },
 };
 
 function createEnemy(name, hp, attack) {
@@ -53,3 +42,31 @@ const createList = [
 createList.forEach((x) => createEnemy(x.name, x.hp, x.attack));
 
 let currentEnemy = {};
+
+function enemyAttack(attack) {
+  const c = attack
+    ? currentEnemy.attacks.find((x) => x.name === attack)
+    : currentEnemy.attacks[0];
+  infoEl.innerText = `${currentEnemy.name} uses ${c.name}`;
+
+  const manageDmg = () => {
+    const calcDmg = Math.floor(c.dmg + (c.dmg * currentEnemy.str) / 100);
+    if (calcDmg >= player.hp) {
+      player.hp = 0;
+    } else {
+      player.hp -= calcDmg;
+    }
+  };
+
+  fightQueue.push(manageDmg, playerCheckDead);
+}
+
+function enemyCheckDead() {
+  if (currentEnemy.hp === 0) {
+    infoEl.innerText = `${currentEnemy.name} is dead`;
+    fightQueue.push(playerWin);
+  } else {
+    infoEl.innerText = `${currentEnemy.name} is attacking...`;
+    fightQueue.push(enemyAttack);
+  }
+}

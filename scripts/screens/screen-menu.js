@@ -3,7 +3,7 @@ function screenMenu() {
 
   let animationId;
 
-  subText = '';
+  infoEl.innerText = '';
 
   // TODO: add logic when too many items in menu
 
@@ -14,108 +14,42 @@ function screenMenu() {
     { name: 'stuff' },
     { name: 'options' },
   ];
-  let currentMenu;
-  let currentMenuName;
-  let currentMenuItem;
-  defaultMenu();
 
-  function defaultMenu() {
-    currentMenu = mainMenu;
-    currentMenuName = 'main';
-    currentMenuItem = mainMenu[0].name;
-  }
+  let index = 0;
+  let menuLinks = menuEl.getElementsByTagName('a');
+  let crtMenu = 'main';
 
-  function keyWorldHandler(event) {
+  createMenu(mainMenu, 'main');
+
+  function keyMenuHandler(event) {
     const key = event.key;
-    if (key === 'ArrowUp') {
-      let i = currentMenu.findIndex((x) => x.name === currentMenuItem);
-      currentMenuItem =
-        currentMenu[i > 0 ? i - 1 : currentMenu.length - 1].name;
-    } else if (key === 'ArrowDown') {
-      let i = currentMenu.findIndex((x) => x.name === currentMenuItem);
-      currentMenuItem =
-        currentMenu[i < currentMenu.length - 1 ? i + 1 : 0].name;
-    } else if (key === 'ArrowLeft' || key === 'Backspace') {
-      if (currentMenu === mainMenu) {
+    if (key === 'ArrowLeft' || key === 'Backspace') {
+      if (crtMenu === 'main') {
         stop();
       } else {
-        defaultMenu();
+        infoEl.innerText = '';
+        crtMenu = 'main';
+        createMenu(mainMenu, 'main');
       }
-    } else if (key === 'ArrowRight' || key === 'Enter' || key === ' ') {
-      if (currentMenuName === 'main') {
-        if (currentMenuItem === 'stats') {
-          currentMenu = [
-            { name: `lvl: ${player.lvl}` },
-            { name: `xp: ${player.xp}` },
-            { name: `map: ${currentMap.lvl}` },
-            { name: `gold: ${player.gold}` },
-            { name: `str: ${player.str}` },
-            { name: `hp: ${player.hp}/${player.hpmax}` },
-          ];
-        } else if (currentMenuItem === 'stuff') {
-          currentMenu = player[currentMenuItem];
-          currentMenuName = currentMenuItem;
-          currentMenuItem = currentMenu[0].name;
-        } else if (currentMenuItem === 'options') {
-          currentMenu = [{ name: `sound` }, { name: `save` }, { name: `load` }];
-        } else {
-          currentMenu = player[currentMenuItem].filter((x) => x.qtt !== 0);
-          currentMenuName = currentMenuItem;
-          currentMenuItem = currentMenu[0].name;
-          if (!currentMenu.length) defaultMenu();
-        }
-      } else if (currentMenuName === 'items') {
-        itemUse(currentMenuItem, defaultMenu);
-      } else if (currentMenuName === 'attacks') {
-        // TODO: re order attacks option?
-      } else if (currentMenuName === 'stuff') {
-        stuffEquip(stuff.filter((x) => x.name === currentMenuItem));
-      } else if (currentMenuName === 'options') {
-        // TODO: add options: sound, save, load
-      }
+    } else if (key === 'ArrowUp') {
+      infoEl.innerText = '';
+      index = index !== 0 ? index - 1 : menuLinks.length - 1;
+      menuLinks[index].focus();
+    } else if (key === 'ArrowDown') {
+      infoEl.innerText = '';
+      index = index !== menuLinks.length - 1 ? index + 1 : 0;
+      menuLinks[index].focus();
     } else if (key === 'Escape') {
       stop();
     }
   }
 
   function start() {
-    document.addEventListener('keydown', keyWorldHandler);
+    document.addEventListener('keydown', keyMenuHandler);
 
     const frame = () => {
       clearCanvas();
       ctx.font = '12px monospace';
-      currentMenu
-        .filter((x) => x.qtt !== 0)
-        .map((x, i) => {
-          if (currentMenuName !== 'stats') {
-            ctx.fillStyle = x.name === currentMenuItem ? cText2 : cText;
-          }
-          if (currentMenuName === 'attacks') {
-            ctx.fillText(x.desc, textOffset, textOffset * 2 + 24 * i);
-          } else if (currentMenuName === 'stuff') {
-            // TODO: add icons for stuff
-            ctx.fillText(
-              x.equiped
-                ? `|${x.equiped.charAt(0).toUpperCase()}| ${
-                    x.name
-                  } ${JSON.stringify(x.effect)}`
-                : `    ${x.name} ${JSON.stringify(x.effect)}`,
-              textOffset,
-              textOffset * 2 + 24 * i
-            );
-          } else if (currentMenuName === 'items') {
-            ctx.fillText(
-              `${x.desc}: x${x.qtt}`,
-              textOffset,
-              textOffset * 2 + 24 * i
-            );
-          } else {
-            ctx.fillText(x.name, textOffset, textOffset * 2 + 24 * i);
-          }
-        });
-
-      drawInfoBox();
-      ctx.fillText(subText, textOffset, baseH - textOffset * 2);
 
       animationId = requestAnimationFrame(frame);
     };
@@ -123,11 +57,86 @@ function screenMenu() {
   }
 
   function stop() {
+    infoEl.innerText = '';
     cancelAnimationFrame(animationId);
-    document.removeEventListener('keydown', keyWorldHandler);
+    document.removeEventListener('keydown', keyMenuHandler);
+    deleteMenu();
     clearCanvas();
     screenWorld(true);
   }
 
   start();
+
+  function deleteMenu() {
+    menuEl.innerHTML = '';
+  }
+
+  function createMenu(menuList, menuName) {
+    crtMenu = menuName;
+    menuEl.innerHTML = '';
+    if (menuList?.length > 0) {
+      menuList.map((x, i) => {
+        const linkEl = document.createElement('a');
+        linkEl.href = '';
+        if (menuName === 'attacks') {
+          linkEl.innerText = `${x.name}: ${x.desc}`;
+        } else if (menuName === 'items') {
+          linkEl.innerText = `${x.name}: ${x.desc} (x${x.qtt})`;
+        } else if (menuName === 'stuff') {
+          linkEl.innerText = x.equiped
+            ? `|${x.equiped.charAt(0).toUpperCase()}| ${
+                x.name
+              } ${JSON.stringify(x.effect)}`
+            : `    ${x.name} ${JSON.stringify(x.effect)}`;
+        } else {
+          linkEl.innerText = x.name;
+        }
+        linkEl.dataset.menu = menuName;
+        linkEl.dataset.value = x.name;
+        menuEl.appendChild(linkEl);
+        index = 0;
+        if (i === index) linkEl.focus();
+        linkEl.addEventListener('click', linkClick);
+      });
+    } else {
+      createMenu(mainMenu, 'main');
+    }
+  }
+
+  function linkClick(e) {
+    e.preventDefault();
+    let crt = e.target;
+    if (crtMenu === 'main') {
+      if (crt.dataset.value === 'stats') {
+        createMenu(
+          [
+            { name: `lvl: ${player.lvl}` },
+            { name: `xp: ${player.xp}` },
+            { name: `map: ${currentMap.lvl}` },
+            { name: `gold: ${player.gold}` },
+            { name: `str: ${player.str}` },
+            { name: `hp: ${player.hp}/${player.hpmax}` },
+          ],
+          crt.dataset.value
+        );
+      } else if (crt.dataset.value === 'options') {
+        createMenu(
+          [{ name: `sound` }, { name: `save` }, { name: `load` }],
+          crt.dataset.value
+        );
+      } else {
+        createMenu(player[crt.dataset.value], crt.dataset.value);
+      }
+    } else if (crtMenu === 'attacks') {
+      // TODO: re order attacks option?
+    } else if (crtMenu === 'items') {
+      itemUse(crt.dataset.value, true);
+      createMenu(player[crtMenu], crtMenu);
+    } else if (crtMenu === 'stuff') {
+      stuffEquip(stuff.filter((x) => x.name === crt.dataset.value));
+      createMenu(player[crtMenu], crtMenu);
+    } else if (crtMenu === 'options') {
+      // TODO: add options: sound, save, load
+    }
+  }
 }

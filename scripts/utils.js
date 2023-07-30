@@ -1,12 +1,16 @@
 // create html: canvas
 const baseW = 352;
 const baseH = 192;
+
 let scale;
+
+const containerEl = document.createElement('div');
+containerEl.classList.add('container');
+document.body.appendChild(containerEl);
 
 const canvasEl = document.createElement('canvas');
 canvasEl.classList.add('canvas');
-
-document.body.appendChild(canvasEl);
+containerEl.appendChild(canvasEl);
 
 // general variables
 const canvas = canvasEl;
@@ -20,7 +24,28 @@ const textOffset = baseW / 44;
 
 const step = baseW / 22;
 
+const infoEl = document.createElement('div');
+infoEl.classList.add('info');
+infoEl.style.cssText = `
+  height: ${menuHeight * scale};
+  margin-top: -${menuHeight * scale};
+  font-size: ${12 * scale}px;
+  padding: ${8 * scale}px;
+`;
+containerEl.appendChild(infoEl);
+
+const menuEl = document.createElement('div');
+menuEl.classList.add('menu');
+menuEl.style.cssText = `
+  height: ${(baseH - menuHeight) * scale};
+  font-size: ${12 * scale}px;
+  padding: ${8 * scale}px;
+`;
+containerEl.appendChild(menuEl);
+
 let subText = ``;
+
+let fightQueue = [];
 
 const cYellow = '#f7f06d';
 const cGreen = '#09bc8a';
@@ -95,10 +120,4 @@ function drawRect(x, y, width, height, fill, stroke, ratio) {
   ctx.strokeRect(x, y, width, height);
   ctx.fillStyle = fill;
   ctx.fillRect(x, y, width * ratio, height);
-}
-
-function drawInfoBox() {
-  drawRect(0, baseH - menuHeight + 1, baseW, menuHeight - 1, cWhite, cBlack, 1);
-  ctx.font = `12px monospace`;
-  ctx.fillStyle = cText;
 }

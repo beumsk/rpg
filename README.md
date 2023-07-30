@@ -23,14 +23,12 @@ _desc_
 
 ## Todo
 
-- try html text for menu, info...
-
 > first release
 
 - add shop
 - adapt enemies to theme avatar
 - create element logic (water > fire etc.)
-- review subtext
+- review infoEl (queue logic cfr fight)
 - add maps, enemies, attacks, items, stuff
 - map transition => show clearly map lvl switch && add randomnes in rewards? (attacks, items, stuff, gold)
 

@@ -17,8 +17,5 @@ function lvlUp() {
   player.hp = player.hpmax;
   player.lvl += 1;
   // TODO: improve logic to have this subtext displayed on screenworld
-  setTimeout(
-    () => (subText = `You lvl up to lvl ${player.lvl}, the door is now open!`),
-    1000
-  );
+  infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`;
 }
