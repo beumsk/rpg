@@ -12,10 +12,13 @@ function checkLvlUp(currentLvl, currentXp) {
 }
 
 function lvlUp() {
+  maps[player.lvl].deadSpots.find((x) => x.type === 'hide-door').x = -step;
+  infoQueue.push(
+    () =>
+      (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
+  );
   player.str += 20 * player.lvl;
   player.hpmax += 20 * player.lvl;
   player.hp = player.hpmax;
   player.lvl += 1;
-  // TODO: improve logic to have this subtext displayed on screenworld
-  infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`;
 }

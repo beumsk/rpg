@@ -15,7 +15,6 @@ const playerBase = {
   lvl: 1,
   xp: 0,
   gold: 0,
-  keys: [],
   attacks: attacksBase,
   items: itemsBase,
   stuff: [],
@@ -34,15 +33,14 @@ function playerAttack(attack) {
     }
   };
 
-  fightQueue.push(manageDmg, enemyCheckDead);
+  infoQueue.push(manageDmg, enemyCheckDead);
 }
 
 function playerCheckDead() {
   if (player.hp === 0) {
     infoEl.innerText = `${player.name} is dead`;
-    fightQueue.push(playerLose);
+    infoQueue.push(playerLose);
   } else {
-    infoEl.innerText = '';
     // new turn for player
     return 'play';
   }

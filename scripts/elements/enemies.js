@@ -58,15 +58,15 @@ function enemyAttack(attack) {
     }
   };
 
-  fightQueue.push(manageDmg, playerCheckDead);
+  infoQueue.push(manageDmg, playerCheckDead);
 }
 
 function enemyCheckDead() {
   if (currentEnemy.hp === 0) {
     infoEl.innerText = `${currentEnemy.name} is dead`;
-    fightQueue.push(playerWin);
+    infoQueue.push(playerWin);
   } else {
     infoEl.innerText = `${currentEnemy.name} is attacking...`;
-    fightQueue.push(enemyAttack);
+    infoQueue.push(enemyAttack);
   }
 }

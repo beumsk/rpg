@@ -1,4 +1,4 @@
-# Tarava
+# T🔥r💧v🍃
 
 _desc_
 
@@ -8,35 +8,44 @@ _desc_
   - (air < fire < water < earth )
   - pick 1 element and fight until the end?
     - offer to change element at lvlup/mapup?
-  - OR master 4 elements through game
+  - OR start with one element and master 4 elements through game
+    - quests OR maps to master new element
+    - defeat boss at the end
+- Logo from 4 elements? && text logo T🔥r💧v🍃
 
 ## Game Design (GD)
 
 - pokemon-rpg like, walking around and fighting enemies
 - one map after the other
-  - get enough xp and choose when to reach next map
+  - get enough xp, lvl up and choose when to reach next map
+  - get rewards (more stats, stuff, attacks, items? )
   - no way back!
 - lvl x gives acces to map x
-- lvlup system:
-  - enough xp > lvlup > access to next map + rewards (more stats, stuff, attacks, items? )
 - add a score screen at the game over
 
 ## Todo
 
+- add shop (in menu) => items, attacks?, stuff? (pay with gold)
+
 > first release
 
-- add shop
 - adapt enemies to theme avatar
 - create element logic (water > fire etc.)
-- review infoEl (queue logic cfr fight)
 - add maps, enemies, attacks, items, stuff
-- map transition => show clearly map lvl switch && add randomnes in rewards? (attacks, items, stuff, gold)
+
+- map transition
+  - add randomnes in rewards? (attacks, items, stuff, gold)
+  - offer option to pick between average reward (5) or random (1-10)
+- randomize the chests
 
 - how to heal? => tarvern? pay? newMap?
 
 > 0.0.X
 
-- handle how is the game saved, laoded and reset
+- handle how is the game saved, laoded
+  - start > new/load > world
+- new > ask name > intro (dialog screen??) > world
+
 - menu improve
   - options: (sound, save, load)
 - fight system: state icons
@@ -46,9 +55,9 @@ _desc_
 - add sounds && music
 - add story
 
-- add randomnes => dmg, gold?, xp?
-- shops: items, attacks?, stuff? (pay with gold)
-- world: add items on map and their collision + game design? puzzle on some map?
+- add randomnes => dmg, map rewards, chest, gold?, xp?
+- world: game design? puzzle on some map?
+- review map to move outside of screen?
 - quests / achievements
 
 ## Ideas

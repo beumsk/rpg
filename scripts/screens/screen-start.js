@@ -3,7 +3,7 @@ function screenStart() {
 
   // reset
   player = { ...playerBase };
-  currentMap = { ...maps[1] };
+  currentMap = { ...maps[player.lvl] };
   stuffEquip(stuffBase);
   // stuffFind(stuff.filter((x) => !x.base));
 

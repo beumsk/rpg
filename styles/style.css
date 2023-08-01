@@ -50,6 +50,7 @@ body {
   font-family: monospace;
   overflow: hidden;
   min-width: 352px;
+  min-height: 192px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,6 +71,31 @@ body {
   outline: solid 1px;
 }
 
+.state {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: var(--white-4);
+  outline: solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.state:empty {
+  display: none;
+}
+
+.state span {
+  flex: 1 0 calc(100% / 3);
+}
+.state span:nth-of-type(2) {
+  text-align: center;
+}
+.state span:nth-of-type(3) {
+  text-align: right;
+}
+
 .info a,
 .menu a {
   text-decoration: none;
@@ -84,11 +110,19 @@ body {
 }
 
 .info {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   background: white;
   outline: solid 1px;
   display: flex;
   align-items: center;
-  position: relative;
+  overflow: auto;
+}
+
+.info:empty {
+  /* display: none; */
 }
 
 .info a {
@@ -114,9 +148,22 @@ body {
   right: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  overflow: auto;
 }
 
 .menu:empty {
+  display: none;
+}
+
+.menu a {
+  padding: 8px 0;
+}
+
+.menu,
+.info {
+  scrollbar-width: none;
+}
+.menu::-webkit-scrollbar,
+.info::-webkit-scrollbar {
   display: none;
 }

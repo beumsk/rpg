@@ -2,6 +2,12 @@ function screenWorld(keepEnemy) {
   canvas.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
 
+  updateState();
+
+  infoEl.innerText = ' ';
+
+  fireQueue();
+
   // TODO: add multiple enemies?
   if (!keepEnemy) {
     mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
@@ -18,27 +24,28 @@ function screenWorld(keepEnemy) {
 
   let animationId;
 
-  function keyWorldHandler(event) {
-    const key = event.key;
-    const pos = { x: player.x, y: player.y };
+  function keyWorldHandler(e) {
+    if (infoQueue.length) return fireQueue();
+    const key = e.key;
+    const oldPos = { x: player.x, y: player.y };
     if (key === 'ArrowUp' && player.y >= step) {
       player.y -= step;
-      infoEl.innerText = `Map ${currentMap.lvl}`;
-    } else if (key === 'ArrowDown' && player.y <= baseH - 64) {
+      infoEl.innerText = ` `;
+    } else if (key === 'ArrowDown' && player.y < baseH - player.h) {
       player.y += step;
-      infoEl.innerText = `Map ${currentMap.lvl}`;
+      infoEl.innerText = ` `;
     } else if (key === 'ArrowLeft' && player.x >= step) {
       player.x -= step;
-      infoEl.innerText = `Map ${currentMap.lvl}`;
-    } else if (key === 'ArrowRight' && player.x <= baseW - 2 * step) {
+      infoEl.innerText = ` `;
+    } else if (key === 'ArrowRight' && player.x < baseW - player.w) {
       player.x += step;
-      infoEl.innerText = `Map ${currentMap.lvl}`;
+      infoEl.innerText = ` `;
     } else if (key === 'Escape') {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
       screenMenu();
     }
-    checkCollision(pos);
+    checkCollision(oldPos);
 
     ctx.fillStyle = player.fill;
     ctx.fillRect(player.x, player.y, player.w, player.h);
@@ -58,6 +65,9 @@ function screenWorld(keepEnemy) {
           stop();
           screenTransition('top', () => screenWorld());
           changeMap(currentMap.rewards);
+          infoQueue.push(
+            () => (infoEl.innerText = `You reached map ${currentMap.lvl}`)
+          );
           player.x = 2 * step;
           player.y = 2 * step;
         } else {
@@ -69,14 +79,12 @@ function screenWorld(keepEnemy) {
           }`;
         }
       } else if (deadSpotCollision.type === 'chest') {
-        if (player.keys.includes(deadSpotCollision.name)) {
+        if (deadSpotCollision.unlocked) {
           openChest(deadSpotCollision.chest);
-          player.keys = player.keys.filter((x) => x !== deadSpotCollision.name);
-          // move chest because of remove bug
           deadSpotCollision.x = -step;
-          deadSpotCollision.y = -step;
+          updateState();
         } else {
-          infoEl.innerText = 'You need the key of this chest.';
+          infoEl.innerText = 'You need the key of this chest';
           player.x = oldPos.x;
           player.y = oldPos.y;
         }

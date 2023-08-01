@@ -48,7 +48,7 @@ function itemUse(item, fromMenu) {
     if (fromMenu) {
       manageItem();
     } else {
-      fightQueue.push(manageItem, enemyAttack);
+      infoQueue.push(manageItem, enemyAttack);
     }
   } else {
     console.log(`No ${c.name} anymore`);

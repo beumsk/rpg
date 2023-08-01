@@ -17,20 +17,33 @@ const canvas = canvasEl;
 const ctx = canvas.getContext('2d');
 ctx.textBaseline = 'middle';
 
-scaleCanvas();
-
 const menuHeight = baseH / 6;
 const textOffset = baseW / 44;
 
 const step = baseW / 22;
 
+scaleCanvas();
+
+containerEl.style.cssText = `
+  width: ${baseW * scale};
+  height: ${baseH * scale};
+`;
+
+const stateEl = document.createElement('div');
+stateEl.classList.add('state');
+stateEl.style.cssText = `
+  height: ${(menuHeight / 2) * scale};
+  font-size: ${8 * scale}px;
+  padding: 0 ${8 * scale}px;
+`;
+containerEl.appendChild(stateEl);
+
 const infoEl = document.createElement('div');
 infoEl.classList.add('info');
 infoEl.style.cssText = `
   height: ${menuHeight * scale};
-  margin-top: -${menuHeight * scale};
   font-size: ${12 * scale}px;
-  padding: ${8 * scale}px;
+  padding: 0 ${8 * scale}px;
 `;
 containerEl.appendChild(infoEl);
 
@@ -39,13 +52,11 @@ menuEl.classList.add('menu');
 menuEl.style.cssText = `
   height: ${(baseH - menuHeight) * scale};
   font-size: ${12 * scale}px;
-  padding: ${8 * scale}px;
+  padding:  ${4 * scale}px ${8 * scale}px;
 `;
 containerEl.appendChild(menuEl);
 
-let subText = ``;
-
-let fightQueue = [];
+let infoQueue = [];
 
 const cYellow = '#f7f06d';
 const cGreen = '#09bc8a';
@@ -105,7 +116,11 @@ function clearCanvas() {
 function scaleCanvas() {
   const winW = window.innerWidth;
   const winH = window.innerHeight;
-  let newScale = Math.min(Math.floor(winW / baseW), Math.floor(winH / baseH));
+  let newScale = Math.min(
+    Math.floor(winW / baseW),
+    Math.floor(winH / (baseH + menuHeight * 2))
+  );
+  if (!newScale) newScale = 1;
   if (newScale !== scale) {
     canvasEl.width = baseW * newScale;
     canvasEl.height = baseH * newScale;
@@ -120,4 +135,23 @@ function drawRect(x, y, width, height, fill, stroke, ratio) {
   ctx.strokeRect(x, y, width, height);
   ctx.fillStyle = fill;
   ctx.fillRect(x, y, width * ratio, height);
+}
+
+function fireQueue() {
+  if (infoQueue.length > 0) {
+    const next = infoQueue[0]();
+    infoQueue.shift();
+    return next;
+  }
+}
+
+function updateState() {
+  stateEl.innerHTML = `
+    <span>${player.name}</span>
+    <span>lvl ${player.lvl} (${player.xp}/${lvls[player.lvl + 1]}xp)</span>
+    <span>${
+      currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''
+    }
+    ${currentMap.name} (${currentMap.lvl})
+    `;
 }

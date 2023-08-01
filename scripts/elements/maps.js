@@ -5,6 +5,7 @@ const defaultChest = {
   type: 'chest',
   fill: cChest,
   img: './img/chest.png',
+  unlocked: false,
 };
 
 const defaultDoor = {
@@ -21,7 +22,7 @@ const maps = [
   { name: null },
   {
     lvl: 1,
-    name: 'Eibwen',
+    name: 'Enoen',
     deadSpots: [
       { ...defaultSpot, x: 0, y: 0 },
       { ...defaultSpot, x: 9 * 16, y: 0 },
@@ -29,9 +30,9 @@ const maps = [
         ...defaultChest,
         x: 1 * 16,
         y: 8 * 16,
-        name: '1-A',
         chest: { gold: 10, items: 'potion', stuff: 'test ring' },
       },
+      { ...defaultSpot, x: 21 * 16, y: 0, type: 'hide-door' },
       { ...defaultDoor, x: 21 * 16, y: 0 },
     ],
   },
@@ -45,9 +46,9 @@ const maps = [
         ...defaultChest,
         x: 8 * 16,
         y: 8 * 16,
-        name: '2-A',
         chest: { gold: 10, stuff: 'potion' },
       },
+      { ...defaultSpot, x: 21 * 16, y: 9 * 16, type: 'hide-door' },
       { ...defaultDoor, x: 21 * 16, y: 9 * 16 },
     ],
     rewards: { items: 'potion' },
@@ -58,22 +59,37 @@ const maps = [
     deadSpots: [
       { ...defaultSpot, x: 9 * 16, y: 6 * 16 },
       { ...defaultSpot, x: 6 * 16, y: 9 * 16 },
+      { ...defaultSpot, x: 0, y: 9 * 16, type: 'hide-door' },
       { ...defaultDoor, x: 0, y: 9 * 16 },
     ],
     rewards: { items: 'potion' },
   },
+  {
+    lvl: 4,
+    name: 'Ruofen',
+    deadSpots: [
+      { ...defaultSpot, x: 9 * 16, y: 6 * 16 },
+      { ...defaultSpot, x: 6 * 16, y: 9 * 16 },
+      { ...defaultSpot, x: 6 * 16, y: 4 * 16, type: 'hide-door' },
+      { ...defaultDoor, x: 6 * 16, y: 4 * 16 },
+    ],
+    rewards: { items: 'potion' },
+  },
+  { lvl: 5, name: 'Evifen' },
 ];
 
 let currentMap;
 
 function randomKeyDrop() {
-  // if (true) {
   if (rand(10) === 1) {
-    mapChests = currentMap.deadSpots.filter((x) => x.type === 'chest');
-    chestNames = mapChests.map((x) => x.name);
-    droppedKey = chestNames[rand(chestNames.length)];
-    player.keys.push(droppedKey);
-    infoEl.innerText = `You found the key ${droppedKey}`;
+    const mapChest = currentMap.deadSpots.find(
+      (x) => x.type === 'chest' && !x.unlocked
+    );
+    if (!mapChest) return;
+    mapChest.unlocked = true;
+    infoQueue.push(
+      () => (infoEl.innerText = `You found the key to open the chest`)
+    );
   }
 }
 
@@ -83,6 +99,7 @@ function changeMap(rewards) {
 
 function openChest(chest) {
   objLoop(chest);
+  currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
   infoEl.innerText = `You opened a chest and got ${
     chest.gold ? chest.gold + 'g,' : ''
   } ${chest.items + ',' || ''} ${chest.stuff || ''}`;

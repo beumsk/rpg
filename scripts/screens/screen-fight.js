@@ -19,14 +19,16 @@ function screenFight() {
 
   createMenu(mainMenu, 'main');
 
-  function keyFightHandler(event) {
-    const key = event.key;
+  function keyFightHandler(e) {
+    const key = e.key;
     if (key === 'Backspace' || key === 'Escape') {
       createMenu(mainMenu, 'main');
     } else if (key === 'ArrowRight') {
+      e.preventDefault();
       index = index !== menuLinks.length - 1 ? index + 1 : 0;
       menuLinks[index].focus();
     } else if (key === 'ArrowLeft') {
+      e.preventDefault();
       index = index !== 0 ? index - 1 : menuLinks.length - 1;
       menuLinks[index].focus();
     } else if (key === 'Enter') {
@@ -34,8 +36,6 @@ function screenFight() {
       if (next === 'stop') {
         stop();
       } else if (next === 'play') {
-        // ensure queue is empty?
-        fightQueue = [];
         createMenu(mainMenu, 'main');
       }
     }
@@ -77,9 +77,13 @@ function screenFight() {
       ctx.fillText(
         currentEnemy.name,
         enemyX + textOffset,
-        enemyY + textOffset * 2
+        enemyY + textOffset * 2.5
       );
-      ctx.fillText(player.name, playerX + textOffset, playerY + textOffset * 2);
+      ctx.fillText(
+        player.name,
+        playerX + textOffset,
+        playerY + textOffset * 2.5
+      );
 
       animationId = requestAnimationFrame(frame);
     };
@@ -87,7 +91,6 @@ function screenFight() {
   }
 
   function stop() {
-    infoEl.innerText = '';
     cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyFightHandler);
     clearCanvas();
@@ -126,14 +129,6 @@ function screenFight() {
       playerAttack(crt.innerText);
     } else if (crtMenu === 'items') {
       itemUse(crt.innerText, false);
-    }
-  }
-
-  function fireQueue() {
-    if (fightQueue.length > 0) {
-      const next = fightQueue[0]();
-      fightQueue.shift();
-      return next;
     }
   }
 }

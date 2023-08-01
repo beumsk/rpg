@@ -3,6 +3,8 @@ function screenTransition(dir, screenFunc = screenWorld) {
   let rectX = 0;
   let rectY = 0;
 
+  infoEl.innerText = '';
+
   if (dir === 'right') rectX = -speed;
   if (dir === 'left') rectX = baseW;
   if (dir === 'bottom') rectY = -speed;

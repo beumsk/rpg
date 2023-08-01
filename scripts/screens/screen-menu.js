@@ -3,9 +3,7 @@ function screenMenu() {
 
   let animationId;
 
-  infoEl.innerText = '';
-
-  // TODO: add logic when too many items in menu
+  infoEl.innerText = ' ';
 
   const mainMenu = [
     { name: 'stats' },
@@ -21,22 +19,24 @@ function screenMenu() {
 
   createMenu(mainMenu, 'main');
 
-  function keyMenuHandler(event) {
-    const key = event.key;
+  function keyMenuHandler(e) {
+    const key = e.key;
     if (key === 'ArrowLeft' || key === 'Backspace') {
       if (crtMenu === 'main') {
         stop();
       } else {
-        infoEl.innerText = '';
+        infoEl.innerText = ' ';
         crtMenu = 'main';
         createMenu(mainMenu, 'main');
       }
     } else if (key === 'ArrowUp') {
-      infoEl.innerText = '';
+      e.preventDefault();
+      infoEl.innerText = ' ';
       index = index !== 0 ? index - 1 : menuLinks.length - 1;
       menuLinks[index].focus();
     } else if (key === 'ArrowDown') {
-      infoEl.innerText = '';
+      e.preventDefault();
+      infoEl.innerText = ' ';
       index = index !== menuLinks.length - 1 ? index + 1 : 0;
       menuLinks[index].focus();
     } else if (key === 'Escape') {
@@ -111,7 +111,7 @@ function screenMenu() {
         createMenu(
           [
             { name: `lvl: ${player.lvl}` },
-            { name: `xp: ${player.xp}` },
+            { name: `xp: ${player.xp}/${lvls[player.lvl + 1]}` },
             { name: `map: ${currentMap.lvl}` },
             { name: `gold: ${player.gold}` },
             { name: `str: ${player.str}` },
