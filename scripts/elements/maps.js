@@ -18,7 +18,7 @@ const defaultDoor = {
 const maps = [
   // GD: map list the player is going through; each map is accessible at a lvl === index
   // => maps[0] is null, map[1] is starting map and map[2] is accessible at lvl 2
-  // GD: chest can give gold, items x1 or stuff x1
+  // GD: chest can give gems, items x1 or stuff x1
   { name: null },
   {
     lvl: 1,
@@ -30,7 +30,7 @@ const maps = [
         ...defaultChest,
         x: 1 * 16,
         y: 8 * 16,
-        chest: { gold: 10, items: 'potion', stuff: 'test ring' },
+        chest: { gems: 10, items: 'potion', stuff: 'test ring' },
       },
       { ...defaultSpot, x: 21 * 16, y: 0, type: 'hide-door' },
       { ...defaultDoor, x: 21 * 16, y: 0 },
@@ -46,7 +46,7 @@ const maps = [
         ...defaultChest,
         x: 8 * 16,
         y: 8 * 16,
-        chest: { gold: 10, stuff: 'potion' },
+        chest: { gems: 10, stuff: 'potion' },
       },
       { ...defaultSpot, x: 21 * 16, y: 9 * 16, type: 'hide-door' },
       { ...defaultDoor, x: 21 * 16, y: 9 * 16 },
@@ -101,21 +101,17 @@ function openChest(chest) {
   objLoop(chest);
   currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
   infoEl.innerText = `You opened a chest and got ${
-    chest.gold ? chest.gold + 'g,' : ''
+    chest.gems ? chest.gems + 'g,' : ''
   } ${chest.items + ',' || ''} ${chest.stuff || ''}`;
 }
 
 function objLoop(obj) {
   for (const key in obj) {
     const value = obj[key];
-    if (key === 'gold') {
-      player.gold += value;
+    if (key === 'gems') {
+      player.gems += value;
     } else if (key === 'items') {
-      if (player.items.find((i) => i.name === value)) {
-        player.items.find((i) => i.name === value).qtt += 1;
-      } else {
-        player.items.push(items.find((i) => i.name === value));
-      }
+      itemFind(items.filter((i) => i.name === value));
     } else if (key === 'stuff') {
       stuffFind(stuff.filter((s) => s.name === value));
     }

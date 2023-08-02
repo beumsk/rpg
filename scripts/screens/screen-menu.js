@@ -10,6 +10,7 @@ function screenMenu() {
     { name: 'attacks' },
     { name: 'items' },
     { name: 'stuff' },
+    { name: 'shop' },
     { name: 'options' },
   ];
 
@@ -88,6 +89,12 @@ function screenMenu() {
                 x.name
               } ${JSON.stringify(x.effect)}`
             : `    ${x.name} ${JSON.stringify(x.effect)}`;
+        } else if (menuName === 'shop') {
+          linkEl.innerText = stuffCategories.includes(x.type)
+            ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(
+                x.effect
+              )} /${x.lvl}\\ (${x.price}₲)`
+            : `${x.name} (${x.price}₲)`;
         } else {
           linkEl.innerText = x.name;
         }
@@ -113,7 +120,7 @@ function screenMenu() {
             { name: `lvl: ${player.lvl}` },
             { name: `xp: ${player.xp}/${lvls[player.lvl + 1]}` },
             { name: `map: ${currentMap.lvl}` },
-            { name: `gold: ${player.gold}` },
+            { name: `gems: ${player.gems}₲` },
             { name: `str: ${player.str}` },
             { name: `hp: ${player.hp}/${player.hpmax}` },
           ],
@@ -122,6 +129,11 @@ function screenMenu() {
       } else if (crt.dataset.value === 'options') {
         createMenu(
           [{ name: `sound` }, { name: `save` }, { name: `load` }],
+          crt.dataset.value
+        );
+      } else if (crt.dataset.value === 'shop') {
+        createMenu(
+          player[crt.dataset.value].filter((x) => x.lvl <= player.lvl),
           crt.dataset.value
         );
       } else {
@@ -133,8 +145,15 @@ function screenMenu() {
       itemUse(crt.dataset.value, true);
       createMenu(player[crtMenu], crtMenu);
     } else if (crtMenu === 'stuff') {
-      stuffEquip(stuff.filter((x) => x.name === crt.dataset.value));
+      stuffEquip(player.stuff.filter((x) => x.name === crt.dataset.value));
       createMenu(player[crtMenu], crtMenu);
+    } else if (crtMenu === 'shop') {
+      shopBuy(crt.dataset.value);
+      createMenu(
+        player[crtMenu].filter((x) => x.lvl <= player.lvl),
+        crtMenu
+      );
+      updateState();
     } else if (crtMenu === 'options') {
       // TODO: add options: sound, save, load
     }

@@ -149,6 +149,7 @@ function updateState() {
   stateEl.innerHTML = `
     <span>${player.name}</span>
     <span>lvl ${player.lvl} (${player.xp}/${lvls[player.lvl + 1]}xp)</span>
+    <span>${player.gems}₲</span>
     <span>${
       currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''
     }

@@ -1,3 +1,6 @@
+// TODO: add amulet, belt, boots, rune, pet?
+const stuffCategories = ['hat', 'cloak', 'ring'];
+
 const stuff = [
   {
     name: 'dummy hat',
@@ -30,7 +33,6 @@ const stuff = [
     desc: 'stuff description',
     lvl: 1,
   },
-  // add amulet, belt, boots, rune, pet?
 ];
 
 const stuffBase = stuff.filter((x) => x.base);

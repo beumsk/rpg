@@ -14,10 +14,11 @@ const playerBase = {
   str: 20,
   lvl: 1,
   xp: 0,
-  gold: 0,
+  gems: 0,
   attacks: attacksBase,
   items: itemsBase,
   stuff: [],
+  shop: shopBase,
 };
 
 function playerAttack(attack) {
@@ -48,7 +49,7 @@ function playerCheckDead() {
 
 function playerWin() {
   player.xp += currentEnemy.xp;
-  player.gold += currentEnemy.gold;
+  player.gems += currentEnemy.gems;
   randomKeyDrop();
   checkLvlUp(player.lvl, player.xp);
   screenTransition('left', () => screenWorld());

@@ -17,7 +17,7 @@ function createEnemy(name, hp, attack) {
     str: Math.floor(hp / 10),
     lvl: Math.ceil(hp / 70),
     xp: Math.floor(hp / 5),
-    gold: Math.floor(hp / 20),
+    gems: Math.floor(hp / 20),
     attacks: [{ name: attack, dmg: Math.floor(hp / 10) }],
   };
   enemies.push(enemy);

@@ -25,16 +25,16 @@ _desc_
 
 ## Todo
 
-- add shop (in menu) => items, attacks?, stuff? (pay with gold)
-
 > first release
 
 - adapt enemies to theme avatar
 - create element logic (water > fire etc.)
 - add maps, enemies, attacks, items, stuff
 
+- how to get new attacks? lvlup? map? chest? shop?
+
 - map transition
-  - add randomnes in rewards? (attacks, items, stuff, gold)
+  - add randomnes in rewards? (attacks, items, stuff, gems)
   - offer option to pick between average reward (5) or random (1-10)
 - randomize the chests
 
@@ -42,7 +42,7 @@ _desc_
 
 > 0.0.X
 
-- handle how is the game saved, laoded
+- handle how is the game saved, loaded
   - start > new/load > world
 - new > ask name > intro (dialog screen??) > world
 
@@ -55,7 +55,7 @@ _desc_
 - add sounds && music
 - add story
 
-- add randomnes => dmg, map rewards, chest, gold?, xp?
+- add randomnes => dmg, map rewards, chest, gems?, xp?
 - world: game design? puzzle on some map?
 - review map to move outside of screen?
 - quests / achievements

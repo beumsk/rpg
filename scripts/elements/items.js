@@ -54,3 +54,13 @@ function itemUse(item, fromMenu) {
     console.log(`No ${c.name} anymore`);
   }
 }
+
+function itemFind(itemList) {
+  itemList.map((x) => {
+    if (player.items.find((i) => i.name === x.name)) {
+      player.items.find((i) => i.name === x.name).qtt += 1;
+    } else {
+      player.items.push(items.find((i) => i.name === x.name));
+    }
+  });
+}

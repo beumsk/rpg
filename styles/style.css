@@ -87,12 +87,13 @@ body {
 }
 
 .state span {
-  flex: 1 0 calc(100% / 3);
+  flex: 1 0 calc(100% / 4);
 }
-.state span:nth-of-type(2) {
+.state span:nth-of-type(2),
+.state span:nth-of-type(3) {
   text-align: center;
 }
-.state span:nth-of-type(3) {
+.state span:nth-of-type(4) {
   text-align: right;
 }
 
