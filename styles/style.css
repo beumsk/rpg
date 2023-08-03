@@ -71,6 +71,22 @@ body {
   outline: solid 1px;
 }
 
+.content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white-1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.content:empty {
+  display: none;
+}
+
 .state {
   position: absolute;
   bottom: 100%;
@@ -123,7 +139,7 @@ body {
 }
 
 .info:empty {
-  /* display: none; */
+  display: none;
 }
 
 .info a {

@@ -6,9 +6,7 @@ _desc_
 
 - inspired from avatar -> fight your way to peace in a world of 4 elements
   - (air < fire < water < earth )
-  - pick 1 element and fight until the end?
-    - offer to change element at lvlup/mapup?
-  - OR start with one element and master 4 elements through game
+  - pick 1 element and master 4 elements through game
     - quests OR maps to master new element
     - defeat boss at the end
 - Logo from 4 elements? && text logo T🔥r💧v🍃
@@ -23,33 +21,55 @@ _desc_
 - lvl x gives acces to map x
 - add a score screen at the game over
 
+- central map: doors to different element worlds
+  - => go on the element of choice > finish the different maps (n, w, e, s) and final boss to master x4 (elements)
+    - each map has monsters to beat + quests?
+  - => boss door opens > beat 4 bosses + bigboss and win
+
 ## Todo
 
-> first release
+> first release: theme + element logic (fights) + story + randomize + graphics + sound + heal? + quests?
+
+> randomize
+
+- randomScreen => select random reward form chests, mapUp, lvlup
+  - offer option to pick between average reward (5) or random (1-10) ??
+- random dmg => attack have range of dmg
+- random gems => gems collected are from range
+
+> theme
 
 - adapt enemies to theme avatar
 - create element logic (water > fire etc.)
 - add maps, enemies, attacks, items, stuff
 
-- how to get new attacks? lvlup? map? chest? shop?
+> story
 
-- map transition
-  - add randomnes in rewards? (attacks, items, stuff, gems)
-  - offer option to pick between average reward (5) or random (1-10)
-- randomize the chests
+- pick element
+- story intro
+- how to learn new element? (imposed or picked?)
+  - quest (completion give access to new element)
+  - map (x maps of element give access to new element)
 
-- how to heal? => tarvern? pay? newMap?
+> quests?
+
+- quests in menu
+- npc as deadSpots => when hitting => dialog screen? and start quest
 
 > 0.0.X
+
+- how to get new attacks? => lvlup? map? chest? shop? quest? element?
+
+- how to heal? => tarvern? pay? newMap?
 
 - handle how is the game saved, loaded
   - start > new/load > world
 - new > ask name > intro (dialog screen??) > world
 
-- menu improve
-  - options: (sound, save, load)
+- menu options: sound, save, load
 - fight system: state icons
 - add AI logic (not only first attack)
+- add time of play (+ paused when unfocus page?)
 
 - add visuals: player, enemies, maps,
 - add sounds && music

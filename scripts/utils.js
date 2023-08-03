@@ -29,6 +29,16 @@ containerEl.style.cssText = `
   height: ${baseH * scale};
 `;
 
+const contentEl = document.createElement('div');
+contentEl.classList.add('content');
+contentEl.style.cssText = `
+  width: ${baseW * scale};
+  height: ${baseH * scale};
+  font-size: ${8 * scale}px;
+  padding: 0 ${8 * scale}px;
+`;
+containerEl.appendChild(contentEl);
+
 const stateEl = document.createElement('div');
 stateEl.classList.add('state');
 stateEl.style.cssText = `

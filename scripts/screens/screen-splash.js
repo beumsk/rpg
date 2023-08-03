@@ -1,7 +1,7 @@
-function screenEnd() {
-  canvas.style.backgroundImage = '';
+function screenSplash() {
+  canvas.style.background = '#ddd';
 
-  let fontSize = baseW / 32;
+  let fontSize = baseW / 4;
   let textColor = cText2;
 
   let animationId;
@@ -13,14 +13,10 @@ function screenEnd() {
     ctx.fillStyle = textColor;
     ctx.textAlign = 'center';
 
-    ctx.fillText(
-      `You died and scored ${(currentMap.lvl - 1) * 100}`,
-      baseW / 2,
-      baseH / 2
-    );
+    ctx.fillText('Tarava', baseW / 2, baseH / 2);
 
-    if (fontSize < baseW / 16) {
-      fontSize += 0.5;
+    if (fontSize > baseW / 8) {
+      fontSize -= 1;
     } else {
       ctx.font = '20px monospace';
       ctx.fillStyle = cText;
@@ -41,6 +37,6 @@ function screenEnd() {
   function keyStartHandler() {
     stop();
     document.removeEventListener('keydown', keyStartHandler);
-    screenSplash();
+    screenTransition('bottom', () => screenStart());
   }
 }

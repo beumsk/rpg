@@ -7,5 +7,5 @@ window.addEventListener('focus', function () {
 //   scaleCanvas();
 // });
 
-// first screen => screenStart() in prod
-screenStart();
+// first screen => screenSplash() in prod
+screenSplash();
