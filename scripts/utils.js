@@ -1,6 +1,6 @@
 // create html: canvas
-const baseW = 352;
-const baseH = 192;
+const baseW = 22 * 16; // 352
+const baseH = 12 * 16; // 192
 
 let scale;
 
@@ -21,6 +21,8 @@ const menuHeight = baseH / 6;
 const textOffset = baseW / 44;
 
 const step = baseW / 22;
+
+const elements = ['air', 'earth', 'water', 'fire'];
 
 scaleCanvas();
 
@@ -69,9 +71,15 @@ containerEl.appendChild(menuEl);
 let infoQueue = [];
 
 const cYellow = '#f7f06d';
+const cYellowLt = '#f9f5bb';
 const cGreen = '#09bc8a';
+const cGreenLt = '#73d2aa';
 const cBlue = '#00a2ff';
+const cBlueLt = '#82c9ff';
 const cRed = '#ff595e';
+const cRedLt = '#ff9b9f';
+const cViolet = '#a052d7';
+const cVioletLt = '#d3b0e0';
 const cBrown = '#bf723f';
 const cWhite = '#fff';
 const cWhite1 = '#eee';
@@ -84,16 +92,26 @@ const cBlack2 = '#222';
 const cBlack1 = '#111';
 const cBlack = '#000';
 
-const cText = cBlack3;
-const cText2 = cRed;
-const cBack = cWhite1;
-const cBack2 = cWhite2;
-const cBack3 = cWhite3;
-const cBack4 = cWhite4;
-const cPlayer = cBlue;
-const cEnemy = cRed;
-const cDoor = cBrown;
-const cChest = cBrown;
+let cText = cBlack3;
+let cText2 = cRed;
+let cBack = cWhite1;
+let cBack2 = cWhite2;
+let cBack3 = cWhite3;
+let cBack4 = cWhite4;
+let cGrad1 = cBack2;
+let cGrad2 = cBack4;
+let cPlayer = cBlue;
+let cEnemy = cRed;
+let cDoor = cBrown;
+let cChest = cBrown;
+
+const colorGrid = {
+  air: cYellowLt,
+  earth: cGreenLt,
+  water: cBlueLt,
+  fire: cRedLt,
+  master: cVioletLt,
+};
 
 // useful general functions
 function rand(val, step = 1, not) {
@@ -156,13 +174,16 @@ function fireQueue() {
 }
 
 function updateState() {
+  // TODO: add score ??
   stateEl.innerHTML = `
-    <span>${player.name}</span>
-    <span>lvl ${player.lvl} (${player.xp}/${lvls[player.lvl + 1]}xp)</span>
-    <span>${player.gems}₲</span>
-    <span>${
+    <p>
+      <span>${player.name}</span>
+      <span>lvl ${player.lvl} (${player.xp}/${lvls[player.lvl + 1]}xp)</span>
+      <span>${player.gems}₲</span>
+    </p>
+    <p>${
       currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''
     }
-    ${currentMap.name} (${currentMap.lvl})
+    ${currentMap.name}</p>
     `;
 }

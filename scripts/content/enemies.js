@@ -8,38 +8,46 @@ const enemyBase = {
   state: '',
 };
 
-function createEnemy(name, hp, attack) {
+function codeEnemy(name, hp, attack, factor = 0, element = '') {
   let enemy = {
     ...enemyBase,
-    name,
-    hp,
-    hpmax: hp,
-    str: Math.floor(hp / 10),
-    lvl: Math.ceil(hp / 70),
-    xp: Math.floor(hp / 5),
-    gems: Math.floor(hp / 20),
-    attacks: [{ name: attack, dmg: Math.floor(hp / 10) }],
+    name: name + ' ' + element,
+    hp: hp + hp * factor,
+    hpmax: hp + hp * factor,
+    str: Math.floor((hp + hp * factor) / 10),
+    lvl: Math.ceil((hp + hp * factor) / 70),
+    mapLvl: Math.ceil(hp / 70),
+    xp: Math.floor((hp + hp * factor) / 5),
+    gems: Math.floor((hp + hp * factor) / 20),
+    attacks: [{ name: attack, dmg: Math.floor((hp + hp * factor) / 10) }],
   };
   enemies.push(enemy);
 }
 
-const enemies = [];
+let enemies = [];
 
-const createList = [
-  // lvl 1
+// GD: set of neutral enemies to be adapted to elements based on world
+// GD: adapt their stats to lvl of map (depends on the orther the player takes the elements)
+// GD: first world will be lowest lvl and will increase with each new map/world
+// GD: master world will be different with only a single fight in each map and the high master as last
+
+const enemyList = [
+  // map 1
   { name: 'Goblin', hp: 30, attack: 'poke' },
   { name: 'Skeleton', hp: 40, attack: 'bone throw' },
   { name: 'Vampire', hp: 60, attack: 'suck' },
-  // lvl 2
+  // map 2
   { name: 'Troll', hp: 80, attack: 'snore' },
   { name: 'Witch', hp: 90, attack: 'dark magic' },
   { name: 'Werewolf', hp: 100, attack: 'bite' },
-  { name: 'Dragon', hp: 120, attack: 'rush' },
-  // lvl 3
-  { name: 'Dragon ice', hp: 160, attack: 'frozen' },
-  { name: 'Dragon fire', hp: 210, attack: 'fireball' },
+  // map 3
+  { name: 'Giant', hp: 160, attack: 'frozen' },
+  { name: 'Dragon', hp: 210, attack: 'fireball' },
+  // map 4
+  { name: 'Satan', hp: 280, attack: 'death' },
+  // map 5
+  { name: 'Spirit', hp: 350, attack: 'bend' },
 ];
-createList.forEach((x) => createEnemy(x.name, x.hp, x.attack));
 
 let currentEnemy = {};
 

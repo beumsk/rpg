@@ -3,9 +3,12 @@ function screenStart() {
 
   // reset
   player = { ...playerBase };
-  currentMap = { ...maps[player.lvl] };
+  codeMaps();
+  maps = [...mapsBase];
+  currentMap = { ...maps[0] };
   stuffEquip(stuffBase);
   // stuffFind(stuff.filter((x) => !x.base));
+  enemyList.forEach((x) => codeEnemy(x.name, x.hp, x.attack));
 
   // TODO: add load game logic
   contentEl.innerHTML = `

@@ -1,7 +1,12 @@
-const lvls = [
-  0, 0, 40, 90, 160, 250, 360, 490, 640, 810, 1000, 1210, 1440, 1690, 1960,
-  2250, 2560, 2890, 3240, 3610, 4000,
-];
+const lvls = [];
+
+function codeLvls(maxLevel) {
+  for (let lvl = 0; lvl <= maxLevel; lvl++) {
+    // lvls.push(lvl < 2 ? 0 : lvl * lvl * 1);
+    lvls.push(lvl < 2 ? 0 : lvl * lvl * 10);
+  }
+}
+codeLvls(50);
 
 function checkLvlUp(currentLvl, currentXp) {
   // GD: only one level at a time
@@ -12,7 +17,7 @@ function checkLvlUp(currentLvl, currentXp) {
 }
 
 function lvlUp() {
-  maps[player.lvl].deadSpots.find((x) => x.type === 'hide-door').x = -step;
+  currentMap.deadSpots.find((x) => x.type === 'hide-door').x = -step;
   infoQueue.push(
     () =>
       (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
@@ -21,4 +26,5 @@ function lvlUp() {
   player.hpmax += 20 * player.lvl;
   player.hp = player.hpmax;
   player.lvl += 1;
+  player.mapLvl += 1;
 }

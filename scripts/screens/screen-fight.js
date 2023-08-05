@@ -1,5 +1,5 @@
 function screenFight() {
-  canvas.style.backgroundImage = `linear-gradient(45deg, ${cBack2} 60%, ${cBack4} 60%)`;
+  canvas.style.backgroundImage = `linear-gradient(45deg, ${cBack2} 60%, ${cGrad2} 60%)`;
   canvas.style.backgroundSize = 'unset';
 
   const rectWidth = 120;
@@ -7,7 +7,7 @@ function screenFight() {
   let enemyX = 0;
   const enemyY = textOffset * 2;
   let playerX = baseW - rectWidth - textOffset * 2;
-  const playerY = baseH - rectHeight - 48;
+  const playerY = baseH - rectHeight - textOffset * 2;
 
   let animationId;
 
@@ -72,18 +72,14 @@ function screenFight() {
         cPlayer,
         player.hp / player.hpmax
       );
-      ctx.font = '16px monospace';
+      ctx.font = '12px monospace';
       ctx.fillStyle = cText;
       ctx.fillText(
         currentEnemy.name,
         enemyX + textOffset,
-        enemyY + textOffset * 2.5
+        enemyY + textOffset * 2
       );
-      ctx.fillText(
-        player.name,
-        playerX + textOffset,
-        playerY + textOffset * 2.5
-      );
+      ctx.fillText(player.name, playerX + textOffset, playerY + textOffset * 2);
 
       animationId = requestAnimationFrame(frame);
     };

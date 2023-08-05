@@ -1,5 +1,5 @@
 function screenWorld(keepEnemy) {
-  canvas.style.backgroundImage = `conic-gradient(${cBack4} 0deg 90deg, ${cBack2} 90deg 180deg, ${cBack4} 180deg 270deg, ${cBack2} 270deg 360deg)`;
+  canvas.style.backgroundImage = `conic-gradient(${cGrad2} 0deg 90deg, ${cGrad1} 90deg 180deg, ${cGrad2} 180deg 270deg, ${cGrad1} 270deg 360deg)`;
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
 
   updateState();
@@ -8,19 +8,26 @@ function screenWorld(keepEnemy) {
 
   fireQueue();
 
+  let objects;
   // TODO: add multiple enemies?
   if (!keepEnemy) {
-    mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
-    currentEnemy = {
-      ...mapEnemies[rand(mapEnemies.length)],
-      ...randPos(baseW, baseH - 32, step, [
-        { x: player.x, y: player.y },
-        ...currentMap.deadSpots,
-      ]),
-    };
+    mapEnemies = enemies.filter((x) => x.mapLvl === currentMap.lvl);
+    if (mapEnemies.length) {
+      currentEnemy = {
+        ...mapEnemies[rand(mapEnemies.length)],
+        ...randPos(baseW, baseH - 32, step, [
+          { x: player.x, y: player.y },
+          ...currentMap.deadSpots,
+        ]),
+      };
+    }
   }
 
-  let objects = [currentEnemy, player, ...currentMap.deadSpots];
+  if (mapEnemies.length) {
+    objects = [currentEnemy, player, ...currentMap.deadSpots];
+  } else {
+    objects = [player, ...currentMap.deadSpots];
+  }
 
   let animationId;
 
@@ -59,25 +66,24 @@ function screenWorld(keepEnemy) {
       stop();
       screenTransition('right', () => screenFight());
     } else if (deadSpotCollision) {
-      if (deadSpotCollision.type === 'door') {
-        if (player.lvl > currentMap.lvl) {
-          currentMap = maps[currentMap.lvl + 1];
-          stop();
-          screenTransition('top', () => screenWorld());
-          changeMap(currentMap.rewards);
-          infoQueue.push(
-            () => (infoEl.innerText = `You reached map ${currentMap.lvl}`)
-          );
-          player.x = 2 * step;
-          player.y = 2 * step;
-        } else {
-          player.x = oldPos.x;
-          player.y = oldPos.y;
-
-          infoEl.innerText = `Up lvl ${player.lvl + 1} to reach Map ${
-            currentMap.lvl + 1
-          }`;
-        }
+      if (deadSpotCollision.type === 'end-door') {
+        stop();
+        screenTransition('bottom', () => screenEnd());
+      } else if (deadSpotCollision.type === 'temple-door') {
+        worldCompleted(currentWorld.name);
+        stop();
+        changeMap('temple');
+      } else if (deadSpotCollision.type === 'door') {
+        stop();
+        changeMap();
+      } else if (
+        ['air', 'earth', 'water', 'fire'].includes(deadSpotCollision.type)
+      ) {
+        stop();
+        changeMap(deadSpotCollision.type);
+      } else if (deadSpotCollision.type === 'master') {
+        stop();
+        changeMap('master');
       } else if (deadSpotCollision.type === 'chest') {
         if (deadSpotCollision.unlocked) {
           openChest(deadSpotCollision.chest);

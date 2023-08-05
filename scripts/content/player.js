@@ -19,6 +19,8 @@ const playerBase = {
   items: itemsBase,
   stuff: [],
   shop: shopBase,
+  mapLvl: 1,
+  elements: [],
 };
 
 function playerAttack(attack) {

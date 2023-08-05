@@ -97,19 +97,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background-color 0.4s ease-in-out;
 }
 .state:empty {
   display: none;
 }
 
-.state span {
-  flex: 1 0 calc(100% / 4);
+.state p {
+  flex: 1 0 50%;
 }
-.state span:nth-of-type(2),
-.state span:nth-of-type(3) {
-  text-align: center;
+.state p:nth-of-type(1) {
+  display: flex;
+  justify-content: space-between;
 }
-.state span:nth-of-type(4) {
+.state p:nth-of-type(2) {
   text-align: right;
 }
 

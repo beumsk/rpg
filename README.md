@@ -8,25 +8,25 @@ _desc_
   - (air < fire < water < earth )
   - pick 1 element and master 4 elements through game
     - quests OR maps to master new element
-    - defeat boss at the end
+    - defeat master at the end
 - Logo from 4 elements? && text logo T🔥r💧v🍃
 
 ## Game Design (GD)
 
 - pokemon-rpg like, walking around and fighting enemies
-- one map after the other
-  - get enough xp, lvl up and choose when to reach next map
-  - get rewards (more stats, stuff, attacks, items? )
-  - no way back!
-- lvl x gives acces to map x
+- central map: doors to different element worlds
+  - => go on the element of choice > finish the different maps (n, w, e, s) and final spirit to master x4 (elements)
+    - each map has monsters to beat (+ quests?)
+  - => master door opens > beat 4 masters + high master and win (OR spirit world??)
 - add a score screen at the game over
 
-- central map: doors to different element worlds
-  - => go on the element of choice > finish the different maps (n, w, e, s) and final boss to master x4 (elements)
-    - each map has monsters to beat + quests?
-  - => boss door opens > beat 4 bosses + bigboss and win
+## Doc
+
+### add doc about the files: screens, content
 
 ## Todo
+
+- => review chest key system?
 
 > first release: theme + element logic (fights) + story + randomize + graphics + sound + heal? + quests?
 
@@ -45,11 +45,7 @@ _desc_
 
 > story
 
-- pick element
-- story intro
-- how to learn new element? (imposed or picked?)
-  - quest (completion give access to new element)
-  - map (x maps of element give access to new element)
+- story intro, new world texts, new element mastered, outro
 
 > quests?
 
@@ -72,12 +68,12 @@ _desc_
 - add time of play (+ paused when unfocus page?)
 
 - add visuals: player, enemies, maps,
+- add designs: floating clouds (japan style)
 - add sounds && music
 - add story
 
 - add randomnes => dmg, map rewards, chest, gems?, xp?
 - world: game design? puzzle on some map?
-- review map to move outside of screen?
 - quests / achievements
 
 ## Ideas
@@ -85,7 +81,14 @@ _desc_
 - Starting a new map gives a random bonus for the rest of the run?
 - think of system to make each game different: stuff to buy, stats to use, new attacks on map change etc.
 - map enigmas?
+- review map to move outside of screen?
+- each learned element would give a new monster to play? (pokemon like with switching monsters)
 
 ## Useful
 
 - 16px icons creation at: https://www.pixilart.com/draw
+- ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
+
+## Dev
+
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4)=89?? hours total dev

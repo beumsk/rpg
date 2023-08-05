@@ -1,84 +1,97 @@
-const defaultSpot = { x: 0, y: 0, w: 16, h: 16, type: 'wall', fill: cBlack };
+// GD: temple map to reach different elements world
+// GD: each world is composed of 5 maps: north, west, east, south and central (where you fight the spirit)
+// GD: reveal next map door when lvl up
+// GD: finished world takes back to temple to start a new world
+// GD: 4 elements worlds finished => spirit world (n,w,e,s,c) OR master league
+// GD: spirit/master finished => end of game
 
-const defaultChest = {
-  ...defaultSpot,
+const spotBase = { x: 0, y: 0, w: 16, h: 16, type: 'wall', fill: cBlack };
+
+const chestBase = {
+  ...spotBase,
   type: 'chest',
   fill: cChest,
   img: './img/chest.png',
   unlocked: false,
 };
 
-const defaultDoor = {
-  ...defaultSpot,
+const doorBase = {
+  ...spotBase,
   type: 'door',
   fill: cDoor,
   img: './img/door.png',
+  x: 21 * 16,
+  y: 11 * 16,
 };
 
-const maps = [
-  // GD: map list the player is going through; each map is accessible at a lvl === index
-  // => maps[0] is null, map[1] is starting map and map[2] is accessible at lvl 2
-  // GD: chest can give gems, items x1 or stuff x1
-  { name: null },
-  {
-    lvl: 1,
-    name: 'Enoen',
-    deadSpots: [
-      { ...defaultSpot, x: 0, y: 0 },
-      { ...defaultSpot, x: 9 * 16, y: 0 },
-      {
-        ...defaultChest,
-        x: 1 * 16,
-        y: 8 * 16,
-        chest: { gems: 10, items: 'potion', stuff: 'test ring' },
-      },
-      { ...defaultSpot, x: 21 * 16, y: 0, type: 'hide-door' },
-      { ...defaultDoor, x: 21 * 16, y: 0 },
-    ],
-  },
-  {
-    lvl: 2,
-    name: 'Owten',
-    deadSpots: [
-      { ...defaultSpot, x: 0, y: 9 * 16 },
-      { ...defaultSpot, x: 21 * 16, y: 0 },
-      {
-        ...defaultChest,
-        x: 8 * 16,
-        y: 8 * 16,
-        chest: { gems: 10, stuff: 'potion' },
-      },
-      { ...defaultSpot, x: 21 * 16, y: 9 * 16, type: 'hide-door' },
-      { ...defaultDoor, x: 21 * 16, y: 9 * 16 },
-    ],
-    rewards: { items: 'potion' },
-  },
-  {
-    lvl: 3,
-    name: 'Eerhten',
-    deadSpots: [
-      { ...defaultSpot, x: 9 * 16, y: 6 * 16 },
-      { ...defaultSpot, x: 6 * 16, y: 9 * 16 },
-      { ...defaultSpot, x: 0, y: 9 * 16, type: 'hide-door' },
-      { ...defaultDoor, x: 0, y: 9 * 16 },
-    ],
-    rewards: { items: 'potion' },
-  },
-  {
-    lvl: 4,
-    name: 'Ruofen',
-    deadSpots: [
-      { ...defaultSpot, x: 9 * 16, y: 6 * 16 },
-      { ...defaultSpot, x: 6 * 16, y: 9 * 16 },
-      { ...defaultSpot, x: 6 * 16, y: 4 * 16, type: 'hide-door' },
-      { ...defaultDoor, x: 6 * 16, y: 4 * 16 },
-    ],
-    rewards: { items: 'potion' },
-  },
-  { lvl: 5, name: 'Evifen' },
-];
+const hideDoorBase = {
+  ...doorBase,
+  type: 'hide-door',
+  img: null,
+  fill: cBlack,
+};
 
+let mapsBase = [];
+let maps;
+let currentWorld;
 let currentMap;
+
+function codeMaps() {
+  function codeSubMaps(element) {
+    let submaps = ['northern', 'western', 'eastern', 'southern', 'central'];
+    // let submaps = ['central'];
+    return submaps.map((y, i) => {
+      return {
+        lvl: i + 1,
+        name: `${y} ${element} ${element === 'master' ? '' : 'tribe'}`,
+        // TODO: add rewards ! (semi random)
+        deadSpots: [
+          {
+            ...chestBase,
+            ...randPos(baseW, baseH, step, [
+              { x: player.x, y: player.y },
+              { x: doorBase.x, y: doorBase.y },
+            ]),
+            // TODO: make chest reward semi random
+            chest: { gems: 10, items: 'potion' },
+          },
+          { ...hideDoorBase },
+          {
+            ...doorBase,
+            type:
+              y === 'master'
+                ? 'end-door'
+                : y === 'central'
+                ? 'temple-door'
+                : 'door',
+          },
+        ],
+      };
+    });
+  }
+
+  mapsBase.push({
+    name: 'temple',
+    deadSpots: [
+      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellow },
+      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen },
+      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue },
+      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed },
+    ],
+  });
+
+  elements.map((x) => {
+    mapsBase.push({
+      name: x,
+      subMaps: codeSubMaps(x),
+    });
+  });
+
+  mapsBase.push({
+    name: 'master',
+    subMaps: codeSubMaps('master'),
+  });
+}
 
 function randomKeyDrop() {
   if (rand(10) === 1) {
@@ -93,8 +106,52 @@ function randomKeyDrop() {
   }
 }
 
-function changeMap(rewards) {
-  objLoop(rewards);
+function changeMap(element) {
+  objLoop(currentMap.rewards);
+  if (element === 'temple') {
+    currentMap = { ...maps[0] };
+    cGrad2 = cBack4;
+    stateEl.style.background = cBack2;
+    currentEnemy = {};
+  } else if (element) {
+    currentWorld = maps.find((x) => x.name === element);
+    currentMap = currentWorld.subMaps[0];
+    cGrad2 = colorGrid[element];
+    stateEl.style.background = colorGrid[element];
+    enemies = [];
+    enemyList.forEach((x) =>
+      codeEnemy(
+        x.name,
+        x.hp,
+        x.attack,
+        // TODO: rethink factor to have correct stats for enemies
+        player.elements.length,
+        currentWorld.name
+      )
+    );
+  } else {
+    currentMap = currentWorld.subMaps[currentMap.lvl];
+  }
+  screenTransition('top', () => screenWorld());
+  infoQueue.push(
+    () => (infoEl.innerText = `You reached map ${currentMap.name}`)
+  );
+  player.x = 2 * step;
+  player.y = 2 * step;
+}
+
+function worldCompleted(element) {
+  player.elements.push(element);
+  maps[0].deadSpots.find((x) => x.type === element).fill = cBlack;
+  maps[0].deadSpots.find((x) => x.type === element).type = '';
+  if (player.elements.length === 4) {
+    maps[0].deadSpots.push(
+      { ...spotBase, x: 10 * 16, y: 5 * 16, type: 'master', fill: cYellow },
+      { ...spotBase, x: 11 * 16, y: 5 * 16, type: 'master', fill: cGreen },
+      { ...spotBase, x: 11 * 16, y: 6 * 16, type: 'master', fill: cBlue },
+      { ...spotBase, x: 10 * 16, y: 6 * 16, type: 'master', fill: cRed }
+    );
+  }
 }
 
 function openChest(chest) {
