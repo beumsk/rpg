@@ -106,46 +106,31 @@ function screenWorld(keepEnemy) {
     const objImg = objects.filter((x) => x.img);
     const objSq = objects.filter((x) => !x.img);
 
-    function loadImage(obj) {
-      return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.onload = () => resolve(image);
-        image.onerror = reject;
-        image.src = obj.img;
-      });
-    }
+    const frame = () => {
+      clearCanvas();
 
-    function loadImages(obj) {
-      return Promise.all(obj.map(loadImage));
-    }
-
-    loadImages(objImg).then((images) => {
-      const frame = () => {
-        clearCanvas();
-
-        images.forEach((img, i) =>
-          ctx.drawImage(
-            img,
-            0,
-            0,
-            step,
-            step,
-            objImg[i].x,
-            objImg[i].y,
-            step,
-            step
-          )
+      objImg.forEach((obj, i) => {
+        ctx.drawImage(
+          imagesLoaded[imagesToLoad.findIndex((x) => x === obj.img)],
+          0,
+          0,
+          step,
+          step,
+          objImg[i].x,
+          objImg[i].y,
+          step,
+          step
         );
+      });
 
-        objSq.forEach((obj) => {
-          ctx.fillStyle = obj.fill;
-          ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
-        });
+      objSq.forEach((obj) => {
+        ctx.fillStyle = obj.fill;
+        ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
+      });
 
-        animationId = requestAnimationFrame(frame);
-      };
-      frame();
-    });
+      animationId = requestAnimationFrame(frame);
+    };
+    frame();
   }
 
   function stop() {

@@ -1,6 +1,30 @@
 function screenSplash() {
   canvas.style.background = '#ddd';
 
+  let pressMsg = '';
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = src;
+      image.onload = () => resolve(image);
+      image.onerror = (error) => reject(error);
+    });
+  }
+
+  async function loadAllImages(imagesArray) {
+    try {
+      const loadedImages = await Promise.all(imagesArray.map(loadImage));
+      imagesLoaded.push(...loadedImages);
+      document.addEventListener('keydown', keyStartHandler);
+      pressMsg = 'Press any key';
+    } catch (error) {
+      console.error('Error loading images:', error);
+    }
+  }
+
+  loadAllImages(imagesToLoad);
+
   let fontSize = baseW / 4;
   let textColor = cText2;
 
@@ -20,7 +44,7 @@ function screenSplash() {
     } else {
       ctx.font = '20px monospace';
       ctx.fillStyle = cText;
-      ctx.fillText('Press any key', baseW / 2, baseH - baseW / 8);
+      ctx.fillText(pressMsg, baseW / 2, baseH - baseW / 8);
     }
 
     animationId = requestAnimationFrame(start);
@@ -33,7 +57,6 @@ function screenSplash() {
   }
 
   start();
-  document.addEventListener('keydown', keyStartHandler);
   function keyStartHandler() {
     stop();
     document.removeEventListener('keydown', keyStartHandler);

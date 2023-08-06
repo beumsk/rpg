@@ -70,6 +70,14 @@ containerEl.appendChild(menuEl);
 
 let infoQueue = [];
 
+const imagesToLoad = [
+  './img/player.png',
+  './img/enemy.png',
+  './img/door.png',
+  './img/chest.png',
+];
+let imagesLoaded = [];
+
 const cYellow = '#f7f06d';
 const cYellowLt = '#f9f5bb';
 const cGreen = '#09bc8a';
