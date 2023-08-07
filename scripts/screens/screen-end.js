@@ -1,5 +1,7 @@
-function screenEnd() {
+function screenEnd(win) {
   canvas.style.backgroundImage = '';
+
+  stateEl.innerHTML = '';
 
   let fontSize = baseW / 32;
   let textColor = cText2;
@@ -14,7 +16,9 @@ function screenEnd() {
     ctx.textAlign = 'center';
 
     ctx.fillText(
-      `You died and scored ${(currentMap.lvl - 1) * 100}`,
+      `You ${win ? 'win and' : 'died but'} scored ${
+        player.xp + player.hp * 5 + player.str * 10 + player.gems
+      }`,
       baseW / 2,
       baseH / 2
     );

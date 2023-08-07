@@ -58,8 +58,9 @@ function codeMaps() {
           { ...hideDoorBase },
           {
             ...doorBase,
+            element: element,
             type:
-              y === 'master'
+              element === 'master'
                 ? 'end-door'
                 : y === 'central'
                 ? 'temple-door'
@@ -70,6 +71,8 @@ function codeMaps() {
     });
   }
 
+  mapsBase = [];
+
   mapsBase.push({
     name: 'temple',
     deadSpots: [
@@ -77,6 +80,7 @@ function codeMaps() {
       { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen },
       { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue },
       { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed },
+      { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
     ],
   });
 
@@ -106,13 +110,14 @@ function randomKeyDrop() {
   }
 }
 
-function changeMap(element) {
+function changeMap(element, masteredElement) {
   objLoop(currentMap.rewards);
   if (element === 'temple') {
     currentMap = { ...maps[0] };
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
     currentEnemy = {};
+    screenTransition('top', () => screenStory(masteredElement));
   } else if (element) {
     currentWorld = maps.find((x) => x.name === element);
     currentMap = currentWorld.subMaps[0];
@@ -129,10 +134,11 @@ function changeMap(element) {
         currentWorld.name
       )
     );
+    screenTransition('top', () => screenWorld());
   } else {
     currentMap = currentWorld.subMaps[currentMap.lvl];
+    screenTransition('top', () => screenWorld());
   }
-  screenTransition('top', () => screenWorld());
   infoQueue.push(
     () => (infoEl.innerText = `You reached map ${currentMap.name}`)
   );

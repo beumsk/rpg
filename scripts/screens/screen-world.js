@@ -68,11 +68,11 @@ function screenWorld(keepEnemy) {
     } else if (deadSpotCollision) {
       if (deadSpotCollision.type === 'end-door') {
         stop();
-        screenTransition('bottom', () => screenEnd());
+        screenTransition('top', () => screenStory('outro'));
       } else if (deadSpotCollision.type === 'temple-door') {
         worldCompleted(currentWorld.name);
         stop();
-        changeMap('temple');
+        changeMap('temple', deadSpotCollision.element);
       } else if (deadSpotCollision.type === 'door') {
         stop();
         changeMap();

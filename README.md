@@ -1,11 +1,11 @@
 # T🔥r💧v🍃
 
-_desc_
+Tarava is an old school rpg inspired by my young years playing pokemon red. The story is based on the 4 elements: air, earth, water, fire. They are the base of everything on earth and our quest is to bring back freedom of the people by mastering the 4 elements and beat the evil masters.
 
 ## Game Theme
 
 - inspired from avatar -> fight your way to peace in a world of 4 elements
-  - (air < fire < water < earth )
+  - air > earth > water > fire
   - pick 1 element and master 4 elements through game
     - quests OR maps to master new element
     - defeat master at the end
@@ -52,7 +52,7 @@ _desc_
 - quests in menu
 - npc as deadSpots => when hitting => dialog screen? and start quest
 
-> 0.0.X
+> other
 
 - how to get new attacks? => lvlup? map? chest? shop? quest? element?
 
@@ -62,12 +62,13 @@ _desc_
   - start > new/load > world
 - new > ask name > intro (dialog screen??) > world
 
+- add helper window => info about menus, keys, goal
 - menu options: sound, save, load
 - fight system: state icons
 - add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
 
-- add visuals: player, enemies, maps,
+- add visuals: player, enemies, maps, => use sprites from online? (avatar, ff)
 - add designs: floating clouds (japan style)
 - add sounds && music
 - add story
@@ -78,6 +79,7 @@ _desc_
 
 ## Ideas
 
+- first fight against master that we lose as we only have basic attacks?
 - Starting a new map gives a random bonus for the rest of the run?
 - think of system to make each game different: stuff to buy, stats to use, new attacks on map change etc.
 - map enigmas?

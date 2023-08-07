@@ -2,6 +2,8 @@ function screenStart() {
   canvas.style.background = '#ddd';
 
   // reset
+  cGrad2 = cBack4;
+  stateEl.style.background = cBack2;
   player = { ...playerBase };
   codeMaps();
   maps = [...mapsBase];
@@ -21,6 +23,6 @@ function screenStart() {
   function keyStartHandler() {
     document.removeEventListener('keydown', keyStartHandler);
     contentEl.innerHTML = '';
-    screenTransition('bottom', () => screenWorld());
+    screenTransition('bottom', () => screenStory('intro'));
   }
 }

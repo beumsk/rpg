@@ -119,7 +119,7 @@ function screenMenu() {
           [
             { name: `lvl: ${player.lvl}` },
             { name: `xp: ${player.xp}/${lvls[player.lvl + 1]}` },
-            { name: `map: ${currentMap.lvl}` },
+            { name: `map: ${currentMap.name}` },
             { name: `gems: ${player.gems}₲` },
             { name: `str: ${player.str}` },
             { name: `hp: ${player.hp}/${player.hpmax}` },
