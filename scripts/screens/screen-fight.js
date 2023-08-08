@@ -47,6 +47,10 @@ function screenFight() {
     const frame = () => {
       clearCanvas();
 
+      // TODO: show player/enemy hp as text?
+      // TODO: show how much dmg p/e hit?
+      // TODO: add attacks animations
+
       // animates the boxes
       if (enemyX < baseW - rectWidth - textOffset * 2) enemyX += 4;
       if (playerX > textOffset * 2) playerX -= 4;

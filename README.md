@@ -6,6 +6,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - inspired from avatar -> fight your way to peace in a world of 4 elements
   - air > earth > water > fire
+    - 💨 erodes 🍃 > 🍃 absorbs 💧 > 💧 extinguishes 🔥 > 🔥 consumes 💨
   - pick 1 element and master 4 elements through game
     - quests OR maps to master new element
     - defeat master at the end
@@ -19,6 +20,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
     - each map has monsters to beat (+ quests?)
   - => master door opens > beat 4 masters + high master and win (OR spirit world??)
 - add a score screen at the game over
+- Dmg = (dmg+str-def) x elmt(0.5|1|2)
+  - => power up player/enemy with str and def
 
 ## Doc
 
@@ -26,6 +29,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
+- => review attack system and balance -> based on dmg, +str, -def, xelement, lvl?
+  - lvlup => str+XX def+XX
+  - TEST difficulty is correct and stays correct through lvlup and mapup
+- => rethink enemies creation and selection for a map
 - => review chest key system?
 
 > first release: theme + element logic (fights) + story + randomize + graphics + sound + heal? + quests?
@@ -72,6 +79,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - add designs: floating clouds (japan style)
 - add sounds && music
 - add story
+- how to play on mobile?? => add move controls + clicks
 
 - add randomnes => dmg, map rewards, chest, gems?, xp?
 - world: game design? puzzle on some map?

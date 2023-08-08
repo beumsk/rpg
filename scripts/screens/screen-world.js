@@ -11,7 +11,7 @@ function screenWorld(keepEnemy) {
   let objects;
   // TODO: add multiple enemies?
   if (!keepEnemy) {
-    mapEnemies = enemies.filter((x) => x.mapLvl === currentMap.lvl);
+    mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
     if (mapEnemies.length) {
       currentEnemy = {
         ...mapEnemies[rand(mapEnemies.length)],
@@ -72,18 +72,18 @@ function screenWorld(keepEnemy) {
       } else if (deadSpotCollision.type === 'temple-door') {
         worldCompleted(currentWorld.name);
         stop();
-        changeMap('temple', deadSpotCollision.element);
+        changeMap('temple', 'temple', deadSpotCollision.element);
       } else if (deadSpotCollision.type === 'door') {
         stop();
-        changeMap();
+        changeMap(deadSpotCollision.element, 'next');
       } else if (
         ['air', 'earth', 'water', 'fire'].includes(deadSpotCollision.type)
       ) {
         stop();
-        changeMap(deadSpotCollision.type);
+        changeMap(deadSpotCollision.type, 'first');
       } else if (deadSpotCollision.type === 'master') {
         stop();
-        changeMap('master');
+        changeMap('master', 'first');
       } else if (deadSpotCollision.type === 'chest') {
         if (deadSpotCollision.unlocked) {
           openChest(deadSpotCollision.chest);

@@ -12,6 +12,7 @@ const playerBase = {
   hpmax: 100,
   state: 'asleep',
   str: 20,
+  def: 10,
   lvl: 1,
   xp: 0,
   gems: 0,
@@ -20,7 +21,9 @@ const playerBase = {
   stuff: [],
   shop: shopBase,
   mapLvl: 1,
-  elements: [],
+  element: '',
+  // elements: [],
+  elements: [...elements],
 };
 
 function playerAttack(attack) {
@@ -28,7 +31,11 @@ function playerAttack(attack) {
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
   const manageDmg = () => {
-    const calcDmg = Math.floor(c.dmg + (c.dmg * player.str) / 100);
+    const lmt = calcElement(player.element, currentEnemy.element);
+    const calcDmg = Math.floor(
+      (c.dmg + (c.dmg * player.str) / 100 - (c.dmg * currentEnemy.def) / 100) *
+        lmt
+    );
     if (calcDmg >= currentEnemy.hp) {
       currentEnemy.hp = 0;
     } else {

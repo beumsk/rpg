@@ -6,48 +6,95 @@ const enemyBase = {
   fill: cEnemy,
   img: './img/enemy.png',
   state: '',
+  element: '',
 };
-
-function codeEnemy(name, hp, attack, factor = 0, element = '') {
-  let enemy = {
-    ...enemyBase,
-    name: name + ' ' + element,
-    hp: hp + hp * factor,
-    hpmax: hp + hp * factor,
-    str: Math.floor((hp + hp * factor) / 10),
-    lvl: Math.ceil((hp + hp * factor) / 70),
-    mapLvl: Math.ceil(hp / 70),
-    xp: Math.floor((hp + hp * factor) / 5),
-    gems: Math.floor((hp + hp * factor) / 20),
-    attacks: [{ name: attack, dmg: Math.floor((hp + hp * factor) / 10) }],
-  };
-  enemies.push(enemy);
-}
 
 let enemies = [];
 
-// GD: set of neutral enemies to be adapted to elements based on world
-// GD: adapt their stats to lvl of map (depends on the orther the player takes the elements)
-// GD: first world will be lowest lvl and will increase with each new map/world
-// GD: master world will be different with only a single fight in each map and the high master as last
+function codeMapEnemies(element, lvl, isBoss) {
+  enemies = [];
+  // how to handle last map of element? (should be boss/spirit fight)
+  enemyNames[element].forEach((x) => {
+    let crtMove = enemyMoves[element][rand(enemyMoves[element].length - 1)];
 
-const enemyList = [
-  // map 1
-  { name: 'Goblin', hp: 30, attack: 'poke' },
-  { name: 'Skeleton', hp: 40, attack: 'bone throw' },
-  { name: 'Vampire', hp: 60, attack: 'suck' },
-  // map 2
-  { name: 'Troll', hp: 80, attack: 'snore' },
-  { name: 'Witch', hp: 90, attack: 'dark magic' },
-  { name: 'Werewolf', hp: 100, attack: 'bite' },
-  // map 3
-  { name: 'Giant', hp: 160, attack: 'frozen' },
-  { name: 'Dragon', hp: 210, attack: 'fireball' },
-  // map 4
-  { name: 'Satan', hp: 280, attack: 'death' },
-  // map 5
-  { name: 'Spirit', hp: 350, attack: 'bend' },
-];
+    let enemy = {
+      ...enemyBase,
+      name: x,
+      lvl: lvl,
+      element: element,
+      hp: lvl * 20,
+      hpmax: lvl * 20,
+      str: lvl * 4,
+      def: lvl * 2,
+      xp: Math.floor(lvls[lvl + 1] / 5),
+      gems: lvl * 2,
+      attacks: [
+        {
+          name: crtMove,
+          dmg: lvl * 4,
+        },
+      ],
+    };
+
+    enemies.push(enemy);
+  });
+}
+
+const enemyNames = {
+  air: [
+    'Whirlwind Dancer',
+    'Tempest Herald',
+    'Zephyr Slicer',
+    'Aerial Phantom',
+    'Gust Guardian',
+    'Skyshrieker',
+    'Cyclone Conjurer',
+  ],
+  earth: [
+    'Mountain Behemoth',
+    'Quartz Goliath',
+    'Crag Guardian',
+    'Terra Tyrant',
+    'Stone Sentinel',
+    'Rockslide Ravager',
+    'Dustforged Colossus',
+  ],
+  water: [
+    'Marine Leviathan',
+    'Aqua Shifter',
+    'Tsunami Bringer',
+    'Mistral Mage',
+    'Tidal Tempest',
+    'Deepsea Devourer',
+    'Aquamyst Enchanter',
+  ],
+  fire: [
+    'Flame Wraith',
+    'Infernal Juggernaut',
+    'Pyrogeist',
+    'Ignis Incarnate',
+    'Blazing Berserker',
+    'Magma Monarch',
+    'Emberflare Conjurer',
+  ],
+  master: [
+    'Elemental Overlord',
+    'Primordial Titan',
+    'Harmony Weaver',
+    'Ethereal Sovereign',
+    'Astral Archon',
+    'Celestial Conductor',
+    'Cosmic Nexus',
+  ],
+};
+
+const enemyMoves = {
+  air: ['tornado strike', 'gust', 'cyclone burst'],
+  earth: ['rockslide', 'quake', 'stalwart defense'],
+  water: ['aqua jet', 'tidal wave', 'mist veil'],
+  fire: ['inferno blaze', 'fireball', 'flame eruption'],
+  master: ['elemental surge', 'ancient wrath', 'harmony fusion'],
+};
 
 let currentEnemy = {};
 
@@ -58,7 +105,11 @@ function enemyAttack(attack) {
   infoEl.innerText = `${currentEnemy.name} uses ${c.name}`;
 
   const manageDmg = () => {
-    const calcDmg = Math.floor(c.dmg + (c.dmg * currentEnemy.str) / 100);
+    const lmt = calcElement(player.element, currentEnemy.element);
+    const calcDmg = Math.floor(
+      (c.dmg + (c.dmg * currentEnemy.str) / 100 - (c.dmg * player.def) / 100) *
+        lmt
+    );
     if (calcDmg >= player.hp) {
       player.hp = 0;
     } else {

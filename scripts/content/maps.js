@@ -37,10 +37,10 @@ let currentWorld;
 let currentMap;
 
 function codeMaps() {
-  function codeSubMaps(element) {
-    let submaps = ['northern', 'western', 'eastern', 'southern', 'central'];
-    // let submaps = ['central'];
-    return submaps.map((y, i) => {
+  function codeDistricts(element) {
+    let districts = ['northern', 'western', 'eastern', 'southern', 'central'];
+    // let districts = ['central'];
+    return districts.map((y, i) => {
       return {
         lvl: i + 1,
         name: `${y} ${element} ${element === 'master' ? '' : 'tribe'}`,
@@ -59,6 +59,7 @@ function codeMaps() {
           {
             ...doorBase,
             element: element,
+            district: i + 1,
             type:
               element === 'master'
                 ? 'end-door'
@@ -87,13 +88,13 @@ function codeMaps() {
   elements.map((x) => {
     mapsBase.push({
       name: x,
-      subMaps: codeSubMaps(x),
+      districts: codeDistricts(x),
     });
   });
 
   mapsBase.push({
     name: 'master',
-    subMaps: codeSubMaps('master'),
+    districts: codeDistricts('master'),
   });
 }
 
@@ -110,33 +111,24 @@ function randomKeyDrop() {
   }
 }
 
-function changeMap(element, masteredElement) {
+function changeMap(world, to, masteredElement) {
   objLoop(currentMap.rewards);
-  if (element === 'temple') {
+  if (to === 'temple') {
     currentMap = { ...maps[0] };
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
     currentEnemy = {};
     screenTransition('top', () => screenStory(masteredElement));
-  } else if (element) {
-    currentWorld = maps.find((x) => x.name === element);
-    currentMap = currentWorld.subMaps[0];
-    cGrad2 = colorGrid[element];
-    stateEl.style.background = colorGrid[element];
-    enemies = [];
-    enemyList.forEach((x) =>
-      codeEnemy(
-        x.name,
-        x.hp,
-        x.attack,
-        // TODO: rethink factor to have correct stats for enemies
-        player.elements.length,
-        currentWorld.name
-      )
-    );
+  } else if (to === 'first') {
+    currentWorld = maps.find((x) => x.name === world);
+    currentMap = currentWorld.districts[0];
+    cGrad2 = colorGrid[world];
+    stateEl.style.background = colorGrid[world];
+    codeMapEnemies(world, currentMap.lvl);
     screenTransition('top', () => screenWorld());
-  } else {
-    currentMap = currentWorld.subMaps[currentMap.lvl];
+  } else if (to === 'next') {
+    currentMap = currentWorld.districts[currentMap.lvl];
+    codeMapEnemies(world, currentMap.lvl);
     screenTransition('top', () => screenWorld());
   }
   infoQueue.push(

@@ -17,7 +17,11 @@ function screenEnd(win) {
 
     ctx.fillText(
       `You ${win ? 'win and' : 'died but'} scored ${
-        player.xp + player.hp * 5 + player.str * 10 + player.gems
+        player.xp +
+        player.hp * 5 +
+        player.str * 10 +
+        player.def * 5 +
+        player.gems
       }`,
       baseW / 2,
       baseH / 2

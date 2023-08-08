@@ -222,3 +222,23 @@ function updateState() {
     ${currentMap.name}</p>
     `;
 }
+
+function calcElement(element1, element2) {
+  if (
+    (element1 === 'earth' && element2 === 'water') ||
+    (element1 === 'water' && element2 === 'fire') ||
+    (element1 === 'fire' && element2 === 'air') ||
+    (element1 === 'air' && element2 === 'earth')
+  ) {
+    return 2;
+  } else if (
+    (element1 === 'water' && element2 === 'earth') ||
+    (element1 === 'fire' && element2 === 'water') ||
+    (element1 === 'air' && element2 === 'fire') ||
+    (element1 === 'earth' && element2 === 'air')
+  ) {
+    return 0.5;
+  } else {
+    return 1;
+  }
+}

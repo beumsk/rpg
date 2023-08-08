@@ -10,7 +10,6 @@ function screenStart() {
   currentMap = { ...maps[0] };
   stuffEquip(stuffBase);
   // stuffFind(stuff.filter((x) => !x.base));
-  enemyList.forEach((x) => codeEnemy(x.name, x.hp, x.attack));
 
   // TODO: add load game logic
   contentEl.innerHTML = `
@@ -23,6 +22,7 @@ function screenStart() {
   function keyStartHandler() {
     document.removeEventListener('keydown', keyStartHandler);
     contentEl.innerHTML = '';
-    screenTransition('bottom', () => screenStory('intro'));
+    // screenTransition('bottom', () => screenStory('intro'));
+    screenTransition('bottom', () => screenWorld());
   }
 }

@@ -18,6 +18,18 @@ function screenMenu() {
   let menuLinks = menuEl.getElementsByTagName('a');
   let crtMenu = 'main';
 
+  const codeStatsMenu = () => [
+    { name: `lvl: ${player.lvl}` },
+    { name: `xp: ${player.xp}/${lvls[player.lvl + 1]}` },
+    { name: `map: ${currentMap.name}` },
+    { name: `gems: ${player.gems}₲` },
+    { name: `str: ${player.str}` },
+    { name: `def: ${player.def}` },
+    { name: `hp: ${player.hp}/${player.hpmax}` },
+    { name: `element: ${player.element}` },
+  ];
+  let statsMenu = codeStatsMenu();
+
   createMenu(mainMenu, 'main');
 
   function keyMenuHandler(e) {
@@ -115,17 +127,7 @@ function screenMenu() {
     let crt = e.target;
     if (crtMenu === 'main') {
       if (crt.dataset.value === 'stats') {
-        createMenu(
-          [
-            { name: `lvl: ${player.lvl}` },
-            { name: `xp: ${player.xp}/${lvls[player.lvl + 1]}` },
-            { name: `map: ${currentMap.name}` },
-            { name: `gems: ${player.gems}₲` },
-            { name: `str: ${player.str}` },
-            { name: `hp: ${player.hp}/${player.hpmax}` },
-          ],
-          crt.dataset.value
-        );
+        createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {
         createMenu(
           [{ name: `sound` }, { name: `save` }, { name: `load` }],
@@ -138,6 +140,17 @@ function screenMenu() {
         );
       } else {
         createMenu(player[crt.dataset.value], crt.dataset.value);
+      }
+    } else if (crtMenu === 'stats') {
+      if (crt.dataset.value.includes('element:')) {
+        if (player.element === '') {
+          player.element = player.elements[0];
+        } else {
+          player.element =
+            player.elements[player.elements.indexOf(player.element) + 1] || '';
+        }
+        statsMenu = codeStatsMenu();
+        createMenu(statsMenu, crtMenu);
       }
     } else if (crtMenu === 'attacks') {
       // TODO: re order attacks option?
