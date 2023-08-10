@@ -31,18 +31,35 @@ const hideDoorBase = {
   fill: cBlack,
 };
 
-let mapsBase = [];
+let mapsBase = [
+  {
+    name: 'temple',
+    deadSpots: [
+      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellow },
+      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen },
+      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue },
+      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed },
+      { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
+    ],
+  },
+];
+
 let maps;
 let currentWorld;
 let currentMap;
 
-function codeMaps() {
+function codeWorldMaps(world) {
+  if (maps.find((x) => x.name === world)) return;
+
+  maps.push({ name: world, districts: codeDistricts(world) });
+
   function codeDistricts(element) {
     let districts = ['northern', 'western', 'eastern', 'southern', 'central'];
     // let districts = ['central'];
+
     return districts.map((y, i) => {
       return {
-        lvl: i + 1,
+        lvl: player.elements.length * districts.length + i + 1,
         name: `${y} ${element} ${element === 'master' ? '' : 'tribe'}`,
         // TODO: add rewards ! (semi random)
         deadSpots: [
@@ -71,31 +88,6 @@ function codeMaps() {
       };
     });
   }
-
-  mapsBase = [];
-
-  mapsBase.push({
-    name: 'temple',
-    deadSpots: [
-      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellow },
-      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen },
-      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue },
-      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed },
-      { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
-    ],
-  });
-
-  elements.map((x) => {
-    mapsBase.push({
-      name: x,
-      districts: codeDistricts(x),
-    });
-  });
-
-  mapsBase.push({
-    name: 'master',
-    districts: codeDistricts('master'),
-  });
 }
 
 function randomKeyDrop() {
@@ -120,6 +112,7 @@ function changeMap(world, to, masteredElement) {
     currentEnemy = {};
     screenTransition('top', () => screenStory(masteredElement));
   } else if (to === 'first') {
+    codeWorldMaps(world);
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
     cGrad2 = colorGrid[world];
@@ -127,6 +120,7 @@ function changeMap(world, to, masteredElement) {
     codeMapEnemies(world, currentMap.lvl);
     screenTransition('top', () => screenWorld());
   } else if (to === 'next') {
+    codeWorldMaps(world);
     currentMap = currentWorld.districts[currentMap.lvl];
     codeMapEnemies(world, currentMap.lvl);
     screenTransition('top', () => screenWorld());

@@ -143,7 +143,9 @@ function screenMenu() {
       }
     } else if (crtMenu === 'stats') {
       if (crt.dataset.value.includes('element:')) {
-        if (player.element === '') {
+        if (player.elements.length === 0) {
+          return;
+        } else if (player.element === '') {
           player.element = player.elements[0];
         } else {
           player.element =

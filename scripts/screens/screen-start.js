@@ -5,7 +5,6 @@ function screenStart() {
   cGrad2 = cBack4;
   stateEl.style.background = cBack2;
   player = { ...playerBase };
-  codeMaps();
   maps = [...mapsBase];
   currentMap = { ...maps[0] };
   stuffEquip(stuffBase);

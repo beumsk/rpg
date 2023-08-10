@@ -22,9 +22,9 @@ function lvlUp() {
     () =>
       (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
   );
-  player.str += 20 * player.lvl;
-  player.hpmax += 20 * player.lvl;
-  player.hp = player.hpmax;
+  player.str += 20;
+  player.def += 10;
+  player.hpmax += 20;
   player.lvl += 1;
-  player.mapLvl += 1;
+  player.hp = player.hpmax;
 }

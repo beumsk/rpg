@@ -14,13 +14,13 @@ const attacks = [
   },
   {
     name: 'kick',
-    dmg: 20,
+    dmg: 8,
     desc: 'attack description',
-    base: true,
+    // base: true,
   },
   {
     name: 'punch',
-    dmg: 10,
+    dmg: 4,
     desc: 'attack description',
     base: true,
   },

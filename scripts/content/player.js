@@ -8,8 +8,8 @@ const playerBase = {
   h: step,
   // fill: cPlayer,
   img: './img/player.png',
-  hp: 100,
-  hpmax: 100,
+  hp: 20,
+  hpmax: 20,
   state: 'asleep',
   str: 20,
   def: 10,
@@ -20,10 +20,9 @@ const playerBase = {
   items: itemsBase,
   stuff: [],
   shop: shopBase,
-  mapLvl: 1,
   element: '',
-  // elements: [],
-  elements: [...elements],
+  elements: [],
+  // elements: [...elements],
 };
 
 function playerAttack(attack) {

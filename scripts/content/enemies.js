@@ -24,14 +24,15 @@ function codeMapEnemies(element, lvl, isBoss) {
       element: element,
       hp: lvl * 20,
       hpmax: lvl * 20,
-      str: lvl * 4,
-      def: lvl * 2,
-      xp: Math.floor(lvls[lvl + 1] / 5),
+      str: lvl * 20,
+      def: lvl * 10,
+      xp: Math.ceil(lvls[lvl + 1] / 5),
+      // xp: lvls[lvl + 1],
       gems: lvl * 2,
       attacks: [
         {
           name: crtMove,
-          dmg: lvl * 4,
+          dmg: 4,
         },
       ],
     };

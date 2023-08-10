@@ -17,11 +17,13 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - pokemon-rpg like, walking around and fighting enemies
 - central map: doors to different element worlds
   - => go on the element of choice > finish the different maps (n, w, e, s) and final spirit to master x4 (elements)
+    - you learn element of world OR element beating world (water > fire etc)
     - each map has monsters to beat (+ quests?)
   - => master door opens > beat 4 masters + high master and win (OR spirit world??)
-- add a score screen at the game over
 - Dmg = (dmg+str-def) x elmt(0.5|1|2)
   - => power up player/enemy with str and def
+- Player lvlUp => dmg+20% & def+10%
+- Enemy lvlUp => dmg+20% & def+10%
 
 ## Doc
 
@@ -29,10 +31,11 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- => review attack system and balance -> based on dmg, +str, -def, xelement, lvl?
-  - lvlup => str+XX def+XX
-  - TEST difficulty is correct and stays correct through lvlup and mapup
-- => rethink enemies creation and selection for a map
+- => TEST difficulty is correct and stays correct through lvlup and mapup
+
+  - => enemies dmg the same no matter the lvl?
+  - how to balance with new player attacks?
+
 - => review chest key system?
 
 > first release: theme + element logic (fights) + story + randomize + graphics + sound + heal? + quests?
@@ -63,7 +66,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - how to get new attacks? => lvlup? map? chest? shop? quest? element?
 
-- how to heal? => tarvern? pay? newMap?
+- how to heal? => potions + lvlup + tarvern? newMap?
 
 - handle how is the game saved, loaded
   - start > new/load > world
@@ -101,4 +104,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4)=89?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4)=93?? hours total dev
