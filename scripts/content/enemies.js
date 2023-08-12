@@ -26,7 +26,7 @@ function codeMapEnemies(element, lvl, isBoss) {
       hpmax: lvl * 20,
       str: lvl * 20,
       def: lvl * 10,
-      xp: Math.ceil(lvls[lvl + 1] / 5),
+      xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
       // xp: lvls[lvl + 1],
       gems: lvl * 2,
       attacks: [

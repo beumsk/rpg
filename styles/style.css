@@ -107,15 +107,17 @@ body {
   display: none;
 }
 
-.state p {
-  flex: 1 0 50%;
-}
 .state p:nth-of-type(1) {
-  display: flex;
-  justify-content: space-between;
+  gap: 4rem;
+  flex: 1 0 65%;
+  padding: 0 16px;
 }
 .state p:nth-of-type(2) {
   text-align: right;
+  flex: 1 0 35%;
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .info a,

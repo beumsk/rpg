@@ -126,7 +126,6 @@ stateEl.classList.add('state');
 stateEl.style.cssText = `
   height: ${(menuHeight / 2) * scale};
   font-size: ${8 * scale}px;
-  padding: 0 ${8 * scale}px;
 `;
 containerEl.appendChild(stateEl);
 
@@ -212,9 +211,11 @@ function updateState() {
   // TODO: add score ??
   stateEl.innerHTML = `
     <p>
-      <span>${player.name}</span>
-      <span>lvl ${player.lvl} (${player.xp}/${lvls[player.lvl + 1]}xp)</span>
-      <span>${player.gems}₲</span>
+      <span>${player.name}</span> | 
+      <span>lvl ${player.lvl}</span> | 
+      <span>${player.xp}/${lvls[player.lvl + 1]} ↗</span> | 
+      <span>${player.hp}/${player.hpmax} ♥</span> | 
+      <span>${player.gems} ⨀</span>
     </p>
     <p>${
       currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''

@@ -31,9 +31,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- => TEST difficulty is correct and stays correct through lvlup and mapup
+- update menu when stuff is equiped, potion used etc
+- codeStuff function to create plenty of stuff
+- introduce new attacks?
 
-  - => enemies dmg the same no matter the lvl?
   - how to balance with new player attacks?
 
 - => review chest key system?
@@ -44,7 +45,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - randomScreen => select random reward form chests, mapUp, lvlup
   - offer option to pick between average reward (5) or random (1-10) ??
-- random dmg => attack have range of dmg
+- random dmg => attack have range of dmg (+ crits + fail?)
 - random gems => gems collected are from range
 
 > theme

@@ -1,6 +1,8 @@
 // TODO: add amulet, belt, boots, rune, pet?
 const stuffCategories = ['hat', 'cloak', 'ring'];
 
+// TODO: code function to create stuff
+
 const stuff = [
   {
     name: 'dummy hat',
@@ -29,7 +31,7 @@ const stuff = [
   {
     name: 'test ring',
     type: 'ring',
-    effect: { str: 5 },
+    effect: { str: 20 },
     desc: 'stuff description',
     lvl: 1,
   },

@@ -91,7 +91,7 @@ function codeWorldMaps(world) {
 }
 
 function randomKeyDrop() {
-  if (rand(10) === 1) {
+  if (rand(5) === 1) {
     const mapChest = currentMap.deadSpots.find(
       (x) => x.type === 'chest' && !x.unlocked
     );

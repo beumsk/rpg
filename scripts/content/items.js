@@ -60,7 +60,8 @@ function itemFind(itemList) {
     if (player.items.find((i) => i.name === x.name)) {
       player.items.find((i) => i.name === x.name).qtt += 1;
     } else {
-      player.items.push(items.find((i) => i.name === x.name));
+      const foundItem = items.find((i) => i.name === x.name);
+      player.items.push({ ...foundItem, qtt: 1 });
     }
   });
 }

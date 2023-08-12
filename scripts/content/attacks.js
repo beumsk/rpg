@@ -20,7 +20,7 @@ const attacks = [
   },
   {
     name: 'punch',
-    dmg: 4,
+    dmg: 6,
     desc: 'attack description',
     base: true,
   },

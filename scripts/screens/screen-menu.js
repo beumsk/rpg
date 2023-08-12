@@ -20,13 +20,13 @@ function screenMenu() {
 
   const codeStatsMenu = () => [
     { name: `lvl: ${player.lvl}` },
-    { name: `xp: ${player.xp}/${lvls[player.lvl + 1]}` },
-    { name: `map: ${currentMap.name}` },
-    { name: `gems: ${player.gems}₲` },
-    { name: `str: ${player.str}` },
-    { name: `def: ${player.def}` },
-    { name: `hp: ${player.hp}/${player.hpmax}` },
-    { name: `element: ${player.element}` },
+    { name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗` },
+    { name: `map: ${currentMap.name} ⫯` },
+    { name: `gems: ${player.gems} ⨀` },
+    { name: `str: ${player.str} ↣` }, // ⊕
+    { name: `def: ${player.def} ∇` }, // ⊖
+    { name: `hp: ${player.hp}/${player.hpmax} ♥` },
+    { name: `element: ${player.element}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
   let statsMenu = codeStatsMenu();
 
@@ -83,6 +83,8 @@ function screenMenu() {
   function deleteMenu() {
     menuEl.innerHTML = '';
   }
+
+  // TODO: update menu when equip stuff!
 
   function createMenu(menuList, menuName) {
     crtMenu = menuName;
