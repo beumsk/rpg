@@ -27,4 +27,5 @@ function lvlUp() {
   player.hpmax += 20;
   player.lvl += 1;
   player.hp = player.hpmax;
+  shopLvlUp(player.lvl);
 }

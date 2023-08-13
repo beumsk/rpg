@@ -31,7 +31,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- update menu when stuff is equiped, potion used etc
 - codeStuff function to create plenty of stuff
 - introduce new attacks?
 

@@ -5,20 +5,32 @@ const items = [
     // TODO: change effect to effect: { key: value }
     effect: 20,
     desc: 'item description',
+    lvl: 1,
+    price: 2,
     base: true,
+    shop: true,
   },
   {
-    name: 'remedy',
-    type: 'state',
-    effect: '',
+    name: 'potion +',
+    type: 'heal',
+    effect: 50,
     desc: 'item description',
+    lvl: 5,
+    price: 10,
+    shop: true,
   },
-  {
-    name: 'waker',
-    type: 'state',
-    effect: 'asleep',
-    desc: 'item description',
-  },
+  // {
+  //   name: 'remedy',
+  //   type: 'state',
+  //   effect: '',
+  //   desc: 'item description',
+  // },
+  // {
+  //   name: 'waker',
+  //   type: 'state',
+  //   effect: 'asleep',
+  //   desc: 'item description',
+  // },
   // add boosts and more items
 ];
 

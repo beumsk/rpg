@@ -1,80 +1,9 @@
-const shop = [
-  {
-    name: 'potion',
-    type: 'heal',
-    effect: 20,
-    desc: 'item description',
-    lvl: 1,
-    price: 2,
-  },
-  {
-    name: 'potion +',
-    type: 'heal',
-    effect: 50,
-    desc: 'item description',
-    lvl: 5,
-    price: 10,
-  },
-  {
-    name: 'strong ring',
-    type: 'ring',
-    effect: { str: 10 },
-    desc: 'stuff description',
-    lvl: 1,
-    price: 10,
-  },
-  {
-    name: 'strong hat',
-    type: 'hat',
-    effect: { str: 10 },
-    desc: 'stuff description',
-    lvl: 1,
-    price: 10,
-  },
-  {
-    name: 'strong cloak',
-    type: 'cloak',
-    effect: { str: 10 },
-    desc: 'stuff description',
-    lvl: 1,
-    price: 10,
-  },
-  {
-    name: 'stronger ring',
-    type: 'ring',
-    effect: { str: 40 },
-    desc: 'stuff description',
-    lvl: 5,
-    price: 40,
-  },
-  {
-    name: 'stronger hat',
-    type: 'hat',
-    effect: { str: 40 },
-    desc: 'stuff description',
-    lvl: 5,
-    price: 40,
-  },
-  {
-    name: 'stronger cloak',
-    type: 'cloak',
-    effect: { str: 40 },
-    desc: 'stuff description',
-    lvl: 5,
-    price: 40,
-  },
-  {
-    name: 'strongest ring',
-    type: 'ring',
-    effect: { str: 100 },
-    desc: 'stuff description',
-    lvl: 10,
-    price: 100,
-  },
-  // (strong, healthy, solid) x (ring, hat, cloak) x (1, 5, 10...)
-];
+const shop = [];
 
-const shopBase = shop.filter((x) => x);
+const shopBase = [
+  ...items.filter((x) => x.lvl === 1 && x.shop),
+  ...stuff.filter((x) => x.lvl === 1 && x.shop),
+];
 
 // TODO: add resell option?
 
@@ -92,4 +21,12 @@ function shopBuy(name) {
   } else {
     infoEl.innerText = `You don't have enough gems...`;
   }
+}
+
+function shopLvlUp(lvl) {
+  player.shop = [
+    ...player.shop,
+    ...items.filter((x) => x.lvl === lvl && x.shop),
+    ...stuff.filter((x) => x.lvl === lvl && x.shop),
+  ];
 }

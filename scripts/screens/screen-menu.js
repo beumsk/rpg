@@ -28,7 +28,7 @@ function screenMenu() {
     { name: `hp: ${player.hp}/${player.hpmax} ♥` },
     { name: `element: ${player.element}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
-  let statsMenu = codeStatsMenu();
+  let statsMenu;
 
   createMenu(mainMenu, 'main');
 
@@ -129,6 +129,7 @@ function screenMenu() {
     let crt = e.target;
     if (crtMenu === 'main') {
       if (crt.dataset.value === 'stats') {
+        statsMenu = codeStatsMenu();
         createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {
         createMenu(
@@ -170,9 +171,9 @@ function screenMenu() {
         player[crtMenu].filter((x) => x.lvl <= player.lvl),
         crtMenu
       );
-      updateState();
     } else if (crtMenu === 'options') {
       // TODO: add options: sound, save, load
     }
+    updateState();
   }
 }
