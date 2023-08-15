@@ -31,27 +31,21 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- codeStuff function to create plenty of stuff
 - introduce new attacks?
-
   - how to balance with new player attacks?
 
-- => review chest key system?
-
-> first release: theme + element logic (fights) + story + randomize + graphics + sound + heal? + quests?
+> first release: theme + story + randomize + graphics + sound
 
 > randomize
 
 - randomScreen => select random reward form chests, mapUp, lvlup
   - offer option to pick between average reward (5) or random (1-10) ??
 - random dmg => attack have range of dmg (+ crits + fail?)
-- random gems => gems collected are from range
+- random gems => gems collected are from range (end of fight screen ? xp,gems?)
 
 > theme
 
-- adapt enemies to theme avatar
-- create element logic (water > fire etc.)
-- add maps, enemies, attacks, items, stuff
+- add attacks, items, stuff
 
 > story
 
@@ -73,6 +67,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - new > ask name > intro (dialog screen??) > world
 
 - add helper window => info about menus, keys, goal
+- tutorial map??
 - menu options: sound, save, load
 - fight system: state icons
 - add AI logic (not only first attack)
@@ -81,7 +76,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - add visuals: player, enemies, maps, => use sprites from online? (avatar, ff)
 - add designs: floating clouds (japan style)
 - add sounds && music
-- add story
 - how to play on mobile?? => add move controls + clicks
 
 - add randomnes => dmg, map rewards, chest, gems?, xp?

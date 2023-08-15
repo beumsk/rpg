@@ -1,41 +1,36 @@
 // TODO: add amulet, belt, boots, rune, pet?
-const stuffCategories = ['hat', 'cloak', 'ring'];
+const stuffCategories = ['ring', 'cloak', 'hat'];
 
-// TODO: code function to create stuff
-
-const stuff = [
-  {
-    name: 'dummy hat',
-    type: 'hat',
-    effect: { hpmax: 5 },
-    desc: 'stuff description',
-    lvl: 1,
-    base: true,
-  },
-  {
-    name: 'dummy cloak',
-    type: 'cloak',
-    effect: { hpmax: 5 },
-    desc: 'stuff description',
-    lvl: 1,
-    base: true,
-  },
-  {
-    name: 'dummy ring',
-    type: 'ring',
-    effect: { hpmax: 5 },
-    desc: 'stuff description',
-    lvl: 1,
-    base: true,
-  },
-  {
-    name: 'test ring',
-    type: 'ring',
-    effect: { str: 20 },
-    desc: 'stuff description',
-    lvl: 1,
-  },
+const stuffFamilies = [
+  { name: 'dummy', effect: { hp: 2 }, lvl: 1 },
+  { name: 'strong', effect: { str: 10 }, lvl: 2 },
+  { name: 'robust', effect: { def: 5 }, lvl: 3 },
+  { name: 'healthy', effect: { hp: 20 }, lvl: 4 },
 ];
+
+let stuff = [];
+
+function codeStuff() {
+  stuffFamilies.forEach((fam) => {
+    stuffCategories.forEach((cat, i) => {
+      const isBase = fam.name === 'dummy';
+
+      let stuf = {
+        name: `${fam.name} ${cat}`,
+        type: cat,
+        effect: fam.effect,
+        // desc: 'stuff desc',
+        lvl: isBase ? fam.lvl : fam.lvl + i,
+        price: fam.lvl * 5,
+        base: isBase,
+        shop: !isBase,
+      };
+
+      stuff.push(stuf);
+    });
+  });
+}
+codeStuff();
 
 const stuffBase = stuff.filter((x) => x.base);
 
@@ -65,10 +60,10 @@ function stuffModifyEffects(obj, add = true) {
     const value = obj[key];
     if (add) {
       player[key] += value;
-      if (key === 'hpmax') player.hp += value;
+      if (key === 'hp') player.hpmax += value;
     } else {
       player[key] -= value;
-      if (key === 'hpmax') player.hp -= value;
+      if (key === 'hp') player.hpmax -= value;
     }
   }
 }

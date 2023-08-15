@@ -1,5 +1,3 @@
-const shop = [];
-
 const shopBase = [
   ...items.filter((x) => x.lvl === 1 && x.shop),
   ...stuff.filter((x) => x.lvl === 1 && x.shop),

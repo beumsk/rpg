@@ -1,4 +1,4 @@
-const lvls = [];
+let lvls = [];
 
 function codeLvls(maxLevel) {
   for (let lvl = 0; lvl <= maxLevel; lvl++) {
