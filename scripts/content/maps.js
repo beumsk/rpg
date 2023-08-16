@@ -61,7 +61,7 @@ function codeWorldMaps(world) {
       return {
         lvl: player.elements.length * districts.length + i + 1,
         name: `${y} ${element} ${element === 'master' ? '' : 'tribe'}`,
-        // TODO: add rewards ! (semi random)
+        // TODO: add rewards ! (semi random based on lvl)
         deadSpots: [
           {
             ...chestBase,
@@ -95,16 +95,19 @@ function randomKeyDrop() {
     const mapChest = currentMap.deadSpots.find(
       (x) => x.type === 'chest' && !x.unlocked
     );
-    if (!mapChest) return;
+    if (!mapChest) return false;
     mapChest.unlocked = true;
     infoQueue.push(
       () => (infoEl.innerText = `You found the key to open the chest`)
     );
+    return true;
   }
+  return false;
 }
 
 function changeMap(world, to, masteredElement) {
-  objLoop(currentMap.rewards);
+  // add rewards based on maplvl
+  // objLoop(currentMap.rewards);
   if (to === 'temple') {
     currentMap = { ...maps[0] };
     cGrad2 = cBack4;

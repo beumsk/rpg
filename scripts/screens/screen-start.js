@@ -12,7 +12,9 @@ function screenStart() {
 
   // TODO: add load game logic
   contentEl.innerHTML = `
-  <h1>Ready to start your adventure?</h1>
+    <div class="text">
+      <h1>Ready to start your adventure?</h1>
+    </div>
   `;
   // <p>OR</p>
   // <h1>Continue your adventure?</h1>

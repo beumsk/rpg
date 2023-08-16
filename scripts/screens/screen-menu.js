@@ -15,7 +15,7 @@ function screenMenu() {
   ];
 
   let index = 0;
-  let menuLinks = menuEl.getElementsByTagName('a');
+  let menuLinks = contentEl.getElementsByTagName('a');
   let crtMenu = 'main';
 
   const codeStatsMenu = () => [
@@ -73,22 +73,16 @@ function screenMenu() {
     infoEl.innerText = '';
     cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyMenuHandler);
-    deleteMenu();
+    contentEl.innerHTML = '';
     clearCanvas();
     screenWorld(true);
   }
 
   start();
 
-  function deleteMenu() {
-    menuEl.innerHTML = '';
-  }
-
-  // TODO: update menu when equip stuff!
-
   function createMenu(menuList, menuName) {
     crtMenu = menuName;
-    menuEl.innerHTML = '';
+    contentEl.innerHTML = '<div class="menu"></div>';
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
         const linkEl = document.createElement('a');
@@ -114,7 +108,7 @@ function screenMenu() {
         }
         linkEl.dataset.menu = menuName;
         linkEl.dataset.value = x.name;
-        menuEl.appendChild(linkEl);
+        contentEl.querySelector('.menu').appendChild(linkEl);
         index = 0;
         if (i === index) linkEl.focus();
         linkEl.addEventListener('click', linkClick);

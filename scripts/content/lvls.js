@@ -13,7 +13,9 @@ function checkLvlUp(currentLvl, currentXp) {
   const nextLvlXp = lvls[currentLvl + 1];
   if (currentXp >= nextLvlXp) {
     lvlUp();
+    return true;
   }
+  return false;
 }
 
 function lvlUp() {

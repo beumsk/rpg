@@ -16,6 +16,7 @@ const playerBase = {
   lvl: 1,
   xp: 0,
   gems: 0,
+  fightEnd: {},
   attacks: attacksBase,
   items: itemsBase,
   stuff: [],
@@ -58,15 +59,19 @@ function playerCheckDead() {
 function playerWin() {
   player.xp += currentEnemy.xp;
   player.gems += currentEnemy.gems;
-  randomKeyDrop();
-  checkLvlUp(player.lvl, player.xp);
-  screenTransition('left', () => screenWorld());
+  const keyDropped = randomKeyDrop();
+  const lvlUp = checkLvlUp(player.lvl, player.xp);
+  player.fightEnd = {
+    xp: currentEnemy.xp,
+    gems: currentEnemy.gems,
+    keyDrop: keyDropped,
+    lvlUp: lvlUp,
+  };
   // stops screenFight
   return 'stop';
 }
 
 function playerLose() {
-  screenTransition('bottom', () => screenEnd());
   // stops screenFight
   return 'stop';
 }

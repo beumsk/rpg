@@ -85,7 +85,7 @@ const texts = {
       <p>Air, Earth, Water and Fire will help him facing the tyrannical masters and finally be able to find back peace and balance in the world.</p>`,
     `<p>I am convinced you can be the chosen one!</p><p>Waste no time and reach the Temple of elements!</p>`,
     `<p>Pick the order you prefer to master the different elements. For each element you will land in the dedicated territory and will face the allies of the masters. Defeating them in all the zones will give you the opportunity to face the elemental spirit.</p>
-    <p>Once master of the 4 elements, you will be able to fight and let's hope defeat the masters!</p>`,
+      <p>Once master of the 4 elements, you will be able to fight and let's hope defeat the masters!</p>`,
   ],
   air: [
     `<p>Congratulations! You are now an air bender!</p><p>You will be able to continue your quest by joining the temple.</p>`,
@@ -99,7 +99,12 @@ const texts = {
   fire: [
     `<p>Congratulations! You are now a fire bender!</p><p>You will be able to continue your quest by joining the temple.</p>`,
   ],
-  outro: [`<h1>What a succes!</h1>`],
+  outro: [
+    `<h1>What a succes, valiant adventurer!</h1>`,
+    `<p>Your journey through the elemental trials has forged you into a true master of the elements.</p>
+      <p>With your newfound mastery over Air, Earth, Water, and Fire, you could bring back the peace everyone wanted.</p>`,
+    `<p>Farewell and may your story echo through the ages!</p>`,
+  ],
 };
 
 let scale;
@@ -116,36 +121,16 @@ contentEl.classList.add('content');
 contentEl.style.cssText = `
   width: ${baseW * scale};
   height: ${baseH * scale};
-  font-size: ${8 * scale}px;
-  padding: 0 ${8 * scale}px;
 `;
 containerEl.appendChild(contentEl);
 
 const stateEl = document.createElement('div');
 stateEl.classList.add('state');
-stateEl.style.cssText = `
-  height: ${(menuHeight / 2) * scale};
-  font-size: ${8 * scale}px;
-`;
 containerEl.appendChild(stateEl);
 
 const infoEl = document.createElement('div');
 infoEl.classList.add('info');
-infoEl.style.cssText = `
-  height: ${menuHeight * scale};
-  font-size: ${12 * scale}px;
-  padding: 0 ${8 * scale}px;
-`;
 containerEl.appendChild(infoEl);
-
-const menuEl = document.createElement('div');
-menuEl.classList.add('menu');
-menuEl.style.cssText = `
-  height: ${(baseH - menuHeight) * scale};
-  font-size: ${12 * scale}px;
-  padding:  ${4 * scale}px ${8 * scale}px;
-`;
-containerEl.appendChild(menuEl);
 
 // useful general functions
 function rand(val, step = 1, not) {
@@ -187,6 +172,7 @@ function scaleCanvas() {
     canvasEl.width = baseW * newScale;
     canvasEl.height = baseH * newScale;
     ctx.setTransform(newScale, 0, 0, newScale, 0, 0);
+    document.documentElement.style.fontSize = 8 * newScale;
     scale = newScale;
   }
 }

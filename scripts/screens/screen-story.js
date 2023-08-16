@@ -3,13 +3,13 @@ function screenStory(textName) {
 
   let i = 0;
 
-  contentEl.innerHTML = texts[textName][i];
+  contentEl.innerHTML = `<div class="text">${texts[textName][i]}</div>`;
 
   document.addEventListener('keydown', keyStartHandler);
   function keyStartHandler() {
     i++;
     if (i < texts[textName].length) {
-      contentEl.innerHTML = texts[textName][i];
+      contentEl.innerHTML = `<div class="text">${texts[textName][i]}</div>`;
     } else {
       document.removeEventListener('keydown', keyStartHandler);
       contentEl.innerHTML = '';

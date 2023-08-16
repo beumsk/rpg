@@ -24,6 +24,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
   - => power up player/enemy with str and def
 - Player lvlUp => dmg+20% & def+10%
 - Enemy lvlUp => dmg+20% & def+10%
+- Items are in shop and rewards
+- Stuff are in shop or rewards
+- Attacks are in rewards only
 
 ## Doc
 
@@ -38,10 +41,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > randomize
 
-- randomScreen => select random reward form chests, mapUp, lvlup
+- randomScreen => select random reward (items, stuff, attacks, boost?) from chests, mapUp, lvlup
   - offer option to pick between average reward (5) or random (1-10) ??
 - random dmg => attack have range of dmg (+ crits + fail?)
-- random gems => gems collected are from range (end of fight screen ? xp,gems?)
+- random gems => gems collected are from range
 
 > theme
 
@@ -49,7 +52,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > story
 
-- story intro, new world texts, new element mastered, outro
+- new world texts, new element mastered
 
 > quests?
 
