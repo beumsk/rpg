@@ -7,8 +7,7 @@ const items = [
     desc: 'item description',
     lvl: 1,
     price: 2,
-    base: true,
-    shop: true,
+    src: ['base', 'shop', 'reward'],
   },
   {
     name: 'potion +',
@@ -17,7 +16,7 @@ const items = [
     desc: 'item description',
     lvl: 5,
     price: 10,
-    shop: true,
+    src: ['shop', 'reward'],
   },
   // {
   //   name: 'remedy',
@@ -34,7 +33,9 @@ const items = [
   // add boosts and more items
 ];
 
-const itemsBase = items.filter((x) => x.base).map((x) => ({ ...x, qtt: 1 }));
+const itemsBase = items
+  .filter((x) => x.src.includes('base'))
+  .map((x) => ({ ...x, qtt: 1 }));
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);

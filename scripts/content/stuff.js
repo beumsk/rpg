@@ -2,10 +2,16 @@
 const stuffCategories = ['ring', 'cloak', 'hat'];
 
 const stuffFamilies = [
-  { name: 'dummy', effect: { hp: 2 }, lvl: 1 },
-  { name: 'strong', effect: { str: 10 }, lvl: 2 },
-  { name: 'robust', effect: { def: 5 }, lvl: 3 },
-  { name: 'healthy', effect: { hp: 20 }, lvl: 4 },
+  { name: 'dummy', effect: { hp: 2 }, lvl: 1, src: ['base'] },
+  {
+    name: 'balanced',
+    effect: { hp: 5, str: 5, def: 5 },
+    lvl: 1,
+    src: ['reward'],
+  },
+  { name: 'strong', effect: { str: 10 }, lvl: 2, src: ['shop'] },
+  { name: 'robust', effect: { def: 5 }, lvl: 3, src: ['shop'] },
+  { name: 'healthy', effect: { hp: 20 }, lvl: 4, src: ['shop'] },
 ];
 
 let stuff = [];
@@ -13,17 +19,14 @@ let stuff = [];
 function codeStuff() {
   stuffFamilies.forEach((fam) => {
     stuffCategories.forEach((cat, i) => {
-      const isBase = fam.name === 'dummy';
-
       let stuf = {
         name: `${fam.name} ${cat}`,
         type: cat,
         effect: fam.effect,
         // desc: 'stuff desc',
-        lvl: isBase ? fam.lvl : fam.lvl + i,
+        lvl: fam.src === 'base' ? fam.lvl : fam.lvl + i,
         price: fam.lvl * 5,
-        base: isBase,
-        shop: !isBase,
+        src: fam.src,
       };
 
       stuff.push(stuf);
@@ -32,7 +35,7 @@ function codeStuff() {
 }
 codeStuff();
 
-const stuffBase = stuff.filter((x) => x.base);
+const stuffBase = stuff.filter((x) => x.src.includes('base'));
 
 function stuffEquip(stuffList) {
   stuffList.map((s) => {

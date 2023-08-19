@@ -8,7 +8,6 @@ function screenStart() {
   maps = [...mapsBase];
   currentMap = { ...maps[0] };
   stuffEquip(stuffBase);
-  // stuffFind(stuff.filter((x) => !x.base));
 
   // TODO: add load game logic
   contentEl.innerHTML = `

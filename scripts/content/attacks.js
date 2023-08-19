@@ -10,26 +10,26 @@ const attacks = [
     name: 'cheat',
     dmg: 1000,
     desc: 'dev attack 1000',
-    // base: true,
+    src: ['base'],
   },
   {
     name: 'kick',
     dmg: 8,
     desc: 'attack description',
-    // base: true,
+    src: [],
   },
   {
     name: 'punch',
     dmg: 6,
     desc: 'attack description',
-    base: true,
+    src: ['base'],
   },
   {
     name: 'joke',
     dmg: 0,
     desc: 'dev attack 0',
-    // base: true,
+    src: [],
   },
 ];
 
-const attacksBase = attacks.filter((x) => x.base);
+const attacksBase = attacks.filter((x) => x.src.includes('base'));
