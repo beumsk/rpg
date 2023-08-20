@@ -30,4 +30,5 @@ function lvlUp() {
   player.lvl += 1;
   player.hp = player.hpmax;
   shopLvlUp(player.lvl);
+  // screenReward('lvl');
 }

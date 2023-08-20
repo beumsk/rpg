@@ -16,7 +16,7 @@ function screenSplash() {
     try {
       const loadedImages = await Promise.all(imagesArray.map(loadImage));
       imagesLoaded.push(...loadedImages);
-      document.addEventListener('keydown', keyStartHandler);
+      document.addEventListener('keydown', keySplashHandler);
       pressMsg = 'Press any key';
     } catch (error) {
       console.error('Error loading images:', error);
@@ -57,9 +57,9 @@ function screenSplash() {
   }
 
   start();
-  function keyStartHandler() {
+  function keySplashHandler() {
     stop();
-    document.removeEventListener('keydown', keyStartHandler);
+    document.removeEventListener('keydown', keySplashHandler);
     screenTransition('bottom', () => screenStart());
   }
 }

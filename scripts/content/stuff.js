@@ -15,6 +15,7 @@ const stuffFamilies = [
 ];
 
 let stuff = [];
+let stuffRewarded = [];
 
 function codeStuff() {
   stuffFamilies.forEach((fam) => {
@@ -74,5 +75,6 @@ function stuffModifyEffects(obj, add = true) {
 function stuffFind(stuffList) {
   stuffList.map((s) => {
     player.stuff = [...player.stuff, { ...s, equiped: '' }];
+    if (s.src.includes('reward')) stuffRewarded.push(s);
   });
 }

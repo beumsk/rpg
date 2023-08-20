@@ -181,11 +181,37 @@ a:focus {
   font-size: 1.25rem;
 }
 
+/* CONTENT Reward */
+.content .reward {
+  text-align: center;
+}
+.content .reward h1,
+.content .reward p {
+  margin-bottom: 2rem;
+}
+.content .reward .rewards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.content .reward .rewards button {
+  background: none;
+  border: solid 1px;
+  padding: 1rem;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.content .reward .rewards button:focus {
+  /* TODO: align all focus styles */
+  outline: solid 2px rgba(0, 0, 0, 0.4);
+}
+
 /* CONTENT Fight end */
 .content .fight-end {
   text-align: center;
 }
-
 .content .fight-end h1 {
   margin-bottom: 2rem;
 }

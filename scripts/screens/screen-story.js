@@ -5,13 +5,13 @@ function screenStory(textName) {
 
   contentEl.innerHTML = `<div class="text">${texts[textName][i]}</div>`;
 
-  document.addEventListener('keydown', keyStartHandler);
-  function keyStartHandler() {
+  document.addEventListener('keydown', keyStoryHandler);
+  function keyStoryHandler() {
     i++;
     if (i < texts[textName].length) {
       contentEl.innerHTML = `<div class="text">${texts[textName][i]}</div>`;
     } else {
-      document.removeEventListener('keydown', keyStartHandler);
+      document.removeEventListener('keydown', keyStoryHandler);
       contentEl.innerHTML = '';
       if (textName === 'outro') {
         screenTransition('bottom', () => screenEnd(true));

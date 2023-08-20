@@ -69,20 +69,13 @@ function codeWorldMaps(world) {
               { x: player.x, y: player.y },
               { x: doorBase.x, y: doorBase.y },
             ]),
-            // TODO: make chest reward semi random
-            chest: { gems: 10, items: 'potion' },
           },
           { ...hideDoorBase },
           {
             ...doorBase,
             element: element,
             district: i + 1,
-            type:
-              element === 'master'
-                ? 'end-door'
-                : y === 'central'
-                ? 'temple-door'
-                : 'door',
+            type: element === 'master' ? 'end-door' : y === 'central' ? 'temple-door' : 'door',
           },
         ],
       };
@@ -92,28 +85,23 @@ function codeWorldMaps(world) {
 
 function randomKeyDrop() {
   if (rand(5) === 1) {
-    const mapChest = currentMap.deadSpots.find(
-      (x) => x.type === 'chest' && !x.unlocked
-    );
+    const mapChest = currentMap.deadSpots.find((x) => x.type === 'chest' && !x.unlocked);
     if (!mapChest) return false;
     mapChest.unlocked = true;
-    infoQueue.push(
-      () => (infoEl.innerText = `You found the key to open the chest`)
-    );
+    infoQueue.push(() => (infoEl.innerText = `You found the key to open the chest`));
     return true;
   }
   return false;
 }
 
 function changeMap(world, to, masteredElement) {
-  // add rewards based on maplvl
-  // objLoop(currentMap.rewards);
   if (to === 'temple') {
+    screenReward('world');
     currentMap = { ...maps[0] };
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
     currentEnemy = {};
-    screenTransition('top', () => screenStory(masteredElement));
+    // screenTransition('top', () => screenStory(masteredElement));
   } else if (to === 'first') {
     codeWorldMaps(world);
     currentWorld = maps.find((x) => x.name === world);
@@ -123,14 +111,13 @@ function changeMap(world, to, masteredElement) {
     codeMapEnemies(world, currentMap.lvl);
     screenTransition('top', () => screenWorld());
   } else if (to === 'next') {
+    screenReward('map');
     codeWorldMaps(world);
     currentMap = currentWorld.districts[currentMap.lvl];
     codeMapEnemies(world, currentMap.lvl);
-    screenTransition('top', () => screenWorld());
+    // screenTransition('top', () => screenWorld());
   }
-  infoQueue.push(
-    () => (infoEl.innerText = `You reached map ${currentMap.name}`)
-  );
+  infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
   player.x = 2 * step;
   player.y = 2 * step;
 }
@@ -149,13 +136,13 @@ function worldCompleted(element) {
   }
 }
 
-function openChest(chest) {
-  objLoop(chest);
-  currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
-  infoEl.innerText = `You opened a chest and got ${
-    chest.gems ? chest.gems + 'g,' : ''
-  } ${chest.items + ',' || ''} ${chest.stuff || ''}`;
-}
+// function openChest(chest) {
+//   objLoop(chest);
+//   currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
+//   infoEl.innerText = `You opened a chest and got ${
+//     chest.gems ? chest.gems + 'g,' : ''
+//   } ${chest.items + ',' || ''} ${chest.stuff || ''}`;
+// }
 
 function objLoop(obj) {
   for (const key in obj) {
@@ -168,4 +155,17 @@ function objLoop(obj) {
       stuffFind(stuff.filter((s) => s.name === value));
     }
   }
+}
+
+function randomRewards() {
+  let rewardItems = items.filter((x) => x.lvl <= currentMap.lvl && x.src.includes('reward'));
+  let rewardStuff = stuff.filter(
+    (x) => x.lvl <= currentMap.lvl && x.src.includes('reward') && !stuffRewarded.includes(x)
+  );
+  let rewardGems = currentMap.lvl * 5;
+  return {
+    item: rewardItems[rand(rewardItems.length)],
+    stuff: rewardStuff[rand(rewardStuff.length)],
+    gems: rewardGems,
+  };
 }

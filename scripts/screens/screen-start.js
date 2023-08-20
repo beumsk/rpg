@@ -8,6 +8,7 @@ function screenStart() {
   maps = [...mapsBase];
   currentMap = { ...maps[0] };
   stuffEquip(stuffBase);
+  stuffRewarded = [];
 
   // TODO: add load game logic
   contentEl.innerHTML = `

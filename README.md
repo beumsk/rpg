@@ -34,6 +34,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
+- replace links with buttons!
+
 - introduce new attacks?
   - how to balance with new player attacks?
 

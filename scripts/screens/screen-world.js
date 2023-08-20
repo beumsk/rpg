@@ -86,7 +86,8 @@ function screenWorld(keepEnemy) {
         changeMap('master', 'first');
       } else if (deadSpotCollision.type === 'chest') {
         if (deadSpotCollision.unlocked) {
-          openChest(deadSpotCollision.chest);
+          stop();
+          screenReward('chest');
           deadSpotCollision.x = -step;
           updateState();
         } else {

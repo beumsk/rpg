@@ -45,10 +45,10 @@ function screenEnd(win) {
   }
 
   start();
-  document.addEventListener('keydown', keyStartHandler);
-  function keyStartHandler() {
+  document.addEventListener('keydown', keyEndHandler);
+  function keyEndHandler() {
     stop();
-    document.removeEventListener('keydown', keyStartHandler);
+    document.removeEventListener('keydown', keyEndHandler);
     screenSplash();
   }
 }

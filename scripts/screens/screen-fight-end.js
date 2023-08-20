@@ -39,9 +39,9 @@ function screenFightEnd() {
 
   updateState();
 
-  document.addEventListener('keydown', keyStartHandler);
-  function keyStartHandler() {
-    document.removeEventListener('keydown', keyStartHandler);
+  document.addEventListener('keydown', keyFightEndHandler);
+  function keyFightEndHandler() {
+    document.removeEventListener('keydown', keyFightEndHandler);
     contentEl.innerHTML = '';
     if (currentEnemy.hp === 0) {
       screenTransition('left', () => screenWorld());
