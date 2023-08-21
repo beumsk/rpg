@@ -2,7 +2,6 @@ let lvls = [];
 
 function codeLvls(maxLevel) {
   for (let lvl = 0; lvl <= maxLevel; lvl++) {
-    // lvls.push(lvl < 2 ? 0 : lvl * lvl * 1);
     lvls.push(lvl < 2 ? 0 : lvl * lvl * 10);
   }
 }
@@ -21,8 +20,7 @@ function checkLvlUp(currentLvl, currentXp) {
 function lvlUp() {
   currentMap.deadSpots.find((x) => x.type === 'hide-door').x = -step;
   infoQueue.push(
-    () =>
-      (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
+    () => (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
   );
   player.str += 20;
   player.def += 10;

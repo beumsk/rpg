@@ -14,7 +14,7 @@ function screenFight() {
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
 
   let index = 0;
-  let menuLinks = infoEl.getElementsByTagName('a');
+  let menuLinks = infoEl.getElementsByTagName('button');
   let crtMenu = 'main';
 
   createMenu(mainMenu, 'main');
@@ -104,7 +104,7 @@ function screenFight() {
     infoEl.innerHTML = '';
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
-        const linkEl = document.createElement('a');
+        const linkEl = document.createElement('button');
         linkEl.href = '';
         linkEl.innerText = x.name;
         linkEl.dataset.menu = menuName;

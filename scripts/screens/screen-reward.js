@@ -8,7 +8,7 @@ function screenReward(type) {
   let rewardButtons = contentEl.getElementsByTagName('button');
 
   const rewards = randomRewards();
-  // TODO: chest, map and world should give different kind of rewards!
+  // TODO: chest, map and world (& lvl) should give different kind of rewards!
   // TODO: add more info on focus => effects...
   // TODO: add animation for random feel
   // TODO: add attacks??
@@ -75,11 +75,11 @@ function screenReward(type) {
     if (type === 'chest') {
       screenTransition('left', () => screenWorld(true));
     } else if (type === 'lvl') {
-      screenTransition('left', () => screenFightEnd());
+      // screenTransition('left', () => screenFightEnd());
     } else if (type === 'map') {
-      screenTransition('left', () => screenWorld());
+      changeMap(currentMap.world, 'next');
     } else if (type === 'world') {
-      screenTransition('left', () => screenStory(currentWorld.name));
+      changeMap('temple', 'temple', currentWorld.name);
     }
   }
 
@@ -92,7 +92,7 @@ function screenReward(type) {
     } else if (crt.dataset.type === 'stuff') {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
     }
-    currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
+    if (type === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
     infoQueue.push(() => (infoEl.innerText = `You got ${crt.dataset.value} (${crt.dataset.type})`));
     stop();
   }

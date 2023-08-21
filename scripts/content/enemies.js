@@ -27,6 +27,7 @@ function codeMapEnemies(element, lvl, isBoss) {
       str: lvl * 20,
       def: lvl * 10,
       xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
+      // DEV: xp = 1lvl
       // xp: lvls[lvl + 1],
       gems: lvl * 2,
       attacks: [
@@ -100,16 +101,13 @@ const enemyMoves = {
 let currentEnemy = {};
 
 function enemyAttack(attack) {
-  const c = attack
-    ? currentEnemy.attacks.find((x) => x.name === attack)
-    : currentEnemy.attacks[0];
+  const c = attack ? currentEnemy.attacks.find((x) => x.name === attack) : currentEnemy.attacks[0];
   infoEl.innerText = `${currentEnemy.name} uses ${c.name}`;
 
   const manageDmg = () => {
     const lmt = calcElement(player.element, currentEnemy.element);
     const calcDmg = Math.floor(
-      (c.dmg + (c.dmg * currentEnemy.str) / 100 - (c.dmg * player.def) / 100) *
-        lmt
+      (c.dmg + (c.dmg * currentEnemy.str) / 100 - (c.dmg * player.def) / 100) * lmt
     );
     if (calcDmg >= player.hp) {
       player.hp = 0;

@@ -1,6 +1,7 @@
 function screenWorld(keepEnemy) {
   canvas.style.backgroundImage = `conic-gradient(${cGrad2} 0deg 90deg, ${cGrad1} 90deg 180deg, ${cGrad2} 180deg 270deg, ${cGrad1} 270deg 360deg)`;
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
+  contentEl.style.background = cGrad2;
 
   updateState();
 
@@ -72,13 +73,11 @@ function screenWorld(keepEnemy) {
       } else if (deadSpotCollision.type === 'temple-door') {
         worldCompleted(currentWorld.name);
         stop();
-        changeMap('temple', 'temple', deadSpotCollision.element);
+        screenReward('world');
       } else if (deadSpotCollision.type === 'door') {
         stop();
-        changeMap(deadSpotCollision.element, 'next');
-      } else if (
-        ['air', 'earth', 'water', 'fire'].includes(deadSpotCollision.type)
-      ) {
+        screenReward('map');
+      } else if (['air', 'earth', 'water', 'fire'].includes(deadSpotCollision.type)) {
         stop();
         changeMap(deadSpotCollision.type, 'first');
       } else if (deadSpotCollision.type === 'master') {

@@ -15,7 +15,7 @@ function screenMenu() {
   ];
 
   let index = 0;
-  let menuLinks = contentEl.getElementsByTagName('a');
+  let menuLinks = contentEl.getElementsByTagName('button');
   let crtMenu = 'main';
 
   const codeStatsMenu = () => [
@@ -85,7 +85,7 @@ function screenMenu() {
     contentEl.innerHTML = '<div class="menu"></div>';
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
-        const linkEl = document.createElement('a');
+        const linkEl = document.createElement('button');
         linkEl.href = '';
         if (menuName === 'attacks') {
           linkEl.innerText = `${x.name}: ${x.desc}`;
@@ -93,15 +93,13 @@ function screenMenu() {
           linkEl.innerText = `${x.name}: ${x.desc} (x${x.qtt})`;
         } else if (menuName === 'stuff') {
           linkEl.innerText = x.equiped
-            ? `|${x.equiped.charAt(0).toUpperCase()}| ${
-                x.name
-              } ${JSON.stringify(x.effect)}`
+            ? `|${x.equiped.charAt(0).toUpperCase()}| ${x.name} ${JSON.stringify(x.effect)}`
             : `    ${x.name} ${JSON.stringify(x.effect)}`;
         } else if (menuName === 'shop') {
           linkEl.innerText = stuffCategories.includes(x.type)
-            ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(
-                x.effect
-              )} /${x.lvl}\\ (${x.price}₲)`
+            ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(x.effect)} /${
+                x.lvl
+              }\\ (${x.price}₲)`
             : `${x.name} (${x.price}₲)`;
         } else {
           linkEl.innerText = x.name;
@@ -126,10 +124,7 @@ function screenMenu() {
         statsMenu = codeStatsMenu();
         createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {
-        createMenu(
-          [{ name: `sound` }, { name: `save` }, { name: `load` }],
-          crt.dataset.value
-        );
+        createMenu([{ name: `sound` }, { name: `save` }, { name: `load` }], crt.dataset.value);
       } else if (crt.dataset.value === 'shop') {
         createMenu(
           player[crt.dataset.value].filter((x) => x.lvl <= player.lvl),
@@ -145,8 +140,7 @@ function screenMenu() {
         } else if (player.element === '') {
           player.element = player.elements[0];
         } else {
-          player.element =
-            player.elements[player.elements.indexOf(player.element) + 1] || '';
+          player.element = player.elements[player.elements.indexOf(player.element) + 1] || '';
         }
         statsMenu = codeStatsMenu();
         createMenu(statsMenu, crtMenu);

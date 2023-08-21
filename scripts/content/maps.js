@@ -53,14 +53,16 @@ function codeWorldMaps(world) {
 
   maps.push({ name: world, districts: codeDistricts(world) });
 
-  function codeDistricts(element) {
+  function codeDistricts() {
     let districts = ['northern', 'western', 'eastern', 'southern', 'central'];
+    // DEV: 1 map per world
     // let districts = ['central'];
 
     return districts.map((y, i) => {
       return {
         lvl: player.elements.length * districts.length + i + 1,
-        name: `${y} ${element} ${element === 'master' ? '' : 'tribe'}`,
+        name: `${y} ${world} ${world === 'master' ? '' : 'tribe'}`,
+        world: world,
         // TODO: add rewards ! (semi random based on lvl)
         deadSpots: [
           {
@@ -73,9 +75,9 @@ function codeWorldMaps(world) {
           { ...hideDoorBase },
           {
             ...doorBase,
-            element: element,
+            element: world,
             district: i + 1,
-            type: element === 'master' ? 'end-door' : y === 'central' ? 'temple-door' : 'door',
+            type: world === 'master' ? 'end-door' : y === 'central' ? 'temple-door' : 'door',
           },
         ],
       };
@@ -96,26 +98,23 @@ function randomKeyDrop() {
 
 function changeMap(world, to, masteredElement) {
   if (to === 'temple') {
-    screenReward('world');
-    currentMap = { ...maps[0] };
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
+    currentMap = { ...maps[0] };
     currentEnemy = {};
-    // screenTransition('top', () => screenStory(masteredElement));
+    screenTransition('top', () => screenStory(masteredElement));
   } else if (to === 'first') {
     codeWorldMaps(world);
-    currentWorld = maps.find((x) => x.name === world);
-    currentMap = currentWorld.districts[0];
     cGrad2 = colorGrid[world];
     stateEl.style.background = colorGrid[world];
+    currentWorld = maps.find((x) => x.name === world);
+    currentMap = currentWorld.districts[0];
     codeMapEnemies(world, currentMap.lvl);
     screenTransition('top', () => screenWorld());
   } else if (to === 'next') {
-    screenReward('map');
-    codeWorldMaps(world);
-    currentMap = currentWorld.districts[currentMap.lvl];
+    currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
     codeMapEnemies(world, currentMap.lvl);
-    // screenTransition('top', () => screenWorld());
+    screenTransition('top', () => screenWorld());
   }
   infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
   player.x = 2 * step;
@@ -133,27 +132,6 @@ function worldCompleted(element) {
       { ...spotBase, x: 11 * 16, y: 6 * 16, type: 'master', fill: cBlue },
       { ...spotBase, x: 10 * 16, y: 6 * 16, type: 'master', fill: cRed }
     );
-  }
-}
-
-// function openChest(chest) {
-//   objLoop(chest);
-//   currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
-//   infoEl.innerText = `You opened a chest and got ${
-//     chest.gems ? chest.gems + 'g,' : ''
-//   } ${chest.items + ',' || ''} ${chest.stuff || ''}`;
-// }
-
-function objLoop(obj) {
-  for (const key in obj) {
-    const value = obj[key];
-    if (key === 'gems') {
-      player.gems += value;
-    } else if (key === 'items') {
-      itemFind(items.filter((i) => i.name === value));
-    } else if (key === 'stuff') {
-      stuffFind(stuff.filter((s) => s.name === value));
-    }
   }
 }
 
