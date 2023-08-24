@@ -44,7 +44,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - randomScreen => select random reward (items, stuff, attacks, boost?) from chests, mapUp, lvlup
   - offer option to pick between average reward (5) or random (1-10) ??
 - random dmg => attack have range of dmg (+ crits + fail?)
-- random gems => gems collected are from range
 
 > theme
 
@@ -63,8 +62,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - how to get new attacks? => lvlup? map? chest? shop? quest? element?
 
-- how to heal? => potions + lvlup + tarvern? newMap?
-
 - handle how is the game saved, loaded
   - start > new/load > world
 - new > ask name > intro (dialog screen??) > world
@@ -77,19 +74,16 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - add time of play (+ paused when unfocus page?)
 
 - add visuals: player, enemies, maps, => use sprites from online? (avatar, ff)
-- add designs: floating clouds (japan style)
 - add sounds && music
 - how to play on mobile?? => add move controls + clicks
 
-- add randomnes => dmg, map rewards, chest, gems?, xp?
+- add randomnes => dmg
 - world: game design? puzzle on some map?
 - quests / achievements
 
 ## Ideas
 
-- first fight against master that we lose as we only have basic attacks?
-- Starting a new map gives a random bonus for the rest of the run?
-- think of system to make each game different: stuff to buy, stats to use, new attacks on map change etc.
+- first fight intro+tuto against master that we lose as we only have basic attacks?
 - map enigmas?
 - review map to move outside of screen?
 - each learned element would give a new monster to play? (pokemon like with switching monsters)

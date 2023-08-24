@@ -99,8 +99,8 @@ function screenMenu() {
           linkEl.innerText = stuffCategories.includes(x.type)
             ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(x.effect)} /${
                 x.lvl
-              }\\ (${x.price}₲)`
-            : `${x.name} (${x.price}₲)`;
+              }\\ (${x.price}⨀)`
+            : `${x.name} (${x.price}⨀)`;
         } else {
           linkEl.innerText = x.name;
         }

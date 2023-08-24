@@ -38,12 +38,11 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(rgba(256, 256, 256, 0.6), rgba(256, 256, 256, 0.6)),
-    /* linear-gradient(to top right, #39ff6e, #4aa9ff, #f78fb3, #ff5d2b); */
-      conic-gradient(from 45deg, #09bc8a, #00a2ff, #ff595e, #f7f06d, #09bc8a);
+    conic-gradient(from 45deg, #09bc8a, #00a2ff, #ff595e, #f7f06d, #09bc8a);
 }
 
-p + p {
-  margin-top: 1em;
+p {
+  margin: 0.5em 0;
 }
 
 button {
@@ -53,6 +52,33 @@ button {
   border: none;
   outline: none;
   margin: 0;
+}
+
+.cloud-1 {
+  animation: cloud-1 100s linear infinite alternate;
+  position: absolute;
+  width: 14%;
+  left: 2%;
+  top: 2%;
+  transform: scaleX(-1);
+}
+@keyframes cloud-1 {
+  100% {
+    left: 84%;
+  }
+}
+
+.cloud-2 {
+  animation: cloud-2 100s linear infinite alternate;
+  position: absolute;
+  width: 28%;
+  right: 2%;
+  bottom: 2%;
+}
+@keyframes cloud-2 {
+  100% {
+    right: 70%;
+  }
 }
 
 .dark-overlay {

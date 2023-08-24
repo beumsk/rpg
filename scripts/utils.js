@@ -1,3 +1,13 @@
+// background images
+document.body.insertAdjacentHTML(
+  'beforeend',
+  `<img src="./img/cloud.png" alt="cloud" class="cloud-1" />`
+);
+document.body.insertAdjacentHTML(
+  'beforeend',
+  `<img src="./img/cloud.png" alt="cloud" class="cloud-2" />`
+);
+
 // create html: container + canvas
 const containerEl = document.createElement('div');
 containerEl.classList.add('container');
@@ -24,12 +34,7 @@ const elements = ['air', 'earth', 'water', 'fire'];
 
 let infoQueue = [];
 
-const imagesToLoad = [
-  './img/player.png',
-  './img/enemy.png',
-  './img/door.png',
-  './img/chest.png',
-];
+const imagesToLoad = ['./img/player.png', './img/enemy.png', './img/door.png', './img/chest.png'];
 let imagesLoaded = [];
 
 // colors
@@ -163,10 +168,7 @@ function clearCanvas() {
 function scaleCanvas() {
   const winW = window.innerWidth;
   const winH = window.innerHeight;
-  let newScale = Math.min(
-    Math.floor(winW / baseW),
-    Math.floor(winH / (baseH + menuHeight * 2))
-  );
+  let newScale = Math.min(Math.floor(winW / baseW), Math.floor(winH / (baseH + menuHeight * 2)));
   if (!newScale) newScale = 1;
   if (newScale !== scale) {
     canvasEl.width = baseW * newScale;
@@ -203,9 +205,7 @@ function updateState() {
       <span>${player.hp}/${player.hpmax} ♥</span> | 
       <span>${player.gems} ⨀</span>
     </p>
-    <p>${
-      currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''
-    }
+    <p>${currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''}
     ${currentMap.name}</p>
     `;
 }
