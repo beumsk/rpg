@@ -101,6 +101,8 @@ button {
 
 .container {
   position: relative;
+  width: 44rem;
+  height: 24rem;
 }
 
 .canvas {
@@ -174,6 +176,8 @@ button {
 /* CONTENT */
 .content {
   position: absolute;
+  width: 44rem;
+  height: 24rem;
   top: 0;
   bottom: 0;
   left: 0;
