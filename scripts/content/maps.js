@@ -39,7 +39,7 @@ let mapsBase = [
       { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen },
       { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue },
       { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed },
-      { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
+      // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
     ],
   },
 ];
@@ -136,9 +136,10 @@ function worldCompleted(element) {
 }
 
 function randomRewards() {
+  // TODO: review items rewards => they are so useless compared to alternative gems or stuff
   let rewardItems = items.filter((x) => x.lvl <= currentMap.lvl && x.src.includes('reward'));
   let rewardStuff = stuff.filter(
-    (x) => x.lvl <= currentMap.lvl && x.src.includes('reward') && !stuffRewarded.includes(x)
+    (x) => x.lvl === currentMap.lvl && x.src.includes('reward') && !stuffRewarded.includes(x)
   );
   let rewardGems = currentMap.lvl * 5;
   return {

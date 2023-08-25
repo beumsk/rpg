@@ -1,38 +1,64 @@
-// TODO: add amulet, belt, boots, rune, pet?
-const stuffCategories = ['ring', 'cloak', 'hat'];
+// TODO: add belt, rune, pet?
+const stuffCategories = ['ring', 'amulet', 'boots', 'cloak', 'hat'];
 
 const stuffFamilies = [
   { name: 'dummy', effect: { hp: 2 }, lvl: 1, src: ['base'] },
   {
     name: 'balanced',
-    effect: { hp: 5, str: 5, def: 5 },
+    effect: { hp: 4, str: 4, def: 4 },
     lvl: 1,
     src: ['reward'],
   },
-  { name: 'strong', effect: { str: 10 }, lvl: 2, src: ['shop'] },
-  { name: 'robust', effect: { def: 5 }, lvl: 3, src: ['shop'] },
-  { name: 'healthy', effect: { hp: 20 }, lvl: 4, src: ['shop'] },
+  {
+    name: 'energized',
+    effect: { hp: 7, str: 7 },
+    lvl: 1,
+    src: ['reward'],
+  },
+  {
+    name: 'fortified',
+    effect: { hp: 7, def: 7 },
+    lvl: 1,
+    src: ['reward'],
+  },
+  { name: 'strong', effect: { str: 10 }, lvl: 1, src: ['shop'] },
+  { name: 'robust', effect: { def: 5 }, lvl: 1, src: ['shop'] },
+  { name: 'healthy', effect: { hp: 20 }, lvl: 1, src: ['shop'] },
 ];
+
+const stuffAges = ['I', 'II', 'III', 'IV', 'V'];
 
 let stuff = [];
 let stuffRewarded = [];
 
 function codeStuff() {
-  stuffFamilies.forEach((fam) => {
-    stuffCategories.forEach((cat, i) => {
-      let stuf = {
-        name: `${fam.name} ${cat}`,
-        type: cat,
-        effect: fam.effect,
-        // desc: 'stuff desc',
-        lvl: fam.src === 'base' ? fam.lvl : fam.lvl + i,
-        price: fam.lvl * 5,
-        src: fam.src,
-      };
+  let i = 0;
+  stuffAges.forEach((age, ageIndex) => {
+    stuffCategories.forEach((cat, catIndex) => {
+      i++;
+      stuffFamilies.forEach((fam, famIndex) => {
+        let stuf = {
+          name: fam.src.includes('base') ? `${fam.name} ${cat}` : `${fam.name} ${cat} ${age}`,
+          type: cat,
+          effect: calcEffects(fam.effect, ageIndex + 1, catIndex),
+          // desc: 'stuff desc',
+          lvl: fam.src.includes('base') ? 1 : i,
+          price: i * 5,
+          src: fam.src,
+        };
 
-      stuff.push(stuf);
+        !(fam.src.includes('base') && age !== 'I') && stuff.push(stuf);
+      });
     });
   });
+
+  function calcEffects(effects, mult, bonus) {
+    const resEffects = {};
+    for (let key in effects) {
+      resEffects[key] = effects[key] * mult + bonus;
+    }
+    return resEffects;
+  }
 }
 codeStuff();
 

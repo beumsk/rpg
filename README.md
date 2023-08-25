@@ -34,6 +34,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
+- change reward to take only certain stuff?? (diff between chest, map and world?)
+- review items + items in rewards to match competition
+
 - introduce new attacks?
   - how to balance with new player attacks?
 
@@ -41,7 +44,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > randomize
 
-- randomScreen => select random reward (items, stuff, attacks, boost?) from chests, mapUp, lvlup
+- randomScreen => select random reward (items, stuff, attacks?, boost?)
   - offer option to pick between average reward (5) or random (1-10) ??
 - random dmg => attack have range of dmg (+ crits + fail?)
 
@@ -52,11 +55,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 > story
 
 - new world texts, new element mastered
-
-> quests?
-
-- quests in menu
-- npc as deadSpots => when hitting => dialog screen? and start quest
 
 > other
 
@@ -84,6 +82,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 ## Ideas
 
 - first fight intro+tuto against master that we lose as we only have basic attacks?
+- quests in menu?
+  - npc as deadSpots => when hitting => dialog screen? and start quest
 - map enigmas?
 - review map to move outside of screen?
 - each learned element would give a new monster to play? (pokemon like with switching monsters)

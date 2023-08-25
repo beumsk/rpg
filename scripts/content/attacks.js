@@ -10,7 +10,7 @@ const attacks = [
     name: 'cheat',
     dmg: 1000,
     desc: 'dev attack 1000',
-    src: ['base'],
+    src: [],
   },
   {
     name: 'kick',
