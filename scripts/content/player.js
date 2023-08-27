@@ -23,6 +23,9 @@ const playerBase = {
   shop: shopBase,
   element: '',
   elements: [],
+  options: {
+    audio: true,
+  },
   // elements: [...elements],
 };
 
@@ -33,8 +36,7 @@ function playerAttack(attack) {
   const manageDmg = () => {
     const lmt = calcElement(player.element, currentEnemy.element);
     const calcDmg = Math.floor(
-      (c.dmg + (c.dmg * player.str) / 100 - (c.dmg * currentEnemy.def) / 100) *
-        lmt
+      (c.dmg + (c.dmg * player.str) / 100 - (c.dmg * currentEnemy.def) / 100) * lmt
     );
     if (calcDmg >= currentEnemy.hp) {
       currentEnemy.hp = 0;

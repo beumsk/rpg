@@ -3,6 +3,8 @@ function screenWorld(keepEnemy) {
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
   contentEl.style.background = cGrad2;
 
+  audioPlay('world');
+
   updateState();
 
   infoEl.innerText = ' ';

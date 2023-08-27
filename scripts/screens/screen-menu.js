@@ -101,6 +101,9 @@ function screenMenu() {
                 x.lvl
               }\\ (${x.price}⨀)`
             : `${x.name} (${x.price}⨀)`;
+        } else if (menuName === 'options') {
+          linkEl.innerText =
+            x.name === 'audio' ? `${x.name}: ${player.options.audio ? 'on' : 'off'}` : x.name;
         } else {
           linkEl.innerText = x.name;
         }
@@ -124,7 +127,7 @@ function screenMenu() {
         statsMenu = codeStatsMenu();
         createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {
-        createMenu([{ name: `sound` }, { name: `save` }, { name: `load` }], crt.dataset.value);
+        createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crt.dataset.value);
       } else if (crt.dataset.value === 'shop') {
         createMenu(
           player[crt.dataset.value].filter((x) => x.lvl <= player.lvl),
@@ -160,7 +163,11 @@ function screenMenu() {
         crtMenu
       );
     } else if (crtMenu === 'options') {
-      // TODO: add options: sound, save, load
+      // TODO: add options: save, load
+      if (crt.dataset.value === 'audio') {
+        audioToggle();
+        createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crtMenu);
+      }
     }
     updateState();
   }

@@ -60,6 +60,7 @@ function screenSplash() {
   function keySplashHandler() {
     stop();
     document.removeEventListener('keydown', keySplashHandler);
+    audioPlay('start');
     screenTransition('bottom', () => screenStart());
   }
 }

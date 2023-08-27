@@ -36,7 +36,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - change reward to take only certain stuff?? (diff between chest, map and world?)
 - review items + items in rewards to match competition
-
+- get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
+  - panoplie boost??
 - introduce new attacks?
   - how to balance with new player attacks?
 
@@ -66,13 +67,13 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - add helper window => info about menus, keys, goal
 - tutorial map??
-- menu options: sound, save, load
+- menu options: save, load
 - fight system: state icons
 - add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
 
 - add visuals: player, enemies, maps, => use sprites from online? (avatar, ff)
-- add sounds && music
+- add sounds effects? => rewards, attacks, walk...
 - how to play on mobile?? => add move controls + clicks
 
 - add randomnes => dmg
@@ -92,7 +93,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - 16px icons creation at: https://www.pixilart.com/draw
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
+- 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4)=93?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4)=105?? hours total dev
