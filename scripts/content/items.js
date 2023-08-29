@@ -33,9 +33,7 @@ const items = [
   // add boosts and more items
 ];
 
-const itemsBase = items
-  .filter((x) => x.src.includes('base'))
-  .map((x) => ({ ...x, qtt: 1 }));
+const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);
@@ -44,13 +42,9 @@ function itemUse(item, fromMenu) {
 
     const manageItem = () => {
       if (c.type === 'heal') {
-        player.hp + c.effect <= player.hpmax
-          ? (player.hp += c.effect)
-          : (player.hp = player.hpmax);
+        player.hp + c.effect <= player.hpmax ? (player.hp += c.effect) : (player.hp = player.hpmax);
       } else if (c.type === 'state') {
-        c.effect === ''
-          ? (player.state = c.effect)
-          : player.state.replace(c.effect, '');
+        c.effect === '' ? (player.state = c.effect) : player.state.replace(c.effect, '');
       }
       if (c.qtt === 1) {
         player.items = player.items.filter((x) => x.name !== item);
@@ -68,10 +62,10 @@ function itemUse(item, fromMenu) {
   }
 }
 
-function itemFind(itemList) {
+function itemFind(itemList, qtt) {
   itemList.map((x) => {
     if (player.items.find((i) => i.name === x.name)) {
-      player.items.find((i) => i.name === x.name).qtt += 1;
+      player.items.find((i) => i.name === x.name).qtt += Number(qtt) || 1;
     } else {
       const foundItem = items.find((i) => i.name === x.name);
       player.items.push({ ...foundItem, qtt: 1 });

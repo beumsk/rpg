@@ -8,16 +8,18 @@ function screenReward(type) {
   let rewardButtons = contentEl.getElementsByTagName('button');
 
   const rewards = randomRewards();
-  // TODO: chest, map and world (& lvl) should give different kind of rewards!
+  // TODO: chest, map and world should give different kind of rewards!
   // TODO: add more info on focus => effects...
   // TODO: add animation for random feel
   // TODO: add attacks??
   const rewardsHTML = `
     <div class="rewards">
-      <button data-type="item" data-value="${rewards.item.name}">${rewards.item.name}</button>
+      <button data-type="item" data-value="${rewards.item.name}" data-qtt="${rewards.itemQtt}">
+        ${rewards.item.name} x${rewards.itemQtt}
+      </button>
       ${
-        rewards.stuff
-          ? `<button data-type="stuff" data-value="${rewards.stuff.name}">${rewards.stuff.name}</button>`
+        rewards.stuf
+          ? `<button data-type="stuf" data-value="${rewards.stuf.name}">${rewards.stuf.name}</button>`
           : ''
       }
       <button data-type="gems" data-value="${rewards.gems}">${rewards.gems} gems</button>
@@ -88,8 +90,11 @@ function screenReward(type) {
     if (crt.dataset.type === 'gems') {
       player.gems += parseFloat(crt.dataset.value);
     } else if (crt.dataset.type === 'item') {
-      itemFind(items.filter((i) => i.name === crt.dataset.value));
-    } else if (crt.dataset.type === 'stuff') {
+      itemFind(
+        items.filter((i) => i.name === crt.dataset.value),
+        crt.dataset.qtt
+      );
+    } else if (crt.dataset.type === 'stuf') {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
     }
     if (type === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';

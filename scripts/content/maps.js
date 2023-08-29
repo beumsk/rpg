@@ -136,15 +136,18 @@ function worldCompleted(element) {
 }
 
 function randomRewards() {
-  // TODO: review items rewards => they are so useless compared to alternative gems or stuff
   let rewardItems = items.filter((x) => x.lvl <= currentMap.lvl && x.src.includes('reward'));
+  let item = rewardItems[rand(rewardItems.length)];
+
   let rewardStuff = stuff.filter(
     (x) => x.lvl === currentMap.lvl && x.src.includes('reward') && !stuffRewarded.includes(x)
   );
-  let rewardGems = currentMap.lvl * 5;
+  let stuf = rewardStuff[rand(rewardStuff.length)];
+
   return {
-    item: rewardItems[rand(rewardItems.length)],
-    stuff: rewardStuff[rand(rewardStuff.length)],
-    gems: rewardGems,
+    item,
+    itemQtt: Math.ceil((currentMap.lvl * 5) / item.price),
+    stuf,
+    gems: currentMap.lvl * 5,
   };
 }

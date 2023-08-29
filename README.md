@@ -34,8 +34,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
+- review items effects
+
 - change reward to take only certain stuff?? (diff between chest, map and world?)
-- review items + items in rewards to match competition
 - get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
   - panoplie boost??
 - introduce new attacks?

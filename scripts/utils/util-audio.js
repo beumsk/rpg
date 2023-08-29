@@ -8,7 +8,6 @@ const audioFiles = {
 
 for (key in audioFiles) {
   audioFiles[key].audio = new Audio(audioFiles[key].path);
-  console.log(audioFiles[key].path);
   audioFiles[key].audio.loop = true;
   document.body.appendChild(audioFiles[key].audio);
 }
@@ -18,7 +17,7 @@ window.addEventListener('blur', audioOff);
 window.addEventListener('focus', audioOn);
 
 function audioPlay(name, bypass) {
-  if (!bypass && player.options && !player.options.audio) return;
+  if (!bypass && !player.options?.audio) return;
   for (key in audioFiles) {
     if (audioFiles[key].state === 'play') {
       // if same audio => return
