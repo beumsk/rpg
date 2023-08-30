@@ -38,11 +38,15 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(rgba(256, 256, 256, 0.6), rgba(256, 256, 256, 0.6)),
-    conic-gradient(from 45deg, #09bc8a, #00a2ff, #ff595e, #f7f06d, #09bc8a);
+    conic-gradient(from 45deg, var(--green), var(--blue), var(--red), var(--yellow), var(--green));
 }
 
 p {
   margin: 0.5em 0;
+}
+
+h1 {
+  margin-bottom: 2rem;
 }
 
 button {
@@ -56,6 +60,12 @@ button {
 
 audio:not([controls]) {
   display: none;
+}
+
+kbd {
+  border: solid 1px;
+  padding: 2px 8px;
+  margin-right: 8px;
 }
 
 .cloud-1 {
@@ -190,6 +200,24 @@ audio:not([controls]) {
   /* background: var(--white-1); */
 }
 
+.content button:focus {
+  color: var(--red);
+}
+
+/* CONTENT Start */
+.content .start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.content .start button {
+  font-size: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
 /* CONTENT Text */
 .content .text {
   display: flex;
@@ -214,15 +242,10 @@ audio:not([controls]) {
   border: none;
 }
 
-.content .menu button:focus {
-  color: var(--red);
-}
-
 /* CONTENT Reward */
 .content .reward {
   text-align: center;
 }
-.content .reward h1,
 .content .reward p {
   margin-bottom: 2rem;
 }
@@ -242,9 +265,6 @@ audio:not([controls]) {
 /* CONTENT Fight end */
 .content .fight-end {
   text-align: center;
-}
-.content .fight-end h1 {
-  margin-bottom: 2rem;
 }
 .content .fight-end .fighters {
   display: flex;

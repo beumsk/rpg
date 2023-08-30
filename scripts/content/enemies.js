@@ -5,7 +5,7 @@ const enemyBase = {
   h: step,
   fill: cEnemy,
   img: './img/enemy.png',
-  state: '',
+  states: [''],
   element: '',
 };
 

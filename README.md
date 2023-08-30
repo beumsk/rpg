@@ -34,7 +34,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- review items effects
+- focus button show more info (items, attacks, stuff, rewards)
+
+- review items => codeItems
 
 - change reward to take only certain stuff?? (diff between chest, map and world?)
 - get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
@@ -52,7 +54,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > theme
 
-- add attacks, items, stuff
+- add attacks, items
 
 > story
 
@@ -98,4 +100,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4)=105?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4)=109?? hours total dev

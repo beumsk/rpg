@@ -10,20 +10,54 @@ function screenStart() {
   stuffEquip(stuffBase);
   stuffRewarded = [];
 
+  let index = 0;
+  let startButtons = contentEl.getElementsByTagName('button');
+
   // TODO: add load game logic
   contentEl.innerHTML = `
-    <div class="text">
-      <h1>Ready to start your adventure?</h1>
+    <div class="start">
+      <h1 style="color: var(--red)">Tavara</h1>
+      <button data-type="start">Start your adventure</button>
+      <button data-type="continue">Continue your adventure</button>
+      <button data-type="how">How to play</button>
+      <button data-type="credit">Credit</button>
     </div>
   `;
-  // <p>OR</p>
-  // <h1>Continue your adventure?</h1>
+
+  Array.from(startButtons).map((x) => x.addEventListener('click', startClick));
+  startButtons[0].focus();
 
   document.addEventListener('keydown', keyStartHandler);
-  function keyStartHandler() {
+
+  function keyStartHandler(e) {
+    const key = e.key;
+    if (key === 'ArrowDown') {
+      index = index !== startButtons.length - 1 ? index + 1 : 0;
+      startButtons[index].focus();
+    } else if (key === 'ArrowUp') {
+      index = index !== 0 ? index - 1 : startButtons.length - 1;
+      startButtons[index].focus();
+    }
+  }
+
+  function stop() {
     document.removeEventListener('keydown', keyStartHandler);
     contentEl.innerHTML = '';
-    // screenTransition('bottom', () => screenStory('intro'));
-    screenTransition('bottom', () => screenWorld());
+  }
+
+  function startClick(e) {
+    let crt = e.target;
+    console.log(crt, crt.dataset.type);
+    stop();
+    if (crt.dataset.type === 'start') {
+      // screenTransition('bottom', () => screenStory('intro'));
+      screenTransition('bottom', () => screenWorld());
+    } else if (crt.dataset.type === 'continue') {
+      // TODO: add continue feature
+    } else if (crt.dataset.type === 'how') {
+      screenTransition('bottom', () => screenHow());
+    } else if (crt.dataset.type === 'credit') {
+      screenTransition('bottom', () => screenCredit());
+    }
   }
 }

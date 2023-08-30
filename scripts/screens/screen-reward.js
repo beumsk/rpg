@@ -98,7 +98,12 @@ function screenReward(type) {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
     }
     if (type === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
-    infoQueue.push(() => (infoEl.innerText = `You got ${crt.dataset.value} (${crt.dataset.type})`));
+    infoQueue.push(
+      () =>
+        (infoEl.innerText = `You got ${crt.dataset.value} ${
+          crt.dataset.qtt ? 'x' + crt.dataset.qtt : ''
+        } (${crt.dataset.type})`)
+    );
     stop();
   }
 }

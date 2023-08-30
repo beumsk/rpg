@@ -12,6 +12,7 @@ function screenMenu() {
     { name: 'stuff' },
     { name: 'shop' },
     { name: 'options' },
+    { name: 'exit' },
   ];
 
   let index = 0;
@@ -123,7 +124,9 @@ function screenMenu() {
     e.preventDefault();
     let crt = e.target;
     if (crtMenu === 'main') {
-      if (crt.dataset.value === 'stats') {
+      if (crt.dataset.value === 'exit') {
+        stop();
+      } else if (crt.dataset.value === 'stats') {
         statsMenu = codeStatsMenu();
         createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {

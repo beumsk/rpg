@@ -10,7 +10,7 @@ const playerBase = {
   img: './img/player.png',
   hp: 20,
   hpmax: 20,
-  state: 'asleep',
+  states: [''], // asleep, frozen, paralized, poisoned, ...
   str: 20,
   def: 10,
   lvl: 1,
@@ -23,10 +23,10 @@ const playerBase = {
   shop: shopBase,
   element: '',
   elements: [],
-  options: {
-    audio: true,
-  },
   // elements: [...elements],
+  options: {
+    audio: false,
+  },
 };
 
 function playerAttack(attack) {

@@ -71,21 +71,21 @@ function stuffEquip(stuffList) {
     // stuff type is empty (game start)
     if (!player.stuff.find((x) => x.type === s.type)) {
       player.stuff = [...player.stuff, { ...s, equiped: s.type }];
-      stuffModifyEffects(s.effect);
+      stuffApplyEffects(s.effect);
     }
     // replace stuff type because already something equiped
     else if (newStuff?.equiped) return;
     else {
       oldStuff.equiped = '';
-      stuffModifyEffects(oldStuff.effect, false);
+      stuffApplyEffects(oldStuff.effect, false);
       newStuff.equiped = s.type;
-      stuffModifyEffects(newStuff.effect);
+      stuffApplyEffects(newStuff.effect);
     }
   });
   player.stuff.sort((a, b) => b.equiped.localeCompare(a.equiped));
 }
 
-function stuffModifyEffects(obj, add = true) {
+function stuffApplyEffects(obj, add = true) {
   for (const key in obj) {
     const value = obj[key];
     if (add) {

@@ -1,18 +1,29 @@
 const items = [
+  // items boosting str, def, elements, ...
+  // TODO: codeItems => more items and differents levels/ages
+  // TODO: end of fight => remove tempItemEffects
   {
     name: 'potion',
     type: 'heal',
-    // TODO: change effect to effect: { key: value }
-    effect: 20,
+    effect: { hp: 20 },
     desc: 'item description',
     lvl: 1,
     price: 2,
     src: ['base', 'shop', 'reward'],
   },
   {
+    name: 'strength',
+    type: 'boost',
+    effect: { str: 10 },
+    desc: 'item description',
+    lvl: 1,
+    price: 5,
+    src: ['base', 'shop', 'reward'],
+  },
+  {
     name: 'potion +',
     type: 'heal',
-    effect: 50,
+    effect: { hp: 50 },
     desc: 'item description',
     lvl: 5,
     price: 10,
@@ -21,19 +32,20 @@ const items = [
   // {
   //   name: 'remedy',
   //   type: 'state',
-  //   effect: '',
+  //   effect: {state: ''},
   //   desc: 'item description',
   // },
   // {
   //   name: 'waker',
   //   type: 'state',
-  //   effect: 'asleep',
+  //   effect: {state: 'asleep'},
   //   desc: 'item description',
   // },
-  // add boosts and more items
 ];
 
 const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
+
+let tempItemEffects = {};
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);
@@ -41,15 +53,12 @@ function itemUse(item, fromMenu) {
     infoEl.innerText = `${player.name} uses ${c.name}`;
 
     const manageItem = () => {
-      if (c.type === 'heal') {
-        player.hp + c.effect <= player.hpmax ? (player.hp += c.effect) : (player.hp = player.hpmax);
-      } else if (c.type === 'state') {
-        c.effect === '' ? (player.state = c.effect) : player.state.replace(c.effect, '');
-      }
+      itemApplyEffects(c.effect);
       if (c.qtt === 1) {
         player.items = player.items.filter((x) => x.name !== item);
+      } else {
+        c.qtt -= 1;
       }
-      c.qtt -= 1;
     };
 
     if (fromMenu) {
@@ -59,6 +68,22 @@ function itemUse(item, fromMenu) {
     }
   } else {
     console.log(`No ${c.name} anymore`);
+  }
+}
+
+function itemApplyEffects(obj) {
+  for (const key in obj) {
+    const value = obj[key];
+    if (['hp'].includes(key)) {
+      player.hp + value <= player.hpmax ? (player.hp += value) : (player.hp = player.hpmax);
+    } else if (['str', 'def'].includes(key)) {
+      player[key] += value;
+      // temp effects to be able to be removed after fight
+      tempItemEffects[key] ? (tempItemEffects[key] += value) : (tempItemEffects[key] = value);
+    } else if (key === 'state') {
+      value === '' ? (player.states = []) : player.states.filter((x) => x !== value);
+      // add tempeffects
+    }
   }
 }
 
