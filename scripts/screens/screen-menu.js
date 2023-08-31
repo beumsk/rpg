@@ -23,7 +23,7 @@ function screenMenu() {
     { name: `lvl: ${player.lvl}` },
     { name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗` },
     { name: `map: ${currentMap.name} ⫯` },
-    { name: `gems: ${player.gems} ⨀` },
+    { name: `gems: ${player.gems} ◈` },
     { name: `str: ${player.str} ↣` }, // ⊕
     { name: `def: ${player.def} ∇` }, // ⊖
     { name: `hp: ${player.hp}/${player.hpmax} ♥` },
@@ -91,7 +91,9 @@ function screenMenu() {
         if (menuName === 'attacks') {
           linkEl.innerText = `${x.name}: ${x.desc}`;
         } else if (menuName === 'items') {
-          linkEl.innerText = `${x.name}: ${x.desc} (x${x.qtt})`;
+          linkEl.innerText = `${x.name}: ${JSON.stringify(x.effect)} ${
+            x.type === 'temp' ? 'Ŧ' : ''
+          } (x${x.qtt})`;
         } else if (menuName === 'stuff') {
           linkEl.innerText = x.equiped
             ? `|${x.equiped.charAt(0).toUpperCase()}| ${x.name} ${JSON.stringify(x.effect)}`
@@ -100,8 +102,8 @@ function screenMenu() {
           linkEl.innerText = stuffCategories.includes(x.type)
             ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(x.effect)} /${
                 x.lvl
-              }\\ (${x.price}⨀)`
-            : `${x.name} (${x.price}⨀)`;
+              }\\ (${x.price} ◈)`
+            : `${x.name}: ${JSON.stringify(x.effect)} (${x.price} ◈)`;
         } else if (menuName === 'options') {
           linkEl.innerText =
             x.name === 'audio' ? `${x.name}: ${player.options.audio ? 'on' : 'off'}` : x.name;

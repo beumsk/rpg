@@ -47,7 +47,6 @@ function screenStart() {
 
   function startClick(e) {
     let crt = e.target;
-    console.log(crt, crt.dataset.type);
     stop();
     if (crt.dataset.type === 'start') {
       // screenTransition('bottom', () => screenStory('intro'));

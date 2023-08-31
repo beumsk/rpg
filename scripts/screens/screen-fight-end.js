@@ -8,9 +8,7 @@ function screenFightEnd() {
         <div class="fighters">
           <p class="player winner">
             ${player.name} 
-            lvl:${
-              player.fightEnd.lvlUp ? `${player.lvl - 1}+1` : `${player.lvl}`
-            }
+            lvl:${player.fightEnd.lvlUp ? `${player.lvl - 1}+1` : `${player.lvl}`}
           </p>
           <p class="enemy loser">
             ${currentEnemy.name} lvl:${currentEnemy.lvl}
@@ -19,7 +17,7 @@ function screenFightEnd() {
 
         <div class="rewards">
           <p>xp: +${player.fightEnd.xp} ↗</p>
-          <p>gems: +${player.fightEnd.gems} ⨀</p>
+          <p>gems: +${player.fightEnd.gems} ◈</p>
           ${player.fightEnd.keyDrop ? '<p>chest key: 🗝</p>' : ''}
         </div>
       </div>
@@ -35,7 +33,6 @@ function screenFightEnd() {
       </div>
     `;
   }
-  // TODO: add random rewards ! => button to turn the lottery?
 
   updateState();
 
