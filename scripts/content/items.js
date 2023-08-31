@@ -1,51 +1,67 @@
-const items = [
-  // items boosting str, def, elements, ...
-  // TODO: codeItems => more items and differents levels/ages
-  // TODO: end of fight => remove tempItemEffects
-  {
-    name: 'potion',
-    type: 'heal',
-    effect: { hp: 20 },
-    desc: 'item description',
-    lvl: 1,
-    price: 2,
-    src: ['base', 'shop', 'reward'],
-  },
-  {
-    name: 'strength',
-    type: 'boost',
-    effect: { str: 10 },
-    desc: 'item description',
-    lvl: 1,
-    price: 5,
-    src: ['base', 'shop', 'reward'],
-  },
-  {
-    name: 'potion +',
-    type: 'heal',
-    effect: { hp: 50 },
-    desc: 'item description',
-    lvl: 5,
-    price: 10,
-    src: ['shop', 'reward'],
-  },
-  // {
-  //   name: 'remedy',
-  //   type: 'state',
-  //   effect: {state: ''},
-  //   desc: 'item description',
-  // },
-  // {
-  //   name: 'waker',
-  //   type: 'state',
-  //   effect: {state: 'asleep'},
-  //   desc: 'item description',
-  // },
+// items boosting str, def, elements, ...
+
+const itemsState = [
+  { name: 'remedy', effect: { state: '' } },
+  // { name: 'waker', effect: { state: 'asleep' } },
+  // { name: 'antidote', effect: { state: 'poisoned' } },
+  // { name: 'stimulant', effect: { state: 'paralyzed' } },
+  // { name: 'defrost', effect: { state: 'frozen' } },
+  { name: 'coolant', effect: { state: 'burnt' } },
+  { name: 'dryer', effect: { state: 'drenched' } },
+  { name: 'oxygen', effect: { state: 'breathless' } },
+  { name: 'detangler', effect: { state: 'entangled' } },
 ];
+
+const itemsFamilies = [
+  { name: 'potion', type: 'heal', effect: { hp: 20 }, src: ['shop', 'reward'] },
+  { name: 'strength', type: 'temp', effect: { str: 10 }, src: ['shop', 'reward'] },
+  { name: 'defense', type: 'temp', effect: { def: 5 }, src: ['shop', 'reward'] },
+];
+
+const itemsAges = ['I', 'II', 'III', 'IV', 'V'];
+
+let items = [];
+
+function codeItems() {
+  // TODO: test it out once attacks can deal such states!
+  // itemsState.forEach((state) => {
+  //   let item = {
+  //     ...state,
+  //     type: 'state',
+  //     lvl: 1,
+  //     price: 5,
+  //     src: ['shop', 'reward'],
+  //   };
+  //   items.push(item);
+  // });
+
+  itemsAges.forEach((age, ageIndex) => {
+    itemsFamilies.forEach((fam) => {
+      let item = {
+        name: `${fam.name} ${age}`,
+        type: fam.type,
+        effect: calcEffects(fam.effect, ageIndex),
+        lvl: ageIndex * 5 + 1,
+        price: ageIndex * 5 || 2,
+        src: ageIndex === 0 ? ['base', ...fam.src] : fam.src,
+      };
+      items.push(item);
+    });
+  });
+
+  function calcEffects(effects, mult) {
+    const resEffects = {};
+    for (let key in effects) {
+      resEffects[key] = effects[key] * (mult + 1);
+    }
+    return resEffects;
+  }
+}
+codeItems();
 
 const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
 
-let tempItemEffects = {};
+let itemTempEffects = {};
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);
@@ -78,13 +94,20 @@ function itemApplyEffects(obj) {
       player.hp + value <= player.hpmax ? (player.hp += value) : (player.hp = player.hpmax);
     } else if (['str', 'def'].includes(key)) {
       player[key] += value;
-      // temp effects to be able to be removed after fight
-      tempItemEffects[key] ? (tempItemEffects[key] += value) : (tempItemEffects[key] = value);
+      itemTempEffects[key] ? (itemTempEffects[key] += value) : (itemTempEffects[key] = value);
     } else if (key === 'state') {
+      // TODO: to test & add tempeffects
       value === '' ? (player.states = []) : player.states.filter((x) => x !== value);
-      // add tempeffects
     }
   }
+}
+
+function itemTempUndo() {
+  for (const key in itemTempEffects) {
+    const value = itemTempEffects[key];
+    player[key] -= value;
+  }
+  itemTempEffects = {};
 }
 
 function itemFind(itemList, qtt) {

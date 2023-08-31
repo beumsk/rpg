@@ -2,28 +2,13 @@
 const stuffCategories = ['ring', 'amulet', 'boots', 'cloak', 'hat'];
 
 const stuffFamilies = [
-  { name: 'dummy', effect: { hp: 2 }, lvl: 1, src: ['base'] },
-  {
-    name: 'balanced',
-    effect: { hp: 4, str: 4, def: 4 },
-    lvl: 1,
-    src: ['reward'],
-  },
-  {
-    name: 'energized',
-    effect: { hp: 7, str: 7 },
-    lvl: 1,
-    src: ['reward'],
-  },
-  {
-    name: 'fortified',
-    effect: { hp: 7, def: 7 },
-    lvl: 1,
-    src: ['reward'],
-  },
-  { name: 'strong', effect: { str: 10 }, lvl: 1, src: ['shop'] },
-  { name: 'robust', effect: { def: 5 }, lvl: 1, src: ['shop'] },
-  { name: 'healthy', effect: { hp: 20 }, lvl: 1, src: ['shop'] },
+  { name: 'dummy', effect: { hp: 2 }, src: ['base'] },
+  { name: 'balanced', effect: { hp: 4, str: 4, def: 4 }, src: ['reward'] },
+  { name: 'energized', effect: { hp: 7, str: 7 }, src: ['reward'] },
+  { name: 'fortified', effect: { hp: 7, def: 7 }, src: ['reward'] },
+  { name: 'strong', effect: { str: 10 }, src: ['shop'] },
+  { name: 'robust', effect: { def: 5 }, src: ['shop'] },
+  { name: 'healthy', effect: { hp: 20 }, src: ['shop'] },
 ];
 
 const stuffAges = ['I', 'II', 'III', 'IV', 'V'];

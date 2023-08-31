@@ -22,7 +22,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
   - => master door opens > beat 4 masters + high master and win (OR spirit world??)
 - Dmg = (dmg+str-def) x elmt(0.5|1|2)
   - => power up player/enemy with str and def
-- Player lvlUp => dmg+20% & def+10%
+- Player lvlUp => dmg+20% & def+10% (& up attack | new attack?)
 - Enemy lvlUp => dmg+20% & def+10%
 - Items are in shop and rewards
 - Stuff are in shop or rewards
@@ -34,17 +34,18 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- focus button show more info (items, attacks, stuff, rewards)
+> first release
 
-- review items => codeItems
+1. items review: codeItems (age, types, effects)
+2. attacks review: codeAttacks? (element, dmg)
+3. story review: new world texts, new element mastered
+4. graphics: colors, animations, transitions, backgrounds, player & enemies
+5. sounds: attacks, clicks, movements
 
-- change reward to take only certain stuff?? (diff between chest, map and world?)
 - get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
   - panoplie boost??
-- introduce new attacks?
-  - how to balance with new player attacks?
-
-> first release: theme + story + randomize + graphics + sound
+  - introduce new attacks? world finished & lvlup?
+    - how to balance with new player attacks?
 
 > randomize
 
@@ -52,25 +53,13 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
   - offer option to pick between average reward (5) or random (1-10) ??
 - random dmg => attack have range of dmg (+ crits + fail?)
 
-> theme
-
-- add attacks, items
-
-> story
-
-- new world texts, new element mastered
-
 > other
 
-- how to get new attacks? => lvlup? map? chest? shop? quest? element?
-
 - handle how is the game saved, loaded
-  - start > new/load > world
 - new > ask name > intro (dialog screen??) > world
 
-- add helper window => info about menus, keys, goal
+- focus button show more info (items, attacks, stuff, rewards)
 - tutorial map??
-- menu options: save, load
 - fight system: state icons
 - add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
@@ -96,6 +85,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - 16px icons creation at: https://www.pixilart.com/draw
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
+  - ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
 - 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k
 
 ## Dev
