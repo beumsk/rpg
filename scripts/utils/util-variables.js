@@ -17,7 +17,20 @@ const elements = ['air', 'earth', 'water', 'fire'];
 
 let infoQueue = [];
 
-const imagesToLoad = ['./img/player.png', './img/enemy.png', './img/door.png', './img/chest.png'];
+const imagesToLoad = [
+  './img/door.png',
+  './img/chest.png',
+  './img/player.png',
+  './img/air.png',
+  './img/earth.png',
+  './img/water.png',
+  './img/fire.png',
+  './img/enemy-air.png',
+  './img/enemy-earth.png',
+  './img/enemy-water.png',
+  './img/enemy-fire.png',
+  './img/enemy-master.png',
+];
 let imagesLoaded = [];
 
 // colors

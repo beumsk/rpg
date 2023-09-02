@@ -105,29 +105,19 @@ function screenWorld(keepEnemy) {
 
   function start() {
     document.addEventListener('keydown', keyWorldHandler);
-    const objImg = objects.filter((x) => x.img);
-    const objSq = objects.filter((x) => !x.img);
 
     const frame = () => {
       clearCanvas();
 
-      objImg.forEach((obj, i) => {
-        ctx.drawImage(
-          imagesLoaded[imagesToLoad.findIndex((x) => x === obj.img)],
-          0,
-          0,
-          step,
-          step,
-          objImg[i].x,
-          objImg[i].y,
-          step,
-          step
-        );
-      });
-
-      objSq.forEach((obj) => {
-        ctx.fillStyle = obj.fill;
-        ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
+      objects.forEach((obj) => {
+        if (obj.fill) {
+          ctx.fillStyle = obj.fill;
+          ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
+        }
+        if (obj.img) {
+          let img = imagesLoaded[imagesToLoad.findIndex((x) => x === obj.img)];
+          ctx.drawImage(img, 0, 0, img.width, img.height, obj.x, obj.y, step, step);
+        }
       });
 
       animationId = requestAnimationFrame(frame);

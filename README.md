@@ -36,7 +36,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > first release
 
-1. items review: codeItems (age, types, effects)
+1. items review: states >< attacks
 2. attacks review: codeAttacks? (element, dmg)
 3. story review: new world texts, new element mastered
 4. graphics: colors, animations, transitions, backgrounds, player & enemies
@@ -87,7 +87,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
   - ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
 - 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k
+- sprites: http://www.videogamesprites.net/FinalFantasy5/
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4)=109?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4)=113?? hours total dev

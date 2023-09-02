@@ -10,7 +10,7 @@ const spotBase = { x: 0, y: 0, w: 16, h: 16, type: 'wall', fill: cBlack };
 const chestBase = {
   ...spotBase,
   type: 'chest',
-  fill: cChest,
+  fill: null,
   img: './img/chest.png',
   unlocked: false,
 };
@@ -18,7 +18,7 @@ const chestBase = {
 const doorBase = {
   ...spotBase,
   type: 'door',
-  fill: cDoor,
+  fill: null,
   img: './img/door.png',
   x: 21 * 16,
   y: 11 * 16,
@@ -35,10 +35,10 @@ let mapsBase = [
   {
     name: 'temple',
     deadSpots: [
-      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellow },
-      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen },
-      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue },
-      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed },
+      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellow, img: './img/air.png' },
+      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen, img: './img/earth.png' },
+      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue, img: './img/water.png' },
+      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed, img: './img/fire.png' },
       // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
     ],
   },
@@ -123,8 +123,7 @@ function changeMap(world, to, masteredElement) {
 
 function worldCompleted(element) {
   player.elements.push(element);
-  maps[0].deadSpots.find((x) => x.type === element).fill = cBlack;
-  maps[0].deadSpots.find((x) => x.type === element).type = '';
+  maps[0].deadSpots.find((x) => x.type === element).x = -step;
   if (player.elements.length === 4) {
     maps[0].deadSpots.push(
       { ...spotBase, x: 10 * 16, y: 5 * 16, type: 'master', fill: cYellow },
@@ -146,7 +145,7 @@ function randomRewards() {
 
   return {
     item,
-    itemQtt: Math.ceil((currentMap.lvl * 5) / item.price),
+    itemQtt: Math.floor(currentMap.lvl / item.price) || 1,
     stuf,
     gems: currentMap.lvl * 5,
   };

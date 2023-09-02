@@ -14,8 +14,8 @@ const itemsState = [
 
 const itemsFamilies = [
   { name: 'potion', type: 'heal', effect: { hp: 20 }, src: ['shop', 'reward'] },
-  { name: 'strength', type: 'temp', effect: { str: 10 }, src: ['shop', 'reward'] },
-  { name: 'defense', type: 'temp', effect: { def: 5 }, src: ['shop', 'reward'] },
+  { name: 'strength', type: 'temp', effect: { str: 10 }, src: ['shop'] },
+  { name: 'defense', type: 'temp', effect: { def: 5 }, src: ['shop'] },
 ];
 
 const itemsAges = ['I', 'II', 'III', 'IV', 'V'];
@@ -42,7 +42,7 @@ function codeItems() {
         type: fam.type,
         effect: calcEffects(fam.effect, ageIndex),
         lvl: ageIndex * 5 + 1,
-        price: ageIndex * 5 || 2,
+        price: fam.type === 'heal' ? ageIndex * 5 || 2 : (ageIndex + 1) * 5,
         src: ageIndex === 0 ? ['base', ...fam.src] : fam.src,
       };
       items.push(item);

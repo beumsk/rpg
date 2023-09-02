@@ -3,8 +3,8 @@ const enemyBase = {
   y: 4 * step,
   w: step,
   h: step,
-  fill: cEnemy,
-  img: './img/enemy.png',
+  // fill: cEnemy,
+  // img: './img/enemy.png',
   states: [''],
   element: '',
 };
@@ -22,6 +22,7 @@ function codeMapEnemies(element, lvl, isBoss) {
       name: x,
       lvl: lvl,
       element: element,
+      img: `./img/enemy-${element}.png`,
       hp: lvl * 20,
       hpmax: lvl * 20,
       str: lvl * 20,
