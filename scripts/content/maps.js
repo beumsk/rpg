@@ -105,7 +105,7 @@ function changeMap(world, to, masteredElement) {
     screenTransition('top', () => screenStory(masteredElement));
   } else if (to === 'first') {
     codeWorldMaps(world);
-    cGrad2 = colorGrid[world];
+    bgImg = world;
     stateEl.style.background = colorGrid[world];
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];

@@ -76,3 +76,6 @@ const colorGrid = {
   fire: cRedLt,
   master: cVioletLt,
 };
+
+// backgrounds
+let bgImg = 'temple';

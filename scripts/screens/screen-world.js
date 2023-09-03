@@ -1,5 +1,5 @@
 function screenWorld(keepEnemy) {
-  canvas.style.backgroundImage = `conic-gradient(${cGrad2} 0deg 90deg, ${cGrad1} 90deg 180deg, ${cGrad2} 180deg 270deg, ${cGrad1} 270deg 360deg)`;
+  canvas.style.backgroundImage = `url(./img/bg-${bgImg}.png)`;
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
   contentEl.style.background = cGrad2;
 

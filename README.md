@@ -39,8 +39,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 1. items review: states >< attacks
 2. attacks review: codeAttacks? (element, dmg)
 3. story review: new world texts, new element mastered
-4. graphics: colors, animations, transitions, backgrounds, player & enemies
-5. sounds: attacks, clicks, movements
+4. graphics: colors, animations, transitions
+5. sprites: items, stuff, maps, more players?
+6. sounds: attacks, clicks, movements
 
 - get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
   - panoplie boost??
@@ -87,7 +88,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
   - ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
 - 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k
-- sprites: http://www.videogamesprites.net/FinalFantasy5/
+- sprites characters: http://www.videogamesprites.net/FinalFantasy5/
+- sprites: https://ccrgeek.wordpress.com/rpg-maker-ace/graphics/
 
 ## Dev
 
