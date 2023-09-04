@@ -12,6 +12,7 @@ function screenWorld(keepEnemy) {
   fireQueue();
 
   let objects;
+
   // TODO: add multiple enemies?
   if (!keepEnemy) {
     mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);

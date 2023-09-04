@@ -6,22 +6,22 @@
 }
 
 :root {
-  --yellow: #f7f06d;
-  --green: #09bc8a;
-  --blue: #00a2ff;
-  --red: #ff595e;
-  --violet: #a052d7;
-  --brown: #bf723f;
-  --white: #fff;
-  --white-1: #eee;
-  --white-2: #ddd;
-  --white-3: #ccc;
-  --white-4: #bbb;
-  --black-4: #444;
-  --black-3: #333;
-  --black-2: #222;
-  --black-1: #111;
-  --black: #000;
+  --yellow: rgb(247, 240, 109);
+  --green: rgb(9, 188, 138);
+  --blue: rgb(0, 162, 255);
+  --red: rgb(255, 89, 94);
+  --violet: rgb(160, 82, 215);
+  --brown: rgb(191, 114, 63);
+  --white: rgb(255, 255, 255);
+  --white-1: rgb(238, 238, 238);
+  --white-2: rgb(221, 221, 221);
+  --white-3: rgb(204, 204, 204);
+  --white-4: rgb(187, 187, 187);
+  --black-4: rgb(68, 68, 68);
+  --black-3: rgb(51, 51, 51);
+  --black-2: rgb(34, 34, 34);
+  --black-1: rgb(17, 17, 17);
+  --black: rgb(0, 0, 0);
 }
 
 html,
@@ -118,6 +118,7 @@ kbd {
   position: relative;
   width: 44rem;
   height: 24rem;
+  background: white;
 }
 
 .canvas {

@@ -21,7 +21,7 @@ const doorBase = {
   fill: null,
   img: './img/door.png',
   x: 21 * 16,
-  y: 11 * 16,
+  y: -step,
 };
 
 const hideDoorBase = {
@@ -35,10 +35,10 @@ let mapsBase = [
   {
     name: 'temple',
     deadSpots: [
-      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellow, img: './img/air.png' },
-      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreen, img: './img/earth.png' },
-      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlue, img: './img/water.png' },
-      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRed, img: './img/fire.png' },
+      { ...spotBase, x: 9 * 16, y: 4 * 16, type: 'air', fill: cYellowTr, img: './img/air.png' },
+      { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreenTr, img: './img/earth.png' },
+      { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlueTr, img: './img/water.png' },
+      { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRedTr, img: './img/fire.png' },
       // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
     ],
   },
@@ -72,7 +72,6 @@ function codeWorldMaps(world) {
               { x: doorBase.x, y: doorBase.y },
             ]),
           },
-          { ...hideDoorBase },
           {
             ...doorBase,
             element: world,
@@ -98,6 +97,7 @@ function randomKeyDrop() {
 
 function changeMap(world, to, masteredElement) {
   if (to === 'temple') {
+    cGrad1 = cBack2;
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
     currentMap = { ...maps[0] };
@@ -106,7 +106,9 @@ function changeMap(world, to, masteredElement) {
   } else if (to === 'first') {
     codeWorldMaps(world);
     bgImg = world;
-    stateEl.style.background = colorGrid[world];
+    cGrad1 = colorTrGrid[world];
+    cGrad2 = colorLtGrid[world];
+    stateEl.style.background = colorLtGrid[world];
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
     codeMapEnemies(world, currentMap.lvl);
@@ -145,8 +147,8 @@ function randomRewards() {
 
   return {
     item,
-    itemQtt: Math.floor(currentMap.lvl / item.price) || 1,
+    itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
     stuf,
-    gems: currentMap.lvl * 5,
+    gems: currentMap.lvl * 2,
   };
 }

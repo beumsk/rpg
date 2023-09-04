@@ -18,7 +18,7 @@ function checkLvlUp(currentLvl, currentXp) {
 }
 
 function lvlUp() {
-  currentMap.deadSpots.find((x) => x.type === 'hide-door').x = -step;
+  currentMap.deadSpots.find((x) => x.type.includes('door')).y = 11 * 16;
   infoQueue.push(
     () => (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
   );

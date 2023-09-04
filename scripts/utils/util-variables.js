@@ -34,27 +34,32 @@ const imagesToLoad = [
 let imagesLoaded = [];
 
 // colors
-const cYellow = '#f7f06d';
-const cYellowLt = '#f9f5bb';
-const cGreen = '#09bc8a';
-const cGreenLt = '#73d2aa';
-const cBlue = '#00a2ff';
-const cBlueLt = '#82c9ff';
-const cRed = '#ff595e';
-const cRedLt = '#ff9b9f';
-const cViolet = '#a052d7';
-const cVioletLt = '#d3b0e0';
-const cBrown = '#bf723f';
-const cWhite = '#fff';
-const cWhite1 = '#eee';
-const cWhite2 = '#ddd';
-const cWhite3 = '#ccc';
-const cWhite4 = '#bbb';
-const cBlack4 = '#444';
-const cBlack3 = '#333';
-const cBlack2 = '#222';
-const cBlack1 = '#111';
-const cBlack = '#000';
+const cYellow = 'rgb(247, 240, 109)';
+const cYellowLt = 'rgb(249, 245, 187)';
+const cYellowTr = 'rgba(247, 240, 109, 0.5)';
+const cGreen = 'rgb(9, 188, 138)';
+const cGreenLt = 'rgb(115, 210, 170)';
+const cGreenTr = 'rgba(9, 188, 138, 0.5)';
+const cBlue = 'rgb(0, 162, 255)';
+const cBlueLt = 'rgb(130, 201, 255)';
+const cBlueTr = 'rgba(0, 162, 255, 0.5)';
+const cRed = 'rgb(255, 89, 94)';
+const cRedLt = 'rgb(255, 155, 159)';
+const cRedTr = 'rgba(255, 89, 94, 0.5)';
+const cViolet = 'rgb(160, 82, 215)';
+const cVioletLt = 'rgb(211, 176, 224)';
+const cVioletTr = 'rgba(160, 82, 215, 0.5)';
+const cBrown = 'rgb(191, 114, 63)';
+const cWhite = 'rgb(255, 255, 255)';
+const cWhite1 = 'rgb(238, 238, 238)';
+const cWhite2 = 'rgb(221, 221, 221)';
+const cWhite3 = 'rgb(204, 204, 204)';
+const cWhite4 = 'rgb(187, 187, 187)';
+const cBlack4 = 'rgb(68, 68, 68)';
+const cBlack3 = 'rgb(51, 51, 51)';
+const cBlack2 = 'rgb(34, 34, 34)';
+const cBlack1 = 'rgb(17, 17, 17)';
+const cBlack = 'rgb(0, 0, 0)';
 
 let cText = cBlack3;
 let cText2 = cRed;
@@ -69,7 +74,15 @@ let cEnemy = cRed;
 let cDoor = cBrown;
 let cChest = cBrown;
 
-const colorGrid = {
+const colorTrGrid = {
+  air: cYellowTr,
+  earth: cGreenTr,
+  water: cBlueTr,
+  fire: cRedTr,
+  master: cVioletTr,
+};
+
+const colorLtGrid = {
   air: cYellowLt,
   earth: cGreenLt,
   water: cBlueLt,

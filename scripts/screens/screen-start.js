@@ -2,6 +2,7 @@ function screenStart() {
   canvas.style.background = '#ddd';
 
   // reset
+  cGrad1 = cBack2;
   cGrad2 = cBack4;
   stateEl.style.background = cBack2;
   player = { ...playerBase };

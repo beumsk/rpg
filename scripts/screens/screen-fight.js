@@ -1,5 +1,5 @@
 function screenFight() {
-  canvas.style.backgroundImage = `linear-gradient(45deg, ${cBack2} 60%, ${cGrad2} 60%)`;
+  canvas.style.backgroundImage = `linear-gradient(45deg, ${cGrad1} 60%, ${cGrad2} 60%)`;
   canvas.style.backgroundSize = 'unset';
 
   audioPlay('fight');
