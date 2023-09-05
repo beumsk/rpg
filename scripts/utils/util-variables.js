@@ -34,6 +34,7 @@ const imagesToLoad = [
 let imagesLoaded = [];
 
 // colors
+// TODO: adapt based on background img?
 const cYellow = 'rgb(247, 240, 109)';
 const cYellowLt = 'rgb(249, 245, 187)';
 const cYellowTr = 'rgba(247, 240, 109, 0.5)';

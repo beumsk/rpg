@@ -13,6 +13,7 @@ const playerBase = {
   states: [''], // asleep, frozen, paralized, poisoned, ...
   str: 20,
   def: 10,
+  crit: 20,
   lvl: 1,
   xp: 0,
   gems: 0,
@@ -33,19 +34,39 @@ function playerAttack(attack) {
   const c = player.attacks.find((x) => x.name === attack);
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
-  const manageDmg = () => {
+  const manageAttack = () => {
+    // TODO: rethink element bonus => based on player lmt or attack lmt or both??
     const lmt = calcElement(player.element, currentEnemy.element);
-    const calcDmg = Math.floor(
-      (c.dmg + (c.dmg * player.str) / 100 - (c.dmg * currentEnemy.def) / 100) * lmt
-    );
-    if (calcDmg >= currentEnemy.hp) {
-      currentEnemy.hp = 0;
+    const isCrit = Math.random() < player.crit / 100; // 20%
+
+    if (c.type === 'boost') {
+      const info = attackBoostApply(c.state);
+      infoEl.innerText = `Critical hit! ${info}`;
     } else {
-      currentEnemy.hp -= calcDmg;
+      let calcDmg = Math.floor(
+        (c.dmg + (c.dmg * player.str) / 100 - (c.dmg * currentEnemy.def) / 100) * lmt
+      );
+
+      if (isCrit) {
+        if (c.type === 'neutral') {
+          infoEl.innerText = `Critical hit!`;
+          calcDmg = Math.floor(calcDmg * 1.2); // crit +=20%;
+          console.log(calcDmg);
+        } else {
+          const info = attackElementCritApply(c.type);
+          infoEl.innerText = `Critical hit! ${info}`;
+        }
+      }
+
+      if (calcDmg >= currentEnemy.hp) {
+        currentEnemy.hp = 0;
+      } else {
+        currentEnemy.hp -= calcDmg;
+      }
     }
   };
 
-  infoQueue.push(manageDmg, enemyCheckDead);
+  infoQueue.push(manageAttack, enemyCheckDead);
 }
 
 function playerCheckDead() {
@@ -53,8 +74,27 @@ function playerCheckDead() {
     infoEl.innerText = `${player.name} is dead`;
     infoQueue.push(playerLose);
   } else {
-    // new turn for player
-    return 'play';
+    const checkPeriodics = playerPeriodics();
+    if (checkPeriodics === 'stop') {
+      infoEl.innerText = `${player.name} is dead`;
+      infoQueue.push(playerLose);
+    } else {
+      // new turn for player
+      return 'play';
+    }
+  }
+}
+
+function playerPeriodics() {
+  if (player.states.includes('fire-')) {
+    if (player.hp > player.hp - Math.floor(player.hpmax / 20)) {
+      player.hp -= Math.floor(player.hpmax / 20);
+    } else {
+      return 'stop';
+    }
+  }
+  if (player.states.includes('fire+')) {
+    player.hp += Math.floor(player.hpmax / 20);
   }
 }
 

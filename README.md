@@ -26,22 +26,27 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - Enemy lvlUp => dmg+20% & def+10%
 - Items are in shop and rewards
 - Stuff are in shop or rewards
-- Attacks are in rewards only
-
-## Doc
-
-### add doc about the files: screens, content
+- Attacks are in rewards only??
 
 ## Todo
+
+- test boost attacks and elemental crits
+- make enemy attacks better too
+- rethink element bonus => based on player lmt or attack lmt or both??
+- how to get new attacks? via rewards, lvlup, in fight (catch an attack?), via quest?
 
 > first release
 
 1. items review: states >< attacks
-2. attacks review: codeAttacks? (element, dmg)
+2. attacks review: crits, elemental and boosts
 3. story review: new world texts, new element mastered
 4. graphics: colors, animations, transitions
 5. sprites: items, stuff, maps, more players?
 6. sounds: attacks, clicks, movements
+
+- review fight screen without canvas? => easier to write, add image etc
+
+- to defeat a world (earth) you should master air => air attacks in rewards && best air attack in end world??
 
 - get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
   - panoplie boost??

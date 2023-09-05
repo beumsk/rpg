@@ -24,9 +24,10 @@ function screenMenu() {
     { name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗` },
     { name: `map: ${currentMap.name} ⫯` },
     { name: `gems: ${player.gems} ◈` },
+    { name: `hp: ${player.hp}/${player.hpmax} ♥` },
     { name: `str: ${player.str} ↣` }, // ⊕
     { name: `def: ${player.def} ∇` }, // ⊖
-    { name: `hp: ${player.hp}/${player.hpmax} ♥` },
+    { name: `crit: ${player.crit} %` },
     { name: `element: ${player.element}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
   let statsMenu;

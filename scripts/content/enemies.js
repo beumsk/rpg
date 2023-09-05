@@ -27,6 +27,7 @@ function codeMapEnemies(element, lvl, isBoss) {
       hpmax: lvl * 20,
       str: lvl * 20,
       def: lvl * 10,
+      crit: 20,
       xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
       // DEV: xp = 1lvl
       // xp: lvls[lvl + 1],
@@ -105,7 +106,7 @@ function enemyAttack(attack) {
   const c = attack ? currentEnemy.attacks.find((x) => x.name === attack) : currentEnemy.attacks[0];
   infoEl.innerText = `${currentEnemy.name} uses ${c.name}`;
 
-  const manageDmg = () => {
+  const manageAttack = () => {
     const lmt = calcElement(player.element, currentEnemy.element);
     const calcDmg = Math.floor(
       (c.dmg + (c.dmg * currentEnemy.str) / 100 - (c.dmg * player.def) / 100) * lmt
@@ -117,7 +118,7 @@ function enemyAttack(attack) {
     }
   };
 
-  infoQueue.push(manageDmg, playerCheckDead);
+  infoQueue.push(manageAttack, playerCheckDead);
 }
 
 function enemyCheckDead() {
@@ -125,7 +126,26 @@ function enemyCheckDead() {
     infoEl.innerText = `${currentEnemy.name} is dead`;
     infoQueue.push(playerWin);
   } else {
-    infoEl.innerText = `${currentEnemy.name} is attacking...`;
-    infoQueue.push(enemyAttack);
+    const checkPeriodics = enemyPeriodics();
+    if (checkPeriodics === 'stop') {
+      infoEl.innerText = `${currentEnemy.name} is dead`;
+      infoQueue.push(playerWin);
+    } else {
+      infoEl.innerText = `${currentEnemy.name} is attacking...`;
+      infoQueue.push(enemyAttack);
+    }
+  }
+}
+
+function enemyPeriodics() {
+  if (currentEnemy.states.includes('fire-')) {
+    if (currentEnemy.hp > currentEnemy.hp - Math.floor(currentEnemy.hpmax / 20)) {
+      currentEnemy.hp -= Math.floor(currentEnemy.hpmax / 20);
+    } else {
+      return 'stop';
+    }
+  }
+  if (currentEnemy.states.includes('fire+')) {
+    currentEnemy.hp += Math.floor(currentEnemy.hpmax / 20);
   }
 }

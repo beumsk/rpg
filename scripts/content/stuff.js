@@ -1,4 +1,5 @@
 // TODO: add belt, rune, pet?
+// TODO: add crit bonus?
 const stuffCategories = ['ring', 'amulet', 'boots', 'cloak', 'hat'];
 
 const stuffFamilies = [

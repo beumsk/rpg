@@ -6,10 +6,10 @@ const itemsState = [
   // { name: 'antidote', effect: { state: 'poisoned' } },
   // { name: 'stimulant', effect: { state: 'paralyzed' } },
   // { name: 'defrost', effect: { state: 'frozen' } },
-  { name: 'coolant', effect: { state: 'burnt' } },
-  { name: 'dryer', effect: { state: 'drenched' } },
-  { name: 'oxygen', effect: { state: 'breathless' } },
-  { name: 'detangler', effect: { state: 'entangled' } },
+  { name: 'coolant', effect: { state: 'burnt' } }, // dmg each turn
+  { name: 'dryer', effect: { state: 'drenched' } }, // -str
+  { name: 'oxygen', effect: { state: 'breathless' } }, // -crit
+  { name: 'detangler', effect: { state: 'entangled' } }, // -def
 ];
 
 const itemsFamilies = [
@@ -61,7 +61,7 @@ codeItems();
 
 const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
 
-let itemTempEffects = {};
+let itemBoost = {};
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);
@@ -69,7 +69,7 @@ function itemUse(item, fromMenu) {
     infoEl.innerText = `${player.name} uses ${c.name}`;
 
     const manageItem = () => {
-      itemApplyEffects(c.effect);
+      itemEffectsApply(c.effect);
       if (c.qtt === 1) {
         player.items = player.items.filter((x) => x.name !== item);
       } else {
@@ -87,14 +87,14 @@ function itemUse(item, fromMenu) {
   }
 }
 
-function itemApplyEffects(obj) {
+function itemEffectsApply(obj) {
   for (const key in obj) {
     const value = obj[key];
     if (['hp'].includes(key)) {
       player.hp + value <= player.hpmax ? (player.hp += value) : (player.hp = player.hpmax);
     } else if (['str', 'def'].includes(key)) {
       player[key] += value;
-      itemTempEffects[key] ? (itemTempEffects[key] += value) : (itemTempEffects[key] = value);
+      itemBoost[key] ? (itemBoost[key] += value) : (itemBoost[key] = value);
     } else if (key === 'state') {
       // TODO: to test & add tempeffects
       value === '' ? (player.states = []) : player.states.filter((x) => x !== value);
@@ -102,12 +102,12 @@ function itemApplyEffects(obj) {
   }
 }
 
-function itemTempUndo() {
-  for (const key in itemTempEffects) {
-    const value = itemTempEffects[key];
+function itemBoostUndo() {
+  for (const key in itemBoost) {
+    const value = itemBoost[key];
     player[key] -= value;
   }
-  itemTempEffects = {};
+  itemBoost = {};
 }
 
 function itemFind(itemList, qtt) {

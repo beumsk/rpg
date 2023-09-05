@@ -37,7 +37,8 @@ function screenFight() {
       const next = fireQueue();
       if (next === 'stop') {
         stop();
-        itemTempUndo();
+        itemBoostUndo();
+        attackBoostUndo();
         screenTransition('left', () => screenFightEnd());
       } else if (next === 'play') {
         createMenu(mainMenu, 'main');
