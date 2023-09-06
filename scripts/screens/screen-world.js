@@ -15,7 +15,6 @@ function screenWorld(keepEnemy) {
 
   // TODO: add multiple enemies?
   if (!keepEnemy) {
-    mapEnemies = enemies.filter((x) => x.lvl === currentMap.lvl);
     if (mapEnemies.length) {
       currentEnemy = {
         ...mapEnemies[rand(mapEnemies.length)],

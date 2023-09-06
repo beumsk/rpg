@@ -5,14 +5,12 @@ const enemyBase = {
   h: step,
   // fill: cEnemy,
   // img: './img/enemy.png',
-  states: [''],
-  element: '',
 };
 
-let enemies = [];
+let mapEnemies = [];
 
 function codeMapEnemies(element, lvl, isBoss) {
-  enemies = [];
+  mapEnemies = [];
   // how to handle last map of element? (should be boss/spirit fight)
   enemyNames[element].forEach((x) => {
     let crtMove = enemyMoves[element][rand(enemyMoves[element].length - 1)];
@@ -20,27 +18,33 @@ function codeMapEnemies(element, lvl, isBoss) {
     let enemy = {
       ...enemyBase,
       name: x,
-      lvl: lvl,
-      element: element,
       img: `./img/enemy-${element}.png`,
       hp: lvl * 20,
       hpmax: lvl * 20,
       str: lvl * 20,
       def: lvl * 10,
-      crit: 20,
+      crit: 20, // increase with lvl?
+      hpmaxTemp: 0,
+      strTemp: 0,
+      defTemp: 0,
+      critTemp: 0,
+      states: [],
+      lvl: lvl,
       xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
       // DEV: xp = 1lvl
       // xp: lvls[lvl + 1],
       gems: lvl * 2,
+      element: element,
       attacks: [
         {
           name: crtMove,
           dmg: 4,
+          element: element,
         },
       ],
     };
 
-    enemies.push(enemy);
+    mapEnemies.push(enemy);
   });
 }
 
@@ -107,14 +111,38 @@ function enemyAttack(attack) {
   infoEl.innerText = `${currentEnemy.name} uses ${c.name}`;
 
   const manageAttack = () => {
-    const lmt = calcElement(player.element, currentEnemy.element);
-    const calcDmg = Math.floor(
-      (c.dmg + (c.dmg * currentEnemy.str) / 100 - (c.dmg * player.def) / 100) * lmt
-    );
-    if (calcDmg >= player.hp) {
-      player.hp = 0;
+    const lmt = calcElement(currentEnemy.element, player.element);
+    const isCrit = Math.random() < (currentEnemy.crit + currentEnemy.critTemp) / 100;
+
+    if (c.type === 'bonus') {
+      const info = attackElementApply(c.element, currentEnemy, true, false);
+      infoEl.innerText = `${info}`;
+    } else if (c.type === 'malus') {
+      const info = attackElementApply(c.element, player, false, false);
+      infoEl.innerText = `${info}`;
     } else {
-      player.hp -= calcDmg;
+      let calcDmg = Math.floor(
+        (c.dmg +
+          (c.dmg * (currentEnemy.str + currentEnemy.strTemp)) / 100 -
+          (c.dmg * (player.def + player.defTemp)) / 100) *
+          lmt
+      );
+
+      if (isCrit) {
+        if (c.element === 'neutral') {
+          infoEl.innerText = `Critical hit!`;
+          calcDmg = Math.floor(calcDmg * 1.25);
+        } else {
+          const info = attackElementApply(c.element, player, false, true);
+          infoEl.innerText = `Critical hit! ${info}`;
+        }
+      }
+
+      if (calcDmg >= player.hp) {
+        player.hp = 0;
+      } else {
+        player.hp -= calcDmg;
+      }
     }
   };
 

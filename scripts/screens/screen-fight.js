@@ -37,8 +37,10 @@ function screenFight() {
       const next = fireQueue();
       if (next === 'stop') {
         stop();
-        itemBoostUndo();
-        attackBoostUndo();
+        // itemBonusUndo();
+        // attackBonusUndo();
+        // attackMalusUndo();
+        playerResetTemp();
         screenTransition('left', () => screenFightEnd());
       } else if (next === 'play') {
         createMenu(mainMenu, 'main');
@@ -69,7 +71,7 @@ function screenFight() {
         textOffset,
         cEnemy,
         cEnemy,
-        currentEnemy.hp / currentEnemy.hpmax
+        currentEnemy.hp / (currentEnemy.hpmax + currentEnemy.hpmaxTemp)
       );
       drawRect(playerX, playerY, rectWidth, rectHeight, cWhite, cPlayer, 1);
       drawRect(
@@ -79,7 +81,7 @@ function screenFight() {
         textOffset,
         cPlayer,
         cPlayer,
-        player.hp / player.hpmax
+        player.hp / (player.hpmax + player.hpmaxTemp)
       );
       ctx.font = '12px monospace';
       ctx.fillStyle = cText;

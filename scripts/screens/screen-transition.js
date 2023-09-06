@@ -1,4 +1,6 @@
 function screenTransition(dir, screenFunc = screenWorld) {
+  // TODO: make it without canvas!!
+
   const speed = step / 2;
   let rectX = 0;
   let rectY = 0;

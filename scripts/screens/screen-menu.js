@@ -24,10 +24,10 @@ function screenMenu() {
     { name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗` },
     { name: `map: ${currentMap.name} ⫯` },
     { name: `gems: ${player.gems} ◈` },
-    { name: `hp: ${player.hp}/${player.hpmax} ♥` },
-    { name: `str: ${player.str} ↣` }, // ⊕
-    { name: `def: ${player.def} ∇` }, // ⊖
-    { name: `crit: ${player.crit} %` },
+    { name: `hp: ${player.hp}/${player.hpmax} (${player.hpmaxTemp}) ♥` },
+    { name: `str: ${player.str} (${player.strTemp}) ↣` }, // ⊕
+    { name: `def: ${player.def} (${player.defTemp}) ∇` }, // ⊖
+    { name: `crit: ${player.crit} (${player.critTemp}) %` },
     { name: `element: ${player.element}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
   let statsMenu;

@@ -16,6 +16,8 @@ const itemsFamilies = [
   { name: 'potion', type: 'heal', effect: { hp: 20 }, src: ['shop', 'reward'] },
   { name: 'strength', type: 'temp', effect: { str: 10 }, src: ['shop'] },
   { name: 'defense', type: 'temp', effect: { def: 5 }, src: ['shop'] },
+  // crit?
+  // hp?
 ];
 
 const itemsAges = ['I', 'II', 'III', 'IV', 'V'];
@@ -61,7 +63,7 @@ codeItems();
 
 const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
 
-let itemBoost = {};
+// let itemBonus = {};
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);
@@ -92,9 +94,9 @@ function itemEffectsApply(obj) {
     const value = obj[key];
     if (['hp'].includes(key)) {
       player.hp + value <= player.hpmax ? (player.hp += value) : (player.hp = player.hpmax);
-    } else if (['str', 'def'].includes(key)) {
-      player[key] += value;
-      itemBoost[key] ? (itemBoost[key] += value) : (itemBoost[key] = value);
+    } else if (['str', 'def', 'crit'].includes(key)) {
+      player[key + 'Temp'] += value;
+      // itemBonus[key] ? (itemBonus[key] += value) : (itemBonus[key] = value);
     } else if (key === 'state') {
       // TODO: to test & add tempeffects
       value === '' ? (player.states = []) : player.states.filter((x) => x !== value);
@@ -102,13 +104,13 @@ function itemEffectsApply(obj) {
   }
 }
 
-function itemBoostUndo() {
-  for (const key in itemBoost) {
-    const value = itemBoost[key];
-    player[key] -= value;
-  }
-  itemBoost = {};
-}
+// function itemBonusUndo() {
+//   for (const key in itemBonus) {
+//     const value = itemBonus[key];
+//     player[key] -= value;
+//   }
+//   itemBonus = {};
+// }
 
 function itemFind(itemList, qtt) {
   itemList.map((x) => {

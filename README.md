@@ -30,15 +30,19 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- test boost attacks and elemental crits
-- make enemy attacks better too
-- rethink element bonus => based on player lmt or attack lmt or both??
 - how to get new attacks? via rewards, lvlup, in fight (catch an attack?), via quest?
+- make enemy attacks better too
+  - how to assign attacks to enemies?
+- rethink element multiplier => based on?
+  - player lmt && enemy lmt ||
+  - attack lmt && world lmt ||
+  - attack lmt && player lmt && enemy lmt ||
+  - using lmt attack gives player/enemy that lmt || <= seems best option
 
 > first release
 
 1. items review: states >< attacks
-2. attacks review: crits, elemental and boosts
+2. attacks review: crits, elemental, bonus and malus
 3. story review: new world texts, new element mastered
 4. graphics: colors, animations, transitions
 5. sprites: items, stuff, maps, more players?
@@ -98,4 +102,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4)=113?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3)=120?? hours total dev

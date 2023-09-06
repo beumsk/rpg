@@ -10,21 +10,25 @@ const playerBase = {
   img: './img/player.png',
   hp: 20,
   hpmax: 20,
-  states: [''], // asleep, frozen, paralized, poisoned, ...
   str: 20,
   def: 10,
-  crit: 20,
+  crit: 20, // increase with lvl?
+  hpmaxTemp: 0,
+  strTemp: 0,
+  defTemp: 0,
+  critTemp: 0,
+  states: [], // asleep, frozen, paralized, poisoned, ...
   lvl: 1,
   xp: 0,
   gems: 0,
+  element: '',
+  elements: [],
+  // elements: [...elements],
   fightEnd: {},
   attacks: attacksBase,
   items: itemsBase,
   stuff: [],
   shop: shopBase,
-  element: '',
-  elements: [],
-  // elements: [...elements],
   options: {
     audio: false,
   },
@@ -35,25 +39,29 @@ function playerAttack(attack) {
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
   const manageAttack = () => {
-    // TODO: rethink element bonus => based on player lmt or attack lmt or both??
     const lmt = calcElement(player.element, currentEnemy.element);
-    const isCrit = Math.random() < player.crit / 100; // 20%
+    const isCrit = Math.random() < (player.crit + player.critTemp) / 100;
 
-    if (c.type === 'boost') {
-      const info = attackBoostApply(c.state);
-      infoEl.innerText = `Critical hit! ${info}`;
+    if (c.type === 'bonus') {
+      const info = attackElementApply(c.element, player, true, false);
+      infoEl.innerText = `${info}`;
+    } else if (c.type === 'malus') {
+      const info = attackElementApply(c.element, currentEnemy, false, false);
+      infoEl.innerText = `${info}`;
     } else {
       let calcDmg = Math.floor(
-        (c.dmg + (c.dmg * player.str) / 100 - (c.dmg * currentEnemy.def) / 100) * lmt
+        (c.dmg +
+          (c.dmg * (player.str + player.strTemp)) / 100 -
+          (c.dmg * (currentEnemy.def + currentEnemy.defTemp)) / 100) *
+          lmt
       );
 
       if (isCrit) {
-        if (c.type === 'neutral') {
+        if (c.element === 'neutral') {
           infoEl.innerText = `Critical hit!`;
-          calcDmg = Math.floor(calcDmg * 1.2); // crit +=20%;
-          console.log(calcDmg);
+          calcDmg = Math.floor(calcDmg * 1.25);
         } else {
-          const info = attackElementCritApply(c.type);
+          const info = attackElementApply(c.element, currentEnemy, false, true);
           infoEl.innerText = `Critical hit! ${info}`;
         }
       }
@@ -116,4 +124,12 @@ function playerWin() {
 function playerLose() {
   // stops screenFight
   return 'stop';
+}
+
+function playerResetTemp() {
+  player.hpmaxTemp = 0;
+  player.strTemp = 0;
+  player.defTemp = 0;
+  player.critTemp = 0;
+  player.states = [];
 }
