@@ -23,11 +23,13 @@ function codeMapEnemies(element, lvl, isBoss) {
       hpmax: lvl * 20,
       str: lvl * 20,
       def: lvl * 10,
-      crit: 20, // increase with lvl?
+      crit: 10 + lvl,
+      wis: lvl * 10,
       hpmaxTemp: 0,
       strTemp: 0,
       defTemp: 0,
       critTemp: 0,
+      wisTemp: 0,
       states: [],
       lvl: lvl,
       xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
@@ -111,7 +113,7 @@ function enemyAttack(attack) {
   infoEl.innerText = `${currentEnemy.name} uses ${c.name}`;
 
   const manageAttack = () => {
-    const lmt = calcElement(currentEnemy.element, player.element);
+    const elementFactor = calcElement(currentEnemy.element, player.element);
     const isCrit = Math.random() < (currentEnemy.crit + currentEnemy.critTemp) / 100;
 
     if (c.type === 'bonus') {
@@ -125,7 +127,7 @@ function enemyAttack(attack) {
         (c.dmg +
           (c.dmg * (currentEnemy.str + currentEnemy.strTemp)) / 100 -
           (c.dmg * (player.def + player.defTemp)) / 100) *
-          lmt
+          elementFactor
       );
 
       if (isCrit) {

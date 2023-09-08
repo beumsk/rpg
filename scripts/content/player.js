@@ -12,11 +12,13 @@ const playerBase = {
   hpmax: 20,
   str: 20,
   def: 10,
-  crit: 20, // increase with lvl?
+  crit: 10,
+  wis: 10,
   hpmaxTemp: 0,
   strTemp: 0,
   defTemp: 0,
   critTemp: 0,
+  wisTemp: 0,
   states: [], // asleep, frozen, paralized, poisoned, ...
   lvl: 1,
   xp: 0,
@@ -39,7 +41,7 @@ function playerAttack(attack) {
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
   const manageAttack = () => {
-    const lmt = calcElement(player.element, currentEnemy.element);
+    const elementFactor = calcElement(player.element, currentEnemy.element);
     const isCrit = Math.random() < (player.crit + player.critTemp) / 100;
 
     if (c.type === 'bonus') {
@@ -53,7 +55,7 @@ function playerAttack(attack) {
         (c.dmg +
           (c.dmg * (player.str + player.strTemp)) / 100 -
           (c.dmg * (currentEnemy.def + currentEnemy.defTemp)) / 100) *
-          lmt
+          elementFactor
       );
 
       if (isCrit) {
@@ -131,5 +133,6 @@ function playerResetTemp() {
   player.strTemp = 0;
   player.defTemp = 0;
   player.critTemp = 0;
+  player.wisTemp = 0;
   player.states = [];
 }

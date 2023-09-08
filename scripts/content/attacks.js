@@ -6,7 +6,7 @@
 // GD: entangled><grounded +- def (earth)
 // GD: drenched><hydrated +- str (water)
 // GD: burnt><firedup +-hpmax (fire) => 60/80 -5 = 55/75 && 60/80 +5 = 65/85
-// GD: ??? heal or dmg each turn
+// GD: ??? heal or dmg each turn (periodics)
 
 // TODO: review attacks => must be possible for attack to handle state, to give bonus/malus, to steal life, to heal, to poison
 // pass turn?
@@ -92,88 +92,28 @@ codeAttacks();
 
 const attacksBase = attacks.filter((x) => x.src.includes('base'));
 
-let attackBonus = {};
-let attackMalus = {};
+function attackElementApply(element, obj, isBonus, isCrit) {
+  const critFactor = isCrit ? 0.4 : 1;
+  function calcBM(base) {
+    return Math.floor(base * critFactor + (base * obj.wis) / 100);
+  }
 
-// TODO: make bonus/malus dynamic?
-function attackElementApply(lmt, obj, isBonus, isCrit) {
-  // TODO: isCrit to /2 bonus/malus?
-  if (lmt === 'air') {
-    isBonus ? (obj.critTemp += 10) : (obj.critTemp -= 10);
+  if (element === 'air') {
+    isBonus ? (obj.critTemp += calcBM(10)) : (obj.critTemp -= calcBM(10));
     return `${obj.name} % critical ${isBonus ? 'in' : 'de'}creased`;
-  } else if (lmt === 'earth') {
-    isBonus ? (obj.defTemp += 5) : (obj.defTemp -= 5);
+  } else if (element === 'earth') {
+    isBonus ? (obj.defTemp += calcBM(5)) : (obj.defTemp -= calcBM(5));
     return `${obj.name} defense ${isBonus ? 'in' : 'de'}creased`;
-  } else if (lmt === 'water') {
-    isBonus ? (obj.strTemp += 10) : (obj.strTemp -= 10);
+  } else if (element === 'water') {
+    isBonus ? (obj.strTemp += calcBM(10)) : (obj.strTemp -= calcBM(10));
     return `${obj.name} strength ${isBonus ? 'in' : 'de'}creased`;
-  } else if (lmt === 'fire') {
-    // crit fire is way too powerful
-    isBonus ? (obj.hp += 5) : (obj.hp -= 5);
-    isBonus ? (obj.hpmaxTemp += 5) : (obj.hpmaxTemp -= 5);
+  } else if (element === 'fire') {
+    isBonus ? (obj.hp += calcBM(5)) : (obj.hp -= calcBM(5));
+    isBonus ? (obj.hpmaxTemp += calcBM(5)) : (obj.hpmaxTemp -= calcBM(5));
     return `${obj.name} hp ${isBonus ? 'in' : 'de'}creased`;
   }
 }
 
-function attackElementCritApply(lmt) {
-  if (lmt === 'air') {
-    currentEnemy.critTemp -= 10;
-    return 'Enemy % critical decreased';
-  } else if (lmt === 'earth') {
-    currentEnemy.defTemp -= 5;
-    return 'Enemy defense decreased';
-  } else if (lmt === 'water') {
-    currentEnemy.strTemp -= 10;
-    return 'Enemy strength decreased';
-  } else if (lmt === 'fire') {
-    currentEnemy.hp -= 5;
-    currentEnemy.hpmaxTemp -= 5;
-    return 'Enemy hp decreased';
-    // currentEnemy.states.includes('fire-')
-    //   ? null
-    //   : (currentEnemy.states = [...currentEnemy.states, 'fire-']);
-    // return 'Enemy will lose hp periodically';
-  }
-}
-
-function attackBonusApply(state) {
-  if (state === 'air+') {
-    player.critTemp += 10;
-    return 'Player % critical increased';
-  } else if (state === 'earth+') {
-    player.defTemp += 5;
-    return 'Player defense increased';
-  } else if (state === 'water+') {
-    player.strTemp += 10;
-    return 'Player strength increased';
-  } else if (state === 'fire+') {
-    player.hp += 5;
-    player.hpmaxTemp += 5;
-    return 'Enemy hp increased';
-    // // TODO: ability to add up fire+ ?
-    // player.states.includes('fire+') ? null : (player.states = [...player.states, 'fire+']);
-    // return 'Player will win hp periodically';
-  }
-}
-
-function attackMalusApply(state) {
-  if (state === 'air-') {
-    currentEnemy.critTemp -= 10;
-    return 'Enemy % critical decreased';
-  } else if (state === 'earth-') {
-    currentEnemy.defTemp -= 5;
-    return 'Enemy defense decreased';
-  } else if (state === 'water-') {
-    currentEnemy.strTemp -= 10;
-    return 'Enemy strength decreased';
-  } else if (state === 'fire-') {
-    currentEnemy.hp -= 5;
-    currentEnemy.hpmaxTemp -= 5;
-    return 'Enemy hp decreased';
-    // TODO: make this one better than crit fire one??
-    // currentEnemy.states.includes('fire-')
-    //   ? null
-    //   : (currentEnemy.states = [...currentEnemy.states, 'fire-']);
-    // return 'Enemy will lose hp periodically';
-  }
-}
+// ability to add up fire+ ?
+// player.states.includes('fire+') ? null : (player.states = [...player.states, 'fire+']);
+// return 'Player will win hp periodically';

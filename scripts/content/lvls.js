@@ -22,11 +22,13 @@ function lvlUp() {
   infoQueue.push(
     () => (infoEl.innerText = `You lvl up to lvl ${player.lvl}, the door is now open!`)
   );
+  player.hpmax += 20;
+  player.hp = player.hpmax;
   player.str += 20;
   player.def += 10;
-  player.hpmax += 20;
+  player.wis += 10;
+  player.crit += 1;
   player.lvl += 1;
-  player.hp = player.hpmax;
   shopLvlUp(player.lvl);
   // screenReward('lvl');
 }

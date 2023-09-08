@@ -63,8 +63,6 @@ codeItems();
 
 const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
 
-// let itemBonus = {};
-
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);
   if (c.qtt > 0) {
@@ -103,14 +101,6 @@ function itemEffectsApply(obj) {
     }
   }
 }
-
-// function itemBonusUndo() {
-//   for (const key in itemBonus) {
-//     const value = itemBonus[key];
-//     player[key] -= value;
-//   }
-//   itemBonus = {};
-// }
 
 function itemFind(itemList, qtt) {
   itemList.map((x) => {
