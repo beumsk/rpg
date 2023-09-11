@@ -11,6 +11,10 @@ const contentEl = document.createElement('div');
 contentEl.classList.add('content');
 containerEl.appendChild(contentEl);
 
+const transitionEl = document.createElement('div');
+transitionEl.classList.add('transition');
+containerEl.appendChild(transitionEl);
+
 const stateEl = document.createElement('div');
 stateEl.classList.add('state');
 containerEl.appendChild(stateEl);

@@ -193,6 +193,60 @@ kbd {
   border-left: solid 1px var(--black-3);
 }
 
+/* TRANSITION */
+.transition {
+  position: absolute;
+  z-index: 10;
+}
+.transition.to-right {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  animation: to-right linear 1;
+}
+@keyframes to-right {
+  100% {
+    width: 100%;
+  }
+}
+.transition.to-left {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  animation: to-left linear 1;
+}
+@keyframes to-left {
+  100% {
+    width: 100%;
+  }
+}
+.transition.to-bottom {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  animation: to-bottom linear 1;
+}
+@keyframes to-bottom {
+  100% {
+    height: 100%;
+  }
+}
+.transition.to-top {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  animation: to-top linear 1;
+}
+@keyframes to-top {
+  100% {
+    height: 100%;
+  }
+}
+
 /* CONTENT */
 .content {
   position: absolute;

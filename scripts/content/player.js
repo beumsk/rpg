@@ -63,7 +63,7 @@ function playerAttack(attack) {
           infoEl.innerText = `Critical hit!`;
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
-          const info = attackElementApply(c.element, currentEnemy, false, true);
+          const info = attackElementApply(c.element, player, true, true);
           infoEl.innerText = `Critical hit! ${info}`;
         }
       }

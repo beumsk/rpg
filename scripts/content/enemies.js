@@ -4,7 +4,6 @@ const enemyBase = {
   w: step,
   h: step,
   // fill: cEnemy,
-  // img: './img/enemy.png',
 };
 
 let mapEnemies = [];
@@ -135,7 +134,7 @@ function enemyAttack(attack) {
           infoEl.innerText = `Critical hit!`;
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
-          const info = attackElementApply(c.element, player, false, true);
+          const info = attackElementApply(c.element, currentEnemy, true, true);
           infoEl.innerText = `Critical hit! ${info}`;
         }
       }
