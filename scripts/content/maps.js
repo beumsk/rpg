@@ -39,7 +39,7 @@ let mapsBase = [
       { ...spotBase, x: 12 * 16, y: 4 * 16, type: 'earth', fill: cGreenTr, img: './img/earth.png' },
       { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlueTr, img: './img/water.png' },
       { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRedTr, img: './img/fire.png' },
-      // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cViolet },
+      // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cVioletTr },
     ],
   },
 ];
@@ -111,11 +111,11 @@ function changeMap(world, to, masteredElement) {
     stateEl.style.background = colorLtGrid[world];
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
-    codeMapEnemies(world, currentMap.lvl);
+    codeMapEnemies(currentMap.lvl, world);
     screenTransition('top', () => screenWorld());
   } else if (to === 'next') {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
-    codeMapEnemies(world, currentMap.lvl);
+    codeMapEnemies(currentMap.lvl, world);
     screenTransition('top', () => screenWorld());
   }
   infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
@@ -145,10 +145,20 @@ function randomRewards() {
   );
   let stuf = rewardStuff[rand(rewardStuff.length)];
 
+  let rewardAttacks = attacks.filter(
+    (x) =>
+      x.src.includes('reward') &&
+      x.age === 1 &&
+      x.element === currentWorld.name &&
+      !attacksRewarded.includes(x)
+  );
+  let attack = rewardAttacks[rand(rewardAttacks.length)];
+
   return {
     item,
     itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
     stuf,
+    attack,
     gems: currentMap.lvl * 2,
   };
 }

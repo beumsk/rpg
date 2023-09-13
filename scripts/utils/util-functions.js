@@ -72,21 +72,27 @@ function updateState() {
     `;
 }
 
-function calcElement(element1, element2) {
+function calcElement(elementOfAttack, elementAttacking, elementDefending) {
+  // GD: lmt attack gives player/enemy that lmt => if used again lmt attack === lmt of player/enemy => check factor
+  // TODO: rework with element+ (using twice same element give extra bonusor opposite)
+  // => +on- = 1.5, ++on- = 2, -on+ = 0.75, --on+ = 0.5
+
+  if (elementOfAttack !== elementAttacking) return 1;
+
   if (
-    (element1 === 'earth' && element2 === 'water') ||
-    (element1 === 'water' && element2 === 'fire') ||
-    (element1 === 'fire' && element2 === 'air') ||
-    (element1 === 'air' && element2 === 'earth')
+    (elementAttacking === 'earth' && elementDefending === 'water') ||
+    (elementAttacking === 'water' && elementDefending === 'fire') ||
+    (elementAttacking === 'fire' && elementDefending === 'air') ||
+    (elementAttacking === 'air' && elementDefending === 'earth')
   ) {
-    return 2;
+    return 1.5;
   } else if (
-    (element1 === 'water' && element2 === 'earth') ||
-    (element1 === 'fire' && element2 === 'water') ||
-    (element1 === 'air' && element2 === 'fire') ||
-    (element1 === 'earth' && element2 === 'air')
+    (elementAttacking === 'water' && elementDefending === 'earth') ||
+    (elementAttacking === 'fire' && elementDefending === 'water') ||
+    (elementAttacking === 'air' && elementDefending === 'fire') ||
+    (elementAttacking === 'earth' && elementDefending === 'air')
   ) {
-    return 0.5;
+    return 0.75;
   } else {
     return 1;
   }

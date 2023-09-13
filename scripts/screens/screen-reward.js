@@ -22,6 +22,11 @@ function screenReward(type) {
           ? `<button data-type="stuf" data-value="${rewards.stuf.name}">${rewards.stuf.name}</button>`
           : ''
       }
+      ${
+        rewards.attack
+          ? `<button data-type="attack" data-value="${rewards.attack.name}">${rewards.attack.name}</button>`
+          : ''
+      }
       <button data-type="gems" data-value="${rewards.gems}">${rewards.gems} gems</button>
     </div>
   `;
@@ -96,6 +101,8 @@ function screenReward(type) {
       );
     } else if (crt.dataset.type === 'stuf') {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
+    } else if (crt.dataset.type === 'attack') {
+      attackFind(attacks.filter((a) => a.name === crt.dataset.value));
     }
     if (type === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
     infoQueue.push(

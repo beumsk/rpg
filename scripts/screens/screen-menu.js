@@ -28,7 +28,7 @@ function screenMenu() {
     { name: `str: ${player.str} (${player.strTemp}) ↣` }, // ⊕
     { name: `def: ${player.def} (${player.defTemp}) ∇` }, // ⊖
     { name: `crit: ${player.crit} (${player.critTemp}) %` },
-    { name: `element: ${player.element}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
+    { name: `mastered elements: ${JSON.stringify(player.elements)}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
   let statsMenu;
 
@@ -143,17 +143,7 @@ function screenMenu() {
         createMenu(player[crt.dataset.value], crt.dataset.value);
       }
     } else if (crtMenu === 'stats') {
-      if (crt.dataset.value.includes('element:')) {
-        if (player.elements.length === 0) {
-          return;
-        } else if (player.element === '') {
-          player.element = player.elements[0];
-        } else {
-          player.element = player.elements[player.elements.indexOf(player.element) + 1] || '';
-        }
-        statsMenu = codeStatsMenu();
-        createMenu(statsMenu, crtMenu);
-      }
+      // do anything?
     } else if (crtMenu === 'attacks') {
       // TODO: re order attacks option?
     } else if (crtMenu === 'items') {

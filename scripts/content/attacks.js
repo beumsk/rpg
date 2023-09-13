@@ -13,8 +13,9 @@
 
 const attacksNeutral = [
   // base attack => crit deals more dmg
-  { name: 'punch', dmg: 6, src: ['base'] },
-  { name: 'kick', dmg: 8, src: [] },
+  { name: 'punch', dmg: 6, age: 1, src: ['base'] },
+  { name: 'kick', dmg: 10, age: 2, src: [''] },
+  { name: 'headbutt', dmg: 14, age: 3, src: [''] },
   { name: 'cheat', dmg: 1000, src: [] },
   { name: 'joke', dmg: 0, src: [] },
 ];
@@ -49,6 +50,7 @@ const attacksBonusMalus = [
 ];
 
 let attacks = [];
+let attacksRewarded = [];
 
 function codeAttacks() {
   attacksNeutral.forEach((neu) => {
@@ -56,6 +58,7 @@ function codeAttacks() {
       name: neu.name,
       type: 'attack',
       element: 'neutral',
+      age: neu.age || 1,
       dmg: neu.dmg,
       src: neu.src,
       desc: `${neu.dmg}dmg (neutral)`,
@@ -70,8 +73,8 @@ function codeAttacks() {
       element: ele.element,
       age: age + 1,
       dmg: 6 + age * 4,
-      // src: age === 0 ? ['reward', 'base'] : ['reward'],
       src: ['reward'],
+      // src: age === 0 ? ['reward', 'base'] : ['reward'],
       desc: `6dmg (${ele.element})`,
     };
     attacks.push(attack);
@@ -81,6 +84,7 @@ function codeAttacks() {
       name: boo.name,
       type: boo.state.includes('+') ? 'bonus' : 'malus',
       element: boo.state.replace('+', '').replace('-', ''),
+      age: 1,
       state: boo.state,
       src: ['reward'],
       desc: `${boo.state}`,
@@ -92,8 +96,8 @@ codeAttacks();
 
 const attacksBase = attacks.filter((x) => x.src.includes('base'));
 
-function attackElementApply(element, obj, isBonus, isCrit) {
-  const critFactor = isCrit ? 0.4 : 1;
+function attackElementApply(element, obj, isBonus, isSide, isCrit) {
+  const critFactor = isSide ? 0.4 : isCrit ? 1.4 : 1;
   function calcBM(base) {
     return Math.floor(base * critFactor + (base * obj.wis) / 100);
   }
@@ -112,6 +116,13 @@ function attackElementApply(element, obj, isBonus, isCrit) {
     isBonus ? (obj.hpmaxTemp += calcBM(5)) : (obj.hpmaxTemp -= calcBM(5));
     return `${obj.name} hp ${isBonus ? 'in' : 'de'}creased`;
   }
+}
+
+function attackFind(attackList) {
+  attackList.map((a) => {
+    player.attacks = [...player.attacks, { ...a }];
+    if (a.src.includes('reward')) attacksRewarded.push(a);
+  });
 }
 
 // ability to add up fire+ ?

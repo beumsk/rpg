@@ -41,14 +41,14 @@ function playerAttack(attack) {
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
   const manageAttack = () => {
-    const elementFactor = calcElement(player.element, currentEnemy.element);
+    const elementFactor = calcElement(c.element, player.element, currentEnemy.element);
     const isCrit = Math.random() < (player.crit + player.critTemp) / 100;
 
     if (c.type === 'bonus') {
-      const info = attackElementApply(c.element, player, true, false);
+      const info = attackElementApply(c.element, player, true, false, isCrit);
       infoEl.innerText = `${info}`;
     } else if (c.type === 'malus') {
-      const info = attackElementApply(c.element, currentEnemy, false, false);
+      const info = attackElementApply(c.element, currentEnemy, false, false, isCrit);
       infoEl.innerText = `${info}`;
     } else {
       let calcDmg = Math.floor(
@@ -63,10 +63,13 @@ function playerAttack(attack) {
           infoEl.innerText = `Critical hit!`;
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
-          const info = attackElementApply(c.element, player, true, true);
+          const info = attackElementApply(c.element, player, true, true, false);
           infoEl.innerText = `Critical hit! ${info}`;
         }
       }
+
+      // GD: using an attack, gives the player that element
+      player.element = c.element !== 'neutral' ? c.element : '';
 
       if (calcDmg >= currentEnemy.hp) {
         currentEnemy.hp = 0;
@@ -129,6 +132,7 @@ function playerLose() {
 }
 
 function playerResetTemp() {
+  player.element = '';
   player.hpmaxTemp = 0;
   player.strTemp = 0;
   player.defTemp = 0;

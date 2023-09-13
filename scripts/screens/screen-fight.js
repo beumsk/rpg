@@ -4,6 +4,8 @@ function screenFight() {
 
   audioPlay('fight');
 
+  // TODO: recode this without canvas
+
   const rectWidth = 120;
   const rectHeight = 48;
   let enemyX = 0;
@@ -85,12 +87,23 @@ function screenFight() {
       );
       ctx.font = '12px monospace';
       ctx.fillStyle = cText;
-      ctx.fillText(
-        currentEnemy.name,
-        enemyX + textOffset,
-        enemyY + textOffset * 2
-      );
+      ctx.fillText(currentEnemy.name, enemyX + textOffset, enemyY + textOffset * 2);
       ctx.fillText(player.name, playerX + textOffset, playerY + textOffset * 2);
+      ctx.font = '8px monospace';
+      ctx.fillText(
+        `lvl:${currentEnemy.lvl} ${currentEnemy.hp}/${
+          currentEnemy.hpmax + currentEnemy.hpmaxTemp
+        }♥ ${currentEnemy.str + currentEnemy.strTemp}↣ ${currentEnemy.def + currentEnemy.defTemp}∇`,
+        enemyX + textOffset,
+        enemyY + textOffset * 3
+      );
+      ctx.fillText(
+        `lvl:${player.lvl} ${player.hp}/${player.hpmax + player.hpmaxTemp}♥ ${
+          player.str + player.strTemp
+        }↣ ${player.def + player.defTemp}∇`,
+        playerX + textOffset,
+        playerY + textOffset * 3
+      );
 
       animationId = requestAnimationFrame(frame);
     };

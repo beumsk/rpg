@@ -57,7 +57,6 @@ function screenWorld(keepEnemy) {
     }
     checkCollision(oldPos);
 
-    ctx.fillStyle = player.fill;
     ctx.fillRect(player.x, player.y, player.w, player.h);
   }
 
@@ -115,6 +114,7 @@ function screenWorld(keepEnemy) {
           ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
         }
         if (obj.img) {
+          ctx.fillStyle = 'transparent';
           let img = imagesLoaded[imagesToLoad.findIndex((x) => x === obj.img)];
           ctx.drawImage(img, 0, 0, img.width, img.height, obj.x, obj.y, step, step);
         }

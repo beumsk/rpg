@@ -1,7 +1,8 @@
 function screenTransition(dir, screenFunc = screenWorld) {
-  let duration = 2;
+  let duration = 1;
 
   infoEl.innerText = '';
+  ctx.fillStyle = 'transparent';
 
   transitionEl.style.backgroundColor = cGrad2;
 

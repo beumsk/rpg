@@ -17,10 +17,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - pokemon-rpg like, walking around and fighting enemies
 - central map: doors to different element worlds
   - => go on the element of choice > finish the different maps (n, w, e, s) and final spirit to master x4 (elements)
-    - you learn element of world OR element beating world (water > fire etc)
-    - each map has monsters to beat (+ quests?)
+    - you learn elemental attacks of world in rewards and get a thing showing we finished world
+    - each map has monsters of any type to beat (+ quests?)
   - => master door opens > beat 4 masters + high master and win (OR spirit world??)
-- Dmg = (dmg+str-def) x elmt(0.5|1|2)
+- Dmg = (dmg+str-def) x elmt(0.75|1|1.5)
   - => power up player/enemy with str and def
 - Player lvlUp => dmg+20% & def+10% (& up attack | new attack?)
 - Enemy lvlUp => dmg+20% & def+10%
@@ -30,14 +30,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- how to get new attacks? via rewards, lvlup, in fight (catch an attack?), via quest?
-- make enemy attacks better too
-  - how to assign attacks to enemies?
-- rethink element multiplier => based on?
-  - player lmt && enemy lmt ||
-  - attack lmt && world lmt ||
-  - attack lmt && player lmt && enemy lmt ||
-  - using lmt attack gives player/enemy that lmt || <= seems best option
+- how to get new attacks? via rewards
+  - should attack lvlUp?
+- how to assign attacks to enemies?
+  - should they have the same ones as player attacks?
 
 > first release
 
@@ -50,8 +46,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - review fight screen without canvas? => easier to write, add image etc
 
-- to defeat a world (earth) you should master air => air attacks in rewards && best air attack in end world??
-
 - get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
   - panoplie boost??
   - introduce new attacks? world finished & lvlup?
@@ -61,7 +55,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - randomScreen => select random reward (items, stuff, attacks?, boost?)
   - offer option to pick between average reward (5) or random (1-10) ??
-- random dmg => attack have range of dmg (+ crits + fail?)
+- random dmg => attack have range of dmg
 
 > other
 
@@ -87,6 +81,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - first fight intro+tuto against master that we lose as we only have basic attacks?
 - quests in menu?
   - npc as deadSpots => when hitting => dialog screen? and start quest
+- achievements in menu?
+  - kill all kind of monsters, get all chest, stuff, attacks, elements
+- flee a fight?
 - map enigmas?
 - review map to move outside of screen?
 - each learned element would give a new monster to play? (pokemon like with switching monsters)
@@ -102,4 +99,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3)=120?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4)=124?? hours total dev
