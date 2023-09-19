@@ -1,8 +1,6 @@
 function screenMenu() {
   canvas.style.backgroundImage = '';
 
-  let animationId;
-
   infoEl.innerText = ' ';
 
   const mainMenu = [
@@ -59,28 +57,14 @@ function screenMenu() {
     }
   }
 
-  function start() {
-    document.addEventListener('keydown', keyMenuHandler);
-
-    const frame = () => {
-      clearCanvas();
-      ctx.font = '12px monospace';
-
-      animationId = requestAnimationFrame(frame);
-    };
-    frame();
-  }
+  document.addEventListener('keydown', keyMenuHandler);
 
   function stop() {
     infoEl.innerText = '';
-    cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyMenuHandler);
     contentEl.innerHTML = '';
-    clearCanvas();
     screenWorld(true);
   }
-
-  start();
 
   function createMenu(menuList, menuName) {
     crtMenu = menuName;
@@ -90,7 +74,7 @@ function screenMenu() {
         const linkEl = document.createElement('button');
         linkEl.href = '';
         if (menuName === 'attacks') {
-          linkEl.innerText = `${x.name}: ${x.desc}`;
+          linkEl.innerText = `${x.name}: ${x.dmg ? x.dmg + 'dmg (' + x.element + ')' : x.state}`;
         } else if (menuName === 'items') {
           linkEl.innerText = `${x.name}: ${JSON.stringify(x.effect)} ${
             x.type === 'temp' ? 'Ŧ' : ''

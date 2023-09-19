@@ -21,6 +21,6 @@ function screenHow() {
   function stop() {
     document.removeEventListener('keydown', keyHowHandler);
     contentEl.innerHTML = '';
-    screenTransition('bottom', () => screenStart());
+    screenStart();
   }
 }

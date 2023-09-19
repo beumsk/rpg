@@ -30,8 +30,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- how to get new attacks? via rewards
-  - should attack lvlUp?
 - how to assign attacks to enemies?
   - should they have the same ones as player attacks?
 
@@ -99,4 +97,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4)=124?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4)=128?? hours total dev

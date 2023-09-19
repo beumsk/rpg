@@ -136,7 +136,7 @@ function worldCompleted(element) {
   }
 }
 
-function randomRewards() {
+function randomRewards(from) {
   let rewardItems = items.filter((x) => x.lvl <= currentMap.lvl && x.src.includes('reward'));
   let item = rewardItems[rand(rewardItems.length)];
 
@@ -154,11 +154,27 @@ function randomRewards() {
   );
   let attack = rewardAttacks[rand(rewardAttacks.length)];
 
-  return {
-    item,
-    itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
-    stuf,
-    attack,
-    gems: currentMap.lvl * 2,
-  };
+  let rewardObj;
+  if (from === 'chest') {
+    // make it less interesting than map?
+    rewardObj = {
+      item,
+      itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
+      stuf,
+      gems: currentMap.lvl * 2,
+    };
+  } else if (from === 'lvl') {
+    rewardObj = { attack, attackImprove: true };
+  } else if (from === 'map') {
+    rewardObj = {
+      item,
+      itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
+      stuf,
+      gems: currentMap.lvl * 2,
+    };
+  } else if (from === 'world') {
+    rewardObj = { stuf, attack };
+  }
+
+  return rewardObj;
 }

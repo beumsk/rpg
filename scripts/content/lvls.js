@@ -30,5 +30,4 @@ function lvlUp() {
   player.crit += 1;
   player.lvl += 1;
   shopLvlUp(player.lvl);
-  // screenReward('lvl');
 }

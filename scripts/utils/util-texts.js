@@ -6,7 +6,7 @@ const texts = {
       <p>In the midst of chaos, a prophecy emerges. To save the realm, one should learn and master the 4 elements.</p>
       <p>Air, Earth, Water and Fire will help him facing the tyrannical masters and finally be able to find back peace and balance in the world.</p>`,
     `<p>I am convinced you can be the chosen one!</p><p>Waste no time and reach the Temple of elements!</p>`,
-    `<p>Pick the order you prefer to master the different elements. For each element you will land in the dedicated territory and will face the allies of the masters. Defeating them in all the zones will give you the opportunity to face the elemental spirit.</p>
+    `<p>Pick the order you prefer to master the different elements. For each element you will land in the dedicated territory and will face the master's soldiers. Defeat them in all the zones and learn to master the world's element.</p>
       <p>Once master of the 4 elements, you will be able to fight and let's hope defeat the masters!</p>`,
   ],
   air: [

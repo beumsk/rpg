@@ -1,4 +1,4 @@
-function screenReward(type) {
+function screenReward(from) {
   canvas.style.background = cGrad2;
   contentEl.style.background = cGrad2;
 
@@ -7,16 +7,19 @@ function screenReward(type) {
   let index = 0;
   let rewardButtons = contentEl.getElementsByTagName('button');
 
-  const rewards = randomRewards();
-  // TODO: chest, map and world should give different kind of rewards!
+  const rewards = randomRewards(from);
+
   // TODO: add more info on focus => effects...
   // TODO: add animation for random feel
-  // TODO: add attacks??
   const rewardsHTML = `
     <div class="rewards">
-      <button data-type="item" data-value="${rewards.item.name}" data-qtt="${rewards.itemQtt}">
-        ${rewards.item.name} x${rewards.itemQtt}
-      </button>
+      ${
+        rewards.item
+          ? `<button data-type="item" data-value="${rewards.item.name}" data-qtt="${rewards.itemQtt}">
+              ${rewards.item.name} x${rewards.itemQtt}
+            </button>`
+          : ''
+      }
       ${
         rewards.stuf
           ? `<button data-type="stuf" data-value="${rewards.stuf.name}">${rewards.stuf.name}</button>`
@@ -27,32 +30,52 @@ function screenReward(type) {
           ? `<button data-type="attack" data-value="${rewards.attack.name}">${rewards.attack.name}</button>`
           : ''
       }
-      <button data-type="gems" data-value="${rewards.gems}">${rewards.gems} gems</button>
+      ${
+        rewards.attackImprove
+          ? player.attacks
+              .filter((x) => x.type === 'attack')
+              .map((x) => `<button data-type="improve" data-value="${x.name}">${x.name}</button>`)
+              .join('')
+          : ''
+      }
+      ${
+        rewards.gems
+          ? `<button data-type="gems" data-value="${rewards.gems}">${rewards.gems} gems</button>`
+          : ''
+      }
     </div>
   `;
 
-  if (type === 'chest') {
+  if (from === 'chest') {
     content = `
       <div class="reward">
         <h1>You opened a chest!</h1>
-        <p>Pick the reward you want</p>
+        <p>Choose wisely between these rewards</p>
         ${rewardsHTML}
       </div>
     `;
-  } else if (type === 'lvl') {
-  } else if (type === 'map') {
+  } else if (from === 'lvl') {
+    content = `
+      <div class="reward">
+        <h1>You reached lvl ${player.lvl}!</h1>
+        <p>Improve one of your attacks or learn a new one.</p>
+        <p>Choose wisely between these attacks</p>
+        ${rewardsHTML}
+      </div>
+    `;
+  } else if (from === 'map') {
     content = `
       <div class="reward">
         <h1>You cleared ${currentMap.name} from the enemies!</h1>
-        <p>Pick the reward you want</p>
+        <p>Choose wisely between these rewards</p>
         ${rewardsHTML}
       </div>
     `;
-  } else if (type === 'world') {
+  } else if (from === 'world') {
     content = `
       <div class="reward">
         <h1>You saved the ${currentWorld.name} world from the masters!</h1>
-        <p>Pick the reward you want</p>
+        <p>Choose wisely between these rewards</p>
         ${rewardsHTML}
       </div>
     `;
@@ -79,13 +102,13 @@ function screenReward(type) {
     document.removeEventListener('keydown', keyRewardHandler);
     clearCanvas();
     contentEl.innerHTML = '';
-    if (type === 'chest') {
+    if (from === 'chest') {
       screenTransition('left', () => screenWorld(true));
-    } else if (type === 'lvl') {
-      // screenTransition('left', () => screenFightEnd());
-    } else if (type === 'map') {
+    } else if (from === 'lvl') {
+      screenTransition('left', () => screenWorld());
+    } else if (from === 'map') {
       changeMap(currentMap.world, 'next');
-    } else if (type === 'world') {
+    } else if (from === 'world') {
       changeMap('temple', 'temple', currentWorld.name);
     }
   }
@@ -103,8 +126,10 @@ function screenReward(type) {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
     } else if (crt.dataset.type === 'attack') {
       attackFind(attacks.filter((a) => a.name === crt.dataset.value));
+    } else if (crt.dataset.type === 'improve') {
+      attackImprove(crt.dataset.value);
     }
-    if (type === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
+    if (from === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
     infoQueue.push(
       () =>
         (infoEl.innerText = `You got ${crt.dataset.value} ${

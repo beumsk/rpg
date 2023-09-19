@@ -37,11 +37,18 @@ function screenFightEnd() {
   updateState();
 
   document.addEventListener('keydown', keyFightEndHandler);
+
   function keyFightEndHandler() {
     document.removeEventListener('keydown', keyFightEndHandler);
     contentEl.innerHTML = '';
     if (currentEnemy.hp === 0) {
-      screenTransition('left', () => screenWorld());
+      // if (player.fightEnd.lvlUp) {
+      if (player.fightEnd.lvlUp && player.lvl % 3 === 0) {
+        // TODO: ensure this is often enough
+        screenTransition('right', () => screenReward('lvl'));
+      } else {
+        screenTransition('left', () => screenWorld());
+      }
     } else {
       screenTransition('bottom', () => screenEnd());
     }

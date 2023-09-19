@@ -55,9 +55,9 @@ function screenStart() {
     } else if (crt.dataset.type === 'continue') {
       // TODO: add continue feature
     } else if (crt.dataset.type === 'how') {
-      screenTransition('bottom', () => screenHow());
+      screenHow();
     } else if (crt.dataset.type === 'credit') {
-      screenTransition('bottom', () => screenCredit());
+      screenCredit();
     }
   }
 }

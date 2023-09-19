@@ -61,7 +61,6 @@ function codeAttacks() {
       age: neu.age || 1,
       dmg: neu.dmg,
       src: neu.src,
-      desc: `${neu.dmg}dmg (neutral)`,
     };
     attacks.push(attack);
   });
@@ -75,7 +74,6 @@ function codeAttacks() {
       dmg: 6 + age * 4,
       src: ['reward'],
       // src: age === 0 ? ['reward', 'base'] : ['reward'],
-      desc: `6dmg (${ele.element})`,
     };
     attacks.push(attack);
   });
@@ -87,7 +85,6 @@ function codeAttacks() {
       age: 1,
       state: boo.state,
       src: ['reward'],
-      desc: `${boo.state}`,
     };
     attacks.push(attack);
   });
@@ -123,6 +120,13 @@ function attackFind(attackList) {
     player.attacks = [...player.attacks, { ...a }];
     if (a.src.includes('reward')) attacksRewarded.push(a);
   });
+}
+
+function attackImprove(name) {
+  // TODO: think of a way to improve bonus/malus attacks
+  const c = player.attacks.find((x) => x.name === name);
+  c.age += 1;
+  c.dmg = c.dmg + 2;
 }
 
 // ability to add up fire+ ?

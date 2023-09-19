@@ -19,6 +19,6 @@ function screenCredit() {
   function stop() {
     document.removeEventListener('keydown', keyCreditHandler);
     contentEl.innerHTML = '';
-    screenTransition('bottom', () => screenStart());
+    screenStart();
   }
 }
