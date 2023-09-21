@@ -50,7 +50,7 @@ function screenStart() {
     let crt = e.target;
     stop();
     if (crt.dataset.type === 'start') {
-      // screenTransition('bottom', () => screenStory('intro'));
+      // screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld()));
       screenTransition('bottom', () => screenWorld());
     } else if (crt.dataset.type === 'continue') {
       // TODO: add continue feature

@@ -56,7 +56,7 @@ function codeWorldMaps(world) {
   function codeDistricts() {
     let districts = ['northern', 'western', 'eastern', 'southern', 'central'];
     // DEV: 1 map per world
-    // let districts = ['central'];
+    // districts = ['central'];
 
     return districts.map((y, i) => {
       return {
@@ -97,12 +97,18 @@ function randomKeyDrop() {
 
 function changeMap(world, to, masteredElement) {
   if (to === 'temple') {
+    bgImg = world;
     cGrad1 = cBack2;
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
     currentMap = { ...maps[0] };
     currentEnemy = {};
-    screenTransition('top', () => screenStory(masteredElement));
+    mapEnemies = [];
+    screenTransition('top', () =>
+      screenStory([...texts[masteredElement], ...texts['world' + player.elements.length]], () =>
+        screenWorld()
+      )
+    );
   } else if (to === 'first') {
     codeWorldMaps(world);
     bgImg = world;

@@ -26,36 +26,26 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - Enemy lvlUp => dmg+20% & def+10%
 - Items are in shop and rewards
 - Stuff are in shop or rewards
-- Attacks are in rewards only??
+- Attacks are in rewards andlvlup
 
 ## Todo
 
-- how to assign attacks to enemies?
-  - should they have the same ones as player attacks?
-
 > first release
 
-1. items review: states >< attacks
-2. attacks review: crits, elemental, bonus and malus
-3. story review: new world texts, new element mastered
-4. graphics: colors, animations, transitions
+4. graphics: colors, animations, transitions, backgrounds
 5. sprites: items, stuff, maps, more players?
-6. sounds: attacks, clicks, movements
 
 - review fight screen without canvas? => easier to write, add image etc
 
-- get stronger faster? (enemies gain 20hp per map, player gain dmg+20%...)
-  - panoplie boost??
-  - introduce new attacks? world finished & lvlup?
-    - how to balance with new player attacks?
-
 > randomize
 
-- randomScreen => select random reward (items, stuff, attacks?, boost?)
-  - offer option to pick between average reward (5) or random (1-10) ??
+- rewardScreen => add boost? && option to pick average (5) or random (1-10) ?
 - random dmg => attack have range of dmg
 
 > other
+
+- give enemies more attacks => should they have the same ones as player attacks?
+- handle items curing malus
 
 - handle how is the game saved, loaded
 - new > ask name > intro (dialog screen??) > world
@@ -65,12 +55,12 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - fight system: state icons
 - add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
+- panoplie boost??
 
 - add visuals: player, enemies, maps, => use sprites from online? (avatar, ff)
-- add sounds effects? => rewards, attacks, walk...
+- add sounds effects? => rewards, attacks, movements, clicks
 - how to play on mobile?? => add move controls + clicks
 
-- add randomnes => dmg
 - world: game design? puzzle on some map?
 - quests / achievements
 
@@ -97,4 +87,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4)=128?? hours total dev
+- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2)=130?? hours total dev

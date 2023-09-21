@@ -70,7 +70,7 @@ function screenWorld(keepEnemy) {
     } else if (deadSpotCollision) {
       if (deadSpotCollision.type === 'end-door') {
         stop();
-        screenTransition('top', () => screenStory('outro'));
+        screenTransition('top', () => screenStory(texts['outro'], () => screenEnd(true)));
       } else if (deadSpotCollision.type === 'temple-door') {
         worldCompleted(currentWorld.name);
         stop();

@@ -1,23 +1,21 @@
-// items boosting str, def, elements, ...
-
 const itemsState = [
   { name: 'remedy', effect: { state: '' } },
   // { name: 'waker', effect: { state: 'asleep' } },
   // { name: 'antidote', effect: { state: 'poisoned' } },
   // { name: 'stimulant', effect: { state: 'paralyzed' } },
   // { name: 'defrost', effect: { state: 'frozen' } },
-  { name: 'coolant', effect: { state: 'burnt' } }, // dmg each turn
-  { name: 'dryer', effect: { state: 'drenched' } }, // -str
-  { name: 'oxygen', effect: { state: 'breathless' } }, // -crit
-  { name: 'detangler', effect: { state: 'entangled' } }, // -def
+  { name: 'coolant', effect: { state: 'burnt' } },
+  { name: 'dryer', effect: { state: 'drenched' } },
+  { name: 'oxygen', effect: { state: 'breathless' } },
+  { name: 'detangler', effect: { state: 'entangled' } },
 ];
 
 const itemsFamilies = [
   { name: 'potion', type: 'heal', effect: { hp: 20 }, src: ['shop', 'reward'] },
   { name: 'strength', type: 'temp', effect: { str: 10 }, src: ['shop'] },
   { name: 'defense', type: 'temp', effect: { def: 5 }, src: ['shop'] },
-  // crit?
-  // hp?
+  { name: 'critical', type: 'temp', effect: { crit: 5 }, src: ['shop'] },
+  { name: 'health', type: 'temp', effect: { hpmax: 5 }, src: ['shop'] },
 ];
 
 const itemsAges = ['I', 'II', 'III', 'IV', 'V'];
@@ -69,7 +67,7 @@ function itemUse(item, fromMenu) {
     infoEl.innerText = `${player.name} uses ${c.name}`;
 
     const manageItem = () => {
-      itemEffectsApply(c.effect);
+      itemEffectsApply(c);
       if (c.qtt === 1) {
         player.items = player.items.filter((x) => x.name !== item);
       } else {
@@ -87,14 +85,16 @@ function itemUse(item, fromMenu) {
   }
 }
 
-function itemEffectsApply(obj) {
+function itemEffectsApply(item) {
+  const obj = item.effect;
   for (const key in obj) {
     const value = obj[key];
-    if (['hp'].includes(key)) {
+    if (['hp'].includes(key) && item.type === 'heal') {
+      if (player.hp > player.hpmax) return;
       player.hp + value <= player.hpmax ? (player.hp += value) : (player.hp = player.hpmax);
-    } else if (['str', 'def', 'crit'].includes(key)) {
+    } else if (['str', 'def', 'crit', 'hpmax'].includes(key)) {
       player[key + 'Temp'] += value;
-      // itemBonus[key] ? (itemBonus[key] += value) : (itemBonus[key] = value);
+      if (key === 'hpmax') player.hp += value;
     } else if (key === 'state') {
       // TODO: to test & add tempeffects
       value === '' ? (player.states = []) : player.states.filter((x) => x !== value);
