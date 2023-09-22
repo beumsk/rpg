@@ -257,6 +257,7 @@ kbd {
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
   /* background: var(--white-1); */
 }
 
@@ -411,10 +412,17 @@ kbd {
   background: white;
 }
 
+.fight h2 {
+  font-weight: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .fight .life {
   width: 100%;
   border: solid 2px;
-  height: 2rem;
+  height: 1.5rem;
 }
 .fight .life div {
   height: 100%;
@@ -455,6 +463,7 @@ kbd {
 }
 .fight .enemy .life div {
   background: var(--red);
+  margin-left: auto;
 }
 
 /* SCROLLBAR + EMPTY HIDDEN */

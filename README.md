@@ -35,6 +35,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - BUG with fight enter press, too many between attack and effect?
 - review fight screen without canvas? => easier to write, add image etc
 - graphics: colors, animations, transitions, backgrounds
+- ensure playing after death works + handle load/save?
 
 > randomize
 
@@ -46,7 +47,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - give enemies more attacks => should they have the same ones as player attacks?
 - handle items curing malus
 
-- handle how is the game saved, loaded
 - new > ask name > intro (dialog screen??) > world
 
 - focus button show more info (items, attacks, stuff, rewards)

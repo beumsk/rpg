@@ -81,6 +81,7 @@ function screenFight() {
 
   function stop() {
     document.removeEventListener('keydown', keyFightHandler);
+    fightEl.innerHTML = '';
   }
 
   function createMenu(menuList, menuName) {
