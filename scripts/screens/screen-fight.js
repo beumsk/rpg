@@ -4,16 +4,7 @@ function screenFight() {
 
   audioPlay('fight');
 
-  // TODO: recode this without canvas
-
-  const rectWidth = 120;
-  const rectHeight = 48;
-  let enemyX = 0;
-  const enemyY = textOffset * 2;
-  let playerX = baseW - rectWidth - textOffset * 2;
-  const playerY = baseH - rectHeight - textOffset * 2;
-
-  let animationId;
+  // TODO: save last used action?
 
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
 
@@ -22,6 +13,7 @@ function screenFight() {
   let crtMenu = 'main';
 
   createMenu(mainMenu, 'main');
+  updateFighters(true);
 
   function keyFightHandler(e) {
     const key = e.key;
@@ -36,12 +28,10 @@ function screenFight() {
       index = index !== 0 ? index - 1 : menuLinks.length - 1;
       menuLinks[index].focus();
     } else if (key === 'Enter') {
+      updateFighters();
       const next = fireQueue();
       if (next === 'stop') {
         stop();
-        // itemBonusUndo();
-        // attackBonusUndo();
-        // attackMalusUndo();
         playerResetTemp();
         screenTransition('left', () => screenFightEnd());
       } else if (next === 'play') {
@@ -50,73 +40,48 @@ function screenFight() {
     }
   }
 
-  function start() {
-    document.addEventListener('keydown', keyFightHandler);
+  function updateFighters(animation) {
+    const enemyStats = `lvl:${currentEnemy.lvl} ${currentEnemy.hp}/${
+      currentEnemy.hpmax + currentEnemy.hpmaxTemp
+    }♥ ${currentEnemy.str + currentEnemy.strTemp}↣ ${currentEnemy.def + currentEnemy.defTemp}∇`;
+    const enemyLife = (currentEnemy.hp / (currentEnemy.hpmax + currentEnemy.hpmaxTemp)) * 100;
 
-    const frame = () => {
-      clearCanvas();
+    const playerStats = `lvl:${player.lvl} ${player.hp}/${player.hpmax + player.hpmaxTemp}♥ ${
+      player.str + player.strTemp
+    }↣ ${player.def + player.defTemp}∇`;
+    const playerLife = (player.hp / (player.hpmax + player.hpmaxTemp)) * 100;
 
-      // TODO: show player/enemy hp as text?
-      // TODO: show how much dmg p/e hit?
-      // TODO: add attacks animations
+    if (animation) {
+      fightEl.innerHTML = `
+        <div class="enemy">
+          <div class="box">
+            <h2>${currentEnemy.name}</h2>
+            <p>${enemyStats}</p>
+            <div class="life"><div style="width: ${enemyLife}%"></div></div>
+          </div>
+        </div>
 
-      // animates the boxes
-      if (enemyX < baseW - rectWidth - textOffset * 2) enemyX += 4;
-      if (playerX > textOffset * 2) playerX -= 4;
-
-      // create enemy and player boxes
-      drawRect(enemyX, enemyY, rectWidth, rectHeight, cWhite, cEnemy, 1);
-      drawRect(
-        enemyX + textOffset,
-        enemyY + textOffset * 4,
-        rectWidth - textOffset * 2,
-        textOffset,
-        cEnemy,
-        cEnemy,
-        currentEnemy.hp / (currentEnemy.hpmax + currentEnemy.hpmaxTemp)
-      );
-      drawRect(playerX, playerY, rectWidth, rectHeight, cWhite, cPlayer, 1);
-      drawRect(
-        playerX + textOffset,
-        playerY + textOffset * 4,
-        rectWidth - textOffset * 2,
-        textOffset,
-        cPlayer,
-        cPlayer,
-        player.hp / (player.hpmax + player.hpmaxTemp)
-      );
-      ctx.font = '12px monospace';
-      ctx.fillStyle = cText;
-      ctx.fillText(currentEnemy.name, enemyX + textOffset, enemyY + textOffset * 2);
-      ctx.fillText(player.name, playerX + textOffset, playerY + textOffset * 2);
-      ctx.font = '8px monospace';
-      ctx.fillText(
-        `lvl:${currentEnemy.lvl} ${currentEnemy.hp}/${
-          currentEnemy.hpmax + currentEnemy.hpmaxTemp
-        }♥ ${currentEnemy.str + currentEnemy.strTemp}↣ ${currentEnemy.def + currentEnemy.defTemp}∇`,
-        enemyX + textOffset,
-        enemyY + textOffset * 3
-      );
-      ctx.fillText(
-        `lvl:${player.lvl} ${player.hp}/${player.hpmax + player.hpmaxTemp}♥ ${
-          player.str + player.strTemp
-        }↣ ${player.def + player.defTemp}∇`,
-        playerX + textOffset,
-        playerY + textOffset * 3
-      );
-
-      animationId = requestAnimationFrame(frame);
-    };
-    frame();
+        <div class="player">
+          <div class="box">
+            <h2>${player.name}</h2>
+            <p>${playerStats}</p> 
+            <div class="life"><div style="width: ${playerLife}%"></div></div>
+          </div>
+        </div>
+      `;
+    } else {
+      document.querySelector('.fight .enemy p').innerHTML = enemyStats;
+      document.querySelector('.fight .player p').innerHTML = playerStats;
+      document.querySelector('.fight .enemy .life div').style.width = enemyLife + '%';
+      document.querySelector('.fight .player .life div').style.width = playerLife + '%';
+    }
   }
+
+  document.addEventListener('keydown', keyFightHandler);
 
   function stop() {
-    cancelAnimationFrame(animationId);
     document.removeEventListener('keydown', keyFightHandler);
-    clearCanvas();
   }
-
-  start();
 
   function createMenu(menuList, menuName) {
     crtMenu = menuName;

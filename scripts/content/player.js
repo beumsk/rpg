@@ -32,7 +32,7 @@ const playerBase = {
   stuff: [],
   shop: shopBase,
   options: {
-    audio: false,
+    audio: true,
   },
 };
 

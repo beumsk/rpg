@@ -32,10 +32,9 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > first release
 
-4. graphics: colors, animations, transitions, backgrounds
-5. sprites: items, stuff, maps, more players?
-
+- BUG with fight enter press, too many between attack and effect?
 - review fight screen without canvas? => easier to write, add image etc
+- graphics: colors, animations, transitions, backgrounds
 
 > randomize
 
@@ -52,12 +51,14 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - focus button show more info (items, attacks, stuff, rewards)
 - tutorial map??
+- other player sprites to pick when starting
 - fight system: state icons
 - add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
 - panoplie boost??
 
-- add visuals: player, enemies, maps, => use sprites from online? (avatar, ff)
+- add visuals of items, stuff, attacks...
+- decorate the maps
 - add sounds effects? => rewards, attacks, movements, clicks
 - how to play on mobile?? => add move controls + clicks
 
@@ -78,7 +79,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Useful
 
-- 16px icons creation at: https://www.pixilart.com/draw
+- pixelart 8bit creation at: https://www.pixilart.com/draw
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
   - ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
 - 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k

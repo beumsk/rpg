@@ -248,7 +248,8 @@ kbd {
 }
 
 /* CONTENT */
-.content {
+.content,
+.fight {
   position: absolute;
   width: 44rem;
   height: 24rem;
@@ -392,6 +393,68 @@ kbd {
   margin-top: 2rem;
   padding-top: 2rem;
   border-top: solid 1px;
+}
+
+/* FIGHT */
+.fight .enemy,
+.fight .player {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  padding: 1rem;
+}
+
+.fight .box {
+  padding: 1rem;
+  border: solid 1px;
+  background: white;
+}
+
+.fight .life {
+  width: 100%;
+  border: solid 2px;
+  height: 2rem;
+}
+.fight .life div {
+  height: 100%;
+  transition: width 0.2s linear;
+}
+
+.fight .player {
+  left: 100%;
+  animation: playerSlide 1s ease-in-out forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+@keyframes playerSlide {
+  100% {
+    left: 0;
+  }
+}
+.fight .player .life {
+  border-color: var(--blue);
+}
+.fight .player .life div {
+  background: var(--blue);
+}
+
+.fight .enemy {
+  right: 100%;
+  animation: enemySlide 1s ease-in-out forwards;
+  text-align: right;
+}
+@keyframes enemySlide {
+  100% {
+    right: 0;
+  }
+}
+.fight .enemy .life {
+  border-color: var(--red);
+}
+.fight .enemy .life div {
+  background: var(--red);
 }
 
 /* SCROLLBAR + EMPTY HIDDEN */

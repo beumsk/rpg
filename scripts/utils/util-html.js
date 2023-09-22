@@ -7,6 +7,10 @@ const canvasEl = document.createElement('canvas');
 canvasEl.classList.add('canvas');
 containerEl.appendChild(canvasEl);
 
+const fightEl = document.createElement('div');
+fightEl.classList.add('fight');
+containerEl.appendChild(fightEl);
+
 const contentEl = document.createElement('div');
 contentEl.classList.add('content');
 containerEl.appendChild(contentEl);
