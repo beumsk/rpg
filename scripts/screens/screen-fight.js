@@ -27,7 +27,7 @@ function screenFight() {
       e.preventDefault();
       index = index !== 0 ? index - 1 : menuLinks.length - 1;
       menuLinks[index].focus();
-    } else if (key === 'Enter') {
+    } else if (key === 'Enter' || key === ' ') {
       updateFighters();
       const next = fireQueue();
       if (next === 'stop') {

@@ -6,7 +6,6 @@ const playerBase = {
   y: 2 * step,
   w: step,
   h: step,
-  // fill: cPlayer,
   img: './img/player.png',
   hp: 20,
   hpmax: 20,

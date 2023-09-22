@@ -1,5 +1,5 @@
 function screenHow() {
-  canvas.style.background = '#ddd';
+  canvas.style.background = cWhite2;
 
   contentEl.innerHTML = `
     <div class="start">

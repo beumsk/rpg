@@ -147,6 +147,11 @@ function screenMenu() {
       if (crt.dataset.value === 'audio') {
         audioToggle();
         createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crtMenu);
+      } else if (crt.dataset.value === 'save') {
+        gameSave();
+        createMenu(player[crtMenu], crtMenu);
+      } else if (crt.dataset.value === 'load') {
+        // gameLoad();
       }
     }
     updateState();

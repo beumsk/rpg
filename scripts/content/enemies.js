@@ -23,6 +23,7 @@ function codeMapEnemies(lvl, world) {
       // let lmt = element === 'master' ? elements[rand(elements.length)] : element;
 
       // GD: master have 4 elements attacks
+      // TODO: increase base dmg??
       let crtMoves =
         element === 'master'
           ? elements.map((x) => ({

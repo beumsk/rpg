@@ -1,29 +1,24 @@
 function screenStart() {
-  canvas.style.background = '#ddd';
-
-  // reset
-  cGrad1 = cBack2;
-  cGrad2 = cBack4;
-  stateEl.style.background = cBack2;
-  player = { ...playerBase };
-  maps = [...mapsBase];
-  currentMap = { ...maps[0] };
-  stuffEquip(stuffBase);
-  stuffRewarded = [];
-
   let index = 0;
   let startButtons = contentEl.getElementsByTagName('button');
 
-  // TODO: add load game logic
   contentEl.innerHTML = `
     <div class="start">
       <h1 style="color: var(--red)">Tavara</h1>
-      <button data-type="start">Start your adventure</button>
-      <button data-type="continue">Continue your adventure</button>
+      <button data-type="start">Start a new adventure</button>
       <button data-type="how">How to play</button>
       <button data-type="credit">Credit</button>
     </div>
   `;
+
+  // TODO: add export/import file ?
+  if (localStorage.getItem('game')) {
+    const startEl = document.querySelector('[data-type="start"]');
+    startEl.insertAdjacentHTML(
+      'afterend',
+      `<button data-type="continue">Continue your adventure</button>`
+    );
+  }
 
   Array.from(startButtons).map((x) => x.addEventListener('click', startClick));
   startButtons[0].focus();
@@ -50,10 +45,12 @@ function screenStart() {
     let crt = e.target;
     stop();
     if (crt.dataset.type === 'start') {
+      gameReset();
       // screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld()));
       screenTransition('bottom', () => screenWorld());
     } else if (crt.dataset.type === 'continue') {
-      // TODO: add continue feature
+      gameLoad();
+      screenTransition('bottom', () => screenWorld());
     } else if (crt.dataset.type === 'how') {
       screenHow();
     } else if (crt.dataset.type === 'credit') {

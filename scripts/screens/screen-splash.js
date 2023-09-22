@@ -1,5 +1,5 @@
 function screenSplash() {
-  canvas.style.background = '#ddd';
+  canvas.style.background = cWhite2;
 
   function loadImage(src) {
     return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 function screenStory(textArr, screenFunc) {
-  canvas.style.background = '#ddd';
+  canvas.style.background = cWhite2;
 
   let i = 0;
 

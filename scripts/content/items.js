@@ -11,11 +11,11 @@ const itemsState = [
 ];
 
 const itemsFamilies = [
-  { name: 'potion', type: 'heal', effect: { hp: 20 }, src: ['shop', 'reward'] },
+  { name: 'potion', type: 'heal', effect: { hp: 40 }, src: ['shop', 'reward'] },
   { name: 'strength', type: 'temp', effect: { str: 10 }, src: ['shop'] },
   { name: 'defense', type: 'temp', effect: { def: 5 }, src: ['shop'] },
   { name: 'critical', type: 'temp', effect: { crit: 5 }, src: ['shop'] },
-  { name: 'health', type: 'temp', effect: { hpmax: 5 }, src: ['shop'] },
+  { name: 'health', type: 'temp', effect: { hpmax: 20 }, src: ['shop'] },
 ];
 
 const itemsAges = ['I', 'II', 'III', 'IV', 'V'];

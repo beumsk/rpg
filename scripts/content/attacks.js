@@ -109,8 +109,8 @@ function attackElementApply(element, obj, isBonus, isSide, isCrit) {
     isBonus ? (obj.strTemp += calcBM(10)) : (obj.strTemp -= calcBM(10));
     return `${obj.name} strength ${isBonus ? 'in' : 'de'}creased`;
   } else if (element === 'fire') {
-    isBonus ? (obj.hp += calcBM(5)) : (obj.hp -= calcBM(5));
-    isBonus ? (obj.hpmaxTemp += calcBM(5)) : (obj.hpmaxTemp -= calcBM(5));
+    isBonus ? (obj.hp += calcBM(10)) : (obj.hp -= calcBM(10));
+    isBonus ? (obj.hpmaxTemp += calcBM(10)) : (obj.hpmaxTemp -= calcBM(10));
     return `${obj.name} hp ${isBonus ? 'in' : 'de'}creased`;
   }
 }

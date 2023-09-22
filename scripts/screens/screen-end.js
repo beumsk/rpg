@@ -1,5 +1,11 @@
 function screenEnd(win) {
-  canvas.style.backgroundImage = '';
+  canvas.style.background = cWhite2;
+
+  bgImg = 'temple';
+  cGrad1 = cBack2;
+  cGrad2 = cBack4;
+  stateEl.style.background = cBack2;
+  contentEl.style.background = 'transparent';
 
   stateEl.innerHTML = '';
 
