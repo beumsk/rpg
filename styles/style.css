@@ -118,6 +118,20 @@ kbd {
   }
 }
 
+.version {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 0.5rem;
+  color: var(--black-1);
+  text-decoration: none;
+  padding: 0.5rem;
+  opacity: 0.5;
+}
+.version:hover {
+  opacity: 1;
+}
+
 .container {
   position: relative;
   width: 44rem;

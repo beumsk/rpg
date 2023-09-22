@@ -32,6 +32,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > first release
 
+- test difficulty of game & add difficulty option?
 - BUG with fight enter press, too many between attack and effect?
 - graphics: colors, animations, transitions, backgrounds
 
@@ -65,7 +66,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Ideas
 
-- save/load via download/upload file?
+- save/load via download/upload file? (encrypt data to avoid cheat?)
 - first fight intro+tuto against master that we lose as we only have basic attacks?
 - quests in menu?
   - npc as deadSpots => when hitting => dialog screen? and start quest
@@ -87,4 +88,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 5.08.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2)=130?? hours total dev
+- 22.09.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4)=134?? hours total dev

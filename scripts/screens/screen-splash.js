@@ -19,7 +19,7 @@ function screenSplash() {
         contentEl.innerHTML = `
           <div class="splash">
             <img src='./img/logo.png', class="logo" />
-            <h1 style="color: var(--red)">Tavara</h1>
+            <h1 style="color: var(--red)">Tarava</h1>
             <p>Press any key</p>
           </div>
         `;

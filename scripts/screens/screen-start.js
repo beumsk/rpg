@@ -4,7 +4,7 @@ function screenStart() {
 
   contentEl.innerHTML = `
     <div class="start">
-      <h1 style="color: var(--red)">Tavara</h1>
+      <h1 style="color: var(--red)">Tarava</h1>
       <button data-type="start">Start a new adventure</button>
       <button data-type="how">How to play</button>
       <button data-type="credit">Credit</button>
