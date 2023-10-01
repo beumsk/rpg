@@ -13,7 +13,9 @@ function scaleCanvas() {
   document.documentElement.style.fontSize = 8 * newScale + 'px';
   console.log(document.documentElement.style.fontSize, scale, newScale);
 }
-scaleCanvas();
+window.onload = function() {
+  scaleCanvas();
+};
 
 function rand(val, step = 1, not) {
   let r;
