@@ -7,10 +7,10 @@ function scaleCanvas() {
   if (newScale !== scale) {
     canvasEl.width = baseW * newScale;
     canvasEl.height = baseH * newScale;
-    document.documentElement.style.fontSize = 8 * newScale;
     ctx.setTransform(newScale, 0, 0, newScale, 0, 0);
     scale = newScale;
   }
+  document.documentElement.style.fontSize = 8 * newScale + 'px';
 }
 scaleCanvas();
 
