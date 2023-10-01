@@ -11,6 +11,7 @@ function scaleCanvas() {
     scale = newScale;
   }
   document.documentElement.style.fontSize = 8 * newScale + 'px';
+  console.log(document.documentElement.style.fontSize, scale, newScale);
 }
 scaleCanvas();
 
