@@ -19,9 +19,11 @@ function screenEnd(win) {
   `;
 
   document.addEventListener('keydown', keyEndHandler);
+  contentEl.addEventListener('click', keyEndHandler);
 
   function keyEndHandler() {
     document.removeEventListener('keydown', keyEndHandler);
+    contentEl.removeEventListener('click', keyEndHandler);
     screenSplash();
   }
 }

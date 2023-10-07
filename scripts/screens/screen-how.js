@@ -13,6 +13,7 @@ function screenHow() {
   `;
 
   document.addEventListener('keydown', keyHowHandler);
+  contentEl.addEventListener('click', keyHowHandler);
 
   function keyHowHandler() {
     stop();
@@ -20,6 +21,7 @@ function screenHow() {
 
   function stop() {
     document.removeEventListener('keydown', keyHowHandler);
+    contentEl.removeEventListener('click', keyHowHandler);
     contentEl.innerHTML = '';
     screenStart();
   }

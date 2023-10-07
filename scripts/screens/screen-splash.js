@@ -16,6 +16,7 @@ function screenSplash() {
       imagesLoaded.push(...loadedImages);
       if (loadedImages) {
         document.addEventListener('keydown', keySplashHandler);
+        contentEl.addEventListener('click', keySplashHandler);
         contentEl.innerHTML = `
           <div class="splash">
             <img src='./img/logo.png', class="logo" />
@@ -33,6 +34,7 @@ function screenSplash() {
 
   function keySplashHandler() {
     document.removeEventListener('keydown', keySplashHandler);
+    contentEl.removeEventListener('click', keySplashHandler);
     audioPlay('start');
     screenTransition('bottom', () => screenStart());
   }

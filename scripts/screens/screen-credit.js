@@ -11,6 +11,7 @@ function screenCredit() {
   `;
 
   document.addEventListener('keydown', keyCreditHandler);
+  contentEl.addEventListener('click', keyCreditHandler);
 
   function keyCreditHandler() {
     stop();
@@ -18,6 +19,7 @@ function screenCredit() {
 
   function stop() {
     document.removeEventListener('keydown', keyCreditHandler);
+    contentEl.removeEventListener('click', keyCreditHandler);
     contentEl.innerHTML = '';
     screenStart();
   }

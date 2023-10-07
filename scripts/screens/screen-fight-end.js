@@ -37,9 +37,11 @@ function screenFightEnd() {
   updateState();
 
   document.addEventListener('keydown', keyFightEndHandler);
+  contentEl.addEventListener('click', keyFightEndHandler);
 
   function keyFightEndHandler() {
     document.removeEventListener('keydown', keyFightEndHandler);
+    contentEl.removeEventListener('click', keyFightEndHandler);
     contentEl.innerHTML = '';
     if (currentEnemy.hp === 0) {
       // if (player.fightEnd.lvlUp) {

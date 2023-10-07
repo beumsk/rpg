@@ -24,6 +24,10 @@
   --black: rgb(0, 0, 0);
 }
 
+html {
+  font-size: 8px;
+}
+
 html,
 body {
   height: 100%;
@@ -136,12 +140,15 @@ kbd {
   position: relative;
   width: 44rem;
   height: 24rem;
-  background: white;
+  /* background: white; */
 }
 
 .canvas {
+  width: 44rem;
+  height: 24rem;
   image-rendering: pixelated;
   outline: solid 1px;
+  /* transition: all 0.4s ease-in-out; */
 }
 
 /* STATE */
@@ -309,6 +316,12 @@ kbd {
   100% {
     width: 2rem;
   }
+}
+.splash h1 {
+  color: var(--red);
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
 }
 
 /* CONTENT Start */

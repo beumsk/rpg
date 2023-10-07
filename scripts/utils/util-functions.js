@@ -5,17 +5,16 @@ function scaleCanvas() {
   let newScale = Math.min(Math.floor(winW / baseW), Math.floor(winH / (baseH + menuHeight * 2)));
   if (!newScale) newScale = 1;
   if (newScale !== scale) {
+    canvasEl.width = baseW * newScale;
+    canvasEl.height = baseH * newScale;
+    ctx.setTransform(newScale, 0, 0, newScale, 0, 0);
+    document.documentElement.style.fontSize = 8 * newScale + 'px';
     scale = newScale;
   }
-  canvasEl.width = baseW * newScale;
-  canvasEl.height = baseH * newScale;
-  ctx.setTransform(newScale, 0, 0, newScale, 0, 0);
-  document.documentElement.style.fontSize = 8 * newScale + 'px';
-  console.log(document.documentElement.style.fontSize, scale, newScale);
 }
-window.onload = function() {
-  scaleCanvas();
-};
+// window.onload = function () {
+scaleCanvas();
+// };
 
 function rand(val, step = 1, not) {
   let r;
