@@ -66,6 +66,9 @@ button {
   outline: none;
   margin: 0;
 }
+button:focus {
+  color: var(--red);
+}
 
 audio:not([controls]) {
   display: none;
@@ -187,7 +190,7 @@ kbd {
   right: 0;
   height: 4rem;
   font-size: 1.5rem;
-  padding: 0 1rem;
+  padding: 0 5rem 0 1rem;
   background: white;
   outline: solid 1px;
   display: flex;
@@ -201,9 +204,6 @@ kbd {
 .info button:not(:first-of-type) {
   padding-left: 1rem;
 }
-.info button:focus {
-  color: var(--red);
-}
 
 .info a:not(:first-of-type)::after {
   content: '';
@@ -212,6 +212,36 @@ kbd {
   top: 0;
   bottom: 0;
   border-left: solid 1px var(--black-3);
+}
+
+/* ACTION */
+.action-queue {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  border-left: solid 1px;
+  text-align: center;
+}
+.action-queue:empty {
+  display: none;
+}
+
+/* .action-move {
+} */
+
+.action-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  border-left: solid 1px;
+  text-align: center;
+}
+.action-menu:empty {
+  display: none;
 }
 
 /* TRANSITION */
@@ -341,6 +371,10 @@ kbd {
 .content .start button {
   font-size: 1.5rem;
   margin-bottom: 0.5em;
+}
+.content .start button.back {
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
 /* CONTENT Text */

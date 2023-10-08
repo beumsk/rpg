@@ -1,6 +1,8 @@
 function screenHow() {
   canvas.style.background = cWhite2;
 
+  const backButton = contentEl.getElementsByClassName('back');
+
   contentEl.innerHTML = `
     <div class="start">
       <h1>How to play</h1>
@@ -9,11 +11,12 @@ function screenHow() {
       <p><kbd>←↑↓→</kbd>: to navigate menus and select buttons</p>
       <p><kbd>Enter</kbd>: to validate selection</p>
       <p><kbd>Return</kbd>: to go back</p>
+      <button class="back">← Back</button>
     </div>
   `;
 
   document.addEventListener('keydown', keyHowHandler);
-  contentEl.addEventListener('click', keyHowHandler);
+  backButton[0].addEventListener('click', keyHowHandler);
 
   function keyHowHandler() {
     stop();
@@ -21,7 +24,7 @@ function screenHow() {
 
   function stop() {
     document.removeEventListener('keydown', keyHowHandler);
-    contentEl.removeEventListener('click', keyHowHandler);
+    backButton[0].removeEventListener('click', keyHowHandler);
     contentEl.innerHTML = '';
     screenStart();
   }

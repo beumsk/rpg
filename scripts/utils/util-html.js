@@ -26,3 +26,15 @@ containerEl.appendChild(stateEl);
 const infoEl = document.createElement('div');
 infoEl.classList.add('info');
 containerEl.appendChild(infoEl);
+
+const actionQueueEl = document.createElement('button');
+actionQueueEl.classList.add('action-queue');
+containerEl.appendChild(actionQueueEl);
+
+// const actionMoveEl = document.createElement('div');
+// actionMoveEl.classList.add('action-move');
+// containerEl.appendChild(actionMoveEl);
+
+const actionMenuEl = document.createElement('button');
+actionMenuEl.classList.add('action-menu');
+containerEl.appendChild(actionMenuEl);

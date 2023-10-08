@@ -160,6 +160,8 @@ function enemyAttack(attack) {
           const info = attackElementApply(c.element, currentEnemy, true, true, false);
           infoEl.innerText = `Critical hit! ${info}`;
         }
+      } else {
+        infoEl.innerText = '...';
       }
 
       // GD: using an attack, gives the enemy that element

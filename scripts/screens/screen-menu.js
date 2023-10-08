@@ -10,7 +10,7 @@ function screenMenu() {
     { name: 'stuff' },
     { name: 'shop' },
     { name: 'options' },
-    { name: 'exit' },
+    { name: '← exit' },
   ];
 
   let index = 0;
@@ -32,15 +32,19 @@ function screenMenu() {
 
   createMenu(mainMenu, 'main');
 
+  function createMainMenu() {
+    infoEl.innerText = ' ';
+    crtMenu = 'main';
+    createMenu(mainMenu, 'main');
+  }
+
   function keyMenuHandler(e) {
     const key = e.key;
     if (key === 'ArrowLeft' || key === 'Backspace') {
       if (crtMenu === 'main') {
         stop();
       } else {
-        infoEl.innerText = ' ';
-        crtMenu = 'main';
-        createMenu(mainMenu, 'main');
+        createMainMenu();
       }
     } else if (key === 'ArrowUp') {
       e.preventDefault();
@@ -72,7 +76,6 @@ function screenMenu() {
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
         const linkEl = document.createElement('button');
-        linkEl.href = '';
         if (menuName === 'attacks') {
           linkEl.innerText = `${x.name}: ${x.dmg ? x.dmg + 'dmg (' + x.element + ')' : x.state}`;
         } else if (menuName === 'items') {
@@ -102,8 +105,17 @@ function screenMenu() {
         if (i === index) linkEl.focus();
         linkEl.addEventListener('click', linkClick);
       });
+      if (menuName !== 'main') {
+        const backLink = document.createElement('button');
+        backLink.innerText = '← back';
+        backLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          createMainMenu();
+        });
+        contentEl.querySelector('.menu').appendChild(backLink);
+      }
     } else {
-      createMenu(mainMenu, 'main');
+      createMainMenu();
     }
   }
 
@@ -111,7 +123,7 @@ function screenMenu() {
     e.preventDefault();
     let crt = e.target;
     if (crtMenu === 'main') {
-      if (crt.dataset.value === 'exit') {
+      if (crt.dataset.value === '← exit') {
         stop();
       } else if (crt.dataset.value === 'stats') {
         statsMenu = codeStatsMenu();

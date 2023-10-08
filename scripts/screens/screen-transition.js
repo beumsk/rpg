@@ -9,6 +9,8 @@ function screenTransition(dir, screenFunc = screenWorld) {
   transitionEl.className = `transition to-${dir}`;
   transitionEl.style.animationDuration = duration + 's';
 
+  actionMenuEl.innerText = '';
+
   setTimeout(() => {
     screenFunc();
     transitionEl.className = 'transition';

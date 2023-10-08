@@ -28,15 +28,25 @@ function screenFight() {
       index = index !== 0 ? index - 1 : menuLinks.length - 1;
       menuLinks[index].focus();
     } else if (key === 'Enter' || key === ' ') {
-      updateFighters();
-      const next = fireQueue();
-      if (next === 'stop') {
-        stop();
-        playerResetTemp();
-        screenTransition('left', () => screenFightEnd());
-      } else if (next === 'play') {
-        createMenu(mainMenu, 'main');
-      }
+      queueRun();
+    }
+  }
+
+  function queueRun() {
+    updateFighters();
+    const next = fireQueue();
+    if (next === 'stop') {
+      actionQueueEl.innerText = '';
+      actionQueueEl.removeEventListener('click', queueRun);
+      infoEl.removeEventListener('click', queueRun);
+      stop();
+      playerResetTemp();
+      screenTransition('left', () => screenFightEnd());
+    } else if (next === 'play') {
+      actionQueueEl.innerText = '';
+      actionQueueEl.removeEventListener('click', queueRun);
+      infoEl.removeEventListener('click', queueRun);
+      createMenu(mainMenu, 'main');
     }
   }
 
@@ -90,7 +100,6 @@ function screenFight() {
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
         const linkEl = document.createElement('button');
-        linkEl.href = '';
         linkEl.innerText = x.name;
         linkEl.dataset.menu = menuName;
         linkEl.dataset.value = x.name;
@@ -113,8 +122,14 @@ function screenFight() {
       }
     } else if (crtMenu === 'attacks') {
       playerAttack(crt.innerText);
+      actionQueueEl.innerText = '→';
+      actionQueueEl.addEventListener('click', queueRun);
+      infoEl.addEventListener('click', queueRun);
     } else if (crtMenu === 'items') {
       itemUse(crt.innerText, false);
+      actionQueueEl.innerText = '→';
+      actionQueueEl.addEventListener('click', queueRun);
+      infoEl.addEventListener('click', queueRun);
     }
   }
 }

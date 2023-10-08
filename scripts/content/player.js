@@ -65,6 +65,8 @@ function playerAttack(attack) {
           const info = attackElementApply(c.element, player, true, true, false);
           infoEl.innerText = `Critical hit! ${info}`;
         }
+      } else {
+        infoEl.innerText = '...';
       }
 
       // GD: using an attack, gives the player that element

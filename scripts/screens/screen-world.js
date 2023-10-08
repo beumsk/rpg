@@ -34,6 +34,14 @@ function screenWorld(keepEnemy) {
 
   let animationId;
 
+  actionMenuEl.innerText = 'Menu';
+  function menuClick() {
+    stop();
+    actionMenuEl.removeEventListener('click', menuClick);
+    screenMenu();
+  }
+  actionMenuEl.addEventListener('click', menuClick);
+
   function keyWorldHandler(e) {
     if (infoQueue.length) return fireQueue();
     const key = e.key;
@@ -127,6 +135,7 @@ function screenWorld(keepEnemy) {
 
   function stop() {
     cancelAnimationFrame(animationId);
+    actionMenuEl.innerText = '';
     document.removeEventListener('keydown', keyWorldHandler);
     clearCanvas();
   }
