@@ -42,31 +42,51 @@ function screenWorld(keepEnemy) {
   }
   actionMenuEl.addEventListener('click', menuClick);
 
+  actionMoveEl.style.display = 'block';
+
+  function movePlayer(dir) {
+    return function () {
+      const oldPos = { x: player.x, y: player.y };
+      if (dir === 'up' && player.y >= step) {
+        player.y -= step;
+      } else if (dir === 'down' && player.y < baseH - player.h) {
+        player.y += step;
+      } else if (dir === 'left' && player.x >= step) {
+        player.x -= step;
+      } else if (dir === 'right' && player.x < baseW - player.w) {
+        player.x += step;
+      }
+      infoEl.innerText = ` `;
+      checkCollision(oldPos);
+    };
+  }
+  const moveUp = movePlayer('up');
+  const moveDown = movePlayer('down');
+  const moveLeft = movePlayer('left');
+  const moveRight = movePlayer('right');
+
   function keyWorldHandler(e) {
     if (infoQueue.length) return fireQueue();
     const key = e.key;
-    const oldPos = { x: player.x, y: player.y };
-    if (key === 'ArrowUp' && player.y >= step) {
-      player.y -= step;
-      infoEl.innerText = ` `;
-    } else if (key === 'ArrowDown' && player.y < baseH - player.h) {
-      player.y += step;
-      infoEl.innerText = ` `;
-    } else if (key === 'ArrowLeft' && player.x >= step) {
-      player.x -= step;
-      infoEl.innerText = ` `;
-    } else if (key === 'ArrowRight' && player.x < baseW - player.w) {
-      player.x += step;
-      infoEl.innerText = ` `;
+    if (key === 'ArrowUp') {
+      moveUp();
+    } else if (key === 'ArrowDown') {
+      moveDown();
+    } else if (key === 'ArrowLeft') {
+      moveLeft();
+    } else if (key === 'ArrowRight') {
+      moveRight();
     } else if (key === 'Escape') {
       stop();
       document.removeEventListener('keydown', keyWorldHandler);
       screenMenu();
     }
-    checkCollision(oldPos);
-
-    ctx.fillRect(player.x, player.y, player.w, player.h);
   }
+
+  actionMoveEl.querySelector('.up').addEventListener('click', moveUp);
+  actionMoveEl.querySelector('.down').addEventListener('click', moveDown);
+  actionMoveEl.querySelector('.left').addEventListener('click', moveLeft);
+  actionMoveEl.querySelector('.right').addEventListener('click', moveRight);
 
   function checkCollision(oldPos) {
     const deadSpotCollision = currentMap.deadSpots.find(
@@ -136,8 +156,13 @@ function screenWorld(keepEnemy) {
   function stop() {
     cancelAnimationFrame(animationId);
     actionMenuEl.innerText = '';
+    actionMoveEl.style.display = 'none';
     document.removeEventListener('keydown', keyWorldHandler);
     clearCanvas();
+    actionMoveEl.querySelector('.up').removeEventListener('click', moveUp);
+    actionMoveEl.querySelector('.down').removeEventListener('click', moveDown);
+    actionMoveEl.querySelector('.left').removeEventListener('click', moveLeft);
+    actionMoveEl.querySelector('.right').removeEventListener('click', moveRight);
   }
 
   start();

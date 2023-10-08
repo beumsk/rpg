@@ -32,8 +32,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > first release
 
-- add mobile support => touch instead of keyboard
-  - move player, ...?
 - test difficulty of game & add difficulty option?
 - BUG with fight enter press, too many between attack and effect?
 - graphics: colors, animations, transitions, backgrounds
@@ -83,7 +81,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - pixelart 8bit creation at: https://www.pixilart.com/draw
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
-  - ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ ← → // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
+- ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ ← → ▴ ▾ ◂ ▸ // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
 - 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k
 - sprites characters: http://www.videogamesprites.net/FinalFantasy5/
 - sprites: https://ccrgeek.wordpress.com/rpg-maker-ace/graphics/

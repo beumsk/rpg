@@ -31,9 +31,20 @@ const actionQueueEl = document.createElement('button');
 actionQueueEl.classList.add('action-queue');
 containerEl.appendChild(actionQueueEl);
 
-// const actionMoveEl = document.createElement('div');
-// actionMoveEl.classList.add('action-move');
-// containerEl.appendChild(actionMoveEl);
+const actionBackEl = document.createElement('button');
+actionBackEl.classList.add('action-back');
+containerEl.appendChild(actionBackEl);
+
+const actionMoveEl = document.createElement('div');
+actionMoveEl.classList.add('action-moves');
+actionMoveEl.innerHTML = ` 
+  <button class="up">▴</button>
+  <button class="down">▾</button>
+  <button class="left">◂</button>
+  <button class="right">▸</button>
+`;
+actionMoveEl.style.display = 'none';
+containerEl.appendChild(actionMoveEl);
 
 const actionMenuEl = document.createElement('button');
 actionMenuEl.classList.add('action-menu');

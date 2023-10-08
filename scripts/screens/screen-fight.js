@@ -18,7 +18,7 @@ function screenFight() {
   function keyFightHandler(e) {
     const key = e.key;
     if (key === 'Backspace' || key === 'Escape') {
-      createMenu(mainMenu, 'main');
+      backToMain();
     } else if (key === 'ArrowRight') {
       e.preventDefault();
       index = index !== menuLinks.length - 1 ? index + 1 : 0;
@@ -108,9 +108,19 @@ function screenFight() {
         if (i === index) linkEl.focus();
         linkEl.addEventListener('click', linkClick);
       });
+      if (menuName !== 'main') {
+        actionBackEl.innerText = 'back';
+        actionBackEl.addEventListener('click', backToMain);
+      } else {
+        actionBackEl.innerText = '';
+      }
     } else {
-      createMenu(mainMenu, 'main');
+      backToMain();
     }
+  }
+
+  function backToMain() {
+    createMenu(mainMenu, 'main');
   }
 
   function linkClick(e) {
@@ -124,11 +134,13 @@ function screenFight() {
       playerAttack(crt.innerText);
       actionQueueEl.innerText = '→';
       actionQueueEl.addEventListener('click', queueRun);
+      actionBackEl.innerText = '';
       infoEl.addEventListener('click', queueRun);
     } else if (crtMenu === 'items') {
       itemUse(crt.innerText, false);
       actionQueueEl.innerText = '→';
       actionQueueEl.addEventListener('click', queueRun);
+      actionBackEl.innerText = '';
       infoEl.addEventListener('click', queueRun);
     }
   }
