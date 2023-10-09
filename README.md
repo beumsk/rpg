@@ -33,7 +33,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 > first release
 
 - test difficulty of game & add difficulty option?
-- BUG with fight enter press, too many between attack and effect?
 - graphics: colors, animations, transitions, backgrounds
 
 > randomize

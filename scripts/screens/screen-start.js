@@ -46,8 +46,8 @@ function screenStart() {
     stop();
     if (crt.dataset.type === 'start') {
       gameReset();
-      // screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld()));
-      screenTransition('bottom', () => screenWorld());
+      screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld()));
+      // screenTransition('bottom', () => screenWorld());
     } else if (crt.dataset.type === 'continue') {
       gameLoad();
       screenTransition('bottom', () => screenWorld());
