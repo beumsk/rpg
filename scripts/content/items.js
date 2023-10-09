@@ -108,7 +108,7 @@ function itemFind(itemList, qtt) {
       player.items.find((i) => i.name === x.name).qtt += Number(qtt) || 1;
     } else {
       const foundItem = items.find((i) => i.name === x.name);
-      player.items.push({ ...foundItem, qtt: 1 });
+      player.items.push({ ...foundItem, qtt: Number(qtt) || 1 });
     }
   });
 }

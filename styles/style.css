@@ -189,7 +189,7 @@ kbd {
   left: 0;
   right: 0;
   height: 4rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding: 0 5rem;
   background: white;
   outline: solid 1px;
@@ -515,10 +515,22 @@ kbd {
   overflow: hidden;
 }
 
+.fight p img {
+  height: 0.875rem;
+  position: relative;
+  top: 0.125rem;
+}
+
 .fight .life {
   width: 100%;
   border: solid 2px;
   height: 1.5rem;
+}
+.fight .life::after {
+  content: attr(data-life);
+  position: relative;
+  top: -1.25rem;
+  padding: 0 0.5rem;
 }
 .fight .life div {
   height: 100%;

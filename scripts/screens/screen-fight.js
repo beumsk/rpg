@@ -51,14 +51,22 @@ function screenFight() {
   }
 
   function updateFighters(animation) {
-    const enemyStats = `lvl:${currentEnemy.lvl} ${currentEnemy.hp}/${
-      currentEnemy.hpmax + currentEnemy.hpmaxTemp
-    }♥ ${currentEnemy.str + currentEnemy.strTemp}↣ ${currentEnemy.def + currentEnemy.defTemp}∇`;
+    const enemyElement = currentEnemy.element
+      ? `<img src="./img/${currentEnemy.element}.png" alt="${currentEnemy.element}" />`
+      : '<span style="width:0.875rem;display:inline-block;"></span>';
+    const enemyStats = `lvl:${currentEnemy.lvl} ${enemyElement} ${
+      currentEnemy.str + currentEnemy.strTemp
+    }↣ ${currentEnemy.def + currentEnemy.defTemp}∇`;
+    const enemyHP = `${currentEnemy.hp}/${currentEnemy.hpmax + currentEnemy.hpmaxTemp}`;
     const enemyLife = (currentEnemy.hp / (currentEnemy.hpmax + currentEnemy.hpmaxTemp)) * 100;
 
-    const playerStats = `lvl:${player.lvl} ${player.hp}/${player.hpmax + player.hpmaxTemp}♥ ${
-      player.str + player.strTemp
-    }↣ ${player.def + player.defTemp}∇`;
+    const playerElement = player.element
+      ? `<img src="./img/${player.element}.png" alt="${player.element}" />`
+      : '<span style="width:0.875rem;display:inline-block;"></span>';
+    const playerStats = `lvl:${player.lvl} ${playerElement} ${player.str + player.strTemp}↣ ${
+      player.def + player.defTemp
+    }∇`;
+    const playerHP = `${player.hp}/${player.hpmax + player.hpmaxTemp}`;
     const playerLife = (player.hp / (player.hpmax + player.hpmaxTemp)) * 100;
 
     if (animation) {
@@ -67,7 +75,7 @@ function screenFight() {
           <div class="box">
             <h2>${currentEnemy.name}</h2>
             <p>${enemyStats}</p>
-            <div class="life"><div style="width: ${enemyLife}%"></div></div>
+            <div class="life" data-life="${enemyHP}"><div style="width: ${enemyLife}%"></div></div>
           </div>
         </div>
 
@@ -75,13 +83,15 @@ function screenFight() {
           <div class="box">
             <h2>${player.name}</h2>
             <p>${playerStats}</p> 
-            <div class="life"><div style="width: ${playerLife}%"></div></div>
+            <div class="life" data-life="${playerHP}"><div style="width: ${playerLife}%"></div></div>
           </div>
         </div>
       `;
     } else {
       document.querySelector('.fight .enemy p').innerHTML = enemyStats;
       document.querySelector('.fight .player p').innerHTML = playerStats;
+      document.querySelector('.fight .enemy .life').dataset.life = enemyHP;
+      document.querySelector('.fight .player .life').dataset.life = playerHP;
       document.querySelector('.fight .enemy .life div').style.width = enemyLife + '%';
       document.querySelector('.fight .player .life div').style.width = playerLife + '%';
     }

@@ -120,7 +120,7 @@ function screenReward(from) {
     } else if (crt.dataset.type === 'item') {
       itemFind(
         items.filter((i) => i.name === crt.dataset.value),
-        crt.dataset.qtt
+        Number(crt.dataset.qtt)
       );
     } else if (crt.dataset.type === 'stuf') {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
