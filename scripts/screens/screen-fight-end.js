@@ -46,7 +46,7 @@ function screenFightEnd() {
     if (currentEnemy.hp === 0) {
       // if (player.fightEnd.lvlUp) {
       if (player.fightEnd.lvlUp && player.lvl % 3 === 0) {
-        // TODO: ensure this is often enough
+        // TODO: ensure this is often enough => lvls 3,6,9,...
         screenTransition('right', () => screenReward('lvl'));
       } else {
         screenTransition('left', () => screenWorld());

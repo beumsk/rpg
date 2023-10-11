@@ -119,7 +119,7 @@ kbd {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 10000;
     background: rgba(0, 0, 0, 0.4);
     pointer-events: none;
   }
@@ -433,9 +433,37 @@ kbd {
   padding: 1rem;
 }
 
+.content .menu > div {
+  position: relative;
+}
+
 .content .menu button {
   padding: 0.25rem;
   border: none;
+}
+.content .menu button:focus + .popup,
+.content .menu button:hover + .popup {
+  display: block;
+}
+
+.content .menu .popup {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  background: var(--white-1);
+  left: 100%;
+  top: 0;
+  padding: 0 1rem;
+  margin-left: 0.5rem;
+  border: solid 1px;
+  white-space: nowrap;
+}
+.content .menu .popup:empty {
+  display: none !important;
+}
+.content .menu .popup h3 {
+  margin: 0.5rem 0;
+  text-transform: uppercase;
 }
 
 /* CONTENT Reward */
@@ -451,6 +479,9 @@ kbd {
   justify-content: center;
   gap: 2rem;
 }
+.content .reward .rewards > div {
+  position: relative;
+}
 .content .reward .rewards button {
   padding: 1rem;
   border: solid 1px;
@@ -465,6 +496,33 @@ kbd {
 }
 .content .reward .rewards button:focus {
   outline: solid 2px rgba(0, 0, 0, 0.4);
+}
+.content .reward .rewards button:focus + .popup,
+.content .reward .rewards button:hover + .popup {
+  display: block;
+}
+
+.content .reward .rewards .popup {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  background: var(--white-1);
+  top: 100%;
+  left: 0;
+  padding: 0 1rem;
+  margin-top: 0.5rem;
+  border: solid 1px;
+  white-space: nowrap;
+}
+.content .reward .rewards .popup:empty {
+  display: none !important;
+}
+.content .reward .rewards .popup h3 {
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+}
+.content .reward .rewards .popup p {
+  margin: 0.5rem 0;
 }
 
 /* CONTENT Fight end */

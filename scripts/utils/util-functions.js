@@ -70,6 +70,27 @@ function updateState() {
     `;
 }
 
+function popupInfo(info) {
+  if ([...itemsTypes].includes(info.type)) {
+    return `
+      <h3>${info.name}</h3>
+      <p>${info.type}: ${JSON.stringify(info.effect)}</p>
+    `;
+  } else if ([...stuffTypes].includes(info.type)) {
+    return `
+      <h3>${info.name}</h3>
+      <p>${info.type}: ${JSON.stringify(info.effect)}</p>
+      <p>equiped: ${!!info.equiped}</p>
+    `;
+  } else if ([...attacksTypes].includes(info.type)) {
+    return `
+      <h3>${info.name}</h3>
+      <p>${info.type}: ${info.dmg ? info.dmg + 'dmg' : ''} (${info.element})</p>
+      <p>age: ${info.age}</p>
+    `;
+  }
+}
+
 function calcElement(elementOfAttack, elementAttacking, elementDefending) {
   // GD: lmt attack gives player/enemy that lmt => if used again lmt attack === lmt of player/enemy => check factor
   // TODO: rework with element+ (using twice same element give extra bonusor opposite)

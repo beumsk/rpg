@@ -1,3 +1,5 @@
+const itemsTypes = ['state', 'heal', 'temp'];
+
 const itemsState = [
   { name: 'remedy', effect: { state: '' } },
   // { name: 'waker', effect: { state: 'asleep' } },

@@ -75,35 +75,44 @@ function screenMenu() {
     contentEl.innerHTML = '<div class="menu"></div>';
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
-        const linkEl = document.createElement('button');
+        const containerEl = document.createElement('div');
+        const btnEl = document.createElement('button');
+        const popupEl = document.createElement('div');
+        popupEl.classList.add('popup');
         if (menuName === 'attacks') {
-          linkEl.innerText = `${x.name}: ${x.dmg ? x.dmg + 'dmg (' + x.element + ')' : x.state}`;
+          btnEl.innerText = `${x.name}: ${x.dmg ? x.dmg + 'dmg (' + x.element + ')' : x.state}`;
+          popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'items') {
-          linkEl.innerText = `${x.name}: ${JSON.stringify(x.effect)} ${
+          btnEl.innerText = `${x.name}: ${JSON.stringify(x.effect)} ${
             x.type === 'temp' ? 'Ŧ' : ''
           } (x${x.qtt})`;
+          popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'stuff') {
-          linkEl.innerText = x.equiped
+          btnEl.innerText = x.equiped
             ? `|${x.equiped.charAt(0).toUpperCase()}| ${x.name} ${JSON.stringify(x.effect)}`
             : `    ${x.name} ${JSON.stringify(x.effect)}`;
+          popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'shop') {
-          linkEl.innerText = stuffCategories.includes(x.type)
+          btnEl.innerText = stuffTypes.includes(x.type)
             ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(x.effect)} /${
                 x.lvl
               }\\ (${x.price} ◈)`
             : `${x.name}: ${JSON.stringify(x.effect)} (${x.price} ◈)`;
+          popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'options') {
-          linkEl.innerText =
+          btnEl.innerText =
             x.name === 'audio' ? `${x.name}: ${player.options.audio ? 'on' : 'off'}` : x.name;
         } else {
-          linkEl.innerText = x.name;
+          btnEl.innerText = x.name;
         }
-        linkEl.dataset.menu = menuName;
-        linkEl.dataset.value = x.name;
-        contentEl.querySelector('.menu').appendChild(linkEl);
+        btnEl.dataset.menu = menuName;
+        btnEl.dataset.value = x.name;
+        containerEl.appendChild(btnEl);
+        containerEl.appendChild(popupEl);
+        contentEl.querySelector('.menu').appendChild(containerEl);
         index = 0;
-        if (i === index) linkEl.focus();
-        linkEl.addEventListener('click', linkClick);
+        if (i === index) btnEl.focus();
+        btnEl.addEventListener('click', linkClick);
       });
       if (menuName !== 'main') {
         const backLink = document.createElement('button');

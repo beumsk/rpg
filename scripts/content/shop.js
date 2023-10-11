@@ -10,7 +10,7 @@ function shopBuy(name) {
   const c = player.shop.find((x) => x.name === name);
   if (player.gems >= c.price) {
     player.gems -= c.price;
-    if (stuffCategories.includes(c.type)) {
+    if (stuffTypes.includes(c.type)) {
       stuffFind([c]);
       player.shop = player.shop.filter((x) => x.name !== name);
     } else {

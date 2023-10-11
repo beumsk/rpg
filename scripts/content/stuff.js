@@ -1,6 +1,6 @@
 // TODO: add belt, rune, pet?
 // TODO: add crit bonus?
-const stuffCategories = ['ring', 'amulet', 'boots', 'cloak', 'hat'];
+const stuffTypes = ['ring', 'amulet', 'boots', 'cloak', 'hat'];
 
 const stuffFamilies = [
   { name: 'dummy', effect: { hp: 2 }, src: ['base'] },
@@ -20,13 +20,13 @@ let stuffRewarded = [];
 function codeStuff() {
   let i = 0;
   stuffAges.forEach((age, ageIndex) => {
-    stuffCategories.forEach((cat, catIndex) => {
+    stuffTypes.forEach((type, typeIndex) => {
       i++;
       stuffFamilies.forEach((fam, famIndex) => {
         let stuf = {
-          name: fam.src.includes('base') ? `${fam.name} ${cat}` : `${fam.name} ${cat} ${age}`,
-          type: cat,
-          effect: calcEffects(fam.effect, ageIndex + 1, catIndex),
+          name: fam.src.includes('base') ? `${fam.name} ${type}` : `${fam.name} ${type} ${age}`,
+          type: type,
+          effect: calcEffects(fam.effect, ageIndex + 1, typeIndex),
           // desc: 'stuff desc',
           lvl: fam.src.includes('base') ? 1 : i,
           price: i * 5,

@@ -9,32 +9,51 @@ function screenReward(from) {
 
   const rewards = randomRewards(from);
 
-  // TODO: add more info on focus => effects...
   // TODO: add animation for random feel
   const rewardsHTML = `
     <div class="rewards">
       ${
         rewards.item
-          ? `<button data-type="item" data-value="${rewards.item.name}" data-qtt="${rewards.itemQtt}">
-              ${rewards.item.name} x${rewards.itemQtt}
-            </button>`
+          ? `<div>
+              <button data-type="item" data-value="${rewards.item.name}" data-qtt="${
+              rewards.itemQtt
+            }">
+                ${rewards.item.name} x${rewards.itemQtt}
+              </button>
+              <div class="popup">${popupInfo(rewards.item)}</div>
+            </div>`
           : ''
       }
       ${
         rewards.stuf
-          ? `<button data-type="stuf" data-value="${rewards.stuf.name}">${rewards.stuf.name}</button>`
+          ? `<div>
+              <button data-type="stuf" data-value="${rewards.stuf.name}">${
+              rewards.stuf.name
+            }</button>
+              <div class="popup">${popupInfo(rewards.stuf)}</div>
+            </div>`
           : ''
       }
       ${
         rewards.attack
-          ? `<button data-type="attack" data-value="${rewards.attack.name}">${rewards.attack.name}</button>`
+          ? `<div>
+              <button data-type="attack" data-value="${rewards.attack.name}">${
+              rewards.attack.name
+            }</button>
+              <div class="popup">${popupInfo(rewards.attack)}</div>
+            </div>`
           : ''
       }
       ${
         rewards.attackImprove
           ? player.attacks
               .filter((x) => x.type === 'attack')
-              .map((x) => `<button data-type="improve" data-value="${x.name}">${x.name}</button>`)
+              .map(
+                (x) => `<div>
+              <button data-type="improve" data-value="${x.name}">${x.name}</button>
+              <div class="popup">${popupInfo(x)}</div>
+            </div>`
+              )
               .join('')
           : ''
       }

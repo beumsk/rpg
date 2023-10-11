@@ -11,6 +11,8 @@
 // TODO: review attacks => must be possible for attack to handle state, to give bonus/malus, to steal life, to heal, to poison
 // pass turn?
 
+const attacksTypes = ['attack', 'bonus', 'malus'];
+
 const attacksNeutral = [
   // base attack => crit deals more dmg
   { name: 'punch', dmg: 6, age: 1, src: ['base'] },

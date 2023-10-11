@@ -109,14 +109,14 @@ function screenFight() {
     infoEl.innerHTML = '';
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
-        const linkEl = document.createElement('button');
-        linkEl.innerText = x.name;
-        linkEl.dataset.menu = menuName;
-        linkEl.dataset.value = x.name;
-        infoEl.appendChild(linkEl);
+        const btnEl = document.createElement('button');
+        btnEl.innerText = x.name;
+        btnEl.dataset.menu = menuName;
+        btnEl.dataset.value = x.name;
+        infoEl.appendChild(btnEl);
         index = 0;
-        if (i === index) linkEl.focus();
-        linkEl.addEventListener('click', linkClick);
+        if (i === index) btnEl.focus();
+        btnEl.addEventListener('click', linkClick);
       });
       if (menuName !== 'main') {
         actionBackEl.innerText = 'back';
