@@ -42,6 +42,12 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - test difficulty of game & add difficulty option?
 - graphics: colors, animations, transitions, backgrounds
 
+- ask player name?
+- tutorial map??
+- first fight intro+tuto against master that we lose as we only have basic attacks?
+
+- show player/enemy character in fight?
+
 > randomize
 
 - rewardScreen => add boost? && option to pick average (5) or random (1-10) ?
@@ -52,11 +58,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - give enemies more attacks => should they have the same ones as player attacks?
 - handle items curing malus
 
-- new > ask name > intro (dialog screen??) > world
-
-- tutorial map??
-- other player sprites to pick when starting
-- fight system: state icons
+- other player sprites to pick when starting?
 - add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
 - panoplie boost??
@@ -64,7 +66,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - add visuals of items, stuff, attacks, fights...
 - decorate the maps
 - add sounds effects? => rewards, attacks, movements, clicks
-- how to play on mobile?? => add move controls + clicks
 
 - world: game design? puzzle on some map?
 - quests / achievements
@@ -72,7 +73,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 ## Ideas
 
 - save/load via download/upload file? (encrypt data to avoid cheat?)
-- first fight intro+tuto against master that we lose as we only have basic attacks?
 - quests in menu?
   - npc as deadSpots => when hitting => dialog screen? and start quest
 - achievements in menu?

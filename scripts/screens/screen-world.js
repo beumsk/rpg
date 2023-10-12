@@ -56,6 +56,7 @@ function screenWorld(keepEnemy) {
       } else if (dir === 'right' && player.x < baseW - player.w) {
         player.x += step;
       }
+      player.img = player.img === './img/player.png' ? './img/player-r.png' : './img/player.png';
       infoEl.innerText = ` `;
       checkCollision(oldPos);
     };

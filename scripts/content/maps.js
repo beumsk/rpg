@@ -104,10 +104,13 @@ function changeMap(world, to, masteredElement) {
     currentMap = { ...maps[0] };
     currentEnemy = {};
     mapEnemies = [];
-    screenTransition('top', () =>
-      screenStory([...texts[masteredElement], ...texts['world' + player.elements.length]], () =>
-        screenWorld()
-      )
+    screenTransition(
+      'top',
+      () =>
+        screenStory([...texts[masteredElement], ...texts['world' + player.elements.length]], () =>
+          screenWorld()
+        ),
+      'temple'
     );
   } else if (to === 'first') {
     codeWorldMaps(world);
@@ -118,7 +121,7 @@ function changeMap(world, to, masteredElement) {
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
     codeMapEnemies(currentMap.lvl, world);
-    screenTransition('top', () => screenWorld());
+    screenTransition('top', () => screenWorld(), world);
   } else if (to === 'next') {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
     codeMapEnemies(currentMap.lvl, world);

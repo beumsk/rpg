@@ -1,4 +1,4 @@
-function screenStory(textArr, screenFunc) {
+function screenStory(textArr, screenFunc, text) {
   canvas.style.background = cWhite2;
 
   let i = 0;
@@ -16,7 +16,7 @@ function screenStory(textArr, screenFunc) {
       document.removeEventListener('keydown', keyStoryHandler);
       contentEl.removeEventListener('click', keyStoryHandler);
       contentEl.innerHTML = '';
-      screenTransition('bottom', () => screenFunc());
+      screenTransition('bottom', () => screenFunc(), text);
     }
   }
 }

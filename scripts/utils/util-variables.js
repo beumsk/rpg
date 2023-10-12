@@ -21,6 +21,7 @@ const imagesToLoad = [
   './img/door.png',
   './img/chest.png',
   './img/player.png',
+  './img/player-r.png',
   './img/air.png',
   './img/earth.png',
   './img/water.png',
