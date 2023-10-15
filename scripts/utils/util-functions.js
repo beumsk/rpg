@@ -12,11 +12,11 @@ function scaleCanvas() {
 }
 scaleCanvas();
 
-function rand(val, step = 1, not) {
+function rand(val, step = 1, not = []) {
   let r;
   do {
     r = Math.floor((Math.random() * val) / step) * step;
-  } while (r === not);
+  } while (not.includes(r));
   return r;
 }
 
@@ -33,6 +33,14 @@ function randPos(valX, valY, step = 1, not) {
     rY = Math.floor((Math.random() * valY) / step) * step;
   }
   return { x: rX, y: rY };
+}
+
+function uniqueRandoms(count, maxNumber) {
+  const numbers = [];
+  while (numbers.length < count) {
+    numbers.push(rand(maxNumber, 1, numbers));
+  }
+  return numbers;
 }
 
 function clearCanvas() {

@@ -123,6 +123,7 @@ function playerWin() {
     keyDrop: keyDropped,
     lvlUp: lvlUp,
   };
+  currentEnemies = currentEnemies.filter((x) => x.name !== currentEnemy.name);
   // stops screenFight
   return 'stop';
 }

@@ -39,8 +39,23 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
+- info in fight menu hover
+- review attack names to be clearer?
+- add shop on map
+  - add dojo to manage new moves and improving moves? (with dojo coins)
+  - give elemental move starting a new world?
+- improve fights: better ai, attack range, elemental str&def?,
+- improve maps: add things on those: npc, quests,
+
+- review map? => show all enemies there is to fight on a certain map => once cleared, show door
+- => create paths on map? at least some decoration.
+
 - test difficulty of game & add difficulty option?
 - graphics: colors, animations, transitions, backgrounds
+
+  - visuals on transitions (new world)
+  - attacks: in fights and menus ?
+  - items & stuff in menus ?
 
 - ask player name?
 - tutorial map??
@@ -94,4 +109,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 08.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2)=136?? hours total dev
+- 16.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4)=140?? hours total dev

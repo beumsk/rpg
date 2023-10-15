@@ -9,7 +9,7 @@ function gameReset() {
 
   // reset game
   player = { ...playerBase };
-  currentEnemy = {};
+  currentEnemies = [];
   mapEnemies = [];
   maps = [...mapsBase];
   currentMap = { ...maps[0] };
@@ -30,7 +30,7 @@ function gameLoad() {
 
   // load game
   player = { ...load.player };
-  currentEnemy = load.currentEnemy;
+  currentEnemies = load.currentEnemies;
   mapEnemies = load.mapEnemies;
   maps = load.maps;
   currentMap = load.currentMap;
@@ -48,7 +48,7 @@ function gameSave() {
     contentBg: contentEl.style.background,
 
     player: { ...player },
-    currentEnemy: { ...currentEnemy },
+    currentEnemies: { ...currentEnemies },
     mapEnemies: [...mapEnemies],
     maps: [...maps],
     currentMap: { ...currentMap },

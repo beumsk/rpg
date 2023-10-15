@@ -67,7 +67,7 @@ function screenMenu() {
     infoEl.innerText = '';
     document.removeEventListener('keydown', keyMenuHandler);
     contentEl.innerHTML = '';
-    screenWorld(true);
+    screenWorld();
   }
 
   function createMenu(menuList, menuName) {

@@ -72,6 +72,7 @@ function screenFight() {
     if (animation) {
       fightEl.innerHTML = `
         <div class="enemy">
+          <img src="${currentEnemy.img}" />
           <div class="box">
             <h2>${currentEnemy.name}</h2>
             <p>${enemyStats}</p>
@@ -80,6 +81,7 @@ function screenFight() {
         </div>
 
         <div class="player">
+          <img src="${player.img}" />
           <div class="box">
             <h2>${player.name}</h2>
             <p>${playerStats}</p> 

@@ -1,4 +1,4 @@
-function screenWorld(keepEnemy) {
+function screenWorld(from) {
   canvas.style.backgroundImage = `url(./img/bg-${bgImg}.png)`;
   canvas.style.backgroundSize = `${step * scale * 2}px ${step * scale * 2}px`;
   contentEl.style.background = cGrad2;
@@ -11,26 +11,11 @@ function screenWorld(keepEnemy) {
 
   fireQueue();
 
-  let objects;
-
-  // TODO: add multiple enemies?
-  if (!keepEnemy) {
-    if (mapEnemies.length) {
-      currentEnemy = {
-        ...mapEnemies[rand(mapEnemies.length)],
-        ...randPos(baseW, baseH - 32, step, [
-          { x: player.x, y: player.y },
-          ...currentMap.deadSpots,
-        ]),
-      };
-    }
+  if (from === 'map') {
+    selectCurrentEnemies(5);
   }
 
-  if (mapEnemies.length) {
-    objects = [currentEnemy, player, ...currentMap.deadSpots];
-  } else {
-    objects = [player, ...currentMap.deadSpots];
-  }
+  let objects = [player, ...currentMap.deadSpots, ...currentEnemies];
 
   let animationId;
 
@@ -93,8 +78,9 @@ function screenWorld(keepEnemy) {
     const deadSpotCollision = currentMap.deadSpots.find(
       (spot) => spot.x === player.x && spot.y === player.y
     );
-    if (player.x === currentEnemy.x && player.y === currentEnemy.y) {
+    if (currentEnemies.some((x) => x.x === player.x && x.y === player.y)) {
       stop();
+      currentEnemy = currentEnemies.find((x) => x.x === player.x && x.y === player.y);
       screenTransition('right', () => screenFight());
     } else if (deadSpotCollision) {
       if (deadSpotCollision.type === 'end-door') {

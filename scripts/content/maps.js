@@ -121,11 +121,11 @@ function changeMap(world, to, masteredElement) {
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
     codeMapEnemies(currentMap.lvl, world);
-    screenTransition('top', () => screenWorld(), world);
+    screenTransition('top', () => screenWorld('map'), world);
   } else if (to === 'next') {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
     codeMapEnemies(currentMap.lvl, world);
-    screenTransition('top', () => screenWorld());
+    screenTransition('top', () => screenWorld('map'));
   }
   infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
   player.x = 2 * step;

@@ -59,7 +59,7 @@ function codeMapEnemies(lvl, world) {
         xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
         // DEV: xp = 1lvl
         // xp: lvls[lvl + 1],
-        gems: lvl * 2,
+        gems: lvl,
         element: '',
         attacks: [...crtMoves],
       };
@@ -125,7 +125,24 @@ const enemyMoves = {
   master: ['elemental surge', 'ancient wrath', 'harmony fusion'],
 };
 
+let currentEnemies = [];
 let currentEnemy = {};
+
+function selectCurrentEnemies(count) {
+  const rands = uniqueRandoms(count, mapEnemies.length);
+  mapEnemies
+    .map((x, i) => {
+      if (rands.includes(i)) {
+        const _randPos = randPos(baseW, baseH - 32, step, [
+          { x: player.x, y: player.y },
+          ...currentMap.deadSpots,
+          ...currentEnemies,
+        ]);
+        currentEnemies.push({ ...x, ..._randPos });
+      }
+    })
+    .filter((x) => x);
+}
 
 function enemyAttack(attack) {
   const c = attack

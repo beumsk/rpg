@@ -122,7 +122,7 @@ function screenReward(from) {
     clearCanvas();
     contentEl.innerHTML = '';
     if (from === 'chest') {
-      screenTransition('left', () => screenWorld(true));
+      screenTransition('left', () => screenWorld());
     } else if (from === 'lvl') {
       screenTransition('left', () => screenWorld());
     } else if (from === 'map') {
