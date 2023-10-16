@@ -8,13 +8,12 @@ function screenMenu() {
     { name: 'attacks' },
     { name: 'items' },
     { name: 'stuff' },
-    { name: 'shop' },
     { name: 'options' },
     { name: '← exit' },
   ];
 
   let index = 0;
-  let menuLinks = contentEl.getElementsByTagName('button');
+  let menuBtns = contentEl.getElementsByTagName('button');
   let crtMenu = 'main';
 
   const codeStatsMenu = () => [
@@ -49,13 +48,13 @@ function screenMenu() {
     } else if (key === 'ArrowUp') {
       e.preventDefault();
       infoEl.innerText = ' ';
-      index = index !== 0 ? index - 1 : menuLinks.length - 1;
-      menuLinks[index].focus();
+      index = index !== 0 ? index - 1 : menuBtns.length - 1;
+      menuBtns[index].focus();
     } else if (key === 'ArrowDown') {
       e.preventDefault();
       infoEl.innerText = ' ';
-      index = index !== menuLinks.length - 1 ? index + 1 : 0;
-      menuLinks[index].focus();
+      index = index !== menuBtns.length - 1 ? index + 1 : 0;
+      menuBtns[index].focus();
     } else if (key === 'Escape') {
       stop();
     }
@@ -92,13 +91,6 @@ function screenMenu() {
             ? `|${x.equiped.charAt(0).toUpperCase()}| ${x.name} ${JSON.stringify(x.effect)}`
             : `    ${x.name} ${JSON.stringify(x.effect)}`;
           popupEl.innerHTML = popupInfo(x);
-        } else if (menuName === 'shop') {
-          btnEl.innerText = stuffTypes.includes(x.type)
-            ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(x.effect)} /${
-                x.lvl
-              }\\ (${x.price} ◈)`
-            : `${x.name}: ${JSON.stringify(x.effect)} (${x.price} ◈)`;
-          popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'options') {
           btnEl.innerText =
             x.name === 'audio' ? `${x.name}: ${player.options.audio ? 'on' : 'off'}` : x.name;
@@ -112,23 +104,23 @@ function screenMenu() {
         contentEl.querySelector('.menu').appendChild(containerEl);
         index = 0;
         if (i === index) btnEl.focus();
-        btnEl.addEventListener('click', linkClick);
+        btnEl.addEventListener('click', btnClick);
       });
       if (menuName !== 'main') {
-        const backLink = document.createElement('button');
-        backLink.innerText = '← back';
-        backLink.addEventListener('click', (e) => {
+        const backBtn = document.createElement('button');
+        backBtn.innerText = '← back';
+        backBtn.addEventListener('click', (e) => {
           e.preventDefault();
           createMainMenu();
         });
-        contentEl.querySelector('.menu').appendChild(backLink);
+        contentEl.querySelector('.menu').appendChild(backBtn);
       }
     } else {
       createMainMenu();
     }
   }
 
-  function linkClick(e) {
+  function btnClick(e) {
     e.preventDefault();
     let crt = e.target;
     if (crtMenu === 'main') {
@@ -139,11 +131,6 @@ function screenMenu() {
         createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {
         createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crt.dataset.value);
-      } else if (crt.dataset.value === 'shop') {
-        createMenu(
-          player[crt.dataset.value].filter((x) => x.lvl <= player.lvl),
-          crt.dataset.value
-        );
       } else {
         createMenu(player[crt.dataset.value], crt.dataset.value);
       }
@@ -157,12 +144,6 @@ function screenMenu() {
     } else if (crtMenu === 'stuff') {
       stuffEquip(player.stuff.filter((x) => x.name === crt.dataset.value));
       createMenu(player[crtMenu], crtMenu);
-    } else if (crtMenu === 'shop') {
-      shopBuy(crt.dataset.value);
-      createMenu(
-        player[crtMenu].filter((x) => x.lvl <= player.lvl),
-        crtMenu
-      );
     } else if (crtMenu === 'options') {
       // TODO: add options: save, load
       if (crt.dataset.value === 'audio') {

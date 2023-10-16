@@ -40,9 +40,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 ## Todo
 
 - info in fight menu hover
-- review attack names to be clearer?
+- confirmation modal => buy any, use item, equip stuf
+- review lvlup => give points to distribute on stats && points for attacks to learn/improve
 - add shop on map
-  - add dojo to manage new moves and improving moves? (with dojo coins)
+  - add dojo on map to manage new moves and improving moves? (with dojo coins)
   - give elemental move starting a new world?
 - improve fights: better ai, attack range, elemental str&def?,
 - improve maps: add things on those: npc, quests,

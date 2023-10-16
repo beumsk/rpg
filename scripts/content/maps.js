@@ -24,11 +24,13 @@ const doorBase = {
   y: -step,
 };
 
-const hideDoorBase = {
-  ...doorBase,
-  type: 'hide-door',
-  img: null,
-  fill: cBlack,
+const shoppBase = {
+  ...spotBase,
+  type: 'shop',
+  fill: null,
+  img: './img/shop.png',
+  x: 21 * 16,
+  y: 0,
 };
 
 let mapsBase = [
@@ -63,7 +65,6 @@ function codeWorldMaps(world) {
         lvl: player.elements.length * districts.length + i + 1,
         name: `${y} ${world} ${world === 'master' ? '' : 'tribe'}`,
         world: world,
-        // TODO: add rewards ! (semi random based on lvl)
         deadSpots: [
           {
             ...chestBase,
@@ -78,6 +79,7 @@ function codeWorldMaps(world) {
             district: i + 1,
             type: world === 'master' ? 'end-door' : y === 'central' ? 'temple-door' : 'door',
           },
+          { ...shoppBase },
         ],
       };
     });

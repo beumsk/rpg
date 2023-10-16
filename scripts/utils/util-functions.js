@@ -78,23 +78,26 @@ function updateState() {
     `;
 }
 
-function popupInfo(info) {
+function popupInfo(info, withPrice) {
   if ([...itemsTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
       <p>${info.type}: ${JSON.stringify(info.effect)}</p>
+      ${withPrice ? `<p>price: ${info.price} ◈</p>` : null}
     `;
   } else if ([...stuffTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
       <p>${info.type}: ${JSON.stringify(info.effect)}</p>
-      <p>equiped: ${!!info.equiped}</p>
-    `;
+      ${withPrice ? `<p>price: ${info.price} ◈</p>` : null}
+      `;
+    // <p>equiped: ${!!info.equiped}</p>
   } else if ([...attacksTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
       <p>${info.type}: ${info.dmg ? info.dmg + 'dmg' : ''} (${info.element})</p>
       <p>age: ${info.age}</p>
+      ${withPrice ? `<p>price: ${info.price} ◈</p>` : null}
     `;
   }
 }

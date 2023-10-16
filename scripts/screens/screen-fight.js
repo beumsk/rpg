@@ -9,7 +9,7 @@ function screenFight() {
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
 
   let index = 0;
-  let menuLinks = infoEl.getElementsByTagName('button');
+  let menuBtns = infoEl.getElementsByTagName('button');
   let crtMenu = 'main';
 
   createMenu(mainMenu, 'main');
@@ -21,12 +21,12 @@ function screenFight() {
       backToMain();
     } else if (key === 'ArrowRight') {
       e.preventDefault();
-      index = index !== menuLinks.length - 1 ? index + 1 : 0;
-      menuLinks[index].focus();
+      index = index !== menuBtns.length - 1 ? index + 1 : 0;
+      menuBtns[index].focus();
     } else if (key === 'ArrowLeft') {
       e.preventDefault();
-      index = index !== 0 ? index - 1 : menuLinks.length - 1;
-      menuLinks[index].focus();
+      index = index !== 0 ? index - 1 : menuBtns.length - 1;
+      menuBtns[index].focus();
     } else if (key === 'Enter' || key === ' ') {
       queueRun();
     }
@@ -118,7 +118,7 @@ function screenFight() {
         infoEl.appendChild(btnEl);
         index = 0;
         if (i === index) btnEl.focus();
-        btnEl.addEventListener('click', linkClick);
+        btnEl.addEventListener('click', btnClick);
       });
       if (menuName !== 'main') {
         actionBackEl.innerText = 'back';
@@ -135,7 +135,7 @@ function screenFight() {
     createMenu(mainMenu, 'main');
   }
 
-  function linkClick(e) {
+  function btnClick(e) {
     e.preventDefault();
     let crt = e.target;
     if (crtMenu === 'main') {

@@ -110,6 +110,11 @@ function screenWorld(from) {
           player.x = oldPos.x;
           player.y = oldPos.y;
         }
+      } else if (deadSpotCollision.type === 'shop') {
+        player.x = oldPos.x;
+        player.y = oldPos.y;
+        stop();
+        screenShop();
       } else {
         player.x = oldPos.x;
         player.y = oldPos.y;
