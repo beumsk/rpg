@@ -1,4 +1,6 @@
 function screenStart() {
+  contentEl.style.background = cWhite2;
+
   let index = 0;
   let startButtons = contentEl.getElementsByTagName('button');
 
@@ -46,8 +48,13 @@ function screenStart() {
     stop();
     if (crt.dataset.type === 'start') {
       gameReset();
-      screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld(), 'temple'));
-      // screenTransition('bottom', () => screenWorld(), 'temple');
+      if (ISDEV.skipIntro) {
+        screenTransition('bottom', () => screenWorld(), 'temple');
+      } else {
+        screenTransition('bottom', () =>
+          screenStory(texts['intro'], () => screenWorld(), 'temple')
+        );
+      }
     } else if (crt.dataset.type === 'continue') {
       gameLoad();
       screenTransition('bottom', () => screenWorld());

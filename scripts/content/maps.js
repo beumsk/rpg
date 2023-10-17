@@ -33,6 +33,15 @@ const shoppBase = {
   y: 0,
 };
 
+const dojoBase = {
+  ...spotBase,
+  type: 'dojo',
+  fill: null,
+  img: './img/dojo.png',
+  x: 0,
+  y: 11 * 16,
+};
+
 let mapsBase = [
   {
     name: 'temple',
@@ -42,6 +51,8 @@ let mapsBase = [
       { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlueTr, img: './img/water.png' },
       { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRedTr, img: './img/fire.png' },
       // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cVioletTr },
+      { ...shoppBase },
+      { ...dojoBase },
     ],
   },
 ];
@@ -56,9 +67,9 @@ function codeWorldMaps(world) {
   maps.push({ name: world, districts: codeDistricts(world) });
 
   function codeDistricts() {
-    let districts = ['northern', 'western', 'eastern', 'southern', 'central'];
-    // DEV: 1 map per world
-    // districts = ['central'];
+    let districts = ISDEV.fasterWorld
+      ? ['central']
+      : ['northern', 'western', 'eastern', 'southern', 'central'];
 
     return districts.map((y, i) => {
       return {
@@ -80,6 +91,7 @@ function codeWorldMaps(world) {
             type: world === 'master' ? 'end-door' : y === 'central' ? 'temple-door' : 'door',
           },
           { ...shoppBase },
+          { ...dojoBase },
         ],
       };
     });
@@ -87,7 +99,7 @@ function codeWorldMaps(world) {
 }
 
 function randomKeyDrop() {
-  if (rand(5) === 1) {
+  if (rand(keyDropRate) === 1) {
     const mapChest = currentMap.deadSpots.find((x) => x.type === 'chest' && !x.unlocked);
     if (!mapChest) return false;
     mapChest.unlocked = true;
@@ -106,13 +118,10 @@ function changeMap(world, to, masteredElement) {
     currentMap = { ...maps[0] };
     currentEnemy = {};
     mapEnemies = [];
-    screenTransition(
-      'top',
-      () =>
-        screenStory([...texts[masteredElement], ...texts['world' + player.elements.length]], () =>
-          screenWorld()
-        ),
-      'temple'
+    screenTransition('top', () =>
+      screenStory([...texts[masteredElement], ...texts['world' + player.elements.length]], () =>
+        screenWorld()
+      )
     );
   } else if (to === 'first') {
     codeWorldMaps(world);
@@ -128,10 +137,14 @@ function changeMap(world, to, masteredElement) {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
     codeMapEnemies(currentMap.lvl, world);
     screenTransition('top', () => screenWorld('map'));
+  } else if (to === 'last') {
+    currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
+    codeMapEnemies(currentMap.lvl, world, true);
+    screenTransition('top', () => screenWorld('map'));
   }
   infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
-  player.x = 2 * step;
-  player.y = 2 * step;
+  player.x = 0;
+  player.y = 0;
 }
 
 function worldCompleted(element) {

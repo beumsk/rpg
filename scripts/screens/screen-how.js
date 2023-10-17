@@ -1,5 +1,5 @@
 function screenHow() {
-  canvas.style.background = cWhite2;
+  contentEl.style.background = cWhite2;
 
   const backButton = contentEl.getElementsByClassName('back');
 

@@ -1,5 +1,4 @@
 function screenReward(from) {
-  canvas.style.background = cGrad2;
   contentEl.style.background = cGrad2;
 
   let content;

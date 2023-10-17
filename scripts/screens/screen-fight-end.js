@@ -1,5 +1,5 @@
 function screenFightEnd() {
-  canvas.style.background = cGrad2;
+  contentEl.style.background = cGrad2;
 
   if (currentEnemy.hp === 0) {
     contentEl.innerHTML = `
@@ -47,12 +47,12 @@ function screenFightEnd() {
       // if (player.fightEnd.lvlUp) {
       if (player.fightEnd.lvlUp && player.lvl % 3 === 0) {
         // TODO: ensure this is often enough => lvls 3,6,9,...
-        screenTransition('right', () => screenReward('lvl'));
+        screenTransition('right', () => screenReward('lvl'), '', cGrad1);
       } else {
-        screenTransition('left', () => screenWorld());
+        screenTransition('left', () => screenWorld(), '', cGrad1);
       }
     } else {
-      screenTransition('bottom', () => screenEnd());
+      screenTransition('bottom', () => screenEnd(), '', cGrad1);
     }
   }
 }

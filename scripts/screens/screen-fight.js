@@ -1,6 +1,7 @@
 function screenFight() {
-  canvas.style.backgroundImage = `linear-gradient(45deg, ${cGrad1} 60%, ${cGrad2} 60%)`;
-  canvas.style.backgroundSize = 'unset';
+  canvas.style.background = cGrad2;
+  fightEl.style.backgroundImage = `linear-gradient(45deg, ${cGrad1} 60%, ${cGrad2} 60%)`;
+  fightEl.style.backgroundSize = 'unset';
 
   audioPlay('fight');
 
@@ -41,7 +42,7 @@ function screenFight() {
       infoEl.removeEventListener('click', queueRun);
       stop();
       playerResetTemp();
-      screenTransition('left', () => screenFightEnd());
+      screenTransition('left', () => screenFightEnd(), '', cGrad1);
     } else if (next === 'play') {
       actionQueueEl.innerText = '';
       actionQueueEl.removeEventListener('click', queueRun);
@@ -121,7 +122,7 @@ function screenFight() {
         btnEl.addEventListener('click', btnClick);
       });
       if (menuName !== 'main') {
-        actionBackEl.innerText = 'back';
+        actionBackEl.innerText = '← back';
         actionBackEl.addEventListener('click', backToMain);
       } else {
         actionBackEl.innerText = '';

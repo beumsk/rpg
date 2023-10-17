@@ -1,10 +1,10 @@
-function screenTransition(dir, screenFunc = screenWorld, text) {
+function screenTransition(dir, screenFunc = screenWorld, text, bg = cGrad2) {
   let duration = 1;
 
   infoEl.innerText = '';
   ctx.fillStyle = 'transparent';
 
-  transitionEl.style.backgroundColor = cGrad2;
+  transitionEl.style.backgroundColor = bg;
 
   transitionEl.className = `transition to-${dir}`;
   transitionEl.style.animationDuration = duration + 's';

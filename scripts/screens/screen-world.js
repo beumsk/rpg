@@ -12,7 +12,13 @@ function screenWorld(from) {
   fireQueue();
 
   if (from === 'map') {
-    selectCurrentEnemies(5);
+    selectCurrentEnemies(enemiesPerMap);
+  }
+
+  if (currentMap.name !== 'temple' && currentEnemies.length === 0) {
+    infoQueue.push(
+      () => (infoEl.innerText = `You cleared ${currentMap.name}, the door is now open!`)
+    );
   }
 
   let objects = [player, ...currentMap.deadSpots, ...currentEnemies];

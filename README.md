@@ -39,12 +39,13 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- info in fight menu hover
+- elements dmg boost if master!!
+- info in fight menu hover + review btn designs
 - confirmation modal => buy any, use item, equip stuf
 - review lvlup => give points to distribute on stats && points for attacks to learn/improve
-- add shop on map
-  - add dojo on map to manage new moves and improving moves? (with dojo coins)
+- add dojo on map to manage new moves and improving moves? (with dojo coins)
   - give elemental move starting a new world?
+  - max of 4 attacks, select the ones to have in fight
 - improve fights: better ai, attack range, elemental str&def?,
 - improve maps: add things on those: npc, quests,
 
@@ -93,6 +94,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
   - npc as deadSpots => when hitting => dialog screen? and start quest
 - achievements in menu?
   - kill all kind of monsters, get all chest, stuff, attacks, elements
+- add a lottery?
 - flee a fight?
 - map enigmas?
 - review map to move outside of screen?

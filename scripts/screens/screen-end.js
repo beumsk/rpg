@@ -1,5 +1,5 @@
 function screenEnd(win) {
-  canvas.style.background = cWhite2;
+  contentEl.style.background = cWhite2;
 
   bgImg = 'temple';
   cGrad1 = cBack2;

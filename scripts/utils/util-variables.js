@@ -17,9 +17,16 @@ const elements = ['air', 'earth', 'water', 'fire'];
 
 let infoQueue = [];
 
+const enemiesPerMap = ISDEV.fasterXP ? 1 : 5;
+const fightsPerLvl = enemiesPerMap;
+
+const keyDropRate = 5;
+
 const imagesToLoad = [
   './img/door.png',
   './img/chest.png',
+  './img/shop.png',
+  './img/dojo.png',
   './img/player.png',
   './img/player-r.png',
   './img/air.png',

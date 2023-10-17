@@ -1,5 +1,5 @@
 function screenMenu() {
-  canvas.style.backgroundImage = '';
+  // contentEl.style.backgroundImage = '';
 
   infoEl.innerText = ' ';
 

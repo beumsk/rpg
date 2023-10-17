@@ -157,6 +157,7 @@ kbd {
 /* STATE */
 .state {
   position: absolute;
+  z-index: 20;
   bottom: 100%;
   left: 0;
   right: 0;
@@ -199,19 +200,10 @@ kbd {
 }
 
 .info button {
-  padding-right: 1rem;
-}
-.info button:not(:first-of-type) {
-  padding-left: 1rem;
-}
-
-.info a:not(:first-of-type)::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  border-left: solid 1px var(--black-3);
+  margin-right: 1rem;
+  border: solid 1px;
+  padding: 4px 8px;
+  white-space: nowrap;
 }
 
 /* ACTION */
@@ -510,7 +502,7 @@ kbd {
   font-size: 0.5rem;
 }
 .content .reward .rewards button:focus {
-  outline: solid 2px rgba(0, 0, 0, 0.4);
+  outline: solid 2px;
 }
 .content .reward .rewards button:focus + .popup,
 .content .reward .rewards button:hover + .popup {
@@ -674,6 +666,7 @@ kbd {
 }
 
 .content:empty,
+.fight:empty,
 .info:empty,
 .state:empty {
   display: none;

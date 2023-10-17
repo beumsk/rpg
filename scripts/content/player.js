@@ -2,8 +2,8 @@ let player = {};
 
 const playerBase = {
   name: 'Player',
-  x: 2 * step,
-  y: 2 * step,
+  x: 0,
+  y: 0,
   w: step,
   h: step,
   img: './img/player.png',
@@ -31,7 +31,7 @@ const playerBase = {
   stuff: [],
   shop: shopBase,
   options: {
-    audio: true,
+    audio: !ISDEV.mute,
   },
 };
 
@@ -42,6 +42,7 @@ function playerAttack(attack) {
   const manageAttack = () => {
     const elementFactor = calcElement(c.element, player.element, currentEnemy.element);
     const isCrit = Math.random() < (player.crit + player.critTemp) / 100;
+    const isMaster = player.elements.includes(c.element);
 
     if (c.type === 'bonus') {
       const info = attackElementApply(c.element, player, true, false, isCrit);
@@ -56,6 +57,8 @@ function playerAttack(attack) {
           (c.dmg * (currentEnemy.def + currentEnemy.defTemp)) / 100) *
           elementFactor
       );
+
+      if (isMaster) calcDmg = Math.floor(calcDmg * 1.5);
 
       if (isCrit) {
         if (c.element === 'neutral') {

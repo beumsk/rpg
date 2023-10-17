@@ -1,6 +1,4 @@
 const enemyBase = {
-  x: 2 * step,
-  y: 4 * step,
   w: step,
   h: step,
   // fill: cEnemy,
@@ -8,9 +6,10 @@ const enemyBase = {
 
 let mapEnemies = [];
 
-function codeMapEnemies(lvl, world) {
+function codeMapEnemies(lvl, world, isLast) {
   mapEnemies = [];
-  // how to handle last map of element? (should it be different?)
+  // GD: last map of a world have enemies which are master of their element
+  // => how to handle last map of masters world??
 
   if (world === 'master') {
     codeElementEnemies('master');
@@ -56,11 +55,10 @@ function codeMapEnemies(lvl, world) {
         wisTemp: 0,
         states: [],
         lvl: lvl,
-        xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / 5),
-        // DEV: xp = 1lvl
-        // xp: lvls[lvl + 1],
+        xp: Math.ceil((lvls[lvl + 1] - lvls[lvl]) / fightsPerLvl),
         gems: lvl,
         element: '',
+        elements: element === 'master' ? [...elements] : isLast ? [element] : [],
         attacks: [...crtMoves],
       };
 
@@ -154,6 +152,7 @@ function enemyAttack(attack) {
   const manageAttack = () => {
     const elementFactor = calcElement(c.element, currentEnemy.element, player.element);
     const isCrit = Math.random() < (currentEnemy.crit + currentEnemy.critTemp) / 100;
+    const isMaster = currentEnemy.elements.includes(c.element);
 
     if (c.type === 'bonus') {
       const info = attackElementApply(c.element, currentEnemy, true, false, isCrit);
@@ -168,6 +167,8 @@ function enemyAttack(attack) {
           (c.dmg * (player.def + player.defTemp)) / 100) *
           elementFactor
       );
+
+      if (isMaster) calcDmg = Math.floor(calcDmg * 1.5);
 
       if (isCrit) {
         if (c.element === 'neutral') {

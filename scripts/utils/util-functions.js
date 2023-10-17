@@ -83,13 +83,13 @@ function popupInfo(info, withPrice) {
     return `
       <h3>${info.name}</h3>
       <p>${info.type}: ${JSON.stringify(info.effect)}</p>
-      ${withPrice ? `<p>price: ${info.price} ◈</p>` : null}
+      ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
     `;
   } else if ([...stuffTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
       <p>${info.type}: ${JSON.stringify(info.effect)}</p>
-      ${withPrice ? `<p>price: ${info.price} ◈</p>` : null}
+      ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
       `;
     // <p>equiped: ${!!info.equiped}</p>
   } else if ([...attacksTypes].includes(info.type)) {
@@ -97,14 +97,14 @@ function popupInfo(info, withPrice) {
       <h3>${info.name}</h3>
       <p>${info.type}: ${info.dmg ? info.dmg + 'dmg' : ''} (${info.element})</p>
       <p>age: ${info.age}</p>
-      ${withPrice ? `<p>price: ${info.price} ◈</p>` : null}
+      ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
     `;
   }
 }
 
 function calcElement(elementOfAttack, elementAttacking, elementDefending) {
   // GD: lmt attack gives player/enemy that lmt => if used again lmt attack === lmt of player/enemy => check factor
-  // TODO: rework with element+ (using twice same element give extra bonusor opposite)
+  // TODO: rework with element+ (using twice same element give extra bonus or opposite)
   // => +on- = 1.5, ++on- = 2, -on+ = 0.75, --on+ = 0.5
 
   if (elementOfAttack !== elementAttacking) return 1;
