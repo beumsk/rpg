@@ -18,9 +18,6 @@ function checkLvlUp(currentLvl, currentXp) {
 }
 
 function lvlUp() {
-  const door = currentMap.deadSpots.find((x) => x.type.includes('door'));
-  if (door) door.y = 11 * 16;
-  infoQueue.push(() => (infoEl.innerText = `You lvl up to lvl ${player.lvl}!`));
   player.hpmax += 20;
   player.hp = player.hpmax;
   player.str += 20;
@@ -28,5 +25,5 @@ function lvlUp() {
   player.wis += 10;
   player.crit += 1;
   player.lvl += 1;
-  shopLvlUp(player.lvl);
+  player.scrolls += 1;
 }

@@ -1,6 +1,8 @@
 function screenTransition(dir, screenFunc = screenWorld, text, bg = cGrad2) {
   let duration = 1;
 
+  // TODO: add more transitions
+
   infoEl.innerText = '';
   ctx.fillStyle = 'transparent';
 
@@ -16,6 +18,8 @@ function screenTransition(dir, screenFunc = screenWorld, text, bg = cGrad2) {
   actionMenuEl.innerText = '';
 
   setTimeout(() => {
+    contentEl.innerHTML = '';
+    fightEl.innerHTML = '';
     transitionEl.innerHTML = '';
     screenFunc();
     transitionEl.className = 'transition';

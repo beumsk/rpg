@@ -274,7 +274,7 @@ kbd {
 /* TRANSITION */
 .transition {
   position: absolute;
-  z-index: 10;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -342,7 +342,6 @@ kbd {
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: hidden;
   /* background: var(--white-1); */
 }
 
@@ -424,53 +423,23 @@ kbd {
 
 /* CONTENT Menu */
 .content .menu,
-.content .shop {
+.content .shop,
+.content .dojo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   font-size: 1.25rem;
   padding: 1rem;
-}
-
-.content .menu > div,
-.content .shop > div {
-  position: relative;
+  width: 44rem;
+  height: 24rem;
+  overflow: auto;
 }
 
 .content .menu button,
-.content .shop button {
+.content .shop button,
+.content .dojo button {
   padding: 0.25rem;
   border: none;
-}
-.content .menu button:focus + .popup,
-.content .menu button:hover + .popup,
-.content .shop button:focus + .popup,
-.content .shop button:hover + .popup {
-  display: block;
-}
-
-.content .menu .popup,
-.content .shop .popup {
-  display: none;
-  position: absolute;
-  z-index: 100;
-  background: var(--white-1);
-  left: 100%;
-  top: 0;
-  padding: 0 1rem;
-  margin-left: 0.5rem;
-  border: solid 1px;
-  white-space: nowrap;
-}
-.content .menu .popup:empty,
-.content .shop .popup:empty {
-  display: none !important;
-}
-.content .menu .popup h3,
-.content .shop .popup h3 {
-  margin: 0.5rem 0;
-  text-transform: uppercase;
 }
 
 /* CONTENT Reward */
@@ -486,9 +455,6 @@ kbd {
   justify-content: center;
   gap: 2rem;
 }
-.content .reward .rewards > div {
-  position: relative;
-}
 .content .reward .rewards button {
   padding: 1rem;
   border: solid 1px;
@@ -503,33 +469,6 @@ kbd {
 }
 .content .reward .rewards button:focus {
   outline: solid 2px;
-}
-.content .reward .rewards button:focus + .popup,
-.content .reward .rewards button:hover + .popup {
-  display: block;
-}
-
-.content .reward .rewards .popup {
-  display: none;
-  position: absolute;
-  z-index: 100;
-  background: var(--white-1);
-  top: 100%;
-  left: 0;
-  padding: 0 1rem;
-  margin-top: 0.5rem;
-  border: solid 1px;
-  white-space: nowrap;
-}
-.content .reward .rewards .popup:empty {
-  display: none !important;
-}
-.content .reward .rewards .popup h3 {
-  margin: 0.5rem 0;
-  text-transform: uppercase;
-}
-.content .reward .rewards .popup p {
-  margin: 0.5rem 0;
 }
 
 /* CONTENT Fight end */
@@ -557,7 +496,49 @@ kbd {
   border-top: solid 1px;
 }
 
+/* CONTENT Lvl up */
+.content .lvl-up {
+  text-align: center;
+  padding: 1rem;
+}
+
+/* CONTENT Popup */
+.content button:focus + .popup,
+.content button:hover + .popup {
+  display: block;
+}
+.content .popup {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  background: var(--white-1);
+  top: 0;
+  right: 0;
+  padding: 0 1rem;
+  outline: solid 1px;
+  white-space: nowrap;
+}
+.content .popup.bottom {
+  top: unset;
+  bottom: 0;
+  left: 0;
+}
+.content .popup:empty {
+  display: none !important;
+}
+.content .popup h3 {
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+}
+.content .popup p {
+  margin: 0.5rem 0;
+}
+
 /* FIGHT */
+.fight {
+  overflow: hidden;
+}
+
 .fight .enemy,
 .fight .player {
   position: absolute;
@@ -654,14 +635,22 @@ kbd {
 
 /* SCROLLBAR + EMPTY HIDDEN */
 .content,
+.content .menu,
+.content .shop,
+.content .dojo,
+.content .reward,
 .info,
-.status {
+.state {
   overflow: auto;
   scrollbar-width: none;
 }
 .content::-webkit-scrollbar,
+.content .menu::-webkit-scrollbar,
+.content .shop::-webkit-scrollbar,
+.content .dojo::-webkit-scrollbar,
+.content .reward::-webkit-scrollbar,
 .info::-webkit-scrollbar,
-.status::-webkit-scrollbar {
+.state::-webkit-scrollbar {
   display: none;
 }
 

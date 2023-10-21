@@ -26,7 +26,6 @@ function screenHow() {
   function stop() {
     document.removeEventListener('keydown', keyHowHandler);
     backButton[0].removeEventListener('click', keyHowHandler);
-    contentEl.innerHTML = '';
     screenStart();
   }
 }

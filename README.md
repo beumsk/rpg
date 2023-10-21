@@ -35,21 +35,24 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - Enemy lvlUp => dmg+20% & def+10%
 - Items are in shop and rewards
 - Stuff are in shop or rewards
-- Attacks are in rewards and lvlup
+- Attacks are in dojo: learn or improve with scrolls
 
 ## Todo
 
-- elements dmg boost if master!!
+- ensure reset resets everything => attention to shallow copy vs deep copy!
+
+- work on attack improve !!
+- simplify codes: map change, dry as much as possible (enemy/player attack, btnCreation, ...?)
 - info in fight menu hover + review btn designs
 - confirmation modal => buy any, use item, equip stuf
-- review lvlup => give points to distribute on stats && points for attacks to learn/improve
-- add dojo on map to manage new moves and improving moves? (with dojo coins)
-  - give elemental move starting a new world?
-  - max of 4 attacks, select the ones to have in fight
+- review lvlup => give points to distribute on stats ?
+- max of 4 attacks, select the ones to have in fight
 - improve fights: better ai, attack range, elemental str&def?,
 - improve maps: add things on those: npc, quests,
+- more fights? add element on map to add new enemies or trainingMap?
 
-- review map? => show all enemies there is to fight on a certain map => once cleared, show door
+- Tuto => get attack => fight enemy => buy potion and use it => door to temple
+
 - => create paths on map? at least some decoration.
 
 - test difficulty of game & add difficulty option?
@@ -105,11 +108,11 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - pixelart 8bit creation at: https://www.pixilart.com/draw
 - ascii: https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
-- ↗ ⫯ ◈ ↣ ∇ ♥ ☴ ☷ ☵ ☲ Ŧ ← → ↑ ↓ ▴ ▾ ◂ ▸ // ▣ ⨀ ♪ ♀ ♂ ✠ ⋈
+- ↗ ⫯ ◈ ⋈ ↣ ∇ ♥ ❖ ☴ ☷ ☵ ☲ Ŧ ← → ↑ ↓ ▴ ▾ ◂ ▸ // ▣ ⨀ ♪ ♀ ♂ ✠ ∾
 - 8 bit soundtracks: https://www.youtube.com/watch?v=5bn3Jmvep1k
 - sprites characters: http://www.videogamesprites.net/FinalFantasy5/
 - sprites: https://ccrgeek.wordpress.com/rpg-maker-ace/graphics/
 
 ## Dev
 
-- 16.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4)=140?? hours total dev
+- 21.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4+6)=146?? hours total dev

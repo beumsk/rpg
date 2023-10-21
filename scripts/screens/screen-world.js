@@ -15,7 +15,9 @@ function screenWorld(from) {
     selectCurrentEnemies(enemiesPerMap);
   }
 
-  if (currentMap.name !== 'temple' && currentEnemies.length === 0) {
+  if (!['tutorial', 'temple'].includes(currentMap.name) && currentEnemies.length === 0) {
+    const door = currentMap.deadSpots.find((x) => x.type.includes('door'));
+    if (door) door.y = 11 * 16;
     infoQueue.push(
       () => (infoEl.innerText = `You cleared ${currentMap.name}, the door is now open!`)
     );
@@ -61,12 +63,16 @@ function screenWorld(from) {
     if (infoQueue.length) return fireQueue();
     const key = e.key;
     if (key === 'ArrowUp') {
+      e.preventDefault();
       moveUp();
     } else if (key === 'ArrowDown') {
+      e.preventDefault();
       moveDown();
     } else if (key === 'ArrowLeft') {
+      e.preventDefault();
       moveLeft();
     } else if (key === 'ArrowRight') {
+      e.preventDefault();
       moveRight();
     } else if (key === 'Escape') {
       stop();
@@ -92,6 +98,9 @@ function screenWorld(from) {
       if (deadSpotCollision.type === 'end-door') {
         stop();
         screenTransition('top', () => screenStory(texts['outro'], () => screenEnd(true)));
+      } else if (deadSpotCollision.type === 'tuto-door') {
+        stop();
+        screenReward('tuto');
       } else if (deadSpotCollision.type === 'temple-door') {
         worldCompleted(currentWorld.name);
         stop();
@@ -121,6 +130,11 @@ function screenWorld(from) {
         player.y = oldPos.y;
         stop();
         screenShop();
+      } else if (deadSpotCollision.type === 'dojo') {
+        player.x = oldPos.x;
+        player.y = oldPos.y;
+        stop();
+        screenDojo();
       } else {
         player.x = oldPos.x;
         player.y = oldPos.y;

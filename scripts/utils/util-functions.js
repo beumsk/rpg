@@ -12,6 +12,10 @@ function scaleCanvas() {
 }
 scaleCanvas();
 
+function deepCopy(any) {
+  return JSON.parse(JSON.stringify(any));
+}
+
 function rand(val, step = 1, not = []) {
   let r;
   do {
@@ -71,7 +75,8 @@ function updateState() {
       <span>lvl ${player.lvl}</span> | 
       <span>${player.xp}/${lvls[player.lvl + 1]} ↗</span> | 
       <span>${player.hp}/${player.hpmax + player.hpmaxTemp} ♥</span> | 
-      <span>${player.gems} ◈</span>
+      <span>${player.gems} ◈</span> | 
+      <span>${player.scrolls} ⋈</span>
     </p>
     <p>${currentMap.deadSpots.find((x) => x.type === 'chest')?.unlocked ? '🗝 ' : ''}
     ${currentMap.name}</p>
@@ -96,7 +101,7 @@ function popupInfo(info, withPrice) {
     return `
       <h3>${info.name}</h3>
       <p>${info.type}: ${info.dmg ? info.dmg + 'dmg' : ''} (${info.element})</p>
-      <p>age: ${info.age}</p>
+      <p>lvl: ${info.lvl}</p>
       ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
     `;
   }

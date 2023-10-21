@@ -5,13 +5,16 @@ function gameReset() {
   cGrad1 = cBack2;
   cGrad2 = cBack4;
   stateEl.style.background = cBack2;
-  contentEl.style.background = 'transparent';
 
   // reset game
-  player = { ...playerBase };
+  player = deepCopy(ISDEV.skipTuto ? { ...playerBase } : { ...playerBase, gems: 2, scrolls: 1 });
+  if (ISDEV.skipTuto) {
+    // add potion? stuff?
+    attackFind(attacks.filter((x) => x.name === 'punch'));
+  }
   currentEnemies = [];
   mapEnemies = [];
-  maps = [...mapsBase];
+  maps = deepCopy(ISDEV.skipTuto ? [...mapTemple] : [...mapTuto]);
   currentMap = { ...maps[0] };
   stuffEquip(stuffBase);
   stuffRewarded = [];

@@ -1,6 +1,8 @@
 function screenShop() {
   // contentEl.style.backgroundImage = '';
 
+  // TODO: add title, style etc
+
   infoEl.innerText = ' ';
 
   let index = 0;
@@ -9,10 +11,12 @@ function screenShop() {
   function keyShopHandler(e) {
     const key = e.key;
     if (key === 'ArrowUp') {
+      e.preventDefault();
       infoEl.innerText = ' ';
       index = index !== 0 ? index - 1 : shopBtns.length - 1;
       shopBtns[index].focus();
     } else if (key === 'ArrowDown') {
+      e.preventDefault();
       infoEl.innerText = ' ';
       index = index !== shopBtns.length - 1 ? index + 1 : 0;
       shopBtns[index].focus();
@@ -26,7 +30,7 @@ function screenShop() {
   function updateShop() {
     contentEl.innerHTML = '<div class="shop"></div>';
 
-    const currShop = player.shop.filter((x) => x.lvl <= player.lvl);
+    const currShop = player.shop.filter((x) => x.lvl === player.lvl && x.src.includes('shop'));
 
     if (currShop?.length > 0) {
       currShop.map((x, i) => {

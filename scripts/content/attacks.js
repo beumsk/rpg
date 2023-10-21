@@ -15,9 +15,9 @@ const attacksTypes = ['attack', 'bonus', 'malus'];
 
 const attacksNeutral = [
   // base attack => crit deals more dmg
-  { name: 'punch', dmg: 6, age: 1, src: ['base'] },
-  { name: 'kick', dmg: 10, age: 2, src: [''] },
-  { name: 'headbutt', dmg: 14, age: 3, src: [''] },
+  { name: 'punch', dmg: 6, age: 1, src: ['dojo'] },
+  { name: 'kick', dmg: 10, age: 2, src: [] },
+  { name: 'headbutt', dmg: 14, age: 3, src: [] },
   { name: 'cheat', dmg: 1000, src: [] },
   { name: 'joke', dmg: 0, src: [] },
 ];
@@ -52,7 +52,6 @@ const attacksBonusMalus = [
 ];
 
 let attacks = [];
-let attacksRewarded = [];
 
 function codeAttacks() {
   attacksNeutral.forEach((neu) => {
@@ -60,22 +59,25 @@ function codeAttacks() {
       name: neu.name,
       type: 'attack',
       element: 'neutral',
+      lvl: 1,
       age: neu.age || 1,
+      price: neu.age || 1,
       dmg: neu.dmg,
       src: neu.src,
     };
     attacks.push(attack);
   });
   attacksElement.forEach((ele, i) => {
-    let age = i % (attacksElement.length / 4); // 0,1,2
+    let age = (i % (attacksElement.length / 4)) + 1; // 1,2,3
     let attack = {
       name: ele.name,
       type: 'attack',
       element: ele.element,
-      age: age + 1,
-      dmg: 6 + age * 4,
-      src: ['reward'],
-      // src: age === 0 ? ['reward', 'base'] : ['reward'],
+      lvl: 1,
+      age: age,
+      price: age,
+      dmg: 2 + age * 4,
+      src: ['dojo'],
     };
     attacks.push(attack);
   });
@@ -84,16 +86,16 @@ function codeAttacks() {
       name: boo.name,
       type: boo.state.includes('+') ? 'bonus' : 'malus',
       element: boo.state.replace('+', '').replace('-', ''),
+      lvl: 1,
       age: 1,
+      price: 1,
       state: boo.state,
-      src: ['reward'],
+      src: ['dojo'],
     };
     attacks.push(attack);
   });
 }
 codeAttacks();
-
-const attacksBase = attacks.filter((x) => x.src.includes('base'));
 
 function attackElementApply(element, obj, isBonus, isSide, isCrit) {
   const critFactor = isSide ? 0.4 : isCrit ? 1.4 : 1;
@@ -120,15 +122,25 @@ function attackElementApply(element, obj, isBonus, isSide, isCrit) {
 function attackFind(attackList) {
   attackList.map((a) => {
     player.attacks = [...player.attacks, { ...a }];
-    if (a.src.includes('reward')) attacksRewarded.push(a);
+    const d = player.dojo.find((x) => x.name === a.name);
+    d.price += 1;
+    d.lvl += 1;
+    d.dmg += 2;
   });
 }
 
-function attackImprove(name) {
+function attackImprove(attackList) {
   // TODO: think of a way to improve bonus/malus attacks
-  const c = player.attacks.find((x) => x.name === name);
-  c.age += 1;
-  c.dmg = c.dmg + 2;
+  attackList.map((a) => {
+    const c = player.attacks.find((x) => x.name === a.name);
+    c.price += 1;
+    c.lvl += 1;
+    c.dmg += 2;
+    const d = player.dojo.find((x) => x.name === a.name);
+    d.price += 1;
+    d.lvl += 1;
+    d.dmg += 2;
+  });
 }
 
 // ability to add up fire+ ?

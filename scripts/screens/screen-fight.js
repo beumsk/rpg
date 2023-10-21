@@ -104,10 +104,10 @@ function screenFight() {
 
   function stop() {
     document.removeEventListener('keydown', keyFightHandler);
-    fightEl.innerHTML = '';
   }
 
   function createMenu(menuList, menuName) {
+    // TODO: add info on focus!
     crtMenu = menuName;
     infoEl.innerHTML = '';
     if (menuList?.length > 0) {

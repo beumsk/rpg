@@ -1,8 +1,3 @@
-const shopBase = [
-  ...items.filter((x) => x.lvl === 1 && x.src.includes('shop')),
-  ...stuff.filter((x) => x.lvl === 1 && x.src.includes('shop')),
-];
-
 // TODO: add resell option?
 
 function shopBuy(name) {
@@ -19,12 +14,4 @@ function shopBuy(name) {
   } else {
     infoEl.innerText = `You don't have enough gems...`;
   }
-}
-
-function shopLvlUp(lvl) {
-  player.shop = [
-    ...player.shop,
-    ...items.filter((x) => x.lvl === lvl && x.src.includes('shop')),
-    ...stuff.filter((x) => x.lvl === lvl && x.src.includes('shop')),
-  ];
 }

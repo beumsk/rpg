@@ -45,7 +45,7 @@ function codeItems() {
         effect: calcEffects(fam.effect, ageIndex),
         lvl: ageIndex * 5 + 1,
         price: fam.type === 'heal' ? ageIndex * 5 || 2 : (ageIndex + 1) * 5,
-        src: ageIndex === 0 ? ['base', ...fam.src] : fam.src,
+        src: fam.src,
       };
       items.push(item);
     });
@@ -60,8 +60,6 @@ function codeItems() {
   }
 }
 codeItems();
-
-const itemsBase = items.filter((x) => x.src.includes('base')).map((x) => ({ ...x, qtt: 1 }));
 
 function itemUse(item, fromMenu) {
   const c = player.items.find((x) => x.name === item);

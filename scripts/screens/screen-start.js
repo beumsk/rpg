@@ -30,9 +30,11 @@ function screenStart() {
   function keyStartHandler(e) {
     const key = e.key;
     if (key === 'ArrowDown') {
+      e.preventDefault();
       index = index !== startButtons.length - 1 ? index + 1 : 0;
       startButtons[index].focus();
     } else if (key === 'ArrowUp') {
+      e.preventDefault();
       index = index !== 0 ? index - 1 : startButtons.length - 1;
       startButtons[index].focus();
     }
@@ -40,7 +42,6 @@ function screenStart() {
 
   function stop() {
     document.removeEventListener('keydown', keyStartHandler);
-    contentEl.innerHTML = '';
   }
 
   function startClick(e) {
@@ -49,15 +50,13 @@ function screenStart() {
     if (crt.dataset.type === 'start') {
       gameReset();
       if (ISDEV.skipIntro) {
-        screenTransition('bottom', () => screenWorld(), 'temple');
+        screenTransition('bottom', () => screenWorld(), '');
       } else {
-        screenTransition('bottom', () =>
-          screenStory(texts['intro'], () => screenWorld(), 'temple')
-        );
+        screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld(), ''));
       }
     } else if (crt.dataset.type === 'continue') {
       gameLoad();
-      screenTransition('bottom', () => screenWorld());
+      screenTransition('bottom', () => screenWorld(), currentMap.name);
     } else if (crt.dataset.type === 'how') {
       screenHow();
     } else if (crt.dataset.type === 'credit') {

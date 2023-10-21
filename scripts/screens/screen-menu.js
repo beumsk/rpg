@@ -21,10 +21,12 @@ function screenMenu() {
     { name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗` },
     { name: `map: ${currentMap.name} ⫯` },
     { name: `gems: ${player.gems} ◈` },
-    { name: `hp: ${player.hp}/${player.hpmax} (${player.hpmaxTemp}) ♥` },
-    { name: `str: ${player.str} (${player.strTemp}) ↣` }, // ⊕
-    { name: `def: ${player.def} (${player.defTemp}) ∇` }, // ⊖
-    { name: `crit: ${player.crit} (${player.critTemp}) %` },
+    { name: `scrolls: ${player.scrolls} ⋈` },
+    { name: `health: ${player.hp}/${player.hpmax} (${player.hpmaxTemp}) ♥` },
+    { name: `strength: ${player.str} (${player.strTemp}) ↣` }, // ⊕
+    { name: `defense: ${player.def} (${player.defTemp}) ∇` }, // ⊖
+    { name: `wisdom: ${player.wis} (${player.wisTemp}) ❖` },
+    { name: `critics: ${player.crit} (${player.critTemp}) %` },
     { name: `mastered elements: ${JSON.stringify(player.elements)}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
   let statsMenu;

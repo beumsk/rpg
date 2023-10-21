@@ -42,12 +42,9 @@ function screenFightEnd() {
   function keyFightEndHandler() {
     document.removeEventListener('keydown', keyFightEndHandler);
     contentEl.removeEventListener('click', keyFightEndHandler);
-    contentEl.innerHTML = '';
     if (currentEnemy.hp === 0) {
-      // if (player.fightEnd.lvlUp) {
-      if (player.fightEnd.lvlUp && player.lvl % 3 === 0) {
-        // TODO: ensure this is often enough => lvls 3,6,9,...
-        screenTransition('right', () => screenReward('lvl'), '', cGrad1);
+      if (player.fightEnd.lvlUp) {
+        screenTransition('left', () => screenLvlUp(), '', cGrad1);
       } else {
         screenTransition('left', () => screenWorld(), '', cGrad1);
       }

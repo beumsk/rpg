@@ -83,6 +83,14 @@ let cEnemy = cRed;
 let cDoor = cBrown;
 let cChest = cBrown;
 
+const colorGrid = {
+  air: cYellow,
+  earth: cGreen,
+  water: cBlue,
+  fire: cRed,
+  master: cViolet,
+};
+
 const colorTrGrid = {
   air: cYellowTr,
   earth: cGreenTr,

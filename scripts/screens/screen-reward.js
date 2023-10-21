@@ -1,6 +1,8 @@
 function screenReward(from) {
   contentEl.style.background = cGrad2;
 
+  infoEl.innerText = '';
+
   let content;
 
   let index = 0;
@@ -9,7 +11,9 @@ function screenReward(from) {
   const rewards = randomRewards(from);
 
   // TODO: add animation for random feel
-  const rewardsHTML = `
+  const rewardsHTML =
+    rewards &&
+    `
     <div class="rewards">
       ${
         rewards.item
@@ -19,7 +23,7 @@ function screenReward(from) {
             }">
                 ${rewards.item.name} x${rewards.itemQtt}
               </button>
-              <div class="popup">${popupInfo(rewards.item)}</div>
+              <div class="popup bottom">${popupInfo(rewards.item)}</div>
             </div>`
           : ''
       }
@@ -29,31 +33,8 @@ function screenReward(from) {
               <button data-type="stuf" data-value="${rewards.stuf.name}">${
               rewards.stuf.name
             }</button>
-              <div class="popup">${popupInfo(rewards.stuf)}</div>
+              <div class="popup bottom">${popupInfo(rewards.stuf)}</div>
             </div>`
-          : ''
-      }
-      ${
-        rewards.attack
-          ? `<div>
-              <button data-type="attack" data-value="${rewards.attack.name}">${
-              rewards.attack.name
-            }</button>
-              <div class="popup">${popupInfo(rewards.attack)}</div>
-            </div>`
-          : ''
-      }
-      ${
-        rewards.attackImprove
-          ? player.attacks
-              .filter((x) => x.type === 'attack')
-              .map(
-                (x) => `<div>
-              <button data-type="improve" data-value="${x.name}">${x.name}</button>
-              <div class="popup">${popupInfo(x)}</div>
-            </div>`
-              )
-              .join('')
           : ''
       }
       ${
@@ -69,15 +50,6 @@ function screenReward(from) {
       <div class="reward">
         <h1>You opened a chest!</h1>
         <p>Choose wisely between these rewards</p>
-        ${rewardsHTML}
-      </div>
-    `;
-  } else if (from === 'lvl') {
-    content = `
-      <div class="reward">
-        <h1>You reached lvl ${player.lvl}!</h1>
-        <p>Improve one of your attacks or learn a new one.</p>
-        <p>Choose wisely between these attacks</p>
         ${rewardsHTML}
       </div>
     `;
@@ -97,6 +69,17 @@ function screenReward(from) {
         ${rewardsHTML}
       </div>
     `;
+  } else if (from === 'tuto') {
+    content = `
+      <div class="reward">
+        <h1>You finished the tutorial!</h1>
+        <p>You are now ready to really start your adventure.</p>
+        <p>Good luck!</p>
+        <div class="rewards">
+          <button>Continue</button>
+        </div>
+      </div>
+    `;
   }
 
   contentEl.innerHTML = content;
@@ -108,9 +91,11 @@ function screenReward(from) {
   function keyRewardHandler(e) {
     const key = e.key;
     if (key === 'ArrowRight') {
+      e.preventDefault();
       index = index !== rewardButtons.length - 1 ? index + 1 : 0;
       rewardButtons[index].focus();
     } else if (key === 'ArrowLeft') {
+      e.preventDefault();
       index = index !== 0 ? index - 1 : rewardButtons.length - 1;
       rewardButtons[index].focus();
     }
@@ -119,15 +104,14 @@ function screenReward(from) {
   function stop() {
     document.removeEventListener('keydown', keyRewardHandler);
     clearCanvas();
-    contentEl.innerHTML = '';
     if (from === 'chest') {
-      screenTransition('left', () => screenWorld());
-    } else if (from === 'lvl') {
-      screenTransition('left', () => screenWorld());
+      screenTransition('left', () => screenWorld(), cGrad1);
     } else if (from === 'map') {
       changeMap(currentMap.world, 'next');
     } else if (from === 'world') {
       changeMap('temple', 'temple', currentWorld.name);
+    } else if (from === 'tuto') {
+      changeMap('temple', 'temple');
     }
   }
 
@@ -148,12 +132,12 @@ function screenReward(from) {
       attackImprove(crt.dataset.value);
     }
     if (from === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
-    infoQueue.push(
-      () =>
-        (infoEl.innerText = `You got ${crt.dataset.value} ${
-          crt.dataset.qtt ? 'x' + crt.dataset.qtt : ''
-        } (${crt.dataset.type})`)
-    );
+    // infoQueue.push(
+    //   () =>
+    //     (infoEl.innerText = `You got ${crt.dataset.value} ${
+    //       crt.dataset.qtt ? 'x' + crt.dataset.qtt : ''
+    //     } (${crt.dataset.type})`)
+    // );
     stop();
   }
 }

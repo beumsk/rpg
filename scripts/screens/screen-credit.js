@@ -23,7 +23,6 @@ function screenCredit() {
   function stop() {
     document.removeEventListener('keydown', keyCreditHandler);
     backButton[0].removeEventListener('click', keyCreditHandler);
-    contentEl.innerHTML = '';
     screenStart();
   }
 }

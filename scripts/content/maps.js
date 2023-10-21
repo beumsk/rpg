@@ -24,7 +24,7 @@ const doorBase = {
   y: -step,
 };
 
-const shoppBase = {
+const shopBaseSpot = {
   ...spotBase,
   type: 'shop',
   fill: null,
@@ -33,7 +33,7 @@ const shoppBase = {
   y: 0,
 };
 
-const dojoBase = {
+const dojoBaseSpot = {
   ...spotBase,
   type: 'dojo',
   fill: null,
@@ -42,7 +42,18 @@ const dojoBase = {
   y: 11 * 16,
 };
 
-let mapsBase = [
+let mapTuto = [
+  {
+    name: 'tutorial',
+    deadSpots: [
+      { ...shopBaseSpot },
+      { ...dojoBaseSpot },
+      { ...doorBase, y: 11 * 16, type: 'tuto-door' },
+    ],
+  },
+];
+
+let mapTemple = [
   {
     name: 'temple',
     deadSpots: [
@@ -51,8 +62,6 @@ let mapsBase = [
       { ...spotBase, x: 12 * 16, y: 7 * 16, type: 'water', fill: cBlueTr, img: './img/water.png' },
       { ...spotBase, x: 9 * 16, y: 7 * 16, type: 'fire', fill: cRedTr, img: './img/fire.png' },
       // { ...spotBase, x: 0 * 16, y: 0 * 16, type: 'master', fill: cVioletTr },
-      { ...shoppBase },
-      { ...dojoBase },
     ],
   },
 ];
@@ -64,7 +73,7 @@ let currentMap;
 function codeWorldMaps(world) {
   if (maps.find((x) => x.name === world)) return;
 
-  maps.push({ name: world, districts: codeDistricts(world) });
+  maps.push({ name: world, districts: codeDistricts() });
 
   function codeDistricts() {
     let districts = ISDEV.fasterWorld
@@ -90,8 +99,8 @@ function codeWorldMaps(world) {
             district: i + 1,
             type: world === 'master' ? 'end-door' : y === 'central' ? 'temple-door' : 'door',
           },
-          { ...shoppBase },
-          { ...dojoBase },
+          { ...shopBaseSpot },
+          { ...dojoBaseSpot },
         ],
       };
     });
@@ -115,41 +124,50 @@ function changeMap(world, to, masteredElement) {
     cGrad1 = cBack2;
     cGrad2 = cBack4;
     stateEl.style.background = cBack2;
+    if (!masteredElement) maps = [...mapTemple];
     currentMap = { ...maps[0] };
     currentEnemy = {};
     mapEnemies = [];
-    screenTransition('top', () =>
-      screenStory([...texts[masteredElement], ...texts['world' + player.elements.length]], () =>
-        screenWorld()
-      )
-    );
+    if (masteredElement) {
+      screenTransition('top', () =>
+        screenStory(
+          [...texts[masteredElement], ...texts['world' + player.elements.length]],
+          () => screenWorld(),
+          'temple'
+        )
+      );
+    } else {
+      screenTransition('top', () => screenWorld(), 'temple', cGrad1);
+    }
   } else if (to === 'first') {
     codeWorldMaps(world);
     bgImg = world;
-    cGrad1 = colorTrGrid[world];
+    cGrad1 = colorGrid[world];
     cGrad2 = colorLtGrid[world];
     stateEl.style.background = colorLtGrid[world];
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
     codeMapEnemies(currentMap.lvl, world);
-    screenTransition('top', () => screenWorld('map'), world);
+    screenTransition('top', () => screenWorld('map'), `${currentMap.name}`);
   } else if (to === 'next') {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
     codeMapEnemies(currentMap.lvl, world);
-    screenTransition('top', () => screenWorld('map'));
+    screenTransition('top', () => screenWorld('map'), `${currentMap.name}`);
   } else if (to === 'last') {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
     codeMapEnemies(currentMap.lvl, world, true);
-    screenTransition('top', () => screenWorld('map'));
+    screenTransition('top', () => screenWorld('map'), `${currentMap.name}`);
   }
-  infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
+  // infoQueue.push(() => (infoEl.innerText = `You reached map ${currentMap.name}`));
   player.x = 0;
   player.y = 0;
 }
 
 function worldCompleted(element) {
-  player.elements.push(element);
-  maps[0].deadSpots.find((x) => x.type === element).x = -step;
+  if (element) {
+    player.elements.push(element);
+    maps[0].deadSpots.find((x) => x.type === element).x = -step;
+  }
   if (player.elements.length === 4) {
     maps[0].deadSpots.push(
       { ...spotBase, x: 10 * 16, y: 5 * 16, type: 'master', fill: cYellow },
@@ -158,47 +176,4 @@ function worldCompleted(element) {
       { ...spotBase, x: 10 * 16, y: 6 * 16, type: 'master', fill: cRed }
     );
   }
-}
-
-function randomRewards(from) {
-  let rewardItems = items.filter((x) => x.lvl <= currentMap.lvl && x.src.includes('reward'));
-  let item = rewardItems[rand(rewardItems.length)];
-
-  let rewardStuff = stuff.filter(
-    (x) => x.lvl === currentMap.lvl && x.src.includes('reward') && !stuffRewarded.includes(x)
-  );
-  let stuf = rewardStuff[rand(rewardStuff.length)];
-
-  let rewardAttacks = attacks.filter(
-    (x) =>
-      x.src.includes('reward') &&
-      x.age === 1 &&
-      x.element === currentWorld.name &&
-      !attacksRewarded.includes(x)
-  );
-  let attack = rewardAttacks[rand(rewardAttacks.length)];
-
-  let rewardObj;
-  if (from === 'chest') {
-    // make it less interesting than map?
-    rewardObj = {
-      item,
-      itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
-      stuf,
-      gems: currentMap.lvl * 2,
-    };
-  } else if (from === 'lvl') {
-    rewardObj = { attack, attackImprove: true };
-  } else if (from === 'map') {
-    rewardObj = {
-      item,
-      itemQtt: Math.floor((currentMap.lvl * 2) / item.price) || 1,
-      stuf,
-      gems: currentMap.lvl * 2,
-    };
-  } else if (from === 'world') {
-    rewardObj = { stuf, attack };
-  }
-
-  return rewardObj;
 }

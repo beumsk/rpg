@@ -34,13 +34,16 @@
   <body>
     <div class="dark-overlay"></div>
 
-    <a href="https://github.com/beumsk/tarava" target="_blank" class="version">V 0.1.3</a>
+    <a href="https://github.com/beumsk/tarava" target="_blank" class="version">V 0.1.4</a>
 
     <script>
-      const ISDEV = {};
+      const ISDEV = {
+        skipTuto: true,
+      };
       // const ISDEV = {
       //   mute: true,
       //   skipIntro: true,
+      //   skipTuto: true,
       //   fasterXP: true,
       //   fasterWorld: true,
       // };
@@ -59,9 +62,11 @@
     <script src="./scripts/content/items.js"></script>
     <script src="./scripts/content/stuff.js"></script>
     <script src="./scripts/content/shop.js"></script>
+    <script src="./scripts/content/dojo.js"></script>
     <script src="./scripts/content/lvls.js"></script>
     <script src="./scripts/content/player.js"></script>
     <script src="./scripts/content/enemies.js"></script>
+    <script src="./scripts/content/rewards.js"></script>
 
     <script src="./scripts/screens/screen-splash.js"></script>
     <script src="./scripts/screens/screen-transition.js"></script>
@@ -71,9 +76,11 @@
     <script src="./scripts/screens/screen-story.js"></script>
     <script src="./scripts/screens/screen-world.js"></script>
     <script src="./scripts/screens/screen-shop.js"></script>
+    <script src="./scripts/screens/screen-dojo.js"></script>
     <script src="./scripts/screens/screen-reward.js"></script>
     <script src="./scripts/screens/screen-fight.js"></script>
     <script src="./scripts/screens/screen-fight-end.js"></script>
+    <script src="./scripts/screens/screen-lvl-up.js"></script>
     <script src="./scripts/screens/screen-menu.js"></script>
     <script src="./scripts/screens/screen-end.js"></script>
 
