@@ -29,8 +29,9 @@ function screenShop() {
 
   function updateShop() {
     contentEl.innerHTML = '<div class="shop"></div>';
+    index = 0;
 
-    const currShop = player.shop.filter((x) => x.lvl === player.lvl && x.src.includes('shop'));
+    const currShop = player.shop.filter((x) => x.lvl <= player.lvl && x.src.includes('shop'));
 
     if (currShop?.length > 0) {
       currShop.map((x, i) => {
@@ -51,8 +52,6 @@ function screenShop() {
         containerEl.appendChild(popupEl);
 
         contentEl.querySelector('.shop').appendChild(containerEl);
-        index = 0;
-        if (i === index) btnEl.focus();
         btnEl.addEventListener('click', btnClick);
       });
 
@@ -63,6 +62,8 @@ function screenShop() {
       });
       contentEl.querySelector('.shop').appendChild(exitBtn);
     }
+
+    shopBtns[0].focus();
   }
   updateShop();
 

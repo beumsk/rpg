@@ -13,6 +13,8 @@
 
 const attacksTypes = ['attack', 'bonus', 'malus'];
 
+const elementStat = { air: 'crit', earth: 'def', water: 'str', fire: 'hp' };
+
 const attacksNeutral = [
   // base attack => crit deals more dmg
   { name: 'punch', dmg: 6, age: 1, src: ['dojo'] },
@@ -40,15 +42,15 @@ const attacksElement = [
 
 const attacksBonusMalus = [
   // bonus attacks => bonus player
-  { name: 'aerocharge', state: 'air+' },
-  { name: 'terraforge', state: 'earth+' },
-  { name: 'hydroflow', state: 'water+' },
-  { name: 'pyroburst', state: 'fire+' },
+  { name: 'aerocharge', element: 'air', type: 'bonus' },
+  { name: 'terraforge', element: 'earth', type: 'bonus' },
+  { name: 'hydroflow', element: 'water', type: 'bonus' },
+  { name: 'pyroburst', element: 'fire', type: 'bonus' },
   // malus attacks => malus enemy
-  { name: 'aerochill', state: 'air-' },
-  { name: 'terratremor', state: 'earth-' },
-  { name: 'hydrodrain', state: 'water-' },
-  { name: 'pyrosmother', state: 'fire-' },
+  { name: 'aerochill', element: 'air', type: 'malus' },
+  { name: 'terratremor', element: 'earth', type: 'malus' },
+  { name: 'hydrodrain', element: 'water', type: 'malus' },
+  { name: 'pyrosmother', element: 'fire', type: 'malus' },
 ];
 
 let attacks = [];
@@ -84,12 +86,12 @@ function codeAttacks() {
   attacksBonusMalus.forEach((boo) => {
     let attack = {
       name: boo.name,
-      type: boo.state.includes('+') ? 'bonus' : 'malus',
-      element: boo.state.replace('+', '').replace('-', ''),
+      type: boo.type,
+      element: boo.element,
       lvl: 1,
       age: 1,
       price: 1,
-      state: boo.state,
+      effect: { [elementStat[boo.element]]: boo.element === 'water' ? 20 : 10 },
       src: ['dojo'],
     };
     attacks.push(attack);
@@ -97,49 +99,63 @@ function codeAttacks() {
 }
 codeAttacks();
 
-function attackElementApply(element, obj, isBonus, isSide, isCrit) {
+function attackElementApply(attack, obj, isSide, isCrit) {
   const critFactor = isSide ? 0.4 : isCrit ? 1.4 : 1;
-  function calcBM(base) {
-    return Math.floor(base * critFactor + (base * obj.wis) / 100);
+  const isBonus = attack.type === 'malus' ? 'malus' : 'bonus'; // 'attack' is bonus
+
+  function calcBM() {
+    let base = attack.element === 'water' ? 20 : 10;
+    let calc = Math.floor(
+      base + ((base * (attack.lvl - 1)) / 2) * critFactor + (base * obj.wis) / 100
+    );
+    return isBonus ? calc : -calc;
   }
 
-  if (element === 'air') {
-    isBonus ? (obj.critTemp += calcBM(10)) : (obj.critTemp -= calcBM(10));
+  if (attack.element === 'air') {
+    obj.critTemp += calcBM();
     return `${obj.name} % critical ${isBonus ? 'in' : 'de'}creased`;
-  } else if (element === 'earth') {
-    isBonus ? (obj.defTemp += calcBM(5)) : (obj.defTemp -= calcBM(5));
+  } else if (attack.element === 'earth') {
+    obj.defTemp += calcBM();
     return `${obj.name} defense ${isBonus ? 'in' : 'de'}creased`;
-  } else if (element === 'water') {
-    isBonus ? (obj.strTemp += calcBM(10)) : (obj.strTemp -= calcBM(10));
+  } else if (attack.element === 'water') {
+    obj.strTemp += calcBM();
     return `${obj.name} strength ${isBonus ? 'in' : 'de'}creased`;
-  } else if (element === 'fire') {
-    isBonus ? (obj.hp += calcBM(10)) : (obj.hp -= calcBM(10));
-    isBonus ? (obj.hpmaxTemp += calcBM(10)) : (obj.hpmaxTemp -= calcBM(10));
+  } else if (attack.element === 'fire') {
+    obj.hp += calcBM();
+    obj.hpmaxTemp += calcBM();
     return `${obj.name} hp ${isBonus ? 'in' : 'de'}creased`;
   }
 }
 
 function attackFind(attackList) {
   attackList.map((a) => {
-    player.attacks = [...player.attacks, { ...a }];
+    player.attacks = deepCopy([...player.attacks, { ...a }]);
     const d = player.dojo.find((x) => x.name === a.name);
     d.price += 1;
     d.lvl += 1;
-    d.dmg += 2;
+    if (a.dmg) {
+      d.dmg += 2;
+    } else {
+      d.effect[elementStat[d.element]] += (d.element === 'water' ? 20 : 10) / 2;
+    }
   });
 }
 
 function attackImprove(attackList) {
-  // TODO: think of a way to improve bonus/malus attacks
   attackList.map((a) => {
     const c = player.attacks.find((x) => x.name === a.name);
-    c.price += 1;
-    c.lvl += 1;
-    c.dmg += 2;
     const d = player.dojo.find((x) => x.name === a.name);
+    c.price += 1;
     d.price += 1;
+    c.lvl += 1;
     d.lvl += 1;
-    d.dmg += 2;
+    if (a.dmg) {
+      c.dmg += 2;
+      d.dmg += 2;
+    } else {
+      c.effect[elementStat[c.element]] += (c.element === 'water' ? 20 : 10) / 2;
+      d.effect[elementStat[d.element]] += (d.element === 'water' ? 20 : 10) / 2;
+    }
   });
 }
 

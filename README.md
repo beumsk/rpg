@@ -31,7 +31,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
   - => master door opens > beat 4 masters + high master and win
 - Dmg = (dmg+str-def) x elmt(0.75|1|1.5)
   - => power up player/enemy with str and def
-- Player lvlUp => dmg+20% & def+10% (& every 3 lvls up attack or new attack)
+- Player lvlUp => dmg+20% & def+10% (& 1 scroll)
 - Enemy lvlUp => dmg+20% & def+10%
 - Items are in shop and rewards
 - Stuff are in shop or rewards
@@ -39,20 +39,20 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- ensure reset resets everything => attention to shallow copy vs deep copy!
-
-- work on attack improve !!
 - simplify codes: map change, dry as much as possible (enemy/player attack, btnCreation, ...?)
-- info in fight menu hover + review btn designs
 - confirmation modal => buy any, use item, equip stuf
+
 - review lvlup => give points to distribute on stats ?
-- max of 4 attacks, select the ones to have in fight
+
 - improve fights: better ai, attack range, elemental str&def?,
-- improve maps: add things on those: npc, quests,
+- work on attack improve !!
+- max of 4 attacks? select the ones to have in fight
 - more fights? add element on map to add new enemies or trainingMap?
 
 - Tuto => get attack => fight enemy => buy potion and use it => door to temple
+- first fight intro+tuto against master that we lose as we only have basic attacks?
 
+- improve maps: add things on those: npc, quests,
 - => create paths on map? at least some decoration.
 
 - test difficulty of game & add difficulty option?
@@ -63,10 +63,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
   - items & stuff in menus ?
 
 - ask player name?
-- tutorial map??
-- first fight intro+tuto against master that we lose as we only have basic attacks?
-
-- show player/enemy character in fight?
 
 > randomize
 
@@ -79,12 +75,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - handle items curing malus
 
 - other player sprites to pick when starting?
-- add AI logic (not only first attack)
 - add time of play (+ paused when unfocus page?)
 - panoplie boost??
 
 - add visuals of items, stuff, attacks, fights...
-- decorate the maps
 - add sounds effects? => rewards, attacks, movements, clicks
 
 - world: game design? puzzle on some map?
@@ -101,7 +95,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - flee a fight?
 - map enigmas?
 - review map to move outside of screen?
-- each learned element would give a new monster to play? (pokemon like with switching monsters)
 - text logo T🔥r💧v🍃 ?
 
 ## Useful

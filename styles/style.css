@@ -202,8 +202,24 @@ kbd {
 .info button {
   margin-right: 1rem;
   border: solid 1px;
-  padding: 4px 8px;
+  padding: 0.5rem 1rem;
   white-space: nowrap;
+  position: relative;
+}
+
+.info button[data-type]::before {
+  content: attr(data-type);
+  position: absolute;
+  top: 0;
+  left: 2px;
+  font-size: 0.5rem;
+}
+.info button[data-element]::after {
+  content: attr(data-element);
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+  font-size: 0.5rem;
 }
 
 /* ACTION */

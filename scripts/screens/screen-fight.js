@@ -10,7 +10,7 @@ function screenFight() {
   const mainMenu = [{ name: 'attacks' }, { name: 'items' }];
 
   let index = 0;
-  let menuBtns = infoEl.getElementsByTagName('button');
+  let fightBtns = infoEl.getElementsByTagName('button');
   let crtMenu = 'main';
 
   createMenu(mainMenu, 'main');
@@ -22,12 +22,12 @@ function screenFight() {
       backToMain();
     } else if (key === 'ArrowRight') {
       e.preventDefault();
-      index = index !== menuBtns.length - 1 ? index + 1 : 0;
-      menuBtns[index].focus();
+      index = index !== fightBtns.length - 1 ? index + 1 : 0;
+      fightBtns[index].focus();
     } else if (key === 'ArrowLeft') {
       e.preventDefault();
-      index = index !== 0 ? index - 1 : menuBtns.length - 1;
-      menuBtns[index].focus();
+      index = index !== 0 ? index - 1 : fightBtns.length - 1;
+      fightBtns[index].focus();
     } else if (key === 'Enter' || key === ' ') {
       queueRun();
     }
@@ -110,15 +110,19 @@ function screenFight() {
     // TODO: add info on focus!
     crtMenu = menuName;
     infoEl.innerHTML = '';
+    index = 0;
+
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
         const btnEl = document.createElement('button');
         btnEl.innerText = x.name;
         btnEl.dataset.menu = menuName;
         btnEl.dataset.value = x.name;
+        if (x.type && x.element) {
+          btnEl.dataset.type = x.type;
+          btnEl.dataset.element = x.element;
+        }
         infoEl.appendChild(btnEl);
-        index = 0;
-        if (i === index) btnEl.focus();
         btnEl.addEventListener('click', btnClick);
       });
       if (menuName !== 'main') {
@@ -127,6 +131,7 @@ function screenFight() {
       } else {
         actionBackEl.innerText = '';
       }
+      fightBtns[0].focus();
     } else {
       backToMain();
     }

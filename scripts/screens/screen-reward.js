@@ -105,7 +105,7 @@ function screenReward(from) {
     document.removeEventListener('keydown', keyRewardHandler);
     clearCanvas();
     if (from === 'chest') {
-      screenTransition('left', () => screenWorld(), cGrad1);
+      screenTransition('left', () => screenWorld(), '', cGrad1);
     } else if (from === 'map') {
       changeMap(currentMap.world, 'next');
     } else if (from === 'world') {
@@ -126,10 +126,6 @@ function screenReward(from) {
       );
     } else if (crt.dataset.type === 'stuf') {
       stuffFind(stuff.filter((s) => s.name === crt.dataset.value));
-    } else if (crt.dataset.type === 'attack') {
-      attackFind(attacks.filter((a) => a.name === crt.dataset.value));
-    } else if (crt.dataset.type === 'improve') {
-      attackImprove(crt.dataset.value);
     }
     if (from === 'chest') currentMap.deadSpots.find((x) => x.type === 'chest').type = '';
     // infoQueue.push(

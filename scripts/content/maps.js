@@ -170,10 +170,17 @@ function worldCompleted(element) {
   }
   if (player.elements.length === 4) {
     maps[0].deadSpots.push(
-      { ...spotBase, x: 10 * 16, y: 5 * 16, type: 'master', fill: cYellow },
-      { ...spotBase, x: 11 * 16, y: 5 * 16, type: 'master', fill: cGreen },
-      { ...spotBase, x: 11 * 16, y: 6 * 16, type: 'master', fill: cBlue },
-      { ...spotBase, x: 10 * 16, y: 6 * 16, type: 'master', fill: cRed }
+      { ...spotBase, x: 10 * 16, y: 5 * 16, type: 'master', fill: cYellowTr, img: './img/air.png' },
+      {
+        ...spotBase,
+        x: 11 * 16,
+        y: 5 * 16,
+        type: 'master',
+        fill: cGreenTr,
+        img: './img/earth.png',
+      },
+      { ...spotBase, x: 11 * 16, y: 6 * 16, type: 'master', fill: cBlueTr, img: './img/water.png' },
+      { ...spotBase, x: 10 * 16, y: 6 * 16, type: 'master', fill: cRedTr, img: './img/fire.png' }
     );
   }
 }

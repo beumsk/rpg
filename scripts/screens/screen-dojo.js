@@ -29,6 +29,7 @@ function screenDojo() {
 
   function updateDojo() {
     contentEl.innerHTML = '<div class="dojo"></div>';
+    index = 0;
 
     const currDojoLearn = player.dojo.filter(
       (x) =>
@@ -58,7 +59,7 @@ function screenDojo() {
         const btnEl = document.createElement('button');
         btnEl.innerText = `${x.name}: ${x.dmg ? x.dmg + 'dmg' : x.type} ${x.element} (${
           x.price
-        } ◈)`;
+        } ⋈)`;
         btnEl.dataset.value = x.name;
         containerEl.appendChild(btnEl);
 
@@ -68,7 +69,6 @@ function screenDojo() {
         containerEl.appendChild(popupEl);
 
         contentEl.querySelector('.dojo').appendChild(containerEl);
-        index = 0;
         btnEl.addEventListener('click', btnClick);
       });
       contentEl.querySelector('.dojo').appendChild(exitBtn);
@@ -81,7 +81,7 @@ function screenDojo() {
         const btnEl = document.createElement('button');
         btnEl.innerText = `|!| ${x.name}: ${x.dmg ? x.dmg + 'dmg' : x.type} ${x.element} (${
           x.price
-        } ◈)`;
+        } ⋈)`;
         btnEl.dataset.value = x.name;
         containerEl.appendChild(btnEl);
 
@@ -90,7 +90,6 @@ function screenDojo() {
         popupEl.innerHTML = popupInfo(x, true);
         containerEl.appendChild(popupEl);
         contentEl.querySelector('.dojo').appendChild(containerEl);
-        index = 0;
         btnEl.addEventListener('click', btnClick);
       });
       contentEl.querySelector('.dojo').appendChild(exitBtn);
@@ -103,7 +102,7 @@ function screenDojo() {
       contentEl.querySelector('.dojo').appendChild(exitBtn);
     }
 
-    Array.from(dojoBtns)[0].focus();
+    dojoBtns[0].focus();
   }
   updateDojo();
 

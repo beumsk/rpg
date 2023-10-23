@@ -100,9 +100,15 @@ function popupInfo(info, withPrice) {
   } else if ([...attacksTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
-      <p>${info.type}: ${info.dmg ? info.dmg + 'dmg' : ''} (${info.element})</p>
+      ${
+        info.type === 'attack'
+          ? `<p>${info.type}: ${info.dmg}dmg (${info.element})</p>`
+          : `<p>${info.type}: ${info.type === 'bonus' ? '+' : '-'}${JSON.stringify(info.effect)} (${
+              info.element
+            })</p>`
+      }      
       <p>lvl: ${info.lvl}</p>
-      ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
+      ${withPrice ? `<p>price: ${info.price} ⋈</p>` : ''}
     `;
   }
 }

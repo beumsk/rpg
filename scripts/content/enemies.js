@@ -155,10 +155,10 @@ function enemyAttack(attack) {
     const isMaster = currentEnemy.elements.includes(c.element);
 
     if (c.type === 'bonus') {
-      const info = attackElementApply(c.element, currentEnemy, true, false, isCrit);
+      const info = attackElementApply(c, currentEnemy, false, isCrit);
       infoEl.innerText = `${info}`;
     } else if (c.type === 'malus') {
-      const info = attackElementApply(c.element, player, false, false, isCrit);
+      const info = attackElementApply(c, player, false, isCrit);
       infoEl.innerText = `${info}`;
     } else {
       let calcDmg = Math.floor(
@@ -175,7 +175,7 @@ function enemyAttack(attack) {
           infoEl.innerText = `Critical hit!`;
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
-          const info = attackElementApply(c.element, currentEnemy, true, true, false);
+          const info = attackElementApply(c, currentEnemy, true, false);
           infoEl.innerText = `Critical hit! ${info}`;
         }
       } else {

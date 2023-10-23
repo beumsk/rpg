@@ -74,6 +74,8 @@ function screenMenu() {
   function createMenu(menuList, menuName) {
     crtMenu = menuName;
     contentEl.innerHTML = '<div class="menu"></div>';
+    index = 0;
+
     if (menuList?.length > 0) {
       menuList.map((x, i) => {
         const containerEl = document.createElement('div');
@@ -104,8 +106,6 @@ function screenMenu() {
         containerEl.appendChild(btnEl);
         containerEl.appendChild(popupEl);
         contentEl.querySelector('.menu').appendChild(containerEl);
-        index = 0;
-        if (i === index) btnEl.focus();
         btnEl.addEventListener('click', btnClick);
       });
       if (menuName !== 'main') {
@@ -117,6 +117,7 @@ function screenMenu() {
         });
         contentEl.querySelector('.menu').appendChild(backBtn);
       }
+      menuBtns[0].focus();
     } else {
       createMainMenu();
     }
