@@ -13,15 +13,14 @@ function screenCredit() {
   `;
   // <p>Designs: </p>
 
-  document.addEventListener('keydown', keyCreditHandler);
   backButton[0].addEventListener('click', keyCreditHandler);
+  backButton[0].focus();
 
   function keyCreditHandler() {
     stop();
   }
 
   function stop() {
-    document.removeEventListener('keydown', keyCreditHandler);
     backButton[0].removeEventListener('click', keyCreditHandler);
     screenStart();
   }

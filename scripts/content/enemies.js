@@ -27,13 +27,15 @@ function codeMapEnemies(lvl, world, isLast) {
         element === 'master'
           ? elements.map((x) => ({
               name: enemyMoves[x][rand(enemyMoves[x].length)],
-              dmg: 4,
+              lvl: Math.ceil(lvl / 5),
+              type: 'attack',
               element: x,
             }))
           : [
               {
                 name: enemyMoves[element][rand(enemyMoves[element].length)],
-                dmg: 4,
+                lvl: Math.ceil(lvl / 5),
+                type: 'attack',
                 element: element,
               },
             ];
@@ -172,14 +174,20 @@ function enemyAttack(attack) {
 
       if (isCrit) {
         if (c.element === 'neutral') {
-          infoEl.innerText = `Critical hit!`;
+          infoQueue.push(() => (infoEl.innerText = `Critical hit!`));
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
           const info = attackElementApply(c, currentEnemy, true, false);
-          infoEl.innerText = `Critical hit! ${info}`;
+          infoQueue.push(() => (infoEl.innerText = `Critical hit! ${info}`));
         }
       } else {
         infoEl.innerText = '...';
+      }
+
+      if (elementFactor !== 1) {
+        infoQueue.push(
+          () => (infoEl.innerText = elementFactor > 1 ? 'Superb move!' : 'Poor move.')
+        );
       }
 
       // GD: using an attack, gives the enemy that element
@@ -191,9 +199,11 @@ function enemyAttack(attack) {
         player.hp -= calcDmg;
       }
     }
+
+    infoQueue.push(playerCheckDead);
   };
 
-  infoQueue.push(manageAttack, playerCheckDead);
+  infoQueue.push(manageAttack);
 }
 
 function enemyCheckDead() {

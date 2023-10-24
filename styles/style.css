@@ -295,6 +295,7 @@ kbd {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  outline: solid 1px;
 }
 .transition h1 {
 }

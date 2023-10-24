@@ -106,7 +106,7 @@ function attackElementApply(attack, obj, isSide, isCrit) {
   function calcBM() {
     let base = attack.element === 'water' ? 20 : 10;
     let calc = Math.floor(
-      base + ((base * (attack.lvl - 1)) / 2) * critFactor + (base * obj.wis) / 100
+      (base + (base * (attack.lvl - 1)) / 2 + (base * obj.wis) / 100) * critFactor
     );
     return isBonus ? calc : -calc;
   }

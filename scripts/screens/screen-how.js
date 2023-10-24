@@ -16,15 +16,14 @@ function screenHow() {
     </div>
   `;
 
-  document.addEventListener('keydown', keyHowHandler);
   backButton[0].addEventListener('click', keyHowHandler);
+  backButton[0].focus();
 
   function keyHowHandler() {
     stop();
   }
 
   function stop() {
-    document.removeEventListener('keydown', keyHowHandler);
     backButton[0].removeEventListener('click', keyHowHandler);
     screenStart();
   }

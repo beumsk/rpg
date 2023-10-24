@@ -64,14 +64,20 @@ function playerAttack(attack) {
 
       if (isCrit) {
         if (c.element === 'neutral') {
-          infoEl.innerText = `Critical hit!`;
+          infoQueue.push(() => (infoEl.innerText = `Critical hit!`));
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
           const info = attackElementApply(c, player, true, false);
-          infoEl.innerText = `Critical hit! ${info}`;
+          infoQueue.push(() => (infoEl.innerText = `Critical hit! ${info}`));
         }
       } else {
         infoEl.innerText = '...';
+      }
+
+      if (elementFactor !== 1) {
+        infoQueue.push(
+          () => (infoEl.innerText = elementFactor > 1 ? 'Superb move!' : 'Poor move.')
+        );
       }
 
       // GD: using an attack, gives the player that element
@@ -83,9 +89,11 @@ function playerAttack(attack) {
         currentEnemy.hp -= calcDmg;
       }
     }
+
+    infoQueue.push(enemyCheckDead);
   };
 
-  infoQueue.push(manageAttack, enemyCheckDead);
+  infoQueue.push(manageAttack);
 }
 
 function playerCheckDead() {
