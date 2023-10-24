@@ -89,7 +89,7 @@ function codeWorldMaps(world) {
           {
             ...chestBase,
             ...randPos(baseW, baseH, step, [
-              { x: player.x, y: player.y },
+              { x: 0, y: 0 },
               { x: doorBase.x, y: doorBase.y },
             ]),
           },

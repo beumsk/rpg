@@ -39,6 +39,7 @@ const playerBase = {
 
 function playerAttack(attack) {
   const c = player.attacks.find((x) => x.name === attack);
+
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
   const manageAttack = () => {
@@ -48,10 +49,10 @@ function playerAttack(attack) {
 
     if (c.type === 'bonus') {
       const info = attackElementApply(c, player, false, isCrit);
-      infoEl.innerText = `${info}`;
+      infoQueue.push(() => (infoEl.innerText = `${info}`));
     } else if (c.type === 'malus') {
       const info = attackElementApply(c, currentEnemy, false, isCrit);
-      infoEl.innerText = `${info}`;
+      infoQueue.push(() => (infoEl.innerText = `${info}`));
     } else {
       let calcDmg = Math.floor(
         (c.dmg +
@@ -70,8 +71,6 @@ function playerAttack(attack) {
           const info = attackElementApply(c, player, true, false);
           infoQueue.push(() => (infoEl.innerText = `Critical hit! ${info}`));
         }
-      } else {
-        infoEl.innerText = '...';
       }
 
       if (elementFactor !== 1) {
@@ -79,6 +78,9 @@ function playerAttack(attack) {
           () => (infoEl.innerText = elementFactor > 1 ? 'Superb move!' : 'Poor move.')
         );
       }
+
+      // GD: 50% of attacks deals +1
+      calcDmg = rand(2) ? Math.ceil(calcDmg * 1.1) : calcDmg;
 
       // GD: using an attack, gives the player that element
       player.element = c.element !== 'neutral' ? c.element : '';
@@ -92,8 +94,7 @@ function playerAttack(attack) {
 
     infoQueue.push(enemyCheckDead);
   };
-
-  infoQueue.push(manageAttack);
+  manageAttack();
 }
 
 function playerCheckDead() {

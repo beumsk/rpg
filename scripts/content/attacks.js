@@ -8,7 +8,7 @@
 // GD: burnt><firedup +-hpmax (fire) => 60/80 -5 = 55/75 && 60/80 +5 = 65/85
 // GD: ??? heal or dmg each turn (periodics)
 
-// TODO: review attacks => must be possible for attack to handle state, to give bonus/malus, to steal life, to heal, to poison
+// TODO: improve attacks => must be possible for attack to handle state, to give bonus/malus, to steal life, to heal, to poison
 // pass turn?
 
 const attacksTypes = ['attack', 'bonus', 'malus'];

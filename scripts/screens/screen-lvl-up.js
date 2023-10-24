@@ -1,8 +1,6 @@
 function screenLvlUp() {
   contentEl.style.background = cGrad2;
 
-  // TODO: player picks which stats to update?
-
   contentEl.innerHTML = `
     <div class="lvl-up">
       <h1>You reached lvl ${player.lvl}!</h1>

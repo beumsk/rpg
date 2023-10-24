@@ -107,7 +107,6 @@ function screenFight() {
   }
 
   function createMenu(menuList, menuName) {
-    // TODO: add info on focus!
     crtMenu = menuName;
     infoEl.innerHTML = '';
     index = 0;
@@ -149,13 +148,13 @@ function screenFight() {
         createMenu(player[crt.dataset.value], crt.dataset.value);
       }
     } else if (crtMenu === 'attacks') {
-      playerAttack(crt.innerText);
+      infoQueue.push(() => playerAttack(crt.innerText));
       actionQueueEl.innerText = '→';
       actionQueueEl.addEventListener('click', queueRun);
       actionBackEl.innerText = '';
       infoEl.addEventListener('click', queueRun);
     } else if (crtMenu === 'items') {
-      itemUse(crt.innerText, false);
+      infoQueue.push(() => itemUse(crt.innerText, false));
       actionQueueEl.innerText = '→';
       actionQueueEl.addEventListener('click', queueRun);
       actionBackEl.innerText = '';

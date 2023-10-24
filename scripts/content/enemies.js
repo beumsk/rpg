@@ -158,10 +158,10 @@ function enemyAttack(attack) {
 
     if (c.type === 'bonus') {
       const info = attackElementApply(c, currentEnemy, false, isCrit);
-      infoEl.innerText = `${info}`;
+      infoQueue.push(() => (infoEl.innerText = `${info}`));
     } else if (c.type === 'malus') {
       const info = attackElementApply(c, player, false, isCrit);
-      infoEl.innerText = `${info}`;
+      infoQueue.push(() => (infoEl.innerText = `${info}`));
     } else {
       let calcDmg = Math.floor(
         (c.dmg +
@@ -180,8 +180,6 @@ function enemyAttack(attack) {
           const info = attackElementApply(c, currentEnemy, true, false);
           infoQueue.push(() => (infoEl.innerText = `Critical hit! ${info}`));
         }
-      } else {
-        infoEl.innerText = '...';
       }
 
       if (elementFactor !== 1) {
@@ -189,6 +187,9 @@ function enemyAttack(attack) {
           () => (infoEl.innerText = elementFactor > 1 ? 'Superb move!' : 'Poor move.')
         );
       }
+
+      // GD: 50% of attacks deals +1
+      calcDmg = rand(2) ? Math.ceil(calcDmg * 1.1) : calcDmg;
 
       // GD: using an attack, gives the enemy that element
       currentEnemy.element = c.element !== 'neutral' ? c.element : '';
@@ -202,8 +203,7 @@ function enemyAttack(attack) {
 
     infoQueue.push(playerCheckDead);
   };
-
-  infoQueue.push(manageAttack);
+  manageAttack();
 }
 
 function enemyCheckDead() {

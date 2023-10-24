@@ -92,8 +92,8 @@ function screenMenu() {
           popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'stuff') {
           btnEl.innerText = x.equiped
-            ? `|${x.equiped.charAt(0).toUpperCase()}| ${x.name} ${JSON.stringify(x.effect)}`
-            : `    ${x.name} ${JSON.stringify(x.effect)}`;
+            ? `|${x.equiped.charAt(0).toUpperCase()}| ${x.name}`
+            : `${x.name}`;
           popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'options') {
           btnEl.innerText =
@@ -148,10 +148,10 @@ function screenMenu() {
       stuffEquip(player.stuff.filter((x) => x.name === crt.dataset.value));
       createMenu(player[crtMenu], crtMenu);
     } else if (crtMenu === 'options') {
-      // TODO: add options: save, load
       if (crt.dataset.value === 'audio') {
         audioToggle();
-        createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crtMenu);
+        // createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crtMenu);
+        createMenu([{ name: `audio` }, { name: `save` }], crtMenu);
       } else if (crt.dataset.value === 'save') {
         gameSave();
         createMenu(player[crtMenu], crtMenu);

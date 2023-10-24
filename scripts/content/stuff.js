@@ -1,15 +1,18 @@
 // TODO: add belt, rune, pet?
-// TODO: add crit bonus?
 const stuffTypes = ['ring', 'amulet', 'boots', 'cloak', 'hat'];
 
 const stuffFamilies = [
-  { name: 'dummy', effect: { hp: 2 }, src: ['base'] },
-  { name: 'balanced', effect: { hp: 4, str: 4, def: 4 }, src: ['reward'] },
+  { name: 'starter', effect: { hp: 2 }, src: ['base'] },
+  { name: 'balanced', effect: { hp: 4, str: 4, def: 4, wis: 4, crit: 1 }, src: ['reward'] },
   { name: 'energized', effect: { hp: 7, str: 7 }, src: ['reward'] },
   { name: 'fortified', effect: { hp: 7, def: 7 }, src: ['reward'] },
+  // { name: 'sage', effect: { hp: 7, wis: 7 }, src: ['reward'] },
+  { name: 'blessed', effect: { hp: 7, crit: 2 }, src: ['reward'] },
   { name: 'strong', effect: { str: 10 }, src: ['shop'] },
-  { name: 'robust', effect: { def: 5 }, src: ['shop'] },
+  { name: 'robust', effect: { def: 10 }, src: ['shop'] },
   { name: 'healthy', effect: { hp: 20 }, src: ['shop'] },
+  { name: 'lucky', effect: { crit: 4 }, src: ['shop'] },
+  { name: 'wise', effect: { wis: 10 }, src: ['shop'] },
 ];
 
 const stuffAges = ['I', 'II', 'III', 'IV', 'V'];
@@ -27,7 +30,6 @@ function codeStuff() {
           name: fam.src.includes('base') ? `${fam.name} ${type}` : `${fam.name} ${type} ${age}`,
           type: type,
           effect: calcEffects(fam.effect, ageIndex + 1, typeIndex),
-          // desc: 'stuff desc',
           lvl: fam.src.includes('base') ? 1 : i,
           price: i * 5,
           src: fam.src,
@@ -41,7 +43,11 @@ function codeStuff() {
   function calcEffects(effects, mult, bonus) {
     const resEffects = {};
     for (let key in effects) {
-      resEffects[key] = effects[key] * mult + bonus;
+      if (key !== 'crit') {
+        resEffects[key] = effects[key] * mult + bonus;
+      } else {
+        resEffects[key] = Math.floor((effects[key] * mult + bonus) / 2);
+      }
     }
     return resEffects;
   }

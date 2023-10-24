@@ -44,8 +44,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - review lvlup => give points to distribute on stats ?
 
-- improve fights: better ai, attack range, elemental str&def?,
-- work on attack improve !!
+- improve fights: better ai, elemental str&def?,
 - max of 4 attacks? select the ones to have in fight
 - more fights? add element on map to add new enemies or trainingMap?
 
@@ -67,7 +66,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 > randomize
 
 - rewardScreen => add boost? && option to pick average (5) or random (1-10) ?
-- random dmg => attack have range of dmg
 
 > other
 
@@ -108,4 +106,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 21.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4+6)=146?? hours total dev
+- 21.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4+6+4)=150?? hours total dev
