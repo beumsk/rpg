@@ -57,7 +57,7 @@ function screenFight() {
       : '<span style="width:0.875rem;display:inline-block;"></span>';
     const enemyStats = `lvl:${currentEnemy.lvl} ${enemyElement} ${
       currentEnemy.str + currentEnemy.strTemp
-    }↣ ${currentEnemy.def + currentEnemy.defTemp}∇`;
+    }↣ ${currentEnemy.def + currentEnemy.defTemp}∇ ${currentEnemy.crit + currentEnemy.critTemp}%`;
     const enemyHP = `${currentEnemy.hp}/${currentEnemy.hpmax + currentEnemy.hpmaxTemp}`;
     const enemyLife = (currentEnemy.hp / (currentEnemy.hpmax + currentEnemy.hpmaxTemp)) * 100;
 
@@ -66,7 +66,7 @@ function screenFight() {
       : '<span style="width:0.875rem;display:inline-block;"></span>';
     const playerStats = `lvl:${player.lvl} ${playerElement} ${player.str + player.strTemp}↣ ${
       player.def + player.defTemp
-    }∇`;
+    }∇ ${player.crit + player.critTemp}%`;
     const playerHP = `${player.hp}/${player.hpmax + player.hpmaxTemp}`;
     const playerLife = (player.hp / (player.hpmax + player.hpmaxTemp)) * 100;
 

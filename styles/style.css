@@ -533,7 +533,7 @@ kbd {
   right: 0;
   padding: 0 1rem;
   outline: solid 1px;
-  white-space: nowrap;
+  max-width: 50%;
 }
 .content .popup.bottom {
   top: unset;

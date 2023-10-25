@@ -11,9 +11,16 @@
 // TODO: improve attacks => must be possible for attack to handle state, to give bonus/malus, to steal life, to heal, to poison
 // pass turn?
 
+// TODO: more attacks? => lmt attack with dmg only, with malus as crit?
+
 const attacksTypes = ['attack', 'bonus', 'malus'];
 
-const elementStat = { air: 'crit', earth: 'def', water: 'str', fire: 'hp' };
+const elementStat = {
+  air: { txt: 'crit', val: 10 },
+  earth: { txt: 'def', val: 20 },
+  water: { txt: 'str', val: 40 },
+  fire: { txt: 'hp', val: 20 },
+};
 
 const attacksNeutral = [
   // base attack => crit deals more dmg
@@ -91,7 +98,7 @@ function codeAttacks() {
       lvl: 1,
       age: 1,
       price: 1,
-      effect: { [elementStat[boo.element]]: boo.element === 'water' ? 20 : 10 },
+      effect: { [elementStat[boo.element].txt]: elementStat[boo.element].val },
       src: ['dojo'],
     };
     attacks.push(attack);
@@ -99,12 +106,12 @@ function codeAttacks() {
 }
 codeAttacks();
 
-function attackElementApply(attack, obj, isSide, isCrit) {
-  const critFactor = isSide ? 0.4 : isCrit ? 1.4 : 1;
-  const isBonus = attack.type === 'malus' ? 'malus' : 'bonus'; // 'attack' is bonus
+function attackElementApply(attack, obj, isSide, isCrit, isMaster) {
+  const critFactor = isSide ? 0.4 : isCrit && isMaster ? 2 : isCrit || isMaster ? 1.4 : 1; // 0.4 is too much for side?
+  const isBonus = attack.type === 'malus' ? false : true; // 'attack' is bonus
 
   function calcBM() {
-    let base = attack.element === 'water' ? 20 : 10;
+    let base = elementStat[attack.element].val;
     let calc = Math.floor(
       (base + (base * (attack.lvl - 1)) / 2 + (base * obj.wis) / 100) * critFactor
     );
@@ -136,7 +143,7 @@ function attackFind(attackList) {
     if (a.dmg) {
       d.dmg += 2;
     } else {
-      d.effect[elementStat[d.element]] += (d.element === 'water' ? 20 : 10) / 2;
+      d.effect[elementStat[d.element].txt] += elementStat[d.element].val / 2;
     }
   });
 }
@@ -153,8 +160,9 @@ function attackImprove(attackList) {
       c.dmg += 2;
       d.dmg += 2;
     } else {
-      c.effect[elementStat[c.element]] += (c.element === 'water' ? 20 : 10) / 2;
-      d.effect[elementStat[d.element]] += (d.element === 'water' ? 20 : 10) / 2;
+      // add improve in elementStat? => adapt improve to stat (crit should improve slower than strength)
+      c.effect[elementStat[c.element].txt] += elementStat[c.element].val / 2;
+      d.effect[elementStat[d.element].txt] += elementStat[d.element].val / 2;
     }
   });
 }

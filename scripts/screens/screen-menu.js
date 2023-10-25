@@ -4,11 +4,11 @@ function screenMenu() {
   infoEl.innerText = ' ';
 
   const mainMenu = [
-    { name: 'stats' },
-    { name: 'attacks' },
-    { name: 'items' },
-    { name: 'stuff' },
-    { name: 'options' },
+    { name: 'stats', popup: `<p>Check your stats</p>` },
+    { name: 'attacks', popup: `<p>Check your attacks</p>` },
+    { name: 'items', popup: `<p>Check and use your items</p>` },
+    { name: 'stuff', popup: `<p>Check and equip your stuff</p>` },
+    { name: 'options', popup: `<p>Manage audio and save</p>` },
     { name: '← exit' },
   ];
 
@@ -17,17 +17,51 @@ function screenMenu() {
   let crtMenu = 'main';
 
   const codeStatsMenu = () => [
-    { name: `lvl: ${player.lvl}` },
-    { name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗` },
+    {
+      name: `lvl: ${player.lvl}`,
+      popup: `<h3>lvl: ${player.lvl}</h3><p>Level up with experience and get access to more attacks, items and stuff</p>`,
+    },
+    {
+      name: `xp: ${player.xp}/${lvls[player.lvl + 1]} ↗`,
+      popup: `<h3>xp: ${player.xp}/${
+        lvls[player.lvl + 1]
+      } ↗</h3><p>Gain experience defeating enemies leading to level up</p>`,
+    },
     { name: `map: ${currentMap.name} ⫯` },
-    { name: `gems: ${player.gems} ◈` },
-    { name: `scrolls: ${player.scrolls} ⋈` },
-    { name: `health: ${player.hp}/${player.hpmax} (${player.hpmaxTemp}) ♥` },
-    { name: `strength: ${player.str} (${player.strTemp}) ↣` }, // ⊕
-    { name: `defense: ${player.def} (${player.defTemp}) ∇` }, // ⊖
-    { name: `wisdom: ${player.wis} (${player.wisTemp}) ❖` },
-    { name: `critics: ${player.crit} (${player.critTemp}) %` },
-    { name: `mastered elements: ${JSON.stringify(player.elements)}` }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
+    {
+      name: `gems: ${player.gems} ◈`,
+      popup: `<h3>gems: ${player.gems} ◈</h3><p>Use gems to buy items and stuff in the shop</p>`,
+    },
+    {
+      name: `scrolls: ${player.scrolls} ⋈`,
+      popup: `<h3>scrolls: ${player.scrolls} ⋈</h3><p>Use scrolls to learn and improve attacks in the dojo</p>`,
+    },
+    {
+      name: `health: ${player.hp}/${player.hpmax} (${player.hpmaxTemp}) ♥`,
+      popup: `<h3>health: ${player.hp}/${player.hpmax} (${player.hpmaxTemp}) ♥</h3><p>Heal using potions or by getting a new level</p>`,
+    },
+    {
+      name: `strength: ${player.str} (${player.strTemp}) ↣`,
+      popup: `<h3>strength: ${player.str} (${player.strTemp}) ↣</h3><p>Increases your attack damages</p>`,
+    }, // ⊕
+    {
+      name: `defense: ${player.def} (${player.defTemp}) ∇`,
+      popup: `<h3>defense: ${player.def} (${player.defTemp}) ∇</h3><p>Decreases enemies' attack damages</p>`,
+    }, // ⊖
+    {
+      name: `critics: ${player.crit} (${player.critTemp}) %`,
+      popup: `<h3>critics: ${player.crit} (${player.critTemp}) %</h3><p>Rate of critical attack that improve attacks</p>`,
+    },
+    {
+      name: `wisdom: ${player.wis} (${player.wisTemp}) ❖`,
+      popup: `<h3>wisdom: ${player.wis} (${player.wisTemp}) ❖</h3><p>Increases bonus and malus effects</p>`,
+    },
+    {
+      name: `mastered elements: ${JSON.stringify(player.elements)}`,
+      popup: `<h3>mastered elements: ${JSON.stringify(
+        player.elements
+      )}</h3><p>Mastered elements give boost to corresponding attacks</p>`,
+    }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
   ];
   let statsMenu;
 
@@ -100,6 +134,7 @@ function screenMenu() {
             x.name === 'audio' ? `${x.name}: ${player.options.audio ? 'on' : 'off'}` : x.name;
         } else {
           btnEl.innerText = x.name;
+          popupEl.innerHTML = x.popup || '';
         }
         btnEl.dataset.menu = menuName;
         btnEl.dataset.value = x.name;
@@ -133,7 +168,8 @@ function screenMenu() {
         statsMenu = codeStatsMenu();
         createMenu(statsMenu, crt.dataset.value);
       } else if (crt.dataset.value === 'options') {
-        createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crt.dataset.value);
+        // createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crt.dataset.value);
+        createMenu([{ name: `audio` }, { name: `save` }], crt.dataset.value);
       } else {
         createMenu(player[crt.dataset.value], crt.dataset.value);
       }

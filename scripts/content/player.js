@@ -43,15 +43,15 @@ function playerAttack(attack) {
   infoEl.innerText = `${player.name} uses ${c.name}`;
 
   const manageAttack = () => {
-    const elementFactor = calcElement(c.element, player.element, currentEnemy.element);
+    const elementFactor = calcElement(c.element, currentEnemy.element);
     const isCrit = Math.random() < (player.crit + player.critTemp) / 100;
     const isMaster = player.elements.includes(c.element);
 
     if (c.type === 'bonus') {
-      const info = attackElementApply(c, player, false, isCrit);
+      const info = attackElementApply(c, player, false, isCrit, isMaster);
       infoQueue.push(() => (infoEl.innerText = `${info}`));
     } else if (c.type === 'malus') {
-      const info = attackElementApply(c, currentEnemy, false, isCrit);
+      const info = attackElementApply(c, currentEnemy, false, isCrit, isMaster);
       infoQueue.push(() => (infoEl.innerText = `${info}`));
     } else {
       let calcDmg = Math.floor(
@@ -68,7 +68,7 @@ function playerAttack(attack) {
           infoQueue.push(() => (infoEl.innerText = `Critical hit!`));
           calcDmg = Math.floor(calcDmg * 1.25);
         } else {
-          const info = attackElementApply(c, player, true, false);
+          const info = attackElementApply(c, player, true, false, false);
           infoQueue.push(() => (infoEl.innerText = `Critical hit! ${info}`));
         }
       }

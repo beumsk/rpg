@@ -46,7 +46,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 - improve fights: better ai, elemental str&def?,
 - max of 4 attacks? select the ones to have in fight
-- more fights? add element on map to add new enemies or trainingMap?
 
 - Tuto => get attack => fight enemy => buy potion and use it => door to temple
 - first fight intro+tuto against master that we lose as we only have basic attacks?
@@ -84,6 +83,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Ideas
 
+- more fights? add element on map to add new enemies or trainingMap?
 - save/load via download/upload file? (encrypt data to avoid cheat?)
 - quests in menu?
   - npc as deadSpots => when hitting => dialog screen? and start quest
@@ -106,4 +106,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 21.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4+6+4)=150?? hours total dev
+- 24.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4+6+4)=150?? hours total dev
