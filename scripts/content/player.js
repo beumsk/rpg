@@ -33,7 +33,7 @@ const playerBase = {
   shop: deepCopy([...items, ...stuff]),
   dojo: deepCopy(attacks),
   options: {
-    audio: !ISDEV.mute,
+    audio: ISDEV.mute ? 0 : 3,
   },
 };
 

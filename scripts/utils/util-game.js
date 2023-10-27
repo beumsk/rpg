@@ -8,6 +8,9 @@ function gameReset() {
 
   // reset game
   player = deepCopy(ISDEV.skipTuto ? { ...playerBase } : { ...playerBase, gems: 2, scrolls: 1 });
+  for (key in audioFiles) {
+    audioFiles[key].audio.volume = player.options.audio / 5;
+  }
   if (ISDEV.skipTuto) {
     // add potion? stuff?
     attackFind(attacks.filter((x) => x.name === 'punch'));
@@ -33,6 +36,9 @@ function gameLoad() {
 
   // load game
   player = { ...load.player };
+  for (key in audioFiles) {
+    audioFiles[key].audio.volume = player.options.audio / 5;
+  }
   currentEnemies = load.currentEnemies;
   mapEnemies = load.mapEnemies;
   maps = load.maps;

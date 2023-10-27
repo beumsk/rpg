@@ -27,6 +27,7 @@ function codeMapEnemies(lvl, world, isLast) {
         element === 'master'
           ? elements.map((x) => ({
               name: enemyMoves[x][rand(enemyMoves[x].length)],
+              dmg: 4,
               lvl: Math.ceil(lvl / 5),
               type: 'attack',
               element: x,
@@ -34,6 +35,7 @@ function codeMapEnemies(lvl, world, isLast) {
           : [
               {
                 name: enemyMoves[element][rand(enemyMoves[element].length)],
+                dmg: 4,
                 lvl: Math.ceil(lvl / 5),
                 type: 'attack',
                 element: element,

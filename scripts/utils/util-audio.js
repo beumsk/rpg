@@ -64,3 +64,34 @@ function audioToggle() {
   }
   player.options.audio = !player.options.audio;
 }
+
+function audioVolumeUp() {
+  for (key in audioFiles) {
+    if (audioFiles[key].audio.volume < 1) {
+      audioFiles[key].audio.volume += 0.2;
+    }
+  }
+}
+
+function audioVolumeDown() {
+  for (key in audioFiles) {
+    if (audioFiles[key].audio.volume > 0) {
+      audioFiles[key].audio.volume -= 0.2;
+    }
+  }
+}
+
+function audioVolumeClick() {
+  if (player.options.audio < 5) {
+    player.options.audio += 1;
+  } else {
+    player.options.audio = 0;
+  }
+  for (key in audioFiles) {
+    if (audioFiles[key].audio.volume < 1) {
+      audioFiles[key].audio.volume += 0.2;
+    } else {
+      audioFiles[key].audio.volume = 0;
+    }
+  }
+}

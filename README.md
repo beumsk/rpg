@@ -29,8 +29,8 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
     - you learn elemental attacks of world in rewards and get a thing showing we finished world
     - each map has monsters of any type to beat (+ quests?)
   - => master door opens > beat 4 masters + high master and win
-- Dmg = (dmg+str-def) x elmt(0.75|1|1.5)
-  - => power up player/enemy with str and def
+- Dmg = (dmg+str-def) x elmt(0.75|1|1.5) x isMaster(1|1.5) x crit + range
+  - => power up player/enemy with str-def & improving attacks
 - Player lvlUp => dmg+20% & def+10% (& 1 scroll)
 - Enemy lvlUp => dmg+20% & def+10%
 - Items are in shop and rewards
@@ -39,16 +39,18 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
-- simplify codes: map change, dry as much as possible (enemy/player attack, btnCreation, ...?)
 - confirmation modal => buy any, use item, equip stuf
-
-- review lvlup => give points to distribute on stats ?
-
-- improve fights: better ai, elemental str&def?,
-- max of 4 attacks? select the ones to have in fight
+- improve fights: better ai => how ?
+- give enemies more attacks => should they have the same ones as player attacks?
 
 - Tuto => get attack => fight enemy => buy potion and use it => door to temple
 - first fight intro+tuto against master that we lose as we only have basic attacks?
+
+- review lvlup => give points to distribute on stats ?
+- elemental str&def?
+- max of 4 attacks? select the ones to have in fight
+
+- simplify codes: map change, dry as much as possible (enemy/player attack, btnCreation, ...?)
 
 - improve maps: add things on those: npc, quests,
 - => create paths on map? at least some decoration.
@@ -68,7 +70,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 > other
 
-- give enemies more attacks => should they have the same ones as player attacks?
 - handle items curing malus
 
 - other player sprites to pick when starting?

@@ -130,8 +130,7 @@ function screenMenu() {
             : `${x.name}`;
           popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'options') {
-          btnEl.innerText =
-            x.name === 'audio' ? `${x.name}: ${player.options.audio ? 'on' : 'off'}` : x.name;
+          btnEl.innerText = x.name === 'audio' ? `${x.name}: ${player.options.audio}/5` : x.name;
         } else {
           btnEl.innerText = x.name;
           popupEl.innerHTML = x.popup || '';
@@ -185,7 +184,7 @@ function screenMenu() {
       createMenu(player[crtMenu], crtMenu);
     } else if (crtMenu === 'options') {
       if (crt.dataset.value === 'audio') {
-        audioToggle();
+        audioVolumeClick();
         // createMenu([{ name: `audio` }, { name: `save` }, { name: `load` }], crtMenu);
         createMenu([{ name: `audio` }, { name: `save` }], crtMenu);
       } else if (crt.dataset.value === 'save') {
