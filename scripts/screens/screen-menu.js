@@ -99,6 +99,8 @@ function screenMenu() {
   document.addEventListener('keydown', keyMenuHandler);
 
   function stop() {
+    if (tutoStep === 'potion' && player.items.length > 0) return;
+    if (tutoStep === 'potion') tutoStep = 'door';
     infoEl.innerText = '';
     document.removeEventListener('keydown', keyMenuHandler);
     contentEl.innerHTML = '';
@@ -142,23 +144,24 @@ function screenMenu() {
         contentEl.querySelector('.menu').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
-      if (menuName !== 'main') {
-        const backBtn = document.createElement('button');
-        backBtn.innerText = '← back';
-        backBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          createMainMenu();
-        });
-        contentEl.querySelector('.menu').appendChild(backBtn);
-      }
-      menuBtns[0].focus();
-    } else {
-      createMainMenu();
     }
+
+    if (!menuList.length) {
+      contentEl
+        .querySelector('.menu')
+        .insertAdjacentHTML('afterbegin', `<p>No ${menuName} at the moment...</p>`);
+    }
+
+    if (menuName !== 'main') {
+      const backBtn = document.createElement('button');
+      backBtn.innerText = '← back';
+      backBtn.addEventListener('click', () => createMainMenu());
+      contentEl.querySelector('.menu').appendChild(backBtn);
+    }
+    menuBtns[0].focus();
   }
 
   function btnClick(e) {
-    e.preventDefault();
     let crt = e.target;
     if (crtMenu === 'main') {
       if (crt.dataset.value === '← exit') {

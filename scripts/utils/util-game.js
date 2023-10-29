@@ -7,7 +7,7 @@ function gameReset() {
   stateEl.style.background = cBack2;
 
   // reset game
-  player = deepCopy(ISDEV.skipTuto ? { ...playerBase } : { ...playerBase, gems: 2, scrolls: 1 });
+  player = deepCopy({ ...playerBase });
   for (key in audioFiles) {
     audioFiles[key].audio.volume = player.options.audio / 5;
   }

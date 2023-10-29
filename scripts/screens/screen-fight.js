@@ -141,7 +141,6 @@ function screenFight() {
   }
 
   function btnClick(e) {
-    e.preventDefault();
     let crt = e.target;
     if (crtMenu === 'main') {
       if (crt.dataset.value === 'attacks' || crt.dataset.value === 'items') {

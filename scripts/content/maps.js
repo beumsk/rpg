@@ -45,11 +45,7 @@ const dojoBaseSpot = {
 let mapTuto = [
   {
     name: 'tutorial',
-    deadSpots: [
-      { ...shopBaseSpot },
-      { ...dojoBaseSpot },
-      { ...doorBase, y: 11 * 16, type: 'tuto-door' },
-    ],
+    deadSpots: [],
   },
 ];
 
@@ -105,17 +101,6 @@ function codeWorldMaps(world) {
       };
     });
   }
-}
-
-function randomKeyDrop() {
-  if (rand(keyDropRate) === 1) {
-    const mapChest = currentMap.deadSpots.find((x) => x.type === 'chest' && !x.unlocked);
-    if (!mapChest) return false;
-    mapChest.unlocked = true;
-    infoQueue.push(() => (infoEl.innerText = `You found the key to open the chest`));
-    return true;
-  }
-  return false;
 }
 
 function changeMap(world, to, masteredElement) {
@@ -183,4 +168,15 @@ function worldCompleted(element) {
       { ...spotBase, x: 10 * 16, y: 6 * 16, type: 'master', fill: cRedTr, img: './img/fire.png' }
     );
   }
+}
+
+function randomKeyDrop() {
+  if (rand(keyDropRate) === 1) {
+    const mapChest = currentMap.deadSpots.find((x) => x.type === 'chest' && !x.unlocked);
+    if (!mapChest) return false;
+    mapChest.unlocked = true;
+    infoQueue.push(() => (infoEl.innerText = `You found the key to open the chest`));
+    return true;
+  }
+  return false;
 }

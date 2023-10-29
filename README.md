@@ -43,9 +43,6 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 - improve fights: better ai => how ?
 - give enemies more attacks => should they have the same ones as player attacks?
 
-- Tuto => get attack => fight enemy => buy potion and use it => door to temple
-- first fight intro+tuto against master that we lose as we only have basic attacks?
-
 - review lvlup => give points to distribute on stats ?
 - elemental str&def?
 - max of 4 attacks? select the ones to have in fight
@@ -84,6 +81,7 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Ideas
 
+- first fight intro+tuto against master that we lose as we only have basic attacks?
 - more fights? add element on map to add new enemies or trainingMap?
 - save/load via download/upload file? (encrypt data to avoid cheat?)
 - quests in menu?

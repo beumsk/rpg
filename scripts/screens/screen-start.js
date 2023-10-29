@@ -49,10 +49,10 @@ function screenStart() {
     stop();
     if (crt.dataset.type === 'start') {
       gameReset();
-      if (ISDEV.skipIntro) {
-        screenTransition('bottom', () => screenWorld(), '');
-      } else {
+      if (!ISDEV.skipIntro) {
         screenTransition('bottom', () => screenStory(texts['intro'], () => screenWorld(), ''));
+      } else {
+        screenTransition('bottom', () => screenWorld(), '');
       }
     } else if (crt.dataset.type === 'continue') {
       gameLoad();

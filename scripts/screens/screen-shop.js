@@ -31,7 +31,21 @@ function screenShop() {
     contentEl.innerHTML = '<div class="shop"></div>';
     index = 0;
 
-    const currShop = player.shop.filter((x) => x.lvl <= player.lvl && x.src.includes('shop'));
+    let currShop = player.shop.filter((x) => x.lvl <= player.lvl && x.src.includes('shop'));
+
+    if (tutoStep === 'shop') {
+      if (player.items.length === 0) {
+        currShop = player.shop.filter((x) => x.lvl <= player.lvl && x.name === 'potion I');
+      } else {
+        currShop = [];
+      }
+    }
+
+    const exitBtn = document.createElement('button');
+    exitBtn.innerText = '← exit';
+    exitBtn.addEventListener('click', () => {
+      stop();
+    });
 
     if (currShop?.length > 0) {
       currShop.map((x, i) => {
@@ -54,21 +68,21 @@ function screenShop() {
         contentEl.querySelector('.shop').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
-
-      const exitBtn = document.createElement('button');
-      exitBtn.innerText = '← exit';
-      exitBtn.addEventListener('click', () => {
-        stop();
-      });
-      contentEl.querySelector('.shop').appendChild(exitBtn);
     }
+
+    if (!currShop.length) {
+      contentEl
+        .querySelector('.shop')
+        .insertAdjacentHTML('afterbegin', `<p>No items or stuff to buy at the moment...</p>`);
+    }
+
+    contentEl.querySelector('.shop').appendChild(exitBtn);
 
     shopBtns[0].focus();
   }
   updateShop();
 
   function btnClick(e) {
-    e.preventDefault();
     let crt = e.target;
     shopBuy(crt.dataset.value);
     updateShop();
@@ -76,6 +90,8 @@ function screenShop() {
   }
 
   function stop() {
+    if (tutoStep === 'shop' && player.items.length === 0) return;
+    if (tutoStep === 'shop') tutoStep = 'potion';
     infoEl.innerText = '';
     document.removeEventListener('keydown', keyShopHandler);
     contentEl.innerHTML = '';

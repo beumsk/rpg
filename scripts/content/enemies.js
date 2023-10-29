@@ -6,6 +6,40 @@ const enemyBase = {
 
 let mapEnemies = [];
 
+const tutoEnemy = {
+  ...enemyBase,
+  x: 11 * step,
+  y: 5 * step,
+  name: 'noob',
+  img: `./img/enemy-air.png`,
+  hp: 10,
+  hpmax: 10,
+  str: 20,
+  def: 10,
+  crit: 11,
+  wis: 10,
+  hpmaxTemp: 0,
+  strTemp: 0,
+  defTemp: 0,
+  critTemp: 0,
+  wisTemp: 0,
+  states: [],
+  lvl: 1,
+  xp: 0,
+  gems: 2,
+  element: '',
+  elements: [],
+  attacks: [
+    {
+      name: 'hit',
+      dmg: 2,
+      lvl: 1,
+      type: 'attack',
+      element: 'neutral',
+    },
+  ],
+};
+
 function codeMapEnemies(lvl, world, isLast) {
   mapEnemies = [];
   // GD: last map of a world have enemies which are master of their element

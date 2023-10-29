@@ -42,7 +42,11 @@ function screenFightEnd() {
   function keyFightEndHandler() {
     document.removeEventListener('keydown', keyFightEndHandler);
     contentEl.removeEventListener('click', keyFightEndHandler);
-    if (currentEnemy.hp === 0) {
+
+    if (tutoStep === 'fight') {
+      tutoStep = 'shop';
+      screenTransition('left', () => screenWorld(), '', cGrad1);
+    } else if (currentEnemy.hp === 0) {
       if (player.fightEnd.lvlUp) {
         screenTransition('left', () => screenLvlUp(), '', cGrad1);
       } else {

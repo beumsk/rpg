@@ -15,6 +15,10 @@ function screenWorld(from) {
     selectCurrentEnemies(enemiesPerMap);
   }
 
+  if (currentMap.name === 'tutorial') {
+    tutoStart();
+  }
+
   if (!['tutorial', 'temple'].includes(currentMap.name) && currentEnemies.length === 0) {
     const door = currentMap.deadSpots.find((x) => x.type.includes('door'));
     if (door) door.y = 11 * 16;
@@ -22,8 +26,6 @@ function screenWorld(from) {
       () => (infoEl.innerText = `You cleared ${currentMap.name}, the door is now open!`)
     );
   }
-
-  let objects = [player, ...currentMap.deadSpots, ...currentEnemies];
 
   let animationId;
 
@@ -148,6 +150,7 @@ function screenWorld(from) {
     const frame = () => {
       clearCanvas();
 
+      let objects = [player, ...currentMap.deadSpots, ...currentEnemies];
       objects.forEach((obj) => {
         if (obj.fill) {
           ctx.fillStyle = obj.fill;

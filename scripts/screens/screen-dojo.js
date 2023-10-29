@@ -31,7 +31,7 @@ function screenDojo() {
     contentEl.innerHTML = '<div class="dojo"></div>';
     index = 0;
 
-    const currDojoLearn = player.dojo.filter(
+    let currDojoLearn = player.dojo.filter(
       (x) =>
         x.src.includes('dojo') &&
         x.age <= Math.ceil(player.lvl / 5) &&
@@ -42,9 +42,13 @@ function screenDojo() {
     );
 
     // TODO: improve to lvl 4 max??
-    const currDojoImprove = player.dojo.filter(
+    let currDojoImprove = player.dojo.filter(
       (x) => player.attacks.find((y) => y.name === x.name) && x.lvl <= 3
     );
+
+    if (tutoStep === 'dojo' && player.attacks.length > 0) {
+      currDojoImprove = [];
+    }
 
     const exitBtn = document.createElement('button');
     exitBtn.innerText = '← exit';
@@ -71,7 +75,6 @@ function screenDojo() {
         contentEl.querySelector('.dojo').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
-      contentEl.querySelector('.dojo').appendChild(exitBtn);
     }
 
     if (currDojoImprove?.length > 0) {
@@ -92,22 +95,21 @@ function screenDojo() {
         contentEl.querySelector('.dojo').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
-      contentEl.querySelector('.dojo').appendChild(exitBtn);
     }
 
     if (!currDojoLearn.length && !currDojoImprove.length) {
       contentEl
         .querySelector('.dojo')
-        .insertAdjacentHTML('afterbegin', `<p>No attack to buy at the moment...</p>`);
-      contentEl.querySelector('.dojo').appendChild(exitBtn);
+        .insertAdjacentHTML('afterbegin', `<p>No attack to learn or improve at the moment...</p>`);
     }
+
+    contentEl.querySelector('.dojo').appendChild(exitBtn);
 
     dojoBtns[0].focus();
   }
   updateDojo();
 
   function btnClick(e) {
-    e.preventDefault();
     let crt = e.target;
     dojoBuy(crt.dataset.value);
     updateDojo();
@@ -115,6 +117,8 @@ function screenDojo() {
   }
 
   function stop() {
+    if (tutoStep === 'dojo' && player.attacks.length === 0) return;
+    if (tutoStep === 'dojo') tutoStep = 'fight';
     infoEl.innerText = '';
     document.removeEventListener('keydown', keyDojoHandler);
     contentEl.innerHTML = '';
