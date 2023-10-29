@@ -78,15 +78,9 @@ function screenWorld(from) {
       moveRight();
     } else if (key === 'Escape') {
       stop();
-      document.removeEventListener('keydown', keyWorldHandler);
       screenMenu();
     }
   }
-
-  actionMoveEl.querySelector('.up').addEventListener('click', moveUp);
-  actionMoveEl.querySelector('.down').addEventListener('click', moveDown);
-  actionMoveEl.querySelector('.left').addEventListener('click', moveLeft);
-  actionMoveEl.querySelector('.right').addEventListener('click', moveRight);
 
   function checkCollision(oldPos) {
     const deadSpotCollision = currentMap.deadSpots.find(
@@ -146,6 +140,10 @@ function screenWorld(from) {
 
   function start() {
     document.addEventListener('keydown', keyWorldHandler);
+    actionMoveEl.querySelector('.up').addEventListener('click', moveUp);
+    actionMoveEl.querySelector('.down').addEventListener('click', moveDown);
+    actionMoveEl.querySelector('.left').addEventListener('click', moveLeft);
+    actionMoveEl.querySelector('.right').addEventListener('click', moveRight);
 
     const frame = () => {
       clearCanvas();
@@ -173,11 +171,12 @@ function screenWorld(from) {
     actionMenuEl.innerText = '';
     actionMoveEl.style.display = 'none';
     document.removeEventListener('keydown', keyWorldHandler);
-    clearCanvas();
+    actionMenuEl.removeEventListener('click', menuClick);
     actionMoveEl.querySelector('.up').removeEventListener('click', moveUp);
     actionMoveEl.querySelector('.down').removeEventListener('click', moveDown);
     actionMoveEl.querySelector('.left').removeEventListener('click', moveLeft);
     actionMoveEl.querySelector('.right').removeEventListener('click', moveRight);
+    clearCanvas();
   }
 
   start();
