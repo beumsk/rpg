@@ -16,6 +16,11 @@ function deepCopy(any) {
   return JSON.parse(JSON.stringify(any));
 }
 
+function stringify(obj) {
+  // add more char inside the brackets if needed. atm => [,],"
+  return JSON.stringify(obj).replace(/[\[\]"]/g, '');
+}
+
 function rand(val, step = 1, not = []) {
   let r;
   do {
@@ -87,23 +92,25 @@ function popupInfo(info, withPrice) {
   if ([...itemsTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
-      <p>${info.type}: ${JSON.stringify(info.effect)}</p>
+      <p>${info.type}: ${stringify(info.effect)}</p>
       ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
     `;
   } else if ([...stuffTypes].includes(info.type)) {
     return `
       <h3>${info.name}</h3>
-      <p>${info.type}: ${JSON.stringify(info.effect)}</p>
+      <p>${info.type}: ${stringify(info.effect)}</p>
       ${withPrice ? `<p>price: ${info.price} ◈</p>` : ''}
       `;
     // <p>equiped: ${!!info.equiped}</p>
   } else if ([...attacksTypes].includes(info.type)) {
     return `
-      <h3>${info.name}</h3>
+      <h3>
+        ${info.name} ${withPrice ? `<span>(${info.lvl > 1 ? 'improve' : 'learn'})</span>` : ''}
+      </h3>
       ${
         info.type === 'attack'
           ? `<p>${info.type}: ${info.dmg}dmg (${info.element})</p>`
-          : `<p>${info.type}: ${info.type === 'bonus' ? '+' : '-'}${JSON.stringify(info.effect)} (${
+          : `<p>${info.type}: ${info.type === 'bonus' ? '+' : '-'}${stringify(info.effect)} (${
               info.element
             })</p>`
       }      

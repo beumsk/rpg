@@ -11,9 +11,8 @@ function screenReward(from) {
   const rewards = randomRewards(from);
 
   // TODO: add animation for random feel
-  const rewardsHTML =
-    rewards &&
-    `
+  const rewardsHTML = rewards
+    ? `
     <div class="rewards">
       ${
         rewards.item
@@ -43,11 +42,12 @@ function screenReward(from) {
           : ''
       }
     </div>
-  `;
+  `
+    : '';
 
   if (from === 'chest') {
     content = `
-      <div class="reward">
+      <div class="reward scroll">
         <h1>You opened a chest!</h1>
         <p>Choose wisely between these rewards</p>
         ${rewardsHTML}
@@ -55,7 +55,7 @@ function screenReward(from) {
     `;
   } else if (from === 'map') {
     content = `
-      <div class="reward">
+      <div class="reward scroll">
         <h1>You cleared ${currentMap.name} from the enemies!</h1>
         <p>Choose wisely between these rewards</p>
         ${rewardsHTML}
@@ -63,7 +63,7 @@ function screenReward(from) {
     `;
   } else if (from === 'world') {
     content = `
-      <div class="reward">
+      <div class="reward scroll">
         <h1>You saved the ${currentWorld.name} world from the masters!</h1>
         <p>Choose wisely between these rewards</p>
         ${rewardsHTML}
@@ -71,7 +71,7 @@ function screenReward(from) {
     `;
   } else if (from === 'tuto') {
     content = `
-      <div class="reward">
+      <div class="reward scroll">
         <h1>You finished the tutorial!</h1>
         <p>You are now ready to really start your adventure.</p>
         <p>Good luck!</p>

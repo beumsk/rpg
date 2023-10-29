@@ -446,7 +446,6 @@ kbd {
   flex-direction: column;
   align-items: flex-start;
   font-size: 1.25rem;
-  padding: 1rem;
   width: 44rem;
   height: 24rem;
   overflow: auto;
@@ -459,10 +458,16 @@ kbd {
   border: none;
 }
 
+.content .shop h1,
+.content .dojo h1 {
+  margin-bottom: 0;
+  width: 100%;
+  padding: 1rem 1rem 0 1rem;
+}
+
 /* CONTENT Reward */
 .content .reward {
   text-align: center;
-  padding: 1rem;
 }
 .content .reward p {
   margin-bottom: 2rem;
@@ -539,6 +544,7 @@ kbd {
   top: unset;
   bottom: 0;
   left: 0;
+  max-width: unset;
 }
 .content .popup:empty {
   display: none !important;
@@ -546,6 +552,12 @@ kbd {
 .content .popup h3 {
   margin: 0.5rem 0;
   text-transform: uppercase;
+}
+.content .popup h3 span {
+  text-transform: lowercase;
+  font-weight: 400;
+  font-size: 1.25rem;
+  opacity: 0.6;
 }
 .content .popup p {
   margin: 0.5rem 0;
@@ -651,21 +663,18 @@ kbd {
 }
 
 /* SCROLLBAR + EMPTY HIDDEN */
+.scroll {
+  padding: 1rem;
+}
 .content,
-.content .menu,
-.content .shop,
-.content .dojo,
-.content .reward,
+.content .scroll,
 .info,
 .state {
   overflow: auto;
   scrollbar-width: none;
 }
 .content::-webkit-scrollbar,
-.content .menu::-webkit-scrollbar,
-.content .shop::-webkit-scrollbar,
-.content .dojo::-webkit-scrollbar,
-.content .reward::-webkit-scrollbar,
+.content .scroll::-webkit-scrollbar,
 .info::-webkit-scrollbar,
 .state::-webkit-scrollbar {
   display: none;

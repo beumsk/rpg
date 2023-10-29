@@ -9,8 +9,6 @@ function screenWorld(from) {
 
   infoEl.innerText = ' ';
 
-  fireQueue();
-
   if (from === 'map') {
     selectCurrentEnemies(enemiesPerMap);
   }

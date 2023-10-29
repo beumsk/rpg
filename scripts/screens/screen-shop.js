@@ -1,8 +1,6 @@
 function screenShop() {
   // contentEl.style.backgroundImage = '';
 
-  // TODO: add title, style etc
-
   infoEl.innerText = ' ';
 
   let index = 0;
@@ -28,7 +26,7 @@ function screenShop() {
   document.addEventListener('keydown', keyShopHandler);
 
   function updateShop() {
-    contentEl.innerHTML = '<div class="shop"></div>';
+    contentEl.innerHTML = '<div class="shop"><h1>SHOP</h1><div class="scroll"></div></div>';
     index = 0;
 
     let currShop = player.shop.filter((x) => x.lvl <= player.lvl && x.src.includes('shop'));
@@ -53,10 +51,10 @@ function screenShop() {
 
         const btnEl = document.createElement('button');
         btnEl.innerText = stuffTypes.includes(x.type)
-          ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${JSON.stringify(x.effect)} /${
-              x.lvl
-            }\\ (${x.price} ◈)`
-          : `${x.name}: ${JSON.stringify(x.effect)} (${x.price} ◈)`;
+          ? `${x.name} |${x.type.charAt(0).toUpperCase()}|: ${stringify(x.effect)} /${x.lvl}\\ (${
+              x.price
+            } ◈)`
+          : `${x.name}: ${stringify(x.effect)} (${x.price} ◈)`;
         btnEl.dataset.value = x.name;
         containerEl.appendChild(btnEl);
 
@@ -65,18 +63,18 @@ function screenShop() {
         popupEl.innerHTML = popupInfo(x, true);
         containerEl.appendChild(popupEl);
 
-        contentEl.querySelector('.shop').appendChild(containerEl);
+        contentEl.querySelector('.shop .scroll').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
     }
 
     if (!currShop.length) {
       contentEl
-        .querySelector('.shop')
-        .insertAdjacentHTML('afterbegin', `<p>No items or stuff to buy at the moment...</p>`);
+        .querySelector('.shop .scroll')
+        .insertAdjacentHTML('beforeend', `<p>No items or stuff to buy at the moment...</p>`);
     }
 
-    contentEl.querySelector('.shop').appendChild(exitBtn);
+    contentEl.querySelector('.shop .scroll').appendChild(exitBtn);
 
     shopBtns[0].focus();
   }

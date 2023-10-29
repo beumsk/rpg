@@ -57,8 +57,8 @@ function screenMenu() {
       popup: `<h3>wisdom: ${player.wis} (${player.wisTemp}) ❖</h3><p>Increases bonus and malus effects</p>`,
     },
     {
-      name: `mastered elements: ${JSON.stringify(player.elements)}`,
-      popup: `<h3>mastered elements: ${JSON.stringify(
+      name: `mastered elements: ${stringify(player.elements)}`,
+      popup: `<h3>mastered elements: ${stringify(
         player.elements
       )}</h3><p>Mastered elements give boost to corresponding attacks</p>`,
     }, // air ☴ > earth ☷ > water ☵ > fire ☲ (trigrams)
@@ -109,7 +109,7 @@ function screenMenu() {
 
   function createMenu(menuList, menuName) {
     crtMenu = menuName;
-    contentEl.innerHTML = '<div class="menu"></div>';
+    contentEl.innerHTML = '<div class="menu"><div class="scroll"></div></div>';
     index = 0;
 
     if (menuList?.length > 0) {
@@ -122,9 +122,9 @@ function screenMenu() {
           btnEl.innerText = `${x.name}: ${x.dmg ? x.dmg + 'dmg (' + x.element + ')' : x.state}`;
           popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'items') {
-          btnEl.innerText = `${x.name}: ${JSON.stringify(x.effect)} ${
-            x.type === 'temp' ? 'Ŧ' : ''
-          } (x${x.qtt})`;
+          btnEl.innerText = `${x.name}: ${stringify(x.effect)} ${x.type === 'temp' ? 'Ŧ' : ''} (x${
+            x.qtt
+          })`;
           popupEl.innerHTML = popupInfo(x);
         } else if (menuName === 'stuff') {
           btnEl.innerText = x.equiped
@@ -141,14 +141,14 @@ function screenMenu() {
         btnEl.dataset.value = x.name;
         containerEl.appendChild(btnEl);
         containerEl.appendChild(popupEl);
-        contentEl.querySelector('.menu').appendChild(containerEl);
+        contentEl.querySelector('.menu .scroll').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
     }
 
     if (!menuList.length) {
       contentEl
-        .querySelector('.menu')
+        .querySelector('.menu .scroll')
         .insertAdjacentHTML('afterbegin', `<p>No ${menuName} at the moment...</p>`);
     }
 
@@ -156,7 +156,7 @@ function screenMenu() {
       const backBtn = document.createElement('button');
       backBtn.innerText = '← back';
       backBtn.addEventListener('click', () => createMainMenu());
-      contentEl.querySelector('.menu').appendChild(backBtn);
+      contentEl.querySelector('.menu .scroll').appendChild(backBtn);
     }
     menuBtns[0].focus();
   }

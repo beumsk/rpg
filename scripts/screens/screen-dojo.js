@@ -1,8 +1,6 @@
 function screenDojo() {
   // contentEl.style.backgroundImage = '';
 
-  // TODO: add title, style etc
-
   infoEl.innerText = ' ';
 
   let index = 0;
@@ -28,7 +26,7 @@ function screenDojo() {
   document.addEventListener('keydown', keyDojoHandler);
 
   function updateDojo() {
-    contentEl.innerHTML = '<div class="dojo"></div>';
+    contentEl.innerHTML = '<div class="dojo"><h1>DOJO</h1><div class="scroll"></div></div>';
     index = 0;
 
     let currDojoLearn = player.dojo.filter(
@@ -72,7 +70,7 @@ function screenDojo() {
         popupEl.innerHTML = popupInfo(x, true);
         containerEl.appendChild(popupEl);
 
-        contentEl.querySelector('.dojo').appendChild(containerEl);
+        contentEl.querySelector('.dojo .scroll').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
     }
@@ -92,18 +90,18 @@ function screenDojo() {
         popupEl.classList.add('popup');
         popupEl.innerHTML = popupInfo(x, true);
         containerEl.appendChild(popupEl);
-        contentEl.querySelector('.dojo').appendChild(containerEl);
+        contentEl.querySelector('.dojo .scroll').appendChild(containerEl);
         btnEl.addEventListener('click', btnClick);
       });
     }
 
     if (!currDojoLearn.length && !currDojoImprove.length) {
       contentEl
-        .querySelector('.dojo')
-        .insertAdjacentHTML('afterbegin', `<p>No attack to learn or improve at the moment...</p>`);
+        .querySelector('.dojo .scroll')
+        .insertAdjacentHTML('beforeend', `<p>No attack to learn or improve at the moment...</p>`);
     }
 
-    contentEl.querySelector('.dojo').appendChild(exitBtn);
+    contentEl.querySelector('.dojo .scroll').appendChild(exitBtn);
 
     dojoBtns[0].focus();
   }

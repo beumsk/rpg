@@ -133,6 +133,11 @@ function changeMap(world, to, masteredElement) {
     currentWorld = maps.find((x) => x.name === world);
     currentMap = currentWorld.districts[0];
     codeMapEnemies(currentMap.lvl, world);
+    infoQueue.push(() => {
+      infoEl.innerText = `The ${world} world gives you a scroll, use it wisely`;
+      player.scrolls += 1;
+      updateState();
+    });
     screenTransition('top', () => screenWorld('map'), `${currentMap.name}`);
   } else if (to === 'next') {
     currentMap = currentWorld.districts.find((x) => x.lvl === currentMap.lvl + 1);
