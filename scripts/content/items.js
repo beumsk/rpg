@@ -110,5 +110,6 @@ function itemFind(itemList, qtt) {
       const foundItem = items.find((i) => i.name === x.name);
       player.items.push({ ...foundItem, qtt: Number(qtt) || 1 });
     }
+    infoEl.innerText = `You got ${x.name}`;
   });
 }

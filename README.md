@@ -39,6 +39,10 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Todo
 
+- too much time is taken in fights > give other goals > quests, achievements, attack xp,
+- not always same number of enemies on a map ? => 3,4,5,6,7 for each world?
+
+- auto save game??
 - confirmation modal => buy any, use item, equip stuf
 - improve fights: better ai => how ?
 - give enemies more attacks => should they have the same ones as player attacks?
@@ -105,4 +109,4 @@ Tarava is an old school rpg inspired by my young years playing pokemon red. The 
 
 ## Dev
 
-- 24.10.2023 => (20+10+4+8+1+2+6+6+4+2+4+8+4+4+2+4+4+4+4+4+4+4+4+3+4+4+2+4+2+4+6+4)=150?? hours total dev
+- 30.10.2023 => +-152 hours total dev

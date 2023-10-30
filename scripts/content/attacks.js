@@ -19,7 +19,7 @@ const elementStat = {
   air: { txt: 'crit', val: 10 },
   earth: { txt: 'def', val: 20 },
   water: { txt: 'str', val: 40 },
-  fire: { txt: 'hp', val: 20 },
+  fire: { txt: 'hp', val: 10 },
 };
 
 const attacksNeutral = [
@@ -120,16 +120,21 @@ function attackElementApply(attack, obj, isSide, isCrit, isMaster) {
 
   if (attack.element === 'air') {
     obj.critTemp += calcBM();
+    if (obj.critTemp < 0) obj.critTemp = 0;
     return `${obj.name} % critical ${isBonus ? 'in' : 'de'}creased`;
   } else if (attack.element === 'earth') {
     obj.defTemp += calcBM();
+    if (obj.defTemp < 0) obj.defTemp = 0;
     return `${obj.name} defense ${isBonus ? 'in' : 'de'}creased`;
   } else if (attack.element === 'water') {
     obj.strTemp += calcBM();
+    if (obj.strTemp < 0) obj.strTemp = 0;
     return `${obj.name} strength ${isBonus ? 'in' : 'de'}creased`;
   } else if (attack.element === 'fire') {
     obj.hp += calcBM();
     obj.hpmaxTemp += calcBM();
+    if (obj.hp < 0) obj.hp = 0;
+    if (obj.hpmaxTemp < 0) obj.hpmaxTemp = 0;
     return `${obj.name} hp ${isBonus ? 'in' : 'de'}creased`;
   }
 }
@@ -145,6 +150,7 @@ function attackFind(attackList) {
     } else {
       d.effect[elementStat[d.element].txt] += elementStat[d.element].val / 2;
     }
+    infoEl.innerText = `You got ${a.name}`;
   });
 }
 
@@ -164,6 +170,7 @@ function attackImprove(attackList) {
       c.effect[elementStat[c.element].txt] += elementStat[c.element].val / 2;
       d.effect[elementStat[d.element].txt] += elementStat[d.element].val / 2;
     }
+    infoEl.innerText = `You got ${a.name}`;
   });
 }
 

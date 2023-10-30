@@ -94,5 +94,6 @@ function stuffFind(stuffList) {
   stuffList.map((s) => {
     player.stuff = [...player.stuff, { ...s, equiped: '' }];
     if (s.src.includes('reward')) stuffRewarded.push(s);
+    infoEl.innerText = `You got ${s.name}`;
   });
 }

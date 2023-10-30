@@ -150,6 +150,7 @@ function playerLose() {
 function playerResetTemp() {
   player.element = '';
   player.hpmaxTemp = 0;
+  if (player.hp > player.hpmax) player.hp = player.hpmax;
   player.strTemp = 0;
   player.defTemp = 0;
   player.critTemp = 0;
